@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Components
+@using Microsoft.JSInterop
+@inherits TwitterBlockFormBase
+@inject IJSRuntime _jsRuntime
+
+<FormItem Label="Ссылка">
+    <Input @bind-Value="@Block.TweetLink" OnBlur="RenderTweetAsync"/>
+</FormItem>
+@if (!string.IsNullOrEmpty(Block.TweetId))
+{
+    <div id="twitter-@Block.Id" class="tweet">Загрузка твита...</div>
+}
+
+@code
+{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await RenderTweetAsync();
+        }
+    }
+
+    private async Task RenderTweetAsync()
+    {
+        if (!string.IsNullOrEmpty(Block.TweetId))
+        {
+            var arg = new {tweetId = Block.TweetId, id = Block.Id, instance = DotNetObjectReference.Create(this)};
+            await _jsRuntime.InvokeAsync<string>(
+                "BlazorTwttr.render",
+                arg);
+        }
+    }
+}

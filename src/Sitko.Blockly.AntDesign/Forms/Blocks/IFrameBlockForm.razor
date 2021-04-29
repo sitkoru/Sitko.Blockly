@@ -1,0 +1,14 @@
+﻿@inherits IFrameBlockFormBase
+<FormItem Label="Ссылка">
+    <Input @bind-Value="@Block.Src"/>
+</FormItem>
+@if (!string.IsNullOrEmpty(Block.Src))
+{
+    <div style="text-align: center">
+        <iframe frameborder="0"
+                allowfullscreen=""
+                width="@Block.Width" height="@Block.Height"
+                src="@Block.Src">
+        </iframe>
+    </div>
+}

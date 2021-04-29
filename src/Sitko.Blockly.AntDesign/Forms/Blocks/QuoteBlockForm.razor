@@ -1,0 +1,23 @@
+﻿@inherits QuoteBlockFormBase
+
+<FormItem>
+    Здесь будет визуальный редактор?
+</FormItem>
+<Divider/>
+<Row Gutter="24">
+    <AntDesign.Col Span="8">
+        <FormItem Label="Источник">
+            <Input @bind-Value="@Block.Author"/>
+        </FormItem>
+    </AntDesign.Col>
+    <AntDesign.Col Span="8">
+        <FormItem Label="Ссылка">
+            <Input @bind-Value="@Block.Link"/>
+        </FormItem>
+    </AntDesign.Col>
+    <AntDesign.Col Span="8">
+        <FormItem Label="Картинка к источнику">
+            Здесь будет какой-то выбор файла
+        </FormItem>
+    </AntDesign.Col>
+</Row>

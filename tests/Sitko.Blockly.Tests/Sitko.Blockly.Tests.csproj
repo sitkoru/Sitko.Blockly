@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sitko.Blockly\Sitko.Blockly.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sitko.Core.Xunit" Version="7.5.1" />
+  </ItemGroup>
+
+</Project>
