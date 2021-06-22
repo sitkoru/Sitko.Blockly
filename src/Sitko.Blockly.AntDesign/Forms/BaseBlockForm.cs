@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace Sitko.Blockly.AntDesign.Forms
+namespace Sitko.Blockly.AntDesignComponents.Forms
 {
     public abstract class BaseBlockForm<TBlock> : ComponentBase
     {

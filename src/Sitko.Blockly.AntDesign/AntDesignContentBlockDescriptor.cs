@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
-using Sitko.Blockly.AntDesign.Forms;
+using Sitko.Blockly.AntDesignComponents.Forms;
 
-namespace Sitko.Blockly.AntDesign
+namespace Sitko.Blockly.AntDesignComponents
 {
     public record AntDesignContentBlockDescriptor(Type Type, string Title, RenderFragment Icon, Type BlockForm) :
         ContentBlockDescriptor(

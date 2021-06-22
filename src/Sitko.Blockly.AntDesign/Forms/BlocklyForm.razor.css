@@ -1,0 +1,66 @@
+.block-row {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+::deep .block-row .add-block {
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    /*border: solid 1px #ccc;*/
+    /*border-radius: 50%;*/
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*line-height: 20px;*/
+    /*text-align: center;*/
+    cursor: pointer;
+    visibility: hidden;
+    z-index: 999;
+}
+
+::deep .block-row:hover .add-block {
+    visibility: visible;
+}
+
+::deep .block-row .add-block.add-block-top {
+    top: -10px;
+}
+
+::deep .block-row .add-block.add-block-bottom {
+    bottom: -10px;
+}
+
+::deep .block-row .block-form {
+    height: 100%;
+}
+
+.block-row .block-controls {
+    width: 30px;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
+    opacity: 0.1;
+    align-items: center;
+    justify-content: center;
+}
+
+.block-row:hover .block-controls {
+    opacity: 1;
+}
+
+.block-row .block-icon {
+    width: 30px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.block-row .block-content {
+    flex: 1;
+    padding: 0 10px;
+}
+
+::deep .block-row .block-controls .dropdown-toggle:before {
+    content: none;
+}

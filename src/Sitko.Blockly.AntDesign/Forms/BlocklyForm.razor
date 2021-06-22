@@ -1,5 +1,7 @@
 ﻿@using global::AntDesign
-@inherits BlocklyFormBase
+@typeparam TEntity
+@typeparam TForm
+@inherits BlocklyFormBase<TEntity, TForm>
 
 <div id="blocks-@Entity.GetHashCode()">
     @foreach (var block in Blocks)
@@ -7,10 +9,10 @@
         var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
         var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()}";
         <div class="block-row" @key="block.Id">
-            <div style="width:30px; text-align: center">
+            <div class="block-icon">
                 @blockDescriptor.Icon
             </div>
-            <div style="flex: 1; padding: 0 10px;">
+            <div class="block-content">
                 <AntDesign.Dropdown Class="add-block add-block-top" Trigger="@(new[] {TriggerType.Click})">
                     <Overlay>
                         <AntDesign.Menu>
@@ -24,7 +26,7 @@
                     </Overlay>
                     <ChildContent>
                         <Button Size="small" Shape="circle">
-                            <i class="fas fa-plus"></i>
+                            <Icon Type="plus"></Icon>
                         </Button>
                     </ChildContent>
                 </AntDesign.Dropdown>
@@ -39,32 +41,32 @@
                             @foreach (var descriptor in Blockly.Descriptors)
                             {
                                 <AntDesign.MenuItem OnClick="@(() => AddBlock(descriptor.Type, block))">
-                                    <i class="@descriptor.Icon"></i> @descriptor.Title
+                                    @descriptor.Icon @descriptor.Title
                                 </AntDesign.MenuItem>
                             }
                         </AntDesign.Menu>
                     </Overlay>
                     <ChildContent>
                         <Button Size="small" Shape="circle">
-                            <i class="fas fa-plus"></i>
+                            <Icon Type="plus"></Icon>
                         </Button>
                     </ChildContent>
                 </AntDesign.Dropdown>
             </div>
             <div class="block-controls">
                 <AntDesign.Button Size="small" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUp(block))">
-                    <i class="fas fa-arrow-up"></i>
+                    <Icon Type="up"></Icon>
                 </AntDesign.Button>
                 <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="Вы действительно хотите удалить это блок?"
                                       OnConfirm="@(() => DeleteBlock(block))"
                                       OkText="Удалить"
                                       CancelText="Нет">
                     <AntDesign.Button Size="small">
-                        <i class="fas fa-trash"></i>
+                        <Icon Type="delete"></Icon>
                     </AntDesign.Button>
                 </AntDesign.Popconfirm>
                 <AntDesign.Button Size="small" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDown(block))">
-                    <i class="fas fa-arrow-down"></i>
+                    <Icon Type="down"></Icon>
                 </AntDesign.Button>
             </div>
         </div>

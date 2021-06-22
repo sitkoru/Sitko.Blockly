@@ -1,45 +1,52 @@
 ﻿using System.Collections.Generic;
-using Sitko.Blockly.AntDesign.Forms.Blocks;
+using AntDesign;
+using Microsoft.AspNetCore.Components.Rendering;
+using Sitko.Blazor.CKEditor.Bundle;
+using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blocks;
-using Sitko.Core.App;
 
-namespace Sitko.Blockly.AntDesign
+namespace Sitko.Blockly.AntDesignComponents
 {
-    public class AntDesignBlocklyModule : BlocklyModule<AntDesignContentBlockDescriptor, AntDesignBlocklyModuleConfig>
-    {
-        public AntDesignBlocklyModule(AntDesignBlocklyModuleConfig config, Application application) : base(config,
-            application)
-        {
-        }
-    }
-
     public class AntDesignBlocklyModuleConfig : BlocklyModuleConfig<AntDesignContentBlockDescriptor>
     {
+        public CKEditorTheme CKEditorTheme { get; set; } = CKEditorTheme.Light;
+
         protected override IEnumerable<AntDesignContentBlockDescriptor> GetDefaultBlockDescriptors()
         {
             return new AntDesignContentBlockDescriptor[]
             {
                 new AntDesignContentBlockDescriptor<TextBlock, TextBlockForm>("Текст",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"file-text\">")),
+                    builder => builder.AddIcon("text")),
                 new AntDesignContentBlockDescriptor<CutBlock, CutBlockForm>("Кат",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"scissor\">")),
+                    builder => builder.AddIcon("cut")),
                 new AntDesignContentBlockDescriptor<QuoteBlock, QuoteBlockForm>("Цитата",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"file-text\">")),
+                    builder => builder.AddIcon("quote")),
                 new AntDesignContentBlockDescriptor<FileBlock, FileBlockForm>("Файл",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"paper-clip\">")),
+                    builder => builder.AddIcon("attach")),
                 new AntDesignContentBlockDescriptor<PictureBlock, PictureBlockForm>("Картинка",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"picture\">")),
+                    builder => builder.AddIcon("image")),
                 new AntDesignContentBlockDescriptor<GalleryBlock, GalleryBlockForm>("Галерея",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"picture\">")),
+                    builder => builder.AddIcon("gallery")),
                 new AntDesignContentBlockDescriptor<YoutubeBlock, YoutubeBlockForm>("YouTube",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"youtube\">")),
+                    builder => builder.AddIcon("youtube")),
                 new AntDesignContentBlockDescriptor<TwitterBlock, TwitterBlockForm>("Twitter",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"twitter\">")),
+                    builder => builder.AddIcon("twitter")),
                 new AntDesignContentBlockDescriptor<TwitchBlock, TwitchBlockForm>("Twitch",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"video-camera\">")),
+                    builder => builder.AddIcon("twitch")),
                 new AntDesignContentBlockDescriptor<IframeBlock, IFrameBlockForm>("IFrame",
-                    builder => builder.AddMarkupContent(1, "<Icon Type=\"border\">"))
+                    builder => builder.AddIcon("embed"))
             };
+        }
+    }
+
+    public static class RenderTreeBuilderExtensions
+    {
+        public static RenderTreeBuilder AddIcon(this RenderTreeBuilder builder, string icon)
+        {
+            builder.OpenComponent(1, typeof(Icon));
+            builder.AddAttribute(1, nameof(Icon.Component), CustomIconsProvider.GetIcon(icon));
+            builder.CloseComponent();
+            return builder;
         }
     }
 }

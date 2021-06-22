@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
 using Sitko.Blockly.Blocks;
+using Sitko.Core.App.Blazor.Forms;
 
-namespace Sitko.Blockly.AntDesign.Forms
+namespace Sitko.Blockly.AntDesignComponents.Forms
 {
-    public abstract class BlocklyFormBase : ComponentBase
+    public abstract class BlocklyFormBase<TEntity, TForm> : ComponentBase where TForm: BaseForm<TEntity>, IBlocklyForm where TEntity: class, IBlocklyEntity
     {
-        [Parameter] public IBlocklyEntity Entity { get; set; }
+        [Parameter] public TForm Entity { get; set; }
 
         [Inject] protected IBlockly<AntDesignContentBlockDescriptor> Blockly { get; set; }
 
@@ -79,6 +80,7 @@ namespace Sitko.Blockly.AntDesign.Forms
             }
 
             Entity.Blocks = Blocks.ToList();
+            Entity.NotifyChange();
         }
 
         protected void DeleteBlock(ContentBlock block)

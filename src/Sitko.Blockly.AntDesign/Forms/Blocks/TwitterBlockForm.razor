@@ -1,15 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Components
-@using Microsoft.JSInterop
 @inherits TwitterBlockFormBase
 @inject IJSRuntime _jsRuntime
 
 <FormItem Label="Ссылка">
-    <Input @bind-Value="@Block.TweetLink" OnBlur="RenderTweetAsync"/>
+    <Input @bind-Value="@Block.Url" OnBlur="RenderTweetAsync"/>
 </FormItem>
-@if (!string.IsNullOrEmpty(Block.TweetId))
-{
-    <div id="twitter-@Block.Id" class="tweet">Загрузка твита...</div>
-}
+
+<div id="twitter-@Block.Id" class="tweet">
+</div>
 
 @code
 {
@@ -27,9 +25,12 @@
         if (!string.IsNullOrEmpty(Block.TweetId))
         {
             var arg = new {tweetId = Block.TweetId, id = Block.Id, instance = DotNetObjectReference.Create(this)};
-            await _jsRuntime.InvokeAsync<string>(
-                "BlazorTwttr.render",
-                arg);
+            await _jsRuntime.InvokeAsync<string>("Blockly.Twitter.render", arg);
+        }
+        else
+        {
+            var arg = new {id = Block.Id};
+            await _jsRuntime.InvokeAsync<string>("Blockly.Twitter.clear", arg);
         }
     }
 }

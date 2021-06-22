@@ -17,6 +17,8 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <RootNamespace>Sitko.Blockly.AntDesignComponents</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,11 +27,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Sitko.AntDesign" Version="0.9.0-nightly-2104291220" />
+    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="1.0.1" />
+    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="7.12.1" />
   </ItemGroup>
   
   <ItemGroup>
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
     <None Include="..\..\packageIcon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Icons\*.svg" />
+    <EmbeddedResource Include="Icons\*.svg" />
   </ItemGroup>
 </Project>
