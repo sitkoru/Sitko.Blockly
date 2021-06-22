@@ -20,6 +20,10 @@ namespace Sitko.Blockly
         List<ContentBlock> Blocks { get; set; }
     }
 
+    public interface IBlocklyForm : IBlocklyEntity
+    {
+    }
+
     public abstract class BlocklyEntity : IBlocklyEntity
     {
         public List<ContentBlock> Blocks { get; set; } = new List<ContentBlock>();
