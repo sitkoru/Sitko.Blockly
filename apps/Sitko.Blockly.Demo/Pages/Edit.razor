@@ -1,0 +1,10 @@
+﻿@page "/Posts/{PostId:guid}/Edit"
+<Title>Edit post @PostId</Title>
+<PostFormComponent PostId="PostId"></PostFormComponent>
+
+@code {
+
+    [Parameter]
+    public Guid PostId { get; set; }
+
+}

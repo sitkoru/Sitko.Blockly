@@ -1,0 +1,15 @@
+version: "2.1"
+services:
+    postgres:
+        image: postgres:alpine
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_HOST_AUTH_METHOD=trust
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres:/var/lib/postgresql/data
+
+
+volumes:
+    postgres:

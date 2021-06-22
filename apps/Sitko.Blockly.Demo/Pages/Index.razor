@@ -1,0 +1,21 @@
+﻿@page "/"
+@using Sitko.Blockly.Demo.Data.Entities
+<Title>Posts</Title>
+
+<Button>
+    <a href="/Posts/Add">Add</a>
+</Button>
+<br/>
+<AntRepositoryList TItem="Post" TEntityPk="Guid">
+    <Column @bind-Field="@context.Id"></Column>
+    <Column @bind-Field="@context.DateAdded"></Column>
+    <Column @bind-Field="@context.DateUpdated"></Column>
+    <ActionColumn>
+        <Button>
+            <a href="/Posts/@context.Id">Show</a>
+        </Button>
+        <Button>
+            <a href="/Posts/@context.Id/Edit">Show</a>
+        </Button>
+    </ActionColumn>
+</AntRepositoryList>
