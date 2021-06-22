@@ -1,22 +1,14 @@
 using System;
 using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace Sitko.Blockly.Blocks
 {
-    public record TwitchBlock : ContentBlock
+    public record TwitchBlock : UrlContentBlock
     {
-        public override string ToString()
-        {
-            return $"Twitch: {VideoId}{ChannelId}{CollectionId}";
-        }
+        protected override bool IsEmpty => string.IsNullOrEmpty(VideoId) && string.IsNullOrEmpty(ChannelId) &&
+                                           string.IsNullOrEmpty(CollectionId);
 
-        public string? VideoId { get; set; }
-        public string? ChannelId { get; set; }
-        public string? CollectionId { get; set; }
-
-        [JsonIgnore]
-        public string? TwitchLink
+        protected override string FinalUrl
         {
             get
             {
@@ -40,51 +32,46 @@ namespace Sitko.Blockly.Blocks
 
                 return url;
             }
-            set
+        }
+
+        protected override void ParseUrl(string? url)
+        {
+            if (!string.IsNullOrEmpty(url))
             {
-                if (!string.IsNullOrEmpty(value))
+                if (Uri.TryCreate(url, UriKind.Absolute, out var uri))
                 {
-                    if (Uri.TryCreate(value, UriKind.Absolute, out var uri))
+                    if (uri.Host == "player.twitch.tv")
                     {
-                        if (uri.Host == "player.twitch.tv")
+                        var queryParams = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+                        if (queryParams.ContainsKey("video"))
                         {
-                            var queryParams = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
-                            if (queryParams.ContainsKey("video"))
-                            {
-                                VideoId = queryParams["video"][0];
-                                CollectionId = null;
-                                ChannelId = null;
-                            }
-                            else if (queryParams.ContainsKey("channel"))
-                            {
-                                VideoId = null;
-                                CollectionId = null;
-                                ChannelId = queryParams["channel"][0];
-                            }
-                            else if (queryParams.ContainsKey("collection"))
-                            {
-                                VideoId = null;
-                                CollectionId = queryParams["collection"][0];
-                                ChannelId = null;
-                            }
-                            else
-                            {
-                                VideoId = null;
-                                CollectionId = null;
-                                ChannelId = null;
-                            }
+                            VideoId = queryParams["video"][0];
+                            CollectionId = null;
+                            ChannelId = null;
                         }
-                        else if ((uri.Host == "twitch.tv" || uri.Host == "www.twitch.tv") &&
-                                 uri.AbsolutePath.StartsWith("/videos"))
+                        else if (queryParams.ContainsKey("channel"))
                         {
-                            VideoId = uri.AbsolutePath.Split('/').Last();
+                            VideoId = null;
+                            CollectionId = null;
+                            ChannelId = queryParams["channel"][0];
+                        }
+                        else if (queryParams.ContainsKey("collection"))
+                        {
+                            VideoId = null;
+                            CollectionId = queryParams["collection"][0];
+                            ChannelId = null;
+                        }
+                        else
+                        {
+                            VideoId = null;
                             CollectionId = null;
                             ChannelId = null;
                         }
                     }
-                    else
+                    else if ((uri.Host == "twitch.tv" || uri.Host == "www.twitch.tv") &&
+                             uri.AbsolutePath.StartsWith("/videos"))
                     {
-                        VideoId = null;
+                        VideoId = uri.AbsolutePath.Split('/').Last();
                         CollectionId = null;
                         ChannelId = null;
                     }
@@ -96,6 +83,21 @@ namespace Sitko.Blockly.Blocks
                     ChannelId = null;
                 }
             }
+            else
+            {
+                VideoId = null;
+                CollectionId = null;
+                ChannelId = null;
+            }
         }
+
+        public override string ToString()
+        {
+            return $"Twitch: {VideoId}{ChannelId}{CollectionId}";
+        }
+
+        public string? VideoId { get; set; }
+        public string? ChannelId { get; set; }
+        public string? CollectionId { get; set; }
     }
 }

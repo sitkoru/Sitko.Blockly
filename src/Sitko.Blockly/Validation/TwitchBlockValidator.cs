@@ -8,8 +8,9 @@ namespace Sitko.Blockly.Validation
     {
         public TwitchBlockValidator()
         {
-            RuleFor(d => d.TwitchLink).NotEmpty().WithMessage("Укажите ссылку на видео")
-                .Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _)).WithMessage("Значение должно быть ссылкой");
+            RuleFor(d => d.Url).NotEmpty().WithMessage("Укажите ссылку на видео");
+            RuleFor(d => d.Url).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
+                .When(b => !string.IsNullOrEmpty(b.Url)).WithMessage("Значение должно быть ссылкой");
         }
     }
 }

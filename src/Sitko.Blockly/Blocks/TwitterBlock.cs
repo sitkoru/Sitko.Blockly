@@ -1,49 +1,43 @@
 using System;
 using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace Sitko.Blockly.Blocks
 {
-    public record TwitterBlock : ContentBlock
+    public record TwitterBlock : UrlContentBlock
     {
-        public override string ToString()
-        {
-            return $"Twitter: {TweetId} by {TweetAuthor}";
-        }
+        protected override bool IsEmpty => string.IsNullOrEmpty(TweetId);
+        protected override string FinalUrl => $"https://twitter.com/{TweetAuthor}/status/{TweetId}";
 
         public string TweetId { get; set; } = "";
         public string TweetAuthor { get; set; } = "";
 
-        [JsonIgnore]
-        public string? TweetLink
+        protected override void ParseUrl(string? url)
         {
-            get
+            if (!string.IsNullOrEmpty(url))
             {
-                return string.IsNullOrEmpty(TweetId) ? null : $"https://twitter.com/{TweetAuthor}/status/{TweetId}";
-            }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    var uri = new Uri(value);
+                var uri = new Uri(url);
 
-                    if (uri.Segments.Length == 4)
+                if (uri.Segments.Length == 4)
+                {
+                    var author = uri.Segments[1].Replace("/", "");
+                    var tweetId = uri.Segments.Last();
+                    if (TweetAuthor != author || TweetId != tweetId)
                     {
-                        var author = uri.Segments[1].Replace("/", "");
-                        var tweetId = uri.Segments.Last();
-                        if (TweetAuthor != author || TweetId != tweetId)
-                        {
-                            TweetAuthor = author;
-                            TweetId = tweetId;
-                        }
+                        TweetAuthor = author;
+                        TweetId = tweetId;
                     }
                 }
-                else
-                {
-                    TweetId = string.Empty;
-                    TweetAuthor = string.Empty;
-                }
             }
+            else
+            {
+                TweetId = string.Empty;
+                TweetAuthor = string.Empty;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"Twitter: {TweetId} by {TweetAuthor}";
         }
     }
 }

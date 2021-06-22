@@ -8,8 +8,9 @@ namespace Sitko.Blockly.Validation
     {
         public TwitterBlockValidator()
         {
-            RuleFor(d => d.TweetLink).NotEmpty().WithMessage("Укажите ссылку на твит")
-                .Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _)).WithMessage("Значение должно быть ссылкой");
+            RuleFor(d => d.Url).NotEmpty().WithMessage("Укажите ссылку на твит");
+            RuleFor(d => d.Url).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
+                .When(block => !string.IsNullOrEmpty(block.Url)).WithMessage("Значение должно быть ссылкой");
         }
     }
 }
