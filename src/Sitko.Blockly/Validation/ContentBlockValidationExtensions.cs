@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using FluentValidation;
-using FluentValidation.Validators;
 
 namespace Sitko.Blockly.Validation
 {

@@ -46,11 +46,14 @@ namespace Sitko.Blockly.AntDesignComponents
                 if (resourceName.EndsWith(".svg"))
                 {
                     var resource = assembly.GetManifestResourceStream(resourceName);
-                    StreamReader reader = new(resource);
-                    string text = await reader.ReadToEndAsync(); //hello world!
-                    var name = resourceName.Replace("Sitko.Blockly.AntDesignComponents.Icons.", "")
-                        .Replace(".svg", "");
-                    _icons.Add(name, text);
+                    if (resource is not null)
+                    {
+                        StreamReader reader = new(resource);
+                        string text = await reader.ReadToEndAsync(); //hello world!
+                        var name = resourceName.Replace("Sitko.Blockly.AntDesignComponents.Icons.", "")
+                            .Replace(".svg", "");
+                        _icons.Add(name, text);
+                    }
                 }
             }
         }

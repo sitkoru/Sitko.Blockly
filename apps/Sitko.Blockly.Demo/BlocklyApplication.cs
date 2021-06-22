@@ -12,13 +12,10 @@ namespace Sitko.Blockly.Demo
     {
         public BlocklyApplication(string[] args) : base(args)
         {
-            AddModule<PostgresModule<BlocklyContext>, PostgresDatabaseModuleConfig<BlocklyContext>>(
-                (configuration, environment, moduleConfig) =>
-                {
-                });
+            AddModule<PostgresModule<BlocklyContext>, PostgresDatabaseModuleConfig<BlocklyContext>>();
             AddModule<EFRepositoriesModule<BlocklyContext>, EFRepositoriesModuleConfig>();
             AddModule<AntDesignBlocklyModule, AntDesignBlocklyModuleConfig>(
-                (configuration, environment, moduleConfig) =>
+                (_, _, moduleConfig) =>
                 {
                     moduleConfig.AddDefaultFluentValidators();
                     moduleConfig.AddDefaultBlocks();

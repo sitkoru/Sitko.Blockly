@@ -5,9 +5,9 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 {
     public abstract class BaseBlockForm<TBlock> : ComponentBase
     {
-        [Parameter] public TBlock Block { get; set; }
+        [Parameter] public TBlock Block { get; set; } = default!;
 
-        [CascadingParameter] public EditContext CurrentEditContext { get; set; }
+        [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
         protected FieldIdentifier FieldIdentifier { get; private set; }
 
         protected override void OnInitialized()

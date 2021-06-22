@@ -27,7 +27,7 @@ namespace Sitko.Blockly.Blocks
                 }
                 else
                 {
-                    return null;
+                    return "";
                 }
 
                 return url;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FluentValidation;
 using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Demo.Data.Entities;
 using Sitko.Blockly.Validation;

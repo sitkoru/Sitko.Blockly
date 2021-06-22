@@ -48,7 +48,7 @@ namespace Sitko.Blockly
         public IEnumerable<TBlockDescriptor> Descriptors => _descriptors;
         public IEnumerable<Type> Validators => _validators;
 
-        public bool WithDefaultFluentValidators { get; protected set; } = false;
+        public bool WithDefaultFluentValidators { get; protected set; }
 
         public BlocklyModuleConfig<TBlockDescriptor> AddDefaultBlocks()
         {

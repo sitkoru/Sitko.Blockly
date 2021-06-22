@@ -1,5 +1,3 @@
-using System;
-
 namespace Sitko.Blockly.Blocks
 {
     public record IframeBlock : ContentBlock

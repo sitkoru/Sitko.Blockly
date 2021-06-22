@@ -9,11 +9,11 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 {
     public abstract class BlocklyFormBase<TEntity, TForm> : ComponentBase where TForm: BaseForm<TEntity>, IBlocklyForm where TEntity: class, IBlocklyEntity
     {
-        [Parameter] public TForm Entity { get; set; }
+        [Parameter] public TForm Entity { get; set; } = null!;
 
-        [Inject] protected IBlockly<AntDesignContentBlockDescriptor> Blockly { get; set; }
+        [Inject] protected IBlockly<AntDesignContentBlockDescriptor> Blockly { get; set; } = null!;
 
-        protected ObservableCollection<ContentBlock> Blocks;
+        protected ObservableCollection<ContentBlock> Blocks = null!;
 
         protected override void OnInitialized()
         {
