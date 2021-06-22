@@ -20,11 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.1.0"/>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.2.3"/>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0"/>
-    <PackageReference Include="Sitko.Core.App.Web" Version="7.5.1"/>
-    <PackageReference Include="Sitko.Core.Storage" Version="7.5.1"/>
-    <PackageReference Include="FluentValidation" Version="10.1.0"/>
+    <PackageReference Include="Sitko.Core.App.Web" Version="7.12.1"/>
+    <PackageReference Include="Sitko.Core.Storage" Version="7.12.1"/>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
 
