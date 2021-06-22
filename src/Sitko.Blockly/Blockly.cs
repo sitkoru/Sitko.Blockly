@@ -20,9 +20,9 @@ namespace Sitko.Blockly
         private readonly List<TBlockDescriptor> _blockDescriptors;
         private readonly ILogger<Blockly<TBlockDescriptor>> _logger;
 
-        public Blockly(List<TBlockDescriptor> blockDescriptors, ILogger<Blockly<TBlockDescriptor>> logger)
+        public Blockly(IEnumerable<TBlockDescriptor> blockDescriptors, ILogger<Blockly<TBlockDescriptor>> logger)
         {
-            _blockDescriptors = blockDescriptors;
+            _blockDescriptors = blockDescriptors.ToList();
             _logger = logger;
         }
 
@@ -52,7 +52,7 @@ namespace Sitko.Blockly
                 throw new ArgumentException($"Block type {blockType} doesn't inherits from ContentBlock");
             }
 
-            var descriptor = _blockDescriptors.FirstOrDefault(d => d.GetType() == blockType);
+            var descriptor = _blockDescriptors.FirstOrDefault(d => d.Type == blockType);
             if (descriptor is null)
             {
                 throw new Exception($"Can't find descriptor for {blockType}");
