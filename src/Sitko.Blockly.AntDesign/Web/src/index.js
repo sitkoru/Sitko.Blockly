@@ -73,12 +73,15 @@ window.Blockly = {
                 layout: 'video',
                 autoplay: false
             };
-            if (params.video) {
-                twitchParams.video = params.video;
+            if (params.collection) {
+                twitchParams.collection = params.collection;
+                if (params.video) {
+                    twitchParams.video = params.video;
+                }
             } else if (params.channel) {
                 twitchParams.channel = params.channel;
-            } else if (params.collection) {
-                twitchParams.collection = params.collection;
+            } else if (params.video) {
+                twitchParams.video = params.video;
             }
             new Twitch.Player('twitch-' + params.id, twitchParams);
         },
