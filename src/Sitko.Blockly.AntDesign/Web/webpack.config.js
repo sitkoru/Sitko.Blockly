@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 const TerserPlugin = require('terser-webpack-plugin');
 
-var config = {
+const config = {
     entry: {
         index: path.resolve(__dirname, 'src', 'index.js'),
     },
@@ -22,7 +22,7 @@ var config = {
     module: {
         rules: [
             {
-                test: /\.(sa|sc)ss$/,
+                test: /\.css$/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -32,40 +32,6 @@ var config = {
                     },
                     {
                         loader: 'css-loader', // translates CSS into CommonJS modules
-                    }, {
-                        loader: 'postcss-loader', // Run post css actions
-                        options: {
-                            postcssOptions: {
-                                plugins: function () { // post css plugins, can be exported to postcss.config.js
-                                    return [
-                                        require('precss'),
-                                        require('autoprefixer')
-                                    ];
-                                }
-                            }
-                        }
-                    }, {
-                        loader: 'sass-loader' // compiles Sass to CSS
-                    }]
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: '/dist'
-                        }
-                    },
-                    {
-                        loader: 'css-loader', // translates CSS into CommonJS modules
-                    }, {
-                        loader: 'less-loader', // compiles Less to CSS
-                        options: {
-                            lessOptions: {
-                                javascriptEnabled: true
-                            }
-                        }
                     }]
             },
             {
