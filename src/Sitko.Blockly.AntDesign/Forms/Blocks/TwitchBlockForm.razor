@@ -1,37 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components
 @inherits TwitchBlockFormBase
-@inject IJSRuntime _jsRuntime
 
 <FormItem Label="Ссылка">
     <Input @bind-Value="@Block.Url" OnBlur="RenderVideoAsync"/>
 </FormItem>
 <div id="twitch-@Block.Id" class="twitch-video" style="text-align: center"></div>
-
-@code
-{
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            await _jsRuntime.InvokeVoidAsync("Blockly.Twitch.load");
-            await RenderVideoAsync();
-        }
-    }
-
-    private async Task RenderVideoAsync()
-    {
-        if (!string.IsNullOrEmpty(Block.Url))
-        {
-            var arg = new {video = Block.VideoId, channel = Block.ChannelId, collection = Block.CollectionId, id = Block.Id, instance = DotNetObjectReference.Create(this)};
-            await _jsRuntime.InvokeAsync<string>(
-                "Blockly.Twitch.render",
-                arg);
-        }
-        else
-        {
-            var arg = new {id = Block.Id};
-            await _jsRuntime.InvokeAsync<string>("Blockly.Twitch.clear", arg);
-        }
-    }
-}

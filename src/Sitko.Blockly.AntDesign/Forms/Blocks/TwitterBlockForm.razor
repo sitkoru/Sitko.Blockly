@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components
 @inherits TwitterBlockFormBase
-@inject IJSRuntime _jsRuntime
+
 
 <FormItem Label="Ссылка">
     <Input @bind-Value="@Block.Url" OnBlur="RenderTweetAsync"/>
@@ -8,29 +8,3 @@
 
 <div id="twitter-@Block.Id" class="tweet">
 </div>
-
-@code
-{
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            await RenderTweetAsync();
-        }
-    }
-
-    private async Task RenderTweetAsync()
-    {
-        if (!string.IsNullOrEmpty(Block.TweetId))
-        {
-            var arg = new {tweetId = Block.TweetId, id = Block.Id, instance = DotNetObjectReference.Create(this)};
-            await _jsRuntime.InvokeAsync<string>("Blockly.Twitter.render", arg);
-        }
-        else
-        {
-            var arg = new {id = Block.Id};
-            await _jsRuntime.InvokeAsync<string>("Blockly.Twitter.clear", arg);
-        }
-    }
-}
