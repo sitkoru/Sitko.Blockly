@@ -14,7 +14,7 @@ jobs:
             PROJECT: Sitko.Blockly
             ANTDESIGN_PROJECT: Sitko.Blockly.AntDesign
             EF_PROJECT: Sitko.Blockly.EntityFrameworkCore
-            TEST_PROJECT: Sitko.Blockly.Tests
+            TESTS_PROJECT: Sitko.Blockly.Tests
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2.3.4
