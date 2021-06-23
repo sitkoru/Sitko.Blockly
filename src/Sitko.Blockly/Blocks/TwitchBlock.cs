@@ -12,23 +12,28 @@ namespace Sitko.Blockly.Blocks
         {
             get
             {
-                var url = "https://player.twitch.tv/";
-                if (!string.IsNullOrEmpty(VideoId))
+                var url = "https://www.twitch.tv/";
+                if (!string.IsNullOrEmpty(CollectionId))
                 {
-                    url += $"?video={VideoId}";
+                    if (!string.IsNullOrEmpty(VideoId))
+                    {
+                        url += $"videos/{VideoId}?collection={CollectionId}&filter=collections";
+                    }
+                    else
+                    {
+                        url += $"collections/{CollectionId}?filter=collections";
+                    }
+
+                    return url;
                 }
-                else if (!string.IsNullOrEmpty(CollectionId))
+
+                if (!string.IsNullOrEmpty(ChannelId))
                 {
-                    url += $"?collection={CollectionId}";
+                    url += ChannelId;
+                    return url;
                 }
-                else if (!string.IsNullOrEmpty(ChannelId))
-                {
-                    url += $"?channel={ChannelId}";
-                }
-                else
-                {
-                    return "";
-                }
+
+                url += $"videos/{VideoId}";
 
                 return url;
             }
@@ -43,7 +48,16 @@ namespace Sitko.Blockly.Blocks
                     if (uri.Host == "player.twitch.tv")
                     {
                         var queryParams = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
-                        if (queryParams.ContainsKey("video"))
+                        if (queryParams.ContainsKey("collection"))
+                        {
+                            CollectionId = queryParams["collection"][0];
+                            ChannelId = null;
+                            if (queryParams.ContainsKey("video"))
+                            {
+                                VideoId = queryParams["video"][0];
+                            }
+                        }
+                        else if (queryParams.ContainsKey("video"))
                         {
                             VideoId = queryParams["video"][0];
                             CollectionId = null;
@@ -55,12 +69,7 @@ namespace Sitko.Blockly.Blocks
                             CollectionId = null;
                             ChannelId = queryParams["channel"][0];
                         }
-                        else if (queryParams.ContainsKey("collection"))
-                        {
-                            VideoId = null;
-                            CollectionId = queryParams["collection"][0];
-                            ChannelId = null;
-                        }
+
                         else
                         {
                             VideoId = null;
@@ -68,12 +77,26 @@ namespace Sitko.Blockly.Blocks
                             ChannelId = null;
                         }
                     }
-                    else if ((uri.Host == "twitch.tv" || uri.Host == "www.twitch.tv") &&
-                             uri.AbsolutePath.StartsWith("/videos"))
+                    else if ((uri.Host == "twitch.tv" || uri.Host == "www.twitch.tv"))
                     {
-                        VideoId = uri.AbsolutePath.Split('/').Last();
-                        CollectionId = null;
-                        ChannelId = null;
+                        if (uri.AbsolutePath.StartsWith("/videos"))
+                        {
+                            VideoId = uri.AbsolutePath.Split('/').Last();
+                            CollectionId = null;
+                            ChannelId = null;
+                        }
+                        else if (uri.AbsolutePath.StartsWith("/collections"))
+                        {
+                            VideoId = null;
+                            CollectionId = uri.AbsolutePath.Split('/').Last();
+                            ChannelId = null;
+                        }
+                        else if (uri.AbsolutePath.Split('/').Length == 2)
+                        {
+                            VideoId = null;
+                            CollectionId = null;
+                            ChannelId = uri.AbsolutePath.Split('/').Last();
+                        }
                     }
                 }
                 else
