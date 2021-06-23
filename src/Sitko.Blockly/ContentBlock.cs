@@ -21,6 +21,13 @@ namespace Sitko.Blockly
 
     public interface IBlocklyForm : IBlocklyEntity
     {
+        public List<Type>? AllowedBlocks
+        {
+            get
+            {
+                return null;
+            }
+        }
     }
 
     public abstract class BlocklyEntity : IBlocklyEntity

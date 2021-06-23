@@ -7,9 +7,13 @@ using Sitko.Core.App.Blazor.Forms;
 
 namespace Sitko.Blockly.AntDesignComponents.Forms
 {
-    public abstract class BlocklyFormBase<TEntity, TForm> : ComponentBase where TForm: BaseForm<TEntity>, IBlocklyForm where TEntity: class, IBlocklyEntity
+    public abstract class BlocklyFormBase<TEntity, TForm> : ComponentBase where TForm : BaseForm<TEntity>, IBlocklyForm
+        where TEntity : class, IBlocklyEntity
     {
         [Parameter] public TForm Entity { get; set; } = null!;
+
+        public AntDesignContentBlockDescriptor[] BlockDescriptors { get; private set; } =
+            Array.Empty<AntDesignContentBlockDescriptor>();
 
         [Inject] protected IBlockly<AntDesignContentBlockDescriptor> Blockly { get; set; } = null!;
 
@@ -23,6 +27,8 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
                 Entity.Blocks.Add(new TextBlock());
             }
 
+            BlockDescriptors = Blockly.Descriptors
+                .Where(d => Entity.AllowedBlocks is null || Entity.AllowedBlocks.Contains(d.Type)).ToArray();
             Blocks = new ObservableCollection<ContentBlock>(Entity.Blocks.OrderBy(b => b.Position));
         }
 

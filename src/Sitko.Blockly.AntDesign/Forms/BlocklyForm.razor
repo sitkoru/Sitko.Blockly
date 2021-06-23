@@ -16,7 +16,7 @@
                 <AntDesign.Dropdown Class="add-block add-block-top" Trigger="@(new[] {TriggerType.Click})">
                     <Overlay>
                         <AntDesign.Menu>
-                            @foreach (var descriptor in Blockly.Descriptors)
+                            @foreach (var descriptor in BlockDescriptors)
                             {
                                 <AntDesign.MenuItem OnClick="@(() => AddBlock(descriptor.Type, block, false))">
                                     @descriptor.Icon @descriptor.Title
@@ -38,7 +38,7 @@
                 <AntDesign.Dropdown Class="add-block add-block-bottom" Trigger="@(new[] {TriggerType.Click})">
                     <Overlay>
                         <AntDesign.Menu>
-                            @foreach (var descriptor in Blockly.Descriptors)
+                            @foreach (var descriptor in BlockDescriptors)
                             {
                                 <AntDesign.MenuItem OnClick="@(() => AddBlock(descriptor.Type, block))">
                                     @descriptor.Icon @descriptor.Title

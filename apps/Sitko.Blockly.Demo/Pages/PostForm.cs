@@ -28,6 +28,8 @@ namespace Sitko.Blockly.Demo.Pages
             Blocks = entity.Blocks;
             return Task.CompletedTask;
         }
+
+        // public List<Type> AllowedBlocks => new() {typeof(TextBlock)};
     }
 
     public class PostFormValidator : AbstractBlocklyFormValidator<PostForm>
