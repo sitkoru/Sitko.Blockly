@@ -79,9 +79,9 @@
             <Icon Class="plus-icon" Type="plus"></Icon>
             @foreach (var descriptor in BlockDescriptors)
             {
-                <Tooltip Title="@descriptor.Title">
-                    <Button Class="add-block-button" Size="@ButtonSize.Small" OnClick="@(() => AddBlock(descriptor.Type, block))">@descriptor.Icon</Button>
-                </Tooltip>
+                <span class="add-block-button" title="@descriptor.Title">
+                    <Button Size="@ButtonSize.Small" OnClick="@(() => AddBlock(descriptor.Type, block))">@descriptor.Icon</Button>
+                </span>
             }
         </div>
     }
