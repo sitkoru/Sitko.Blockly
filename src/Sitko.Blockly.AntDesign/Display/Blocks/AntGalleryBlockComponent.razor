@@ -1,0 +1,22 @@
+﻿@typeparam TEntity
+@inherits GalleryBlockComponent<TEntity>
+@if (Block.Pictures.Any())
+{
+    if (Block.Pictures.Count > 1)
+    {
+        <Carousel Autoplay="TimeSpan.FromSeconds(2)">
+            @foreach (var image in Block.Pictures)
+            {
+                <CarouselSlick>
+                    <img src="@Options.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+                </CarouselSlick>
+            }
+        </Carousel>
+    }
+    else
+    {
+        var image = Block.Pictures.First();
+        <img src="@Options.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+    }
+}
+

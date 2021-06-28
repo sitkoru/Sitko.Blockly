@@ -8,7 +8,7 @@ namespace Sitko.Blockly.Validation
     {
         public YoutubeBlockValidator()
         {
-            RuleFor(d => d.Url).NotEmpty().WithMessage("Укажите ссылку на видео");
+            RuleFor(d => d.Url).NotEmpty().WithMessage("Укажите ссылку на видео").When(b => b.Enabled);
             RuleFor(d => d.Url).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
                 .When(block => !string.IsNullOrEmpty(block.Url)).WithMessage("Значение должно быть ссылкой");
         }

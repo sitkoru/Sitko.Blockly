@@ -9,6 +9,13 @@ using Sitko.Core.App;
 
 namespace Sitko.Blockly
 {
+    public class BlocklyModule : BlocklyModule<ContentBlockDescriptor, BlocklyModuleConfig>
+    {
+        public BlocklyModule(BlocklyModuleConfig config, Application application) : base(config, application)
+        {
+        }
+    }
+
     public class BlocklyModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TConfig>
         where TBlockDescriptor : ContentBlockDescriptor where TConfig : BlocklyModuleConfig<TBlockDescriptor>, new()
     {
@@ -55,8 +62,7 @@ namespace Sitko.Blockly
             return AddTextBlock()
                 .AddCutBlock()
                 .AddQuoteBlock()
-                .AddFileBlock()
-                .AddPictureBlock()
+                .AddFilesBlock()
                 .AddGalleryBlock()
                 .AddYoutubeBlock()
                 .AddTwitterBlock()
@@ -85,16 +91,9 @@ namespace Sitko.Blockly
         }
 
 
-        public BlocklyModuleConfig<TBlockDescriptor> AddFileBlock()
+        public BlocklyModuleConfig<TBlockDescriptor> AddFilesBlock()
         {
-            RegisterBlock(GetFileBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddPictureBlock()
-        {
-            RegisterBlock(GetPictureBlockDescriptor());
+            RegisterBlock(GetFilesBlockDescriptor());
             return this;
         }
 
@@ -175,8 +174,9 @@ namespace Sitko.Blockly
         protected abstract TBlockDescriptor GetTextBlockDescriptor();
         protected abstract TBlockDescriptor GetCutBlockDescriptor();
         protected abstract TBlockDescriptor GetQuoteBlockDescriptor();
-        protected abstract TBlockDescriptor GetFileBlockDescriptor();
-        protected abstract TBlockDescriptor GetPictureBlockDescriptor();
+        protected abstract TBlockDescriptor GetFilesBlockDescriptor();
+
+
         protected abstract TBlockDescriptor GetGalleryBlockDescriptor();
         protected abstract TBlockDescriptor GetYoutubeBlockDescriptor();
         protected abstract TBlockDescriptor GetTwitterBlockDescriptor();
@@ -201,14 +201,9 @@ namespace Sitko.Blockly
             return new ContentBlockDescriptor<QuoteBlock>("Цитата");
         }
 
-        protected override ContentBlockDescriptor GetFileBlockDescriptor()
+        protected override ContentBlockDescriptor GetFilesBlockDescriptor()
         {
-            return new ContentBlockDescriptor<FileBlock>("Файл");
-        }
-
-        protected override ContentBlockDescriptor GetPictureBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<PictureBlock>("Картинка");
+            return new ContentBlockDescriptor<FilesBlock>("Файлы");
         }
 
         protected override ContentBlockDescriptor GetGalleryBlockDescriptor()

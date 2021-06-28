@@ -1,0 +1,35 @@
+﻿@typeparam TForm
+@inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<TForm>
+
+<FormItem>
+    <CKEditor @bind-Value="Block.Text"></CKEditor>
+    <BlockValidationMessage FieldIdentifier="@FieldIdentifier"></BlockValidationMessage>
+</FormItem>
+<Divider/>
+<Row Gutter="24">
+    <AntDesign.Col Span="8">
+        <FormItem Label="Источник">
+            <Input Placeholder="Автор цитаты" @bind-Value="@Block.Author"/>
+        </FormItem>
+    </AntDesign.Col>
+    <AntDesign.Col Span="8">
+        <FormItem Label="Ссылка">
+            <Input Placeholder="Ссылка на источник" @bind-Value="@Block.Link"/>
+        </FormItem>
+    </AntDesign.Col>
+    <AntDesign.Col Span="8">
+        <FormItem Label="Картинка к источнику">
+            <AntStorageImageInput
+                Avatar="true"
+                Size="small"
+                Storage="Options.Storage"
+                ContentTypes="@Options.ImagesTypes"
+                UploadPath="@Options.ImagesUploadPath"
+                MaxFileSize="@Options.MaxImageSize"
+                GenerateMetadata="Options.GenerateImageMetadata"
+                @bind-Value="Block.Picture">
+            </AntStorageImageInput>
+
+        </FormItem>
+    </AntDesign.Col>
+</Row>

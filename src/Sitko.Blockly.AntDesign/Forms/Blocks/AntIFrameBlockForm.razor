@@ -1,0 +1,15 @@
+﻿@typeparam TForm
+@inherits Sitko.Blockly.Blazor.Forms.Blocks.IFrameBlockForm<TForm>
+<FormItem Label="Ссылка">
+    <Input @bind-Value="@Block.Src"/>
+</FormItem>
+@if (!string.IsNullOrEmpty(Block.Src))
+{
+    <div style="text-align: center">
+        <iframe frameborder="0"
+                allowfullscreen=""
+                width="@(Block.Width > 0 ? Block.Width : 640)" height="@(Block.Height > 0 ? Block.Height : 360)"
+                src="@Block.Src">
+        </iframe>
+    </div>
+}

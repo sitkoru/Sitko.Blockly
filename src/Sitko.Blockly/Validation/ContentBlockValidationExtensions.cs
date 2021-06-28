@@ -15,10 +15,8 @@ namespace Sitko.Blockly.Validation
                     validator
                         .Add(new TextBlockValidator())
                         .Add(new CutBlockValidator())
-                        .Add(new FileBlockValidator())
                         .Add(new GalleryBlockValidator())
                         .Add(new IframeBlockValidator())
-                        .Add(new PictureBlockValidator())
                         .Add(new QuoteBlockValidator())
                         .Add(new TwitchBlockValidator())
                         .Add(new TwitterBlockValidator())

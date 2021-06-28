@@ -8,14 +8,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sitko.Blazor.CKEditor.Bundle;
+using Sitko.Blockly.Blazor;
 using Sitko.Core.App;
 
 namespace Sitko.Blockly.AntDesignComponents
 {
-    public class AntDesignBlocklyModule : BlocklyModule<AntDesignContentBlockDescriptor, AntDesignBlocklyModuleConfig>
+    public class AntDesignBlocklyModule : BlocklyModule<BlazorContentBlockDescriptor, AntDesignBlocklyModuleConfig>
     {
-        public AntDesignBlocklyModule(AntDesignBlocklyModuleConfig config, Application application) : base(config,
-            application)
+        public AntDesignBlocklyModule(AntDesignBlocklyModuleConfig config, Application application) :
+            base(config,
+                application)
         {
         }
 
@@ -24,6 +26,10 @@ namespace Sitko.Blockly.AntDesignComponents
         {
             base.ConfigureServices(services, configuration, environment);
             services.AddCKEditorBundle(configuration, Config.CKEditorTheme);
+            foreach (var configureServicesAction in Config.ConfigureServicesActions)
+            {
+                configureServicesAction(services);
+            }
         }
 
         public override async Task InitAsync(IServiceProvider serviceProvider, IConfiguration configuration,

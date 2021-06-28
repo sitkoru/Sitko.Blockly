@@ -1,0 +1,32 @@
+﻿@typeparam TEntity
+@inherits QuoteBlockComponent<TEntity>
+<blockquote class="blockquote">
+    <div>
+        @((MarkupString) Block.Text)
+    </div>
+    <footer class="author">
+        <cite>
+            @if (!string.IsNullOrEmpty(Block.Link))
+            {
+                if (!string.IsNullOrEmpty(Block.Author))
+                {
+                    <a href="@Block.Link">&mdash; @Block.Author</a>
+                }
+                else
+                {
+                    <a href="@Block.Link">Источник</a>
+                }
+            }
+            else if (!string.IsNullOrEmpty(Block.Author))
+            {
+                <text>&mdash; @Block.Author</text>
+            }
+        </cite>
+    </footer>
+</blockquote>
+@if (Block.Picture != null)
+{
+    <div class="picture">
+        <img src="@Options.Storage.PublicUri(Block.Picture)" alt="@Block.Picture.FileName"/>
+    </div>
+}

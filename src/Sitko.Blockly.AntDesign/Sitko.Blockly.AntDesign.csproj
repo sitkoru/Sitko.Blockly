@@ -22,13 +22,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sitko.Blockly.Blazor\Sitko.Blockly.Blazor.csproj" />
     <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="1.0.1" />
-    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="7.12.1" />
+    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="7.17.0" />
   </ItemGroup>
   
   <ItemGroup>

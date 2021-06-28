@@ -1,0 +1,13 @@
+﻿@foreach (var message in CurrentEditContext.GetValidationMessages(FieldIdentifier).Distinct().ToArray())
+{
+    <FormValidationMessageItem Message="@message" @key="message"></FormValidationMessageItem>
+}
+
+@code
+{
+    [Parameter]
+    public FieldIdentifier FieldIdentifier { get; set; }
+
+    [CascadingParameter]
+    public EditContext CurrentEditContext { get; set; } = null!;
+}

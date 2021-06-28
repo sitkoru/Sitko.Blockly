@@ -1,0 +1,10 @@
+﻿@typeparam TEntity
+@inherits FilesBlockComponent<TEntity>
+@foreach (var file in Block.Files)
+{
+    <ul>
+        <li>
+            <AntDesign.Icon Type="paper-clip"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@Options.Storage.PublicUri(file)">@file.FileName</a>&nbsp;(&nbsp;@file.HumanSize&nbsp;)
+        </li>
+    </ul>
+}

@@ -1,0 +1,15 @@
+﻿@using Sitko.Core.App.Collections
+@using Sitko.Core.Storage
+@typeparam TForm
+@inherits Sitko.Blockly.Blazor.Forms.Blocks.GalleryBlockForm<TForm>
+<AntStorageImagesInput
+    TCollection="ValueCollection<StorageItem>"
+    Storage="Options.Storage"
+    ContentTypes="@Options.ImagesTypes"
+    UploadPath="@Options.ImagesUploadPath"
+    MaxFileSize="@Options.MaxImageSize"
+    MaxAllowedFiles="@Options.MaxAllowedImages"
+    GenerateMetadata="Options.GenerateImageMetadata"
+    @bind-Value="Block.Pictures">
+</AntStorageImagesInput>
+<BlockValidationMessage FieldIdentifier="@FieldIdentifier"></BlockValidationMessage>

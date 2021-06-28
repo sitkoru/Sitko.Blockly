@@ -1,17 +1,14 @@
-﻿@using global::AntDesign
-@typeparam TEntity
+﻿@typeparam TEntity
 @typeparam TForm
-@inherits BlocklyFormBase<TEntity, TForm>
-
-<div id="blocks-@Entity.GetHashCode()">
+@using Sitko.Blockly.Blazor
+@inherits Sitko.Blockly.Blazor.Forms.BlocklyForm<TEntity, TForm>
+<ValidationSummary Model="Form"></ValidationSummary>
+<div id="blocks-@Form.GetHashCode()">
     @foreach (var block in Blocks)
     {
         var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
         var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()}";
         <div class="block-row" @key="block.Id">
-            <div class="block-icon">
-                @blockDescriptor.Icon
-            </div>
             <div class="block-content">
                 <AntDesign.Dropdown Class="add-block add-block-top" Trigger="@(new[] {TriggerType.Click})">
                     <Overlay>
@@ -30,9 +27,16 @@
                         </Button>
                     </ChildContent>
                 </AntDesign.Dropdown>
-                <AntDesign.Card Class="@className">
+                <AntDesign.Card Hoverable TitleTemplate="BlockTitleTemplate(blockDescriptor, block)" Title="@block.Enabled.ToString()" Class="@className">
+                    <Extra>
+                        <Switch Checked="block.Enabled" OnChange="_ => { block.Enabled = !block.Enabled; Form.NotifyChange(); }">
+                            Toggle loading
+                        </Switch>
+                    </Extra>
                     <Body>
-                    @blockDescriptor.RenderBlockForm(block)
+                    <Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
+                        @(blockDescriptor.RenderBlockForm(Form, block))
+                    </Spin>
                     </Body>
                 </AntDesign.Card>
                 <AntDesign.Dropdown Class="add-block add-block-bottom" Trigger="@(new[] {TriggerType.Click})">
@@ -54,7 +58,7 @@
                 </AntDesign.Dropdown>
             </div>
             <div class="block-controls">
-                <AntDesign.Button Size="small" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUp(block))">
+                <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
                     <Icon Type="up"></Icon>
                 </AntDesign.Button>
                 <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="Вы действительно хотите удалить это блок?"
@@ -65,10 +69,21 @@
                         <Icon Type="delete"></Icon>
                     </AntDesign.Button>
                 </AntDesign.Popconfirm>
-                <AntDesign.Button Size="small" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDown(block))">
+                <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveDown(block)" OnClick="@(() => MoveBlockDown(block))">
                     <Icon Type="down"></Icon>
                 </AntDesign.Button>
             </div>
         </div>
     }
 </div>
+
+@code{
+
+    private RenderFragment _disabledBlockIndicator = @<span></span>;
+
+    private RenderFragment BlockTitleTemplate(BlazorContentBlockDescriptor blockDescriptor, ContentBlock block)
+    {
+        return @<Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">@blockDescriptor.Icon</Spin>;
+    }
+
+}

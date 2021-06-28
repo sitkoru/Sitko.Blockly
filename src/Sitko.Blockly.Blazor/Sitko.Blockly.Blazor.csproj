@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>George Drak</Authors>
+    <Company>Sitko.Ru</Company>
+    <Product>Sitko.Blockly</Product>
+    <Description>Sitko.Blockly is a library for building structured content editors</Description>
+    <Summary>Sitko.Blockly is a library for building structured content editors</Summary>
+    <Copyright>Copyright © Sitko.ru 2021</Copyright>
+    <RepositoryUrl>https://github.com/sitkoru/Sitko.Blockly</RepositoryUrl>
+    <PackageIcon>packageIcon.png</PackageIcon>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Sitko.Core.App.Blazor" Version="7.17.0" />
+      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+      <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="7.17.0" />
+    </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
+    <None Include="..\..\packageIcon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

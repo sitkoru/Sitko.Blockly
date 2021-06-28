@@ -8,7 +8,7 @@ namespace Sitko.Blockly.Validation
     {
         public QuoteBlockValidator()
         {
-            RuleFor(d => d.Text).NotEmpty().WithMessage("Введите текст цитаты");
+            RuleFor(d => d.Text).NotEmpty().WithMessage("Введите текст цитаты").When(b => b.Enabled);
             RuleFor(p => p.Link).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
                 .When(x => !string.IsNullOrEmpty(x.Link)).WithMessage("Значение должно быть ссылкой");
         }

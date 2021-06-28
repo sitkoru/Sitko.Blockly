@@ -64,3 +64,15 @@
 ::deep .block-row .block-controls .dropdown-toggle:before {
     content: none;
 }
+
+::deep .ant-card-head {
+    border-bottom: none;
+}
+
+::deep .ant-card-head .anticon {
+    font-size: 2em;
+}
+
+::deep .ant-card-head-title, ::deep .ant-card-extra {
+    padding: 8px 0;
+}

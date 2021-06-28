@@ -7,7 +7,7 @@ namespace Sitko.Blockly.Blocks
     {
         protected override bool IsEmpty => string.IsNullOrEmpty(TweetId);
         protected override string FinalUrl => $"https://twitter.com/{TweetAuthor}/status/{TweetId}";
-
+        
         public string TweetId { get; set; } = "";
         public string TweetAuthor { get; set; } = "";
 

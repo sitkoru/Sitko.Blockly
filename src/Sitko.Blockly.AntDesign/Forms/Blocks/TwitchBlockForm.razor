@@ -1,7 +1,0 @@
-﻿@using Microsoft.AspNetCore.Components
-@inherits TwitchBlockFormBase
-
-<FormItem Label="Ссылка">
-    <Input @bind-Value="@Block.Url" OnBlur="RenderVideoAsync"/>
-</FormItem>
-<div id="twitch-@Block.Id" class="twitch-video" style="text-align: center"></div>

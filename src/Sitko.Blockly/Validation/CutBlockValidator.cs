@@ -7,7 +7,7 @@ namespace Sitko.Blockly.Validation
     {
         public CutBlockValidator()
         {
-            RuleFor(d => d.ButtonText).NotEmpty().WithMessage("Укажите текст кнопки");
+            RuleFor(d => d.ButtonText).NotEmpty().WithMessage("Укажите текст кнопки").When(b => b.Enabled);
         }
     }
 }
