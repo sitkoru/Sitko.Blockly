@@ -4,7 +4,7 @@ using Sitko.Core.App.Collections;
 
 namespace Sitko.Blockly
 {
-    public abstract record ContentBlock: IOrdered
+    public abstract record ContentBlock : IOrdered
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public int Position { get; set; }
@@ -23,6 +23,9 @@ namespace Sitko.Blockly
 
     public interface IBlocklyForm : IBlocklyEntity
     {
+#if NETCOREAPP3_1
+        public List<Type>? AllowedBlocks { get; }
+#else
         public List<Type>? AllowedBlocks
         {
             get
@@ -30,6 +33,7 @@ namespace Sitko.Blockly
                 return null;
             }
         }
+#endif
     }
 
     public abstract class BlocklyEntity : IBlocklyEntity

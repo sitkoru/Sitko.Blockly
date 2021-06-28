@@ -195,5 +195,8 @@ namespace Sitko.Blockly.Tests
         }
 
         public List<ContentBlock> Blocks { get; set; }
+#if NETCOREAPP3_1
+        public List<Type>? AllowedBlocks => null;
+#endif
     }
 }
