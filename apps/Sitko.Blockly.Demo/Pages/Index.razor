@@ -3,29 +3,41 @@
 @using Sitko.Blockly.Demo.Data.Repositories
 @using Sitko.Blockly.Blazor.Display
 @inherits BaseComponent
-<Title>Posts</Title>
-
-<Button>
-    <a href="/Posts/Add">Add</a>
-</Button>
-<br/>
-<br/>
 @if (IsInitialized)
 {
-    foreach (Post post in Posts)
-    {
-        <Card Title="@post.Id.ToString()">
-            <Extra>
-                <a href="/Posts/@post.Id/Edit">
-                    <Button>Edit</Button>
-                </a>
-            </Extra>
-            <ChildContent>
-                <AntBlocksList TEntity="Post" Entity="post" EntityUrl="@($"/Posts/{post.Id}")" Mode="BlocksListMode.Preview"></AntBlocksList>
-            </ChildContent>
-        </Card>
-    }
+    <PageContainer Title="Posts">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Posts</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <Content>
+        </Content>
+        <ExtraContent>
+            <Button>
+                <a href="/Posts/Add">Add</a>
+            </Button>
+        </ExtraContent>
+        <ChildContent>
+            @foreach (Post post in Posts)
+            {
+                <Card Title="@post.Id.ToString()">
+                    <Extra>
+                        <a href="/Posts/@post.Id/Edit">
+                            <Button>Edit</Button>
+                        </a>
+                    </Extra>
+                    <ChildContent>
+                        <AntBlocksList TEntity="Post" Entity="post" EntityUrl="@($"/Posts/{post.Id}")" Mode="BlocksListMode.Preview"></AntBlocksList>
+                    </ChildContent>
+                </Card>
+            }
+
+        </ChildContent>
+    </PageContainer>
 }
+
 
 @code{
 

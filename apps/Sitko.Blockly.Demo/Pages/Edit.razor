@@ -1,6 +1,26 @@
 ﻿@page "/Posts/{PostId:guid}/Edit"
-<Title>Edit post @PostId</Title>
-<PostFormComponent PostId="PostId"></PostFormComponent>
+@{
+    var title = $"Edit post {PostId}";
+}
+<PageContainer Title="@title">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem>Posts</BreadcrumbItem>
+            <BreadcrumbItem>Edit</BreadcrumbItem>
+        </Breadcrumb>
+    </Breadcrumb>
+    <Content>
+    </Content>
+    <ExtraContent>
+        <Button>
+            <a href="/Posts/@PostId">View</a>
+        </Button>
+    </ExtraContent>
+    <ChildContent>
+        <PostFormComponent PostId="PostId"></PostFormComponent>
+    </ChildContent>
+</PageContainer>
 
 @code {
 

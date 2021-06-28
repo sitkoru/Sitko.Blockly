@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AntDesign.ProLayout;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,10 @@ namespace Sitko.Blockly.Demo
         {
             base.ConfigureAppServices(services);
             services.AddValidatorsFromAssemblyContaining<Startup>();
+            services.Configure<ProSettings>(settings =>
+            {
+                settings.Title = "Blockly";
+            });
         }
     }
 }

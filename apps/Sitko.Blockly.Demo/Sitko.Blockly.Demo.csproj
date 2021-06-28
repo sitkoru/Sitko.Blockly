@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AntDesign.ProLayout" Version="0.1.0-nightly-210618061658" />
     <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="7.17.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7" />
     <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="7.17.1" />

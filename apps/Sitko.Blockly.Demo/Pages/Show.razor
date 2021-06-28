@@ -4,8 +4,23 @@
 @inherits BaseComponent
 @if (IsInitialized)
 {
-    <AntDesign.Title>
-        @Post.Id
-    </AntDesign.Title>
-    <AntBlocksList TEntity="Post" Entity="Post" EntityUrl="@($"/Posts/{PostId}")" Mode="BlocksListMode.Full"></AntBlocksList>
+    var title = Post.Id.ToString();
+    <PageContainer Title="@title">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Posts</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ExtraContent>
+            <Button>
+                <a href="/Posts/@Post.Id/Edit/">Edit</a>
+            </Button>
+        </ExtraContent>
+        <Content>
+        </Content>
+        <ChildContent>
+            <AntBlocksList TEntity="Post" Entity="Post" EntityUrl="@($"/Posts/{PostId}")" Mode="BlocksListMode.Full"></AntBlocksList>
+        </ChildContent>
+    </PageContainer>
 }
