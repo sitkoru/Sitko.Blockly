@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Db.Postgres" Version="7.12.1"/>
+    <PackageReference Include="Sitko.Core.Db.Postgres" Version="7.17.0"/>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
   
