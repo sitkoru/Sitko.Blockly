@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
+using Serilog;
 using Serilog.Events;
 using Sitko.Blazor.CKEditor.Bundle;
 using Sitko.Blockly.AntDesignComponents;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Demo.Data;
 using Sitko.Blockly.Demo.Pages;
+using Sitko.Core.App.Logging;
 using Sitko.Core.Blazor.AntDesignComponents;
 using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
@@ -60,9 +62,8 @@ namespace Sitko.Blockly.Demo
                     moduleConfig.ConfigureFormStorage<PostForm, PostDemoBlockFormStorageOptions>();
                 });
             ConfigureLogLevel("System.Net.Http.HttpClient.health-checks", LogEventLevel.Error)
-                .ConfigureLogLevel("Microsoft.AspNetCore.Components", LogEventLevel.Warning)
-                .ConfigureLogLevel("Microsoft.AspNetCore.SignalR", LogEventLevel.Warning)
-                .ConfigureLogLevel("Microsoft.EntityFrameworkCore.ChangeTracking", LogEventLevel.Warning);
+                .ConfigureLogLevel("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .ConfigureLogLevel("Microsoft.EntityFrameworkCore", LogEventLevel.Warning);
         }
 
         protected override bool LoggingEnableConsole => true;
