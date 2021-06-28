@@ -8,9 +8,9 @@ namespace Sitko.Blockly.Validation
     {
         public IframeBlockValidator()
         {
-            RuleFor(p => p.Src).NotEmpty().WithMessage("Укажите ссылку").When(b => b.Enabled);
+            RuleFor(p => p.Src).NotEmpty().WithMessage("Source url is required").When(b => b.Enabled);
             RuleFor(p => p.Src).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
-                .WithMessage("Значение должно быть ссылкой");
+                .WithMessage("Value must be valid url");
         }
     }
 }

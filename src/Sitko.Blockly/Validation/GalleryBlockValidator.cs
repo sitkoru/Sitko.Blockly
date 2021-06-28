@@ -7,7 +7,7 @@ namespace Sitko.Blockly.Validation
     {
         public GalleryBlockValidator()
         {
-            RuleFor(d => d.Pictures).NotEmpty().WithMessage("Выберите картинки").When(b => b.Enabled);
+            RuleFor(d => d.Pictures).NotEmpty().WithMessage("Choose at least 1 picture").When(b => b.Enabled);
         }
     }
 }

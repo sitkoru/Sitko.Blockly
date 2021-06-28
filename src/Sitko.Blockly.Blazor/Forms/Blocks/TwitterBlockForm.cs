@@ -12,12 +12,13 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         where TForm : BaseForm, IBlocklyForm
     {
         protected ElementReference ContainerRef;
+        private string? _lastRendered;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
         protected virtual bool RenderOnInit => true;
 
         protected override FieldIdentifier CreateFieldIdentifier()
         {
-            return FieldIdentifier.Create(() => Block.TweetId);
+            return FieldIdentifier.Create(() => Block.Url);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -29,11 +30,26 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
             }
         }
 
-        protected ValueTask RenderTweetAsync()
+        protected async Task RenderTweetAsync()
         {
-            return !string.IsNullOrEmpty(Block.TweetId)
-                ? JsRuntime.RenderTweetAsync(Block.TweetId, ContainerRef)
-                : JsRuntime.ClearTweetAsync(ContainerRef);
+            if (Block.TweetId != _lastRendered)
+            {
+                if (!string.IsNullOrEmpty(Block.TweetId))
+                {
+                    await JsRuntime.RenderTweetAsync(Block.TweetId, ContainerRef);
+                }
+                else
+                {
+                    await JsRuntime.ClearTweetAsync(ContainerRef);
+                }
+
+                _lastRendered = Block.TweetId;
+            }
+        }
+
+        protected Task OnChangeAsync(string newUrl)
+        {
+            return RenderTweetAsync();
         }
     }
 }

@@ -62,10 +62,10 @@
                 <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
                     <Icon Type="up"></Icon>
                 </AntDesign.Button>
-                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="Вы действительно хотите удалить это блок?"
+                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="Delete block?"
                                       OnConfirm="@(() => DeleteBlock(block))"
-                                      OkText="Удалить"
-                                      CancelText="Нет">
+                                      OkText="Delete"
+                                      CancelText="Cancel">
                     <AntDesign.Button Size="small">
                         <Icon Type="delete"></Icon>
                     </AntDesign.Button>

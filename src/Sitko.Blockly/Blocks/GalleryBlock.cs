@@ -8,7 +8,7 @@ namespace Sitko.Blockly.Blocks
     {
         public override string ToString()
         {
-            return $"Галерея: {string.Join(", ", Pictures.Select(p => p.FileName))}";
+            return $"Gallery: {string.Join(", ", Pictures.Select(p => p.FileName))}";
         }
 
         public ValueCollection<StorageItem> Pictures { get; set; } = new();

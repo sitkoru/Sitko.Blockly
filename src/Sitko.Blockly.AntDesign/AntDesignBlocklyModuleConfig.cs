@@ -39,31 +39,31 @@ namespace Sitko.Blockly.AntDesignComponents
 
         protected override BlazorContentBlockDescriptor GetTextBlockDescriptor()
         {
-            return new BlazorContentBlockDescriptor<TextBlock>("Текст",
+            return new BlazorContentBlockDescriptor<TextBlock>("Text",
                 builder => builder.AddIcon("text"), typeof(AntTextBlockForm<>), typeof(AntTextBlockComponent<>));
         }
 
         protected override BlazorContentBlockDescriptor GetCutBlockDescriptor()
         {
-            return new BlazorContentBlockDescriptor<CutBlock>("Кат",
+            return new BlazorContentBlockDescriptor<CutBlock>("Cut",
                 builder => builder.AddIcon("cut"), typeof(AntCutBlockForm<>), typeof(AntCutBlockComponent<>));
         }
 
         protected override BlazorContentBlockDescriptor GetQuoteBlockDescriptor()
         {
-            return new BlazorContentBlockDescriptor<QuoteBlock>("Цитата",
+            return new BlazorContentBlockDescriptor<QuoteBlock>("Quote",
                 builder => builder.AddIcon("quote"), typeof(AntQuoteBlockForm<>), typeof(AntQuoteBlockComponent<>));
         }
 
         protected override BlazorContentBlockDescriptor GetFilesBlockDescriptor()
         {
-            return new BlazorContentBlockDescriptor<FilesBlock>("Файлы",
+            return new BlazorContentBlockDescriptor<FilesBlock>("Files",
                 builder => builder.AddIcon("attach"), typeof(AntFilesBlockForm<>), typeof(AntFilesBlockComponent<>));
         }
 
         protected override BlazorContentBlockDescriptor GetGalleryBlockDescriptor()
         {
-            return new BlazorContentBlockDescriptor<GalleryBlock>("Галерея",
+            return new BlazorContentBlockDescriptor<GalleryBlock>("Gallery",
                 builder => builder.AddIcon("gallery"), typeof(AntGalleryBlockForm<>),
                 typeof(AntGalleryBlockComponent<>));
         }

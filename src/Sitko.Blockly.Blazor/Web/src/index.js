@@ -85,8 +85,7 @@ window.Blockly = {
             }
             new Twitch.Player(container, twitchParams);
         },
-        clear: function (params) {
-            const container = document.getElementById('twitch-' + params.id);
+        clear: function (container) {
             container.innerHTML = '';
         }
     }

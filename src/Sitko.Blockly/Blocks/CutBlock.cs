@@ -8,6 +8,6 @@ namespace Sitko.Blockly.Blocks
             return "";
         }
 
-        public string ButtonText { get; set; } = "Читать дальше";
+        public string ButtonText { get; set; } = "Read more...";
     }
 }

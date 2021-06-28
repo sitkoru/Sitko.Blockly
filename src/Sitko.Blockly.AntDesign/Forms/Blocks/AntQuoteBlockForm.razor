@@ -8,17 +8,17 @@
 <Divider/>
 <Row Gutter="24">
     <AntDesign.Col Span="8">
-        <FormItem Label="Источник">
-            <Input Placeholder="Автор цитаты" @bind-Value="@Block.Author"/>
+        <FormItem Label="Source">
+            <Input Placeholder="Author name, site title, etc..." @bind-Value="@Block.Author"/>
         </FormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="8">
-        <FormItem Label="Ссылка">
-            <Input Placeholder="Ссылка на источник" @bind-Value="@Block.Link"/>
+        <FormItem Label="Url">
+            <Input Placeholder="Url to source" @bind-Value="@Block.Link"/>
         </FormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="8">
-        <FormItem Label="Картинка к источнику">
+        <FormItem Label="Source picture">
             <AntStorageImageInput
                 Avatar="true"
                 Size="small"

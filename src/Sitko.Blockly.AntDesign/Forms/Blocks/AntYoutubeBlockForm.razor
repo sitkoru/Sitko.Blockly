@@ -1,7 +1,7 @@
 ﻿@using FormItem = AntDesign.FormItem
 @typeparam TForm
 @inherits YoutubeBlockForm<TForm>
-<FormItem Label="Ссылка">
+<FormItem Label="Url">
     <Input @bind-Value="@Block.Url"/>
 </FormItem>
 @if (!string.IsNullOrEmpty(Block.YoutubeId))

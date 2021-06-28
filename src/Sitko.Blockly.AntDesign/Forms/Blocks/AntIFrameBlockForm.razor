@@ -1,6 +1,6 @@
 ﻿@typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.IFrameBlockForm<TForm>
-<FormItem Label="Ссылка">
+<FormItem Label="Source">
     <Input @bind-Value="@Block.Src"/>
 </FormItem>
 @if (!string.IsNullOrEmpty(Block.Src))

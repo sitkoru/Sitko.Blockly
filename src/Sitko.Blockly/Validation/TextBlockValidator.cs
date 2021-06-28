@@ -7,7 +7,7 @@ namespace Sitko.Blockly.Validation
     {
         public TextBlockValidator()
         {
-            RuleFor(p => p.Text).NotEmpty().WithMessage("Введите текст").When(b => b.Enabled);
+            RuleFor(p => p.Text).NotEmpty().WithMessage("Text is required").When(b => b.Enabled);
         }
     }
 }

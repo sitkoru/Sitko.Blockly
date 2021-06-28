@@ -188,27 +188,27 @@ namespace Sitko.Blockly
     {
         protected override ContentBlockDescriptor GetTextBlockDescriptor()
         {
-            return new ContentBlockDescriptor<TextBlock>("Текст");
+            return new ContentBlockDescriptor<TextBlock>("Text");
         }
 
         protected override ContentBlockDescriptor GetCutBlockDescriptor()
         {
-            return new ContentBlockDescriptor<CutBlock>("Кат");
+            return new ContentBlockDescriptor<CutBlock>("Cut");
         }
 
         protected override ContentBlockDescriptor GetQuoteBlockDescriptor()
         {
-            return new ContentBlockDescriptor<QuoteBlock>("Цитата");
+            return new ContentBlockDescriptor<QuoteBlock>("Quote");
         }
 
         protected override ContentBlockDescriptor GetFilesBlockDescriptor()
         {
-            return new ContentBlockDescriptor<FilesBlock>("Файлы");
+            return new ContentBlockDescriptor<FilesBlock>("Files");
         }
 
         protected override ContentBlockDescriptor GetGalleryBlockDescriptor()
         {
-            return new ContentBlockDescriptor<GalleryBlock>("Галерея");
+            return new ContentBlockDescriptor<GalleryBlock>("Gallery");
         }
 
         protected override ContentBlockDescriptor GetYoutubeBlockDescriptor()
