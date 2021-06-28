@@ -1,0 +1,11 @@
+﻿@page "/Posts/{PostId:guid}"
+@using Sitko.Blockly.Blazor.Display
+@using Sitko.Blockly.Demo.Data.Entities
+@inherits BaseComponent
+@if (IsInitialized)
+{
+    <AntDesign.Title>
+        @Post.Id
+    </AntDesign.Title>
+    <AntBlocksList TEntity="Post" Entity="Post" EntityUrl="@($"/Posts/{PostId}")" Mode="BlocksListMode.Full"></AntBlocksList>
+}

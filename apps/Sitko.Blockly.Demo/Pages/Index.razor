@@ -1,21 +1,42 @@
 ﻿@page "/"
 @using Sitko.Blockly.Demo.Data.Entities
+@using Sitko.Blockly.Demo.Data.Repositories
+@using Sitko.Blockly.Blazor.Display
+@inherits BaseComponent
 <Title>Posts</Title>
 
 <Button>
     <a href="/Posts/Add">Add</a>
 </Button>
 <br/>
-<AntRepositoryList TItem="Post" TEntityPk="Guid">
-    <Column @bind-Field="@context.Id"></Column>
-    <Column @bind-Field="@context.DateAdded"></Column>
-    <Column @bind-Field="@context.DateUpdated"></Column>
-    <ActionColumn>
-        <Button>
-            <a href="/Posts/@context.Id">Show</a>
-        </Button>
-        <Button>
-            <a href="/Posts/@context.Id/Edit">Show</a>
-        </Button>
-    </ActionColumn>
-</AntRepositoryList>
+<br/>
+@if (IsInitialized)
+{
+    foreach (Post post in Posts)
+    {
+        <Card Title="@post.Id.ToString()">
+            <Extra>
+                <a href="/Posts/@post.Id/Edit">
+                    <Button>Edit</Button>
+                </a>
+            </Extra>
+            <ChildContent>
+                <AntBlocksList TEntity="Post" Entity="post" EntityUrl="@($"/Posts/{post.Id}")" Mode="BlocksListMode.Preview"></AntBlocksList>
+            </ChildContent>
+        </Card>
+    }
+}
+
+@code{
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var posts = await GetService<PostsRepository>().GetAllAsync();
+        Posts = posts.items;
+        MarkAsInitialized();
+    }
+
+    private Post[] Posts { get; set; }
+
+}
