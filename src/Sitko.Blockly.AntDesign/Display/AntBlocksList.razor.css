@@ -1,0 +1,7 @@
+.blockly {
+    margin-bottom: 40px;
+}
+
+.blockly.blockly-galleryblock img {
+    max-width: 100%;
+}
