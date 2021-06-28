@@ -12,6 +12,7 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         where TForm : BaseForm, IBlocklyForm
     {
         protected ElementReference ContainerRef;
+        private bool _rendered;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 
         protected virtual bool RenderOnInit => true;
@@ -35,10 +36,15 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
             if (!string.IsNullOrEmpty(Block.Url))
             {
                 await JsRuntime.RenderTwitchAsync(ContainerRef, Block.VideoId, Block.ChannelId, Block.CollectionId);
+                _rendered = true;
             }
             else
             {
-                await JsRuntime.InvokeAsync<string>("Blockly.Twitch.clear", ContainerRef);
+                if (_rendered)
+                {
+                    await JsRuntime.InvokeAsync<string>("Blockly.Twitch.clear", ContainerRef);
+                    _rendered = false;
+                }
             }
         }
     }
