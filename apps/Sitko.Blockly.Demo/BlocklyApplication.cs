@@ -59,11 +59,13 @@ namespace Sitko.Blockly.Demo
                     moduleConfig.ConfigureDefaultStorage<DemoBlockFormStorageOptions>();
                     moduleConfig.ConfigureFormStorage<PostForm, PostDemoBlockFormStorageOptions>();
                 });
-            ConfigureLogLevel("System.Net.Http.HttpClient.health-checks",
-                LogEventLevel.Error).ConfigureLogLevel("Microsoft.AspNetCore.Components", LogEventLevel.Warning);
-            ConfigureLogLevel("Microsoft.AspNetCore.SignalR", LogEventLevel.Warning);
-            ConfigureLogLevel("Microsoft.EntityFrameworkCore.ChangeTracking", LogEventLevel.Warning);
+            ConfigureLogLevel("System.Net.Http.HttpClient.health-checks", LogEventLevel.Error)
+                .ConfigureLogLevel("Microsoft.AspNetCore.Components", LogEventLevel.Warning)
+                .ConfigureLogLevel("Microsoft.AspNetCore.SignalR", LogEventLevel.Warning)
+                .ConfigureLogLevel("Microsoft.EntityFrameworkCore.ChangeTracking", LogEventLevel.Warning);
         }
+
+        protected override bool LoggingEnableConsole => true;
 
         private NpgsqlConnectionStringBuilder GetConnectionStringBuilder(IConfiguration configuration,
             IHostEnvironment environment)
