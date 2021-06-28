@@ -12,7 +12,7 @@ jobs:
         container: ghcr.io/sitkoru/actions-container
         env:
             PROJECT: Sitko.Blockly
-            BLAZOR_PROJECT: Sitko.Blockly.AntDesign
+            BLAZOR_PROJECT: Sitko.Blockly.Blazor
             ANTDESIGN_PROJECT: Sitko.Blockly.AntDesign
             EF_PROJECT: Sitko.Blockly.EntityFrameworkCore
             TESTS_PROJECT: Sitko.Blockly.Tests

@@ -12,7 +12,7 @@ jobs:
         env:
             PROJECT: Sitko.Blockly
             ANTDESIGN_PROJECT: Sitko.Blockly.AntDesign
-            BLAZOR_PROJECT: Sitko.Blockly.AntDesign
+            BLAZOR_PROJECT: Sitko.Blockly.Blazor
             EF_PROJECT: Sitko.Blockly.EntityFrameworkCore
         steps:
             -   name: Checkout code
