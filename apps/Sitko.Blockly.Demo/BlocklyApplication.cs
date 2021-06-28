@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
-using Amazon;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Npgsql;
 using Serilog.Events;
 using Sitko.Blazor.CKEditor.Bundle;
@@ -13,7 +15,7 @@ using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage;
 using Sitko.Core.Storage.Metadata.Postgres;
-using Sitko.Core.Storage.S3;
+using Sitko.Core.Storage.FileSystem;
 
 namespace Sitko.Blockly.Demo
 {
@@ -22,31 +24,28 @@ namespace Sitko.Blockly.Demo
         public BlocklyApplication(string[] args) : base(args)
         {
             AddModule<PostgresModule<BlocklyContext>, PostgresDatabaseModuleConfig<BlocklyContext>>(
-                (_, _, moduleConfig) =>
+                (configuration, environment, moduleConfig) =>
                 {
-                    moduleConfig.Database = "Blockly";
+                    var builder = GetConnectionStringBuilder(configuration, environment);
+                    moduleConfig.Host = builder.Host!;
+                    moduleConfig.Port = builder.Port;
+                    moduleConfig.Username = builder.Username!;
+                    moduleConfig.Password = builder.Password!;
+                    moduleConfig.Database = builder.Database!;
+                    moduleConfig.EnableContextPooling = true;
                 });
             AddModule<EFRepositoriesModule<BlocklyContext>, EFRepositoriesModuleConfig>();
-            AddModule<S3StorageModule<BlocklyStorageOptions>, BlocklyStorageOptions>(
-                (_, _, moduleConfig) =>
+            AddModule<FileSystemStorageModule<BlocklyStorageOptions>, BlocklyStorageOptions>(
+                (configuration, environment, moduleConfig) =>
                 {
-                    moduleConfig.PublicUri = new Uri("http://localhost:9000/blockly/");
-                    moduleConfig.Server = new Uri("http://localhost:9000");
-                    moduleConfig.Bucket = "blockly";
-                    moduleConfig.AccessKey = "A8eENTqgEE7uYL7R";
-                    moduleConfig.SecretKey = "82bmVoDRkZgwy4B3PXkLzpXiuqGVZMug";
+                    moduleConfig.PublicUri = new Uri(configuration["STORAGE_PUBLIC_URI"]);
+                    moduleConfig.StoragePath = Path.Combine(Path.GetFullPath("wwwroot"), "static");
                     moduleConfig
                         .UseMetadata<PostgresStorageMetadataProvider<BlocklyStorageOptions>,
                             PostgresStorageMetadataProviderOptions>(options =>
                         {
-                            var builder = new NpgsqlConnectionStringBuilder
-                            {
-                                Host = "localhost",
-                                Username = "postgres",
-                                Password = "123",
-                                Database = "Blockly",
-                                SearchPath = "storage,public"
-                            };
+                            var builder = GetConnectionStringBuilder(configuration, environment);
+                            builder.SearchPath = "storage,public";
                             options.ConnectionString = builder.ConnectionString;
                             options.Schema = "storage";
                         });
@@ -64,6 +63,23 @@ namespace Sitko.Blockly.Demo
                 LogEventLevel.Error).ConfigureLogLevel("Microsoft.AspNetCore.Components", LogEventLevel.Warning);
             ConfigureLogLevel("Microsoft.AspNetCore.SignalR", LogEventLevel.Warning);
             ConfigureLogLevel("Microsoft.EntityFrameworkCore.ChangeTracking", LogEventLevel.Warning);
+        }
+
+        private NpgsqlConnectionStringBuilder GetConnectionStringBuilder(IConfiguration configuration,
+            IHostEnvironment environment)
+        {
+            var connBuilder = new NpgsqlConnectionStringBuilder
+            {
+                Host = configuration["POSTGRES_HOST"] ?? "localhost",
+                Port = !string.IsNullOrEmpty(configuration["POSTGRES_PORT"])
+                    ? int.Parse(configuration["POSTGRES_PORT"])
+                    : 5432,
+                Username = configuration["POSTGRES_USERNAME"] ?? "postgres",
+                Password = configuration["POSTGRES_PASSWORD"] ?? "",
+                Database = configuration["POSTGRES_DATABASE"] ?? "Blockly",
+                Pooling = !environment.IsProduction()
+            };
+            return connBuilder;
         }
     }
 
@@ -99,14 +115,10 @@ namespace Sitko.Blockly.Demo
         }
     }
 
-    public class BlocklyStorageOptions : StorageOptions, IS3StorageOptions
+    public class BlocklyStorageOptions : StorageOptions, IFileSystemStorageOptions
     {
         public override string Name { get; set; } = "Blockly";
-        public Uri Server { get; set; }
-        public string Bucket { get; set; }
-        public string AccessKey { get; set; }
-        public string SecretKey { get; set; }
-        public RegionEndpoint Region { get; set; } = RegionEndpoint.USEast1;
+        public string StoragePath { get; set; }
     }
 
     public record TestMetadata(Guid Id, string Type);
