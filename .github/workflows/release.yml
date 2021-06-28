@@ -41,14 +41,8 @@ jobs:
                 run: |
                     npm ci
                     npm run prod
-            -   name: Create main package
-                run: dotnet pack -c Release src/${{ env.PROJECT }}
-            -   name: Create blazor package
-                run: dotnet pack -c Release src/${{ env.BLAZOR_PROJECT }}
-            -   name: Create antdesign package
-                run: dotnet pack -c Release src/${{ env.ANTDESIGN_PROJECT }}
-            -   name: Create ef package
-                run: dotnet pack -c Release src/${{ env.EF_PROJECT }}
+            -   name: Create packages
+                run: dotnet pack -c Release /p:Version=${{ steps.prep.outputs.version }} -o $(pwd)/packages
             -   name: Push to Nuget
                 run: find packages -name *.nupkg -exec dotnet nuget push {} -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} \;
                     
