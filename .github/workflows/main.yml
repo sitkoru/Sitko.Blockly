@@ -12,6 +12,7 @@ jobs:
         container: ghcr.io/sitkoru/actions-container
         env:
             PROJECT: Sitko.Blockly
+            BLAZOR_PROJECT: Sitko.Blockly.AntDesign
             ANTDESIGN_PROJECT: Sitko.Blockly.AntDesign
             EF_PROJECT: Sitko.Blockly.EntityFrameworkCore
             TESTS_PROJECT: Sitko.Blockly.Tests
@@ -30,14 +31,16 @@ jobs:
                 uses: actions/setup-dotnet@v1.8.0
                 with:
                     dotnet-version: '5.0.x'
-            -   name: Build antdesign js
-                working-directory: src/${{ env.ANTDESIGN_PROJECT }}/Web
+            -   name: Build blazor js
+                working-directory: src/${{ env.BLAZOR_PROJECT }}/Web
                 shell: bash
                 run: |
                     npm ci
                     npm run prod
             -   name: Create main package
                 run: dotnet pack -c Release src/${{ env.PROJECT }}
+            -   name: Create blazor package
+                run: dotnet pack -c Release src/${{ env.BLAZOR_PROJECT }}
             -   name: Create antdesign package
                 run: dotnet pack -c Release src/${{ env.ANTDESIGN_PROJECT }}
             -   name: Create ef package
