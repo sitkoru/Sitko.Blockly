@@ -76,3 +76,29 @@
 ::deep .ant-card-head-title, ::deep .ant-card-extra {
     padding: 8px 0;
 }
+
+::deep .add-block-panel {
+    padding: 10px;
+    margin-bottom: 20px;
+    /*border: 1px dashed #303030;*/
+    margin-left: 10px;
+}
+
+::deep .add-block-panel:hover {
+}
+
+::deep .add-block-panel:hover .add-block-button {
+    visibility: visible;
+}
+
+::deep .add-block-panel .add-block-button {
+    margin-right: 10px;
+    visibility: hidden;
+}
+
+::deep .add-block-panel .plus-icon {
+    margin-right: 10px;
+    border: 1px dashed #303030;
+    border-radius: 50%;
+    padding: 3px;
+}
