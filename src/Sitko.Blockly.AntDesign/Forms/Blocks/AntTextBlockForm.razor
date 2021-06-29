@@ -1,4 +1,5 @@
 ﻿@typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.TextBlockForm<TForm>
-<CKEditor @bind-Value="Block.Text"></CKEditor>
-<BlockValidationMessage FieldIdentifier="@FieldIdentifier"></BlockValidationMessage>
+<BlockFormItem BlockForm="this">
+    <CKEditor @bind-Value="Block.Text"></CKEditor>
+</BlockFormItem>

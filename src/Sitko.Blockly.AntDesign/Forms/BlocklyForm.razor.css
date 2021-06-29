@@ -4,6 +4,10 @@
     position: relative;
 }
 
+.block-row .ant-card-body {
+    padding: 5px 24px 15px;
+}
+
 ::deep .block-row .add-block {
     position: absolute;
     left: 50%;
@@ -70,7 +74,9 @@
 }
 
 ::deep .ant-card-head .anticon {
-    font-size: 2em;
+    font-size: 1.2em;
+    vertical-align: middle;
+    color: #2f54eb;
 }
 
 ::deep .ant-card-head-title, ::deep .ant-card-extra {
@@ -79,26 +85,68 @@
 
 ::deep .add-block-panel {
     padding: 10px;
-    margin-bottom: 20px;
+    margin: 10px 40px 20px 10px;
     /*border: 1px dashed #303030;*/
-    margin-left: 10px;
+    text-align: center;
+    position: relative;
 }
 
-::deep .add-block-panel:hover {
+
+::deep .add-block-panel::after,
+::deep .add-block-panel::before {
+    display: block;
+    content: '';
+    height: 1px;
+    position: absolute;
+    background-color: #303030;
+    top: 50%;
+    width: calc(50% - 30px);
+    transition-duration: .2s;
 }
 
-::deep .add-block-panel:hover .add-block-button {
+::deep .add-block-panel:hover::after,
+::deep .add-block-panel:hover::before,
+::deep .add-block-panel:focus::after,
+::deep .add-block-panel:focus::before {
+    width: calc(50% - 200px);
+    background-color: #2f54eb;
+}
+
+::deep .add-block-panel:after {
+    left: 0;
+}
+
+::deep .add-block-panel:before {
+    right: 0;
+}
+
+::deep .add-block-panel:hover .add-block-button, ::deep .add-block-panel:focus .add-block-button {
     visibility: visible;
+    opacity: 1;
 }
 
 ::deep .add-block-panel .add-block-button {
     margin-right: 10px;
-    visibility: hidden;
+    visibility: visible;
+    opacity: 0;
+    margin: 5px;
+    transition-duration: .2s;
+    display: inline-block;
 }
 
 ::deep .add-block-panel .plus-icon {
-    margin-right: 10px;
+    margin-right: 0;
     border: 1px dashed #303030;
     border-radius: 50%;
     padding: 3px;
+    position: absolute;
+    top: calc(50% - 11px);
+    left: calc(50% - 11px);
+    opacity: 1;
+    transition-duration: .1s;
+}
+
+::deep .add-block-panel:hover .plus-icon,
+::deep .add-block-panel:focus .plus-icon {
+    opacity: 0;
 }

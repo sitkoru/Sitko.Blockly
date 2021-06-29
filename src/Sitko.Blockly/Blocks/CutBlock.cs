@@ -1,3 +1,6 @@
+using System;
+using Microsoft.Extensions.Localization;
+
 namespace Sitko.Blockly.Blocks
 {
     public record CutBlock : ContentBlock
@@ -9,5 +12,12 @@ namespace Sitko.Blockly.Blocks
         }
 
         public string ButtonText { get; set; } = "Read more...";
+    }
+
+    public record CutBlockDescriptor : BlockDescriptor<CutBlock>
+    {
+        public CutBlockDescriptor(IStringLocalizer<CutBlock>? localizer = null) : base(localizer)
+        {
+        }
     }
 }

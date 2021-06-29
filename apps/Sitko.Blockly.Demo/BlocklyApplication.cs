@@ -10,6 +10,8 @@ using Sitko.Blockly.AntDesignComponents;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Demo.Data;
 using Sitko.Blockly.Demo.Pages;
+using Sitko.Core.App;
+using Sitko.Core.App.Localization;
 using Sitko.Core.Blazor.AntDesignComponents;
 using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
@@ -53,8 +55,7 @@ namespace Sitko.Blockly.Demo
             AddModule<AntDesignBlocklyModule, AntDesignBlocklyModuleConfig>(
                 (_, _, moduleConfig) =>
                 {
-                    moduleConfig.AddDefaultFluentValidators();
-                    moduleConfig.AddDefaultBlocks();
+                    moduleConfig.AddBlocks<AntDesignBlocklyModule>();
                     moduleConfig.CKEditorTheme = CKEditorTheme.Dark;
                     moduleConfig.ConfigureDefaultStorage<DemoBlockFormStorageOptions>();
                     moduleConfig.ConfigureFormStorage<PostForm, PostDemoBlockFormStorageOptions>();
@@ -62,6 +63,10 @@ namespace Sitko.Blockly.Demo
             ConfigureLogLevel("System.Net.Http.HttpClient.health-checks", LogEventLevel.Error)
                 .ConfigureLogLevel("Microsoft.AspNetCore", LogEventLevel.Warning)
                 .ConfigureLogLevel("Microsoft.EntityFrameworkCore", LogEventLevel.Warning);
+            this.ConfigureServices(services =>
+            {
+                services.AddJsonLocalization();
+            });
         }
 
         protected override bool LoggingEnableConsole => true;

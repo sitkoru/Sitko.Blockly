@@ -2,59 +2,23 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Sitko.Blockly.Blazor.Display;
 using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.Blazor.FileUpload;
 using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blazor
 {
-    public record BlazorContentBlockDescriptor(Type Type, string Title, RenderFragment Icon, Type FormComponent,
-        Type DisplayComponent) : ContentBlockDescriptor(
-        Type,
-        Title)
+    public interface IBlazorBlockDescriptor : IBlockDescriptor
     {
-        public RenderFragment RenderBlockForm<TForm>(TForm form, ContentBlock block)
-            where TForm : BaseForm, IBlocklyForm
-        {
-            return builder =>
-            {
-                var formType = FormComponent;
-                if (FormComponent.IsGenericTypeDefinition)
-                {
-                    formType = FormComponent.MakeGenericType(typeof(TForm));
-                }
-
-                builder.OpenComponent(0, formType);
-                builder.AddAttribute(1, "Form", form);
-                builder.AddAttribute(2, "Block", block);
-                builder.CloseComponent();
-            };
-        }
-
-        public RenderFragment RenderBlock<TEntity>(ContentBlock block, BlockListContext<TEntity> context)
-            where TEntity : IBlocklyEntity
-        {
-            return builder =>
-            {
-                var component = DisplayComponent;
-                if (FormComponent.IsGenericTypeDefinition)
-                {
-                    component = DisplayComponent.MakeGenericType(typeof(TEntity));
-                }
-
-                builder.OpenComponent(0, component);
-                builder.AddAttribute(1, "Block", block);
-                builder.AddAttribute(2, "Context", context);
-                builder.CloseComponent();
-            };
-        }
+        RenderFragment Icon { get; }
+        Type FormComponent { get; }
+        Type DisplayComponent { get; }
     }
 
-    public record BlazorContentBlockDescriptor<TBlock>
-        (string Title, RenderFragment Icon, Type FormComponent, Type DisplayComponent) :
-            BlazorContentBlockDescriptor(typeof(TBlock), Title,
-                Icon, FormComponent, DisplayComponent) where TBlock : ContentBlock;
+    public interface IBlazorBlockDescriptor<TBlock> : IBlazorBlockDescriptor, IBlockDescriptor<TBlock>
+        where TBlock : ContentBlock
+    {
+    }
 
     public interface IBlockFormStorageOptions : IBlockStorageOptions
     {

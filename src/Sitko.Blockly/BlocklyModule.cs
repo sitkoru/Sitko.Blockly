@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sitko.Blockly.Blocks;
+using Sitko.Blockly.Validation;
 using Sitko.Core.App;
 
 namespace Sitko.Blockly
 {
-    public class BlocklyModule : BlocklyModule<ContentBlockDescriptor, BlocklyModuleConfig>
+    public class BlocklyModule : BlocklyModule<IBlockDescriptor, BlocklyModuleConfig>
     {
         public BlocklyModule(BlocklyModuleConfig config, Application application) : base(config, application)
         {
@@ -17,7 +16,7 @@ namespace Sitko.Blockly
     }
 
     public class BlocklyModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TConfig>
-        where TBlockDescriptor : ContentBlockDescriptor where TConfig : BlocklyModuleConfig<TBlockDescriptor>, new()
+        where TBlockDescriptor : IBlockDescriptor where TConfig : BlocklyModuleConfig<TBlockDescriptor>, new()
     {
         public BlocklyModule(TConfig config, Application application) : base(config,
             application)
@@ -28,207 +27,79 @@ namespace Sitko.Blockly
             IHostEnvironment environment)
         {
             base.ConfigureServices(services, configuration, environment);
-            foreach (var descriptor in Config.Descriptors)
-            {
-                services.AddSingleton(typeof(TBlockDescriptor), descriptor);
-            }
-
-            if (Config.WithDefaultFluentValidators)
-            {
-                services.AddValidatorsFromAssemblyContaining(typeof(BlocklyModule<,>));
-            }
-
-            foreach (var validator in Config.Validators)
-            {
-                services.AddScoped(validator);
-                services.AddScoped(typeof(IValidator), validator);
-            }
+            Config.ConfigureServices(services);
 
             services.AddSingleton<IBlockly<TBlockDescriptor>, Blockly<TBlockDescriptor>>();
         }
     }
 
-    public abstract class BlocklyModuleConfig<TBlockDescriptor> where TBlockDescriptor : ContentBlockDescriptor
+    public abstract class BlocklyModuleConfig<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
     {
-        private readonly HashSet<TBlockDescriptor> _descriptors = new();
-        private readonly List<Type> _validators = new();
-        public IEnumerable<TBlockDescriptor> Descriptors => _descriptors;
-        public IEnumerable<Type> Validators => _validators;
+        private readonly List<Action<IServiceCollection>> _configureActions = new();
 
-        public bool WithDefaultFluentValidators { get; protected set; }
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddDefaultBlocks()
+        public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            return AddTextBlock()
-                .AddCutBlock()
-                .AddQuoteBlock()
-                .AddFilesBlock()
-                .AddGalleryBlock()
-                .AddYoutubeBlock()
-                .AddTwitterBlock()
-                .AddTwitchBlock()
-                .AddIframeBlock();
-        }
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddTextBlock()
-        {
-            RegisterBlock(GetTextBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddCutBlock()
-        {
-            RegisterBlock(GetCutBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddQuoteBlock()
-        {
-            RegisterBlock(GetQuoteBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddFilesBlock()
-        {
-            RegisterBlock(GetFilesBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddGalleryBlock()
-        {
-            RegisterBlock(GetGalleryBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddYoutubeBlock()
-        {
-            RegisterBlock(GetYoutubeBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddTwitterBlock()
-        {
-            RegisterBlock(GetTwitterBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddTwitchBlock()
-        {
-            RegisterBlock(GetTwitchBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddIframeBlock()
-        {
-            RegisterBlock(GetIframeBlockDescriptor());
-            return this;
-        }
-
-
-        public BlocklyModuleConfig<TBlockDescriptor> AddDefaultFluentValidators()
-        {
-            WithDefaultFluentValidators = true;
-            return this;
-        }
-
-        public BlocklyModuleConfig<TBlockDescriptor> WithValidatorsFromAssembly()
-        {
-            return this;
-        }
-
-        public BlocklyModuleConfig<TBlockDescriptor> RegisterBlock(TBlockDescriptor descriptor)
-        {
-            if (_descriptors.Contains(descriptor))
+            foreach (var action in _configureActions)
             {
-                throw new ArgumentException($"Descriptor for {descriptor.Type} already registered");
+                action(serviceCollection);
+            }
+        }
+
+        public BlocklyModuleConfig<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
+            where TDescriptor : TBlockDescriptor
+        {
+            _configureActions.Add(services =>
+            {
+                services.Scan(s =>
+                    s.FromAssemblyOf<TAssembly>().AddClasses(c => c.AssignableTo<TDescriptor>())
+                        .AsSelfWithInterfaces().WithSingletonLifetime());
+            });
+            if (withValidators)
+            {
+                AddValidators<TAssembly, IBlockValidator>();
             }
 
-            _descriptors.Add(descriptor);
             return this;
         }
 
-        public BlocklyModuleConfig<TBlockDescriptor>
-            RegisterBlock<TBlock, TValidator>(TBlockDescriptor descriptor) where TBlock : ContentBlock
-            where TValidator : AbstractValidator<TBlock>
+        public BlocklyModuleConfig<TBlockDescriptor> AddBlocks<TAssembly>(bool withValidators = true)
         {
-            RegisterBlock(descriptor);
-            return RegisterBlockValidator<TBlock, TValidator>();
-        }
+            AddBlocks<TAssembly, TBlockDescriptor>();
+            if (withValidators)
+            {
+                AddValidators<TAssembly, IBlockValidator>();
+            }
 
-        public BlocklyModuleConfig<TBlockDescriptor>
-            RegisterBlockValidator<TBlock, TValidator>() where TBlock : ContentBlock
-            where TValidator : AbstractValidator<TBlock>
-        {
-            _validators.Add(typeof(TValidator));
             return this;
         }
 
-        protected abstract TBlockDescriptor GetTextBlockDescriptor();
-        protected abstract TBlockDescriptor GetCutBlockDescriptor();
-        protected abstract TBlockDescriptor GetQuoteBlockDescriptor();
-        protected abstract TBlockDescriptor GetFilesBlockDescriptor();
+        public BlocklyModuleConfig<TBlockDescriptor> AddValidators<TAssembly, TValidator>()
+            where TValidator : IBlockValidator
+        {
+            _configureActions.Add(services =>
+            {
+                services.Scan(s =>
+                    s.FromAssemblyOf<TAssembly>().FromAssemblyOf<Blockly>()
+                        .AddClasses(c => c.AssignableTo<TValidator>())
+                        .AsSelfWithInterfaces().WithScopedLifetime());
+            });
+            return this;
+        }
 
+        public BlocklyModuleConfig<TBlockDescriptor> AddBlock<TDescriptor, TBlock>(bool withValidator = true)
+            where TDescriptor : TBlockDescriptor, IBlockDescriptor<TBlock> where TBlock : ContentBlock
+        {
+            AddBlocks<TDescriptor, TDescriptor>();
+            if (withValidator)
+            {
+                AddValidators<TDescriptor, IBlockValidator<TBlock>>();
+            }
 
-        protected abstract TBlockDescriptor GetGalleryBlockDescriptor();
-        protected abstract TBlockDescriptor GetYoutubeBlockDescriptor();
-        protected abstract TBlockDescriptor GetTwitterBlockDescriptor();
-        protected abstract TBlockDescriptor GetTwitchBlockDescriptor();
-        protected abstract TBlockDescriptor GetIframeBlockDescriptor();
+            return this;
+        }
     }
 
-    public class BlocklyModuleConfig : BlocklyModuleConfig<ContentBlockDescriptor>
+    public class BlocklyModuleConfig : BlocklyModuleConfig<IBlockDescriptor>
     {
-        protected override ContentBlockDescriptor GetTextBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<TextBlock>("Text");
-        }
-
-        protected override ContentBlockDescriptor GetCutBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<CutBlock>("Cut");
-        }
-
-        protected override ContentBlockDescriptor GetQuoteBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<QuoteBlock>("Quote");
-        }
-
-        protected override ContentBlockDescriptor GetFilesBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<FilesBlock>("Files");
-        }
-
-        protected override ContentBlockDescriptor GetGalleryBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<GalleryBlock>("Gallery");
-        }
-
-        protected override ContentBlockDescriptor GetYoutubeBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<YoutubeBlock>("YouTube");
-        }
-
-        protected override ContentBlockDescriptor GetTwitterBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<TwitterBlock>("Twitter");
-        }
-
-        protected override ContentBlockDescriptor GetTwitchBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<TwitchBlock>("Twitch");
-        }
-
-        protected override ContentBlockDescriptor GetIframeBlockDescriptor()
-        {
-            return new ContentBlockDescriptor<IframeBlock>("IFrame");
-        }
     }
 }

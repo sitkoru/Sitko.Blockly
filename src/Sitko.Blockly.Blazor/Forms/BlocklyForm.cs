@@ -15,10 +15,10 @@ namespace Sitko.Blockly.Blazor.Forms
         [Parameter] public TForm Form { get; set; } = null!;
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
 
-        public BlazorContentBlockDescriptor[] BlockDescriptors { get; private set; } =
-            Array.Empty<BlazorContentBlockDescriptor>();
+        public IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
+            Array.Empty<IBlazorBlockDescriptor>();
 
-        [Inject] protected IBlockly<BlazorContentBlockDescriptor> Blockly { get; set; } = null!;
+        [Inject] protected IBlockly<IBlazorBlockDescriptor> Blockly { get; set; } = null!;
 
         protected readonly OrderedCollection<ContentBlock> Blocks = new();
 
@@ -65,6 +65,23 @@ namespace Sitko.Blockly.Blazor.Forms
         {
             Form.Blocks = new List<ContentBlock>(Blocks.ToList());
             Form.NotifyChange();
+        }
+        
+        public RenderFragment RenderBlockForm(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
+        {
+            return builder =>
+            {
+                var formType = blockDescriptor.FormComponent;
+                if (blockDescriptor.FormComponent.IsGenericTypeDefinition)
+                {
+                    formType = blockDescriptor.FormComponent.MakeGenericType(typeof(TForm));
+                }
+
+                builder.OpenComponent(0, formType);
+                builder.AddAttribute(1, "Form", Form);
+                builder.AddAttribute(2, "Block", block);
+                builder.CloseComponent();
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.Extensions.Localization;
 using Sitko.Core.App.Collections;
 using Sitko.Core.Storage;
 
@@ -12,5 +13,12 @@ namespace Sitko.Blockly.Blocks
         }
 
         public ValueCollection<StorageItem> Pictures { get; set; } = new();
+    }
+    
+    public record GalleryBlockDescriptor : BlockDescriptor<GalleryBlock>
+    {
+        public GalleryBlockDescriptor(IStringLocalizer<GalleryBlock>? localizer = null) : base(localizer)
+        {
+        }
     }
 }

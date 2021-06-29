@@ -1,4 +1,4 @@
-﻿@foreach (var message in CurrentEditContext.GetValidationMessages(FieldIdentifier).Distinct().ToArray())
+﻿@foreach (var message in CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray())
 {
     <FormValidationMessageItem Message="@message" @key="message"></FormValidationMessageItem>
 }
@@ -6,7 +6,7 @@
 @code
 {
     [Parameter]
-    public FieldIdentifier FieldIdentifier { get; set; }
+    public BlockForm BlockForm { get; set; }
 
     [CascadingParameter]
     public EditContext CurrentEditContext { get; set; } = null!;

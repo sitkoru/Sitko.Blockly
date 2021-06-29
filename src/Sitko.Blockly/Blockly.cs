@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Sitko.Blockly
 {
-    public interface IBlockly<out TBlockDescriptor> where TBlockDescriptor : ContentBlockDescriptor
+    public interface IBlockly<out TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
     {
         ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock;
         ContentBlock CreateBlock(Type blockType);
@@ -15,7 +15,12 @@ namespace Sitko.Blockly
         IEnumerable<TBlockDescriptor> Descriptors { get; }
     }
 
-    public class Blockly<TBlockDescriptor> : IBlockly<TBlockDescriptor> where TBlockDescriptor : ContentBlockDescriptor
+    public class Blockly
+    {
+    }
+
+    public class Blockly<TBlockDescriptor> : Blockly, IBlockly<TBlockDescriptor>
+        where TBlockDescriptor : IBlockDescriptor
     {
         private readonly List<TBlockDescriptor> _blockDescriptors;
         private readonly ILogger<Blockly<TBlockDescriptor>> _logger;

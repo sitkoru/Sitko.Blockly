@@ -1,4 +1,5 @@
-﻿using Sitko.Core.Storage;
+﻿using Microsoft.Extensions.Localization;
+using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -13,5 +14,12 @@ namespace Sitko.Blockly.Blocks
         public string? Author { get; set; }
         public string? Link { get; set; }
         public StorageItem? Picture { get; set; }
+    }
+    
+    public record QuoteBlockDescriptor : BlockDescriptor<QuoteBlock>
+    {
+        public QuoteBlockDescriptor(IStringLocalizer<QuoteBlock>? localizer = null) : base(localizer)
+        {
+        }
     }
 }

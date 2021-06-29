@@ -1,10 +1,9 @@
 ﻿@typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<TForm>
 
-<FormItem>
+<BlockFormItem BlockForm="this">
     <CKEditor @bind-Value="Block.Text"></CKEditor>
-    <BlockValidationMessage FieldIdentifier="@FieldIdentifier"></BlockValidationMessage>
-</FormItem>
+</BlockFormItem>
 <Divider/>
 <Row Gutter="24">
     <AntDesign.Col Span="8">
@@ -29,7 +28,6 @@
                 GenerateMetadata="Options.GenerateImageMetadata"
                 @bind-Value="Block.Picture">
             </AntStorageImageInput>
-
         </FormItem>
     </AntDesign.Col>
 </Row>

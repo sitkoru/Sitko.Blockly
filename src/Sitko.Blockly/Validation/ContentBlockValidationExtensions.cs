@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using FluentValidation;
+using FluentValidation.Validators;
+using Microsoft.Extensions.Localization;
 
 namespace Sitko.Blockly.Validation
 {
@@ -7,36 +9,67 @@ namespace Sitko.Blockly.Validation
     {
         public static IRuleBuilderOptions<TModel, ContentBlock> AddBlockValidators<TModel>(
             this IRuleBuilderInitialCollection<TModel, ContentBlock> options,
-            IEnumerable<AbstractValidator<ContentBlock>>? additionalValidators = null)
+            IEnumerable<IBlockDescriptor> blockDescriptors, IEnumerable<IBlockValidator> validators,
+            IEnumerable<AbstractValidator<ContentBlock>>? additionalValidators = null
+        ) where TModel : IBlocklyEntity
         {
-            return options
-                .SetInheritanceValidator(validator =>
+            var validator = new BlockInheritanceValidator<TModel>();
+            foreach (var descriptor in blockDescriptors)
+            {
+                validator.Add(descriptor, validators);
+                if (additionalValidators is not null)
                 {
-                    validator
-                        .Add(new TextBlockValidator())
-                        .Add(new CutBlockValidator())
-                        .Add(new GalleryBlockValidator())
-                        .Add(new IframeBlockValidator())
-                        .Add(new QuoteBlockValidator())
-                        .Add(new TwitchBlockValidator())
-                        .Add(new TwitterBlockValidator())
-                        .Add(new YoutubeBlockValidator());
-                    if (additionalValidators is not null)
+                    foreach (var additionalValidator in additionalValidators)
                     {
-                        foreach (var additionalValidator in additionalValidators)
-                        {
-                            validator.Add(additionalValidator);
-                        }
+                        validator.Add(additionalValidator);
                     }
-                });
+                }
+            }
+
+            return options.SetValidator(validator);
+        }
+
+        private static IStringLocalizer<TBlock>? GetLocalizer<TBlock>(IStringLocalizerFactory? factory)
+            where TBlock : ContentBlock
+        {
+            if (factory is null)
+            {
+                return null;
+            }
+
+            var localizer = factory.Create(typeof(TBlock));
+            if (localizer is IStringLocalizer<TBlock> typedLocalizer)
+            {
+                return typedLocalizer;
+            }
+
+            return null;
+        }
+    }
+
+    public class BlockInheritanceValidator<TModel> : PolymorphicValidator<TModel, ContentBlock>
+    {
+        public BlockInheritanceValidator<TModel> Add(IBlockDescriptor descriptor,
+            IEnumerable<IBlockValidator> validators)
+        {
+            foreach (var blockValidator in validators)
+            {
+                if (blockValidator.CanValidateInstancesOfType(descriptor.Type))
+                {
+                    Add(descriptor.Type, blockValidator);
+                }
+            }
+
+            return this;
         }
     }
 
     public abstract class AbstractBlocklyFormValidator<TForm> : AbstractValidator<TForm> where TForm : IBlocklyForm
     {
-        public AbstractBlocklyFormValidator()
+        public AbstractBlocklyFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
+            IEnumerable<IBlockValidator> validators)
         {
-            RuleForEach(f => f.Blocks).AddBlockValidators(AdditionalValidators);
+            RuleForEach(f => f.Blocks).AddBlockValidators(blockDescriptors, validators, AdditionalValidators);
         }
 
         protected virtual IEnumerable<AbstractValidator<ContentBlock>>? AdditionalValidators => null;

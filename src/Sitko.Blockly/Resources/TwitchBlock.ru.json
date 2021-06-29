@@ -1,0 +1,5 @@
+﻿{
+    "TwitchBlock": "Twitch",
+    "Url is required": "Укажите адрес видео, канала или коллекции",
+    "Value must be valid url": "Значение должно быть корректным URL"
+}

@@ -128,9 +128,8 @@ namespace Sitko.Blockly.Tests
             AddModule<BlocklyModule, BlocklyModuleConfig>(
                 (_, _, moduleConfig) =>
                 {
-                    moduleConfig.AddDefaultFluentValidators();
-                    moduleConfig.AddTextBlock();
-                    moduleConfig.AddCutBlock();
+                    moduleConfig.AddBlock<TextBlockDescriptor, TextBlock>();
+                    moduleConfig.AddBlock<CutBlockDescriptor, CutBlock>();
                 });
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.Extensions.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -30,5 +31,12 @@ namespace Sitko.Blockly.Blocks
         }
 
         public string YoutubeId { get; set; } = "";
+    }
+
+    public record YoutubeBlockDescriptor : BlockDescriptor<YoutubeBlock>
+    {
+        public YoutubeBlockDescriptor(IStringLocalizer<YoutubeBlock>? localizer = null) : base(localizer)
+        {
+        }
     }
 }

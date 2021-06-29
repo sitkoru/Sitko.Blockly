@@ -1,0 +1,5 @@
+﻿{
+    "YoutubeBlock": "Youtube",
+    "Url is required": "Укажите адрес видео",
+    "Value must be valid url": "Значение должно быть корректным URL"
+}

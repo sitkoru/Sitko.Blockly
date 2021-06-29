@@ -6,7 +6,7 @@
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
     var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()}";
     <div class="@className" @key="block.Id">
-        @(blockDescriptor.RenderBlock(block, Context))
+        @(RenderBlock(blockDescriptor, block))
     </div>
     if (Context.Mode == BlocksListMode.Preview && block is CutBlock)
     {

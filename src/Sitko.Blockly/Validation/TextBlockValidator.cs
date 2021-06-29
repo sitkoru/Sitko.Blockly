@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using Sitko.Blockly.Blocks;
 
 namespace Sitko.Blockly.Validation
 {
-    public class TextBlockValidator : AbstractValidator<TextBlock>
+    public class TextBlockValidator : BlockValidator<TextBlock>
     {
-        public TextBlockValidator()
+        public TextBlockValidator(IStringLocalizer<TextBlock>? stringLocalizer = null) : base(stringLocalizer)
         {
-            RuleFor(p => p.Text).NotEmpty().WithMessage("Text is required").When(b => b.Enabled);
+            RuleFor(p => p.Text).NotEmpty().WithMessage(Localize("Text is required")).When(b => b.Enabled);
         }
     }
 }

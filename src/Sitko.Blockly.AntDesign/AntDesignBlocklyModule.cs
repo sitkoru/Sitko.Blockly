@@ -13,7 +13,7 @@ using Sitko.Core.App;
 
 namespace Sitko.Blockly.AntDesignComponents
 {
-    public class AntDesignBlocklyModule : BlocklyModule<BlazorContentBlockDescriptor, AntDesignBlocklyModuleConfig>
+    public class AntDesignBlocklyModule : BlocklyModule<IBlazorBlockDescriptor, AntDesignBlocklyModuleConfig>
     {
         public AntDesignBlocklyModule(AntDesignBlocklyModuleConfig config, Application application) :
             base(config,

@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="1.0.2" />
-    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="7.17.1" />
+    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="7.18.0" />
   </ItemGroup>
   
   <ItemGroup>
@@ -39,5 +39,6 @@
   <ItemGroup>
     <Content Remove="Icons\*.svg" />
     <EmbeddedResource Include="Icons\*.svg" />
+    <EmbeddedResource Include="Resources\*.json" />
   </ItemGroup>
 </Project>

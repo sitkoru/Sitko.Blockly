@@ -7,13 +7,10 @@ using Sitko.Core.App.Blazor.Forms;
 
 namespace Sitko.Blockly.Blazor.Forms
 {
-    public abstract class BlockForm<TForm, TBlock> : BaseComponent
-        where TForm : BaseForm, IBlocklyForm where TBlock : ContentBlock
+    public abstract class BlockForm : BaseComponent
     {
-        [Parameter] public TBlock Block { get; set; } = default!;
-        [Parameter] public TForm Form { get; set; } = default!;
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
-        protected FieldIdentifier FieldIdentifier { get; private set; }
+        public FieldIdentifier FieldIdentifier { get; private set; }
 
         protected override void OnInitialized()
         {
@@ -28,6 +25,14 @@ namespace Sitko.Blockly.Blazor.Forms
             CurrentEditContext.NotifyFieldChanged(FieldIdentifier);
             StateHasChanged();
         }
+    }
+
+    public abstract class BlockForm<TForm, TBlock> : BlockForm
+        where TForm : BaseForm, IBlocklyForm where TBlock : ContentBlock
+    {
+        [Parameter] public TBlock Block { get; set; } = default!;
+        [Parameter] public TForm Form { get; set; } = default!;
+        [Inject] protected IBlazorBlockDescriptor<TBlock> BlockDescriptor { get; set; } = default!;
     }
 
     public abstract class BlockForm<TForm, TBlock, TOptions, TFormOptions> : BlockForm<TForm, TBlock>

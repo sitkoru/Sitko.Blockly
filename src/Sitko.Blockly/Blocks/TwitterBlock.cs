@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.Extensions.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -7,7 +8,7 @@ namespace Sitko.Blockly.Blocks
     {
         protected override bool IsEmpty => string.IsNullOrEmpty(TweetId);
         protected override string FinalUrl => $"https://twitter.com/{TweetAuthor}/status/{TweetId}";
-        
+
         public string TweetId { get; set; } = "";
         public string TweetAuthor { get; set; } = "";
 
@@ -38,6 +39,13 @@ namespace Sitko.Blockly.Blocks
         public override string ToString()
         {
             return $"Twitter: {TweetId} by {TweetAuthor}";
+        }
+    }
+
+    public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>
+    {
+        public TwitterBlockDescriptor(IStringLocalizer<TwitterBlock>? localizer = null) : base(localizer)
+        {
         }
     }
 }

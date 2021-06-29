@@ -1,16 +1,17 @@
 ﻿using System;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 using Sitko.Blockly.Blocks;
 
 namespace Sitko.Blockly.Validation
 {
-    public class QuoteBlockValidator : AbstractValidator<QuoteBlock>
+    public class QuoteBlockValidator : BlockValidator<QuoteBlock>
     {
-        public QuoteBlockValidator()
+        public QuoteBlockValidator(IStringLocalizer<QuoteBlock>? stringLocalizer = null) : base(stringLocalizer)
         {
-            RuleFor(d => d.Text).NotEmpty().WithMessage("Text is required").When(b => b.Enabled);
+            RuleFor(d => d.Text).NotEmpty().WithMessage(Localize("Text is required")).When(b => b.Enabled);
             RuleFor(p => p.Link).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
-                .When(x => !string.IsNullOrEmpty(x.Link)).WithMessage("Value must be valid url");
+                .When(x => !string.IsNullOrEmpty(x.Link)).WithMessage(Localize("Value must be valid url"));
         }
     }
 }

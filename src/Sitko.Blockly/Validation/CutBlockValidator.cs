@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using Sitko.Blockly.Blocks;
 
 namespace Sitko.Blockly.Validation
 {
-    public class CutBlockValidator : AbstractValidator<CutBlock>
+    public class CutBlockValidator : BlockValidator<CutBlock>
     {
-        public CutBlockValidator()
+        public CutBlockValidator(IStringLocalizer<CutBlock>? localizer = null) : base(localizer)
         {
-            RuleFor(d => d.ButtonText).NotEmpty().WithMessage("Button text is required").When(b => b.Enabled);
+            RuleFor(d => d.ButtonText).NotEmpty().WithMessage(Localize("Button text is required")).When(b => b.Enabled);
         }
     }
 }

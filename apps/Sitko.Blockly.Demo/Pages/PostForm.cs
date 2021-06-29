@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FluentValidation;
 using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Demo.Data.Entities;
 using Sitko.Blockly.Validation;
@@ -34,5 +35,9 @@ namespace Sitko.Blockly.Demo.Pages
 
     public class PostFormValidator : AbstractBlocklyFormValidator<PostForm>
     {
+        public PostFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
+            IEnumerable<IBlockValidator> validators) : base(blockDescriptors, validators)
+        {
+        }
     }
 }

@@ -1,16 +1,18 @@
 ﻿using System;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 using Sitko.Blockly.Blocks;
 
 namespace Sitko.Blockly.Validation
 {
-    public class IframeBlockValidator : AbstractValidator<IframeBlock>
+    public class IframeBlockValidator : BlockValidator<IframeBlock>
     {
-        public IframeBlockValidator()
+        public IframeBlockValidator(IStringLocalizer<IframeBlock>? stringLocalizer = null) : base(stringLocalizer)
         {
-            RuleFor(p => p.Src).NotEmpty().WithMessage("Source url is required").When(b => b.Enabled);
+            RuleFor(p => p.Src).NotEmpty().WithMessage(Localize("Source url is required")).When(b => b.Enabled);
             RuleFor(p => p.Src).Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _))
-                .WithMessage("Value must be valid url");
+                .When(x => !string.IsNullOrEmpty(x.Src))
+                .WithMessage(Localize("Value must be valid url"));
         }
     }
 }

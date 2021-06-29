@@ -10,62 +10,27 @@
         var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()}";
         <div class="block-row" @key="block.Id">
             <div class="block-content">
-                @* <AntDesign.Dropdown Class="add-block add-block-top" Trigger="@(new[] {TriggerType.Click})"> *@
-                @*     <Overlay> *@
-                @*         <AntDesign.Menu> *@
-                @*             @foreach (var descriptor in BlockDescriptors) *@
-                @*             { *@
-                @*                 <AntDesign.MenuItem OnClick="@(() => AddBlock(descriptor.Type, block, false))"> *@
-                @*                     @descriptor.Icon @descriptor.Title *@
-                @*                 </AntDesign.MenuItem> *@
-                @*             } *@
-                @*         </AntDesign.Menu> *@
-                @*     </Overlay> *@
-                @*     <ChildContent> *@
-                @*         <Button Size="small" Shape="circle"> *@
-                @*             <Icon Type="plus"></Icon> *@
-                @*         </Button> *@
-                @*     </ChildContent> *@
-                @* </AntDesign.Dropdown> *@
-
                 <AntDesign.Card Hoverable TitleTemplate="BlockTitleTemplate(blockDescriptor, block)" Title="@block.Enabled.ToString()" Class="@className">
                     <Extra>
                         <Switch Checked="block.Enabled" OnChange="_ => { block.Enabled = !block.Enabled; Form.NotifyChange(); }">
-                            Toggle loading
+                            @Localizer["Toogle block state"]
                         </Switch>
                     </Extra>
                     <Body>
                     <Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
-                        @(blockDescriptor.RenderBlockForm(Form, block))
+                        @(RenderBlockForm(blockDescriptor, block))
                     </Spin>
                     </Body>
                 </AntDesign.Card>
-                @* <AntDesign.Dropdown Class="add-block add-block-bottom" Trigger="@(new[] {TriggerType.Click})"> *@
-                @*     <Overlay> *@
-                @*         <AntDesign.Menu> *@
-                @*             @foreach (var descriptor in BlockDescriptors) *@
-                @*             { *@
-                @*                 <AntDesign.MenuItem OnClick="@(() => AddBlock(descriptor.Type, block))"> *@
-                @*                     @descriptor.Icon @descriptor.Title *@
-                @*                 </AntDesign.MenuItem> *@
-                @*             } *@
-                @*         </AntDesign.Menu> *@
-                @*     </Overlay> *@
-                @*     <ChildContent> *@
-                @*         <Button Size="small" Shape="circle"> *@
-                @*             <Icon Type="plus"></Icon> *@
-                @*         </Button> *@
-                @*     </ChildContent> *@
-                @* </AntDesign.Dropdown> *@
             </div>
             <div class="block-controls">
                 <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
                     <Icon Type="up"></Icon>
                 </AntDesign.Button>
-                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="Delete block?"
+                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@Localizer["Delete block?"]"
                                       OnConfirm="@(() => DeleteBlock(block))"
-                                      OkText="Delete"
-                                      CancelText="Cancel">
+                                      OkText="@Localizer["Delete block"]"
+                                      CancelText="@Localizer["Cancel"]">
                     <AntDesign.Button Size="small">
                         <Icon Type="delete"></Icon>
                     </AntDesign.Button>
@@ -91,7 +56,7 @@
 
     private RenderFragment _disabledBlockIndicator = @<span></span>;
 
-    private RenderFragment BlockTitleTemplate(BlazorContentBlockDescriptor blockDescriptor, ContentBlock block)
+    private RenderFragment BlockTitleTemplate(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
     {
         return @<Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">@blockDescriptor.Icon</Spin>;
     }

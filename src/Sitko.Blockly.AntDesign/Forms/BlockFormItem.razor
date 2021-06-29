@@ -1,0 +1,26 @@
+@inherits AntDomComponentBase
+@using AntDesign.Internal;
+
+<Row class="@ClassMapper.Class" style="@Style" id="@Id">
+    @if (!string.IsNullOrEmpty(Label) || LabelTemplate != null)
+    {
+        <AntDesign.Col @attributes="GetLabelColAttributes()" Class="@_labelClassMapper.Class">
+            @if (LabelTemplate != null)
+            {
+                @LabelTemplate
+            }
+            else
+            {
+                <label class=@GetLabelClass()>@(Label)</label>
+            }
+        </AntDesign.Col>
+    }
+    <AntDesign.Col @attributes="GetWrapperColAttributes()" Class=@($"{_prefixCls}-control")>
+        <div class=@($"{_prefixCls}-control-input")>
+            <div class=@($"{_prefixCls}-control-input-content")>
+                @ChildContent
+            </div>
+        </div>
+        <BlockValidationMessage BlockForm="BlockForm"></BlockValidationMessage>
+    </AntDesign.Col>
+</Row>

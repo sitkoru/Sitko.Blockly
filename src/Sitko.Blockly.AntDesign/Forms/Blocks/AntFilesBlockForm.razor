@@ -2,15 +2,15 @@
 @using Sitko.Core.Storage
 @typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.FilesBlockForm<TForm>
-
-<AntStorageFilesInput
-    TCollection="ValueCollection<StorageItem>"
-    Storage="Options.Storage"
-    ContentTypes="@Options.FilesTypes"
-    UploadPath="@Options.FilesUploadPath"
-    MaxFileSize="@Options.MaxFileSize"
-    MaxAllowedFiles="@Options.MaxAllowedFiles"
-    GenerateMetadata="Options.GenerateMetadata"
-    @bind-Value="Block.Files">
-</AntStorageFilesInput>
-<BlockValidationMessage FieldIdentifier="@FieldIdentifier"></BlockValidationMessage>
+<BlockFormItem BlockForm="this">
+    <AntStorageFilesInput
+        TCollection="ValueCollection<StorageItem>"
+        Storage="Options.Storage"
+        ContentTypes="@Options.FilesTypes"
+        UploadPath="@Options.FilesUploadPath"
+        MaxFileSize="@Options.MaxFileSize"
+        MaxAllowedFiles="@Options.MaxAllowedFiles"
+        GenerateMetadata="Options.GenerateMetadata"
+        @bind-Value="Block.Files">
+    </AntStorageFilesInput>
+</BlockFormItem>
