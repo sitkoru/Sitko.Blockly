@@ -11,28 +11,28 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 {
     public partial class BlockFormItem
     {
-        private static readonly Dictionary<string, object> _noneColAttributes = new Dictionary<string, object>();
+        private static readonly Dictionary<string, object> s_noneColAttributes = new();
         private readonly string _prefixCls = "ant-form-item";
 
         private bool _isValid;
 
-        private ClassMapper _labelClassMapper = new ClassMapper();
+        private ClassMapper _labelClassMapper = new();
         private string _labelCls = "";
-        private EventHandler<ValidationStateChangedEventArgs> _validationStateChangedHandler;
+        private EventHandler<ValidationStateChangedEventArgs>? _validationStateChangedHandler;
 
-        [Parameter] public RenderFragment LabelTemplate { get; set; }
+        [Parameter] public RenderFragment? LabelTemplate { get; set; }
 
-        [Parameter] public string Label { get; set; }
+        [Parameter] public string? Label { get; set; }
         [Parameter] public AntLabelAlignType? FormLabelAlign { get; set; } = AntLabelAlignType.Left;
 
         [Parameter] public bool Required { get; set; } = false;
 
-        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
         [Parameter] public bool NoStyle { get; set; } = false;
 
-        [Parameter] public BlockForm BlockForm { get; set; }
-        [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
+        [Parameter] public BlockForm BlockForm { get; set; } = null!;
+        [CascadingParameter] public EditContext? CurrentEditContext { get; set; }
 
         [Parameter] public ColLayoutParam? LabelCol { get; set; }
 
@@ -44,7 +44,12 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 
             SetClass();
 
-            _validationStateChangedHandler = (s, e) =>
+            if (CurrentEditContext is null)
+            {
+                throw new Exception($"{nameof(BlockFormItem)} must be used inside EditForm");
+            }
+
+            _validationStateChangedHandler = (_, _) =>
             {
                 var message = CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray();
                 _isValid = !message.Any();
@@ -85,7 +90,7 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
         {
             if (NoStyle)
             {
-                return _noneColAttributes;
+                return s_noneColAttributes;
             }
 
             ColLayoutParam labelColParameter;
@@ -99,7 +104,7 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
         {
             if (NoStyle)
             {
-                return _noneColAttributes;
+                return s_noneColAttributes;
             }
 
             ColLayoutParam wrapperColParameter;
