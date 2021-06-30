@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -16,7 +16,7 @@ namespace Sitko.Blockly.Blocks
     
     public record IframeBlockDescriptor : BlockDescriptor<IframeBlock>
     {
-        public IframeBlockDescriptor(IStringLocalizer<IframeBlock>? localizer = null) : base(localizer)
+        public IframeBlockDescriptor(ILocalizationProvider<IframeBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

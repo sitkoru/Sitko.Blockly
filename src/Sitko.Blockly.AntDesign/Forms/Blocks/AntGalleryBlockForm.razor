@@ -11,6 +11,11 @@
         MaxFileSize="@Options.MaxImageSize"
         MaxAllowedFiles="@Options.MaxAllowedImages"
         GenerateMetadata="Options.GenerateImageMetadata"
+        UploadText="@LocalizationProvider["Upload"]"
+        RemoveText="@LocalizationProvider["Remove"]"
+        PreviewText="@LocalizationProvider["Preview"]"
+        LeftText="@LocalizationProvider["Move left"]"
+        RightText="@LocalizationProvider["Move right"]"
         @bind-Value="Block.Pictures">
     </AntStorageImagesInput>
 </BlockFormItem>

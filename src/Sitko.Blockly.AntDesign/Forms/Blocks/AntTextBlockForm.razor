@@ -1,5 +1,5 @@
 ﻿@typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.TextBlockForm<TForm>
 <BlockFormItem BlockForm="this">
-    <CKEditor @bind-Value="Block.Text"></CKEditor>
+    <CKEditor TextareaClass="ant-input" SwitchToEditorText="@LocalizationProvider["Switch to editor"]" SwitchToHtmlText="@LocalizationProvider["Switch to HTML"]" Placeholder="@LocalizationProvider["Block content"]" @bind-Value="Block.Text"></CKEditor>
 </BlockFormItem>

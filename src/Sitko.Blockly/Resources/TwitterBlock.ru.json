@@ -1,5 +1,4 @@
 ﻿{
     "TwitterBlock": "Twitter",
-    "Url is required": "Укажите адрес твита",
-    "Value must be valid url": "Значение должно быть корректным URL"
+    "Url is required": "Укажите адрес твита"
 }

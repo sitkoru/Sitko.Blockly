@@ -1,16 +1,16 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
 using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Blocks
 {
     public record AntTwitchBlockDescriptor : TwitchBlockDescriptor, IBlazorBlockDescriptor<TwitchBlock>
     {
-        public AntTwitchBlockDescriptor(IStringLocalizer<TwitchBlock>? localizer = null) : base(localizer)
+        public AntTwitchBlockDescriptor(ILocalizationProvider<TwitchBlock> localizationProvider) : base(localizationProvider)
         {
         }
 

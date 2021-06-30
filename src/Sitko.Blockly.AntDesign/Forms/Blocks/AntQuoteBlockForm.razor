@@ -2,22 +2,22 @@
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<TForm>
 
 <BlockFormItem BlockForm="this">
-    <CKEditor @bind-Value="Block.Text"></CKEditor>
+    <CKEditor TextareaClass="ant-input" SwitchToEditorText="@LocalizationProvider["Back to editor"]" SwitchToHtmlText="@LocalizationProvider["Edit HTML"]" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
 </BlockFormItem>
 <Divider/>
 <Row Gutter="24">
     <AntDesign.Col Span="8">
-        <FormItem Label="Source">
-            <Input Placeholder="Author name, site title, etc..." @bind-Value="@Block.Author"/>
+        <FormItem Label="@LocalizationProvider["Source"]">
+            <Input Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author"/>
         </FormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="8">
-        <FormItem Label="Url">
-            <Input Placeholder="Url to source" @bind-Value="@Block.Link"/>
+        <FormItem Label="@LocalizationProvider["Url"]">
+            <Input Placeholder="@LocalizationProvider["Url"]" @bind-Value="@Block.Link"/>
         </FormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="8">
-        <FormItem Label="Source picture">
+        <FormItem Label="@LocalizationProvider["Source picture"]">
             <AntStorageImageInput
                 Avatar="true"
                 Size="small"
@@ -25,6 +25,8 @@
                 ContentTypes="@Options.ImagesTypes"
                 UploadPath="@Options.ImagesUploadPath"
                 MaxFileSize="@Options.MaxImageSize"
+                UploadText="@LocalizationProvider["Upload"]"
+                RemoveText="@LocalizationProvider["Remove"]"
                 GenerateMetadata="Options.GenerateImageMetadata"
                 @bind-Value="Block.Picture">
             </AntStorageImageInput>

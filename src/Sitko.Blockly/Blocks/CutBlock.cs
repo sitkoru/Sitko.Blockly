@@ -1,5 +1,4 @@
-using System;
-using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -16,7 +15,7 @@ namespace Sitko.Blockly.Blocks
 
     public record CutBlockDescriptor : BlockDescriptor<CutBlock>
     {
-        public CutBlockDescriptor(IStringLocalizer<CutBlock>? localizer = null) : base(localizer)
+        public CutBlockDescriptor(ILocalizationProvider<CutBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

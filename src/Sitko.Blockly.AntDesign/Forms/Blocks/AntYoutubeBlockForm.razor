@@ -1,16 +1,16 @@
 ﻿@using FormItem = AntDesign.FormItem
 @typeparam TForm
 @inherits YoutubeBlockForm<TForm>
-<FormItem Label="Url">
-    <Input @bind-Value="@Block.Url"/>
+<FormItem Label="@LocalizationProvider["Video url"]">
+    <Input placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url"/>
 </FormItem>
 @if (!string.IsNullOrEmpty(Block.YoutubeId))
 {
-    <div style="text-align: center">
-        <iframe frameborder="0"
-                allowfullscreen=""
-                width="560" height="315"
-                src="@Block.Url">
-        </iframe>
+    <div class="youtube-container-wrapper">
+        <div class="youtube-container">
+            <iframe src="@Block.Url"
+                    frameborder="0" allowfullscreen class="youtube-video">
+            </iframe>
+        </div>
     </div>
 }

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Microsoft.Extensions.Localization;
 using Sitko.Core.App.Collections;
+using Sitko.Core.App.Localization;
 using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blocks
@@ -17,7 +17,7 @@ namespace Sitko.Blockly.Blocks
     
     public record GalleryBlockDescriptor : BlockDescriptor<GalleryBlock>
     {
-        public GalleryBlockDescriptor(IStringLocalizer<GalleryBlock>? localizer = null) : base(localizer)
+        public GalleryBlockDescriptor(ILocalizationProvider<GalleryBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

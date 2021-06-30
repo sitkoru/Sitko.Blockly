@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -127,7 +127,7 @@ namespace Sitko.Blockly.Blocks
     
     public record TwitchBlockDescriptor : BlockDescriptor<TwitchBlock>
     {
-        public TwitchBlockDescriptor(IStringLocalizer<TwitchBlock>? localizer = null) : base(localizer)
+        public TwitchBlockDescriptor(ILocalizationProvider<TwitchBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

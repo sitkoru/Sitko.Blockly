@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Sitko.Blazor.CKEditor.Bundle;
 using Sitko.Blockly.Blazor;
 using Sitko.Core.App;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents
 {
@@ -30,6 +31,11 @@ namespace Sitko.Blockly.AntDesignComponents
             {
                 configureServicesAction(services);
             }
+
+            services.Configure<JsonStringLocalizerOptions>(options =>
+            {
+                options.AddDefaultResource<AntDesignBlocklyModule>();
+            });
         }
 
         public override async Task InitAsync(IServiceProvider serviceProvider, IConfiguration configuration,

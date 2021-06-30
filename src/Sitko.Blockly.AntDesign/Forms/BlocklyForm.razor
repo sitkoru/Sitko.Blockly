@@ -13,7 +13,7 @@
                 <AntDesign.Card Hoverable TitleTemplate="BlockTitleTemplate(blockDescriptor, block)" Title="@block.Enabled.ToString()" Class="@className">
                     <Extra>
                         <Switch Checked="block.Enabled" OnChange="_ => { block.Enabled = !block.Enabled; Form.NotifyChange(); }">
-                            @Localizer["Toogle block state"]
+                            @LocalizationProvider["Toogle block state"]
                         </Switch>
                     </Extra>
                     <Body>
@@ -27,10 +27,10 @@
                 <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
                     <Icon Type="up"></Icon>
                 </AntDesign.Button>
-                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@Localizer["Delete block?"]"
+                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@LocalizationProvider["Delete block?"]"
                                       OnConfirm="@(() => DeleteBlock(block))"
-                                      OkText="@Localizer["Delete block"]"
-                                      CancelText="@Localizer["Cancel"]">
+                                      OkText="@LocalizationProvider["Delete block"]"
+                                      CancelText="@LocalizationProvider["Cancel"]">
                     <AntDesign.Button Size="small">
                         <Icon Type="delete"></Icon>
                     </AntDesign.Button>

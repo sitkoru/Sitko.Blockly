@@ -3,8 +3,8 @@
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.TwitterBlockForm<TForm>
 
 
-<FormItem Label="Url">
-    <Input @bind-Value="Block.Url" Placeholder="Tweet link" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
+<FormItem Label="@LocalizationProvider["Tweet link"]">
+    <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Tweet link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
 </FormItem>
 <div @ref="ContainerRef" class="tweet">
 </div>

@@ -1,5 +1,4 @@
 ﻿{
     "IframeBlock": "Фрейм",
-    "Source url is required": "Адрес источника обязателен",
-    "Value must be valid url": "Значение должно быть корректным URL"
+    "Source url is required": "Адрес источника обязателен"
 }

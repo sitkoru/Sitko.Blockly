@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using FluentValidation;
 using FluentValidation.Validators;
-using Microsoft.Extensions.Localization;
 
 namespace Sitko.Blockly.Validation
 {
@@ -27,23 +26,6 @@ namespace Sitko.Blockly.Validation
             }
 
             return options.SetValidator(validator);
-        }
-
-        private static IStringLocalizer<TBlock>? GetLocalizer<TBlock>(IStringLocalizerFactory? factory)
-            where TBlock : ContentBlock
-        {
-            if (factory is null)
-            {
-                return null;
-            }
-
-            var localizer = factory.Create(typeof(TBlock));
-            if (localizer is IStringLocalizer<TBlock> typedLocalizer)
-            {
-                return typedLocalizer;
-            }
-
-            return null;
         }
     }
 

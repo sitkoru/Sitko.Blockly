@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Localization;
+﻿using Sitko.Core.App.Localization;
 using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blocks
@@ -18,7 +18,7 @@ namespace Sitko.Blockly.Blocks
     
     public record QuoteBlockDescriptor : BlockDescriptor<QuoteBlock>
     {
-        public QuoteBlockDescriptor(IStringLocalizer<QuoteBlock>? localizer = null) : base(localizer)
+        public QuoteBlockDescriptor(ILocalizationProvider<QuoteBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

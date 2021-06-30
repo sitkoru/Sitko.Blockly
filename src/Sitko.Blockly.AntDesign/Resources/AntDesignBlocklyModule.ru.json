@@ -1,5 +1,15 @@
 {
+    "Toogle block state": "Включить/выключить блок",
     "Delete block?": "Удалить блок?",
     "Delete block": "Удалить",
-    "Cancel": "Отмена"
+    "Cancel": "Отмена",
+    "Upload": "Загрузить",
+    "Remove": "Удалить",
+    "Move up": "Вверх",
+    "Move down": "Вниз",
+    "Move left": "Влево",
+    "Move right": "Вправо",
+    "Preview": "Предварительный просмотр",
+    "Back to editor": "Обратно в редактор",
+    "Edit HTML": "Редактировать HTML"
 }

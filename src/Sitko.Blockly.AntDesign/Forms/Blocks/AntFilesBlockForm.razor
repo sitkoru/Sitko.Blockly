@@ -11,6 +11,10 @@
         MaxFileSize="@Options.MaxFileSize"
         MaxAllowedFiles="@Options.MaxAllowedFiles"
         GenerateMetadata="Options.GenerateMetadata"
+        UploadText="@LocalizationProvider["Upload"]"
+        RemoveText="@LocalizationProvider["Remove"]"
+        UpText="@LocalizationProvider["Move up"]"
+        DownText="@LocalizationProvider["Move down"]"
         @bind-Value="Block.Files">
     </AntStorageFilesInput>
 </BlockFormItem>

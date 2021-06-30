@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -44,7 +44,7 @@ namespace Sitko.Blockly.Blocks
 
     public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>
     {
-        public TwitterBlockDescriptor(IStringLocalizer<TwitterBlock>? localizer = null) : base(localizer)
+        public TwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

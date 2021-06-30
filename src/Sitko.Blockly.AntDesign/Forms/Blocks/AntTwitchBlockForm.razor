@@ -2,7 +2,7 @@
 @typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.TwitchBlockForm<TForm>
 
-<FormItem Label="Url">
-    <Input @bind-Value="Block.Url" Placeholder="Twitch link" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
+<FormItem Label="@LocalizationProvider["Twitch link"]">
+    <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Twitch link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
 </FormItem>
 <div @ref="ContainerRef" class="twitch-video" style="text-align: center"></div>

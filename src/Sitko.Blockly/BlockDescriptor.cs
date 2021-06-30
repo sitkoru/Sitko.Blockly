@@ -1,5 +1,5 @@
 using System;
-using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly
 {
@@ -22,15 +22,15 @@ namespace Sitko.Blockly
     public abstract record BlockDescriptor<TBlock> : BlockDescriptor, IBlockDescriptor<TBlock>
         where TBlock : ContentBlock
     {
-        protected IStringLocalizer<TBlock>? Localizer { get; }
+        protected ILocalizationProvider<TBlock> LocalizationProvider { get; }
 
-        public BlockDescriptor(IStringLocalizer<TBlock>? localizer = null)
+        public BlockDescriptor(ILocalizationProvider<TBlock> localizationProvider)
         {
-            Localizer = localizer;
+            LocalizationProvider = localizationProvider;
         }
 
         public override Type Type => typeof(TBlock);
 
-        public override string Title => Localizer is null ? typeof(TBlock).Name! : Localizer[typeof(TBlock).Name]!;
+        public override string Title => LocalizationProvider[typeof(TBlock).Name];
     }
 }

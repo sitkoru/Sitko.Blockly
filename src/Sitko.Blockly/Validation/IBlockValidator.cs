@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Validation
 {
@@ -14,16 +14,11 @@ namespace Sitko.Blockly.Validation
     public abstract class BlockValidator<TBlock> : AbstractValidator<TBlock>, IBlockValidator<TBlock>
         where TBlock : ContentBlock
     {
-        protected readonly IStringLocalizer<TBlock>? _stringLocalizer;
+        protected readonly ILocalizationProvider<TBlock> LocalizationProvider;
 
-        protected string Localize(string message)
+        public BlockValidator(ILocalizationProvider<TBlock> localizationProvider)
         {
-            return _stringLocalizer is null ? message : _stringLocalizer[message]!;
-        }
-
-        public BlockValidator(IStringLocalizer<TBlock>? stringLocalizer)
-        {
-            _stringLocalizer = stringLocalizer;
+            LocalizationProvider = localizationProvider;
         }
     }
 }

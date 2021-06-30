@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Localization;
+﻿using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
@@ -14,7 +14,7 @@ namespace Sitko.Blockly.Blocks
     
     public record TextBlockDescriptor : BlockDescriptor<TextBlock>
     {
-        public TextBlockDescriptor(IStringLocalizer<TextBlock>? localizer = null) : base(localizer)
+        public TextBlockDescriptor(ILocalizationProvider<TextBlock> localizationProvider) : base(localizationProvider)
         {
         }
     }

@@ -1,16 +1,16 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
 using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Blocks
 {
     public record AntTwitterBlockDescriptor : TwitterBlockDescriptor, IBlazorBlockDescriptor<TwitterBlock>
     {
-        public AntTwitterBlockDescriptor(IStringLocalizer<TwitterBlock>? localizer = null) : base(localizer)
+        public AntTwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(localizationProvider)
         {
         }
 

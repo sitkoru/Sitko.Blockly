@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sitko.Blockly.Validation;
 using Sitko.Core.App;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly
 {
@@ -30,6 +31,10 @@ namespace Sitko.Blockly
             Config.ConfigureServices(services);
 
             services.AddSingleton<IBlockly<TBlockDescriptor>, Blockly<TBlockDescriptor>>();
+            services.Configure<JsonStringLocalizerOptions>(options =>
+            {
+                options.AddDefaultResource<Blockly>();
+            });
         }
     }
 

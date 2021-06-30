@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
+using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Forms
 {
@@ -8,6 +9,6 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
         where TForm : Sitko.Core.App.Blazor.Forms.BaseForm<TEntity>, IBlocklyForm
     {
         [Inject]
-        protected IStringLocalizer<AntDesignBlocklyModule>? Localizer { get; set; }
+        protected ILocalizationProvider<AntDesignBlocklyModule> LocalizationProvider { get; set; } = null!;
     }
 }
