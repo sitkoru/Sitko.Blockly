@@ -1,10 +1,10 @@
-.block-row {
+::deep .block-row {
     display: flex;
     margin-bottom: 20px;
     position: relative;
 }
 
-.block-row .ant-card-body {
+::deep .block-row .ant-card-body {
     padding: 5px 24px 15px;
 }
 
@@ -66,7 +66,7 @@
 
 .block-row .block-content {
     flex: 1;
-    padding: 0 10px;
+    /*padding: 0 10px;*/
 }
 
 ::deep .block-row .block-controls .dropdown-toggle:before {
@@ -153,4 +153,18 @@
 ::deep .add-block-panel:hover .plus-icon,
 ::deep .add-block-panel:focus .plus-icon {
     opacity: 0;
+}
+
+::deep .blockly-form-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: auto;
+    color: rgba(255,255,255,.85);
+    font-size: 14px;
+    margin: 0;
+    padding: 0 0 8px;
+    line-height: 1.5715;
+    white-space: initial;
+    text-align: left;
 }

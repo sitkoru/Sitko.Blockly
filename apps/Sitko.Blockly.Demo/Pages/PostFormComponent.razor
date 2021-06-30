@@ -4,12 +4,12 @@
 @using Sitko.Blockly.Blazor.Forms
 @using Sitko.Core.Storage
 @inherits BaseComponent
-<AntRepositoryForm TEntity="Post" TEntityPk="Guid" TForm="PostForm" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
+<AntRepositoryForm Layout="@FormLayout.Vertical" TEntity="Post" TEntityPk="Guid" TForm="PostForm" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
     <FormItem Label="Title">
         <Input @bind-Value="context.Title"/>
     </FormItem>
-    <BlocklyForm TEntity="Post" TForm="PostForm" @bind-Value="context.Blocks" Form="context" Options="_blocksOptions"></BlocklyForm>
-    <BlocklyForm TEntity="Post" TForm="PostForm" @bind-Value="context.SecondaryBlocks" Form="context" Options="_secondaryBlocksOptions"></BlocklyForm>
+    <BlocklyForm Label="Blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Blocks" Form="context" Options="_blocksOptions"></BlocklyForm>
+    <BlocklyForm Label="Secondary blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.SecondaryBlocks" Form="context" Options="_secondaryBlocksOptions"></BlocklyForm>
     <Button Disabled="@(!context.CanSave())" OnClick="context.Save">Save</Button>
 </AntRepositoryForm>
 

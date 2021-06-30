@@ -9,5 +9,6 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
         where TForm : Sitko.Core.App.Blazor.Forms.BaseForm<TEntity>
     {
         [Inject] protected ILocalizationProvider<AntDesignBlocklyModule> LocalizationProvider { get; set; } = null!;
+        [Parameter] public string? Label { get; set; }
     }
 }

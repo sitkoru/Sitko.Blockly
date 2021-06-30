@@ -2,8 +2,11 @@
 @typeparam TForm
 @using Sitko.Blockly.Blazor
 @inherits Sitko.Blockly.Blazor.Forms.BlocklyForm<TEntity, TForm, AntDesignBlocklyFormOptions>
-<ValidationSummary Model="Form"></ValidationSummary>
-<div id="blocks-@Form.GetHashCode()">
+<div class="blockly-form">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label class="blockly-form-label">@Label</label>
+    }
     @if (Blocks.Any())
     {
         foreach (var block in Blocks)
@@ -14,7 +17,7 @@
                 <div class="block-content">
                     <AntDesign.Card Hoverable TitleTemplate="BlockTitleTemplate(blockDescriptor, block)" Title="@block.Enabled.ToString()" Class="@className">
                         <Extra>
-                            <Switch Checked="block.Enabled" OnChange="_ => { block.Enabled = !block.Enabled; Form.NotifyChange(); }">
+                            <Switch @bind-Value="block.Enabled">
                                 @LocalizationProvider["Toogle block state"]
                             </Switch>
                         </Extra>
