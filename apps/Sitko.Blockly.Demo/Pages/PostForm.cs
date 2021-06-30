@@ -45,6 +45,7 @@ namespace Sitko.Blockly.Demo.Pages
             IEnumerable<IBlockValidator> validators) : base(blockDescriptors, validators)
         {
             AddBlocksValidators(form => form.Blocks);
+            AddBlocksValidators(form => form.SecondaryBlocks);
             RuleFor(f => f.Title).NotEmpty();
         }
     }
