@@ -1,7 +1,7 @@
 ﻿@typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.IFrameBlockForm<TForm>
-<FormItem Label="@LocalizationProvider["Source"]">
-    <Input @bind-Value="@Block.Src"/>
+<FormItem Label="@LocalizationProvider["Url"]">
+    <Input @bind-Value="@Block.Src" Placeholder="@LocalizationProvider["Source"]"/>
 </FormItem>
 @if (!string.IsNullOrEmpty(Block.Src))
 {

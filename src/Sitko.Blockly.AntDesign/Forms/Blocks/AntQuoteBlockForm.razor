@@ -13,7 +13,7 @@
     </AntDesign.Col>
     <AntDesign.Col Span="8">
         <FormItem Label="@LocalizationProvider["Url"]">
-            <Input Placeholder="@LocalizationProvider["Url"]" @bind-Value="@Block.Link"/>
+            <Input Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link"/>
         </FormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="8">
@@ -27,6 +27,7 @@
                 MaxFileSize="@Options.MaxImageSize"
                 UploadText="@LocalizationProvider["Upload"]"
                 RemoveText="@LocalizationProvider["Remove"]"
+                PreviewText="@LocalizationProvider["Preview"]"
                 GenerateMetadata="Options.GenerateImageMetadata"
                 @bind-Value="Block.Picture">
             </AntStorageImageInput>

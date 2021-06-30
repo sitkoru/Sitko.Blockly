@@ -1,7 +1,7 @@
 ﻿@using FormItem = AntDesign.FormItem
 @typeparam TForm
 @inherits YoutubeBlockForm<TForm>
-<FormItem Label="@LocalizationProvider["Video url"]">
+<FormItem Label="@LocalizationProvider["Url"]">
     <Input placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url"/>
 </FormItem>
 @if (!string.IsNullOrEmpty(Block.YoutubeId))
