@@ -1,10 +1,10 @@
 ﻿@page "/Posts/{PostId:guid}"
-@using Sitko.Blockly.Blazor.Display
 @using Sitko.Blockly.Demo.Data.Entities
+@using Sitko.Core.Storage
 @inherits BaseComponent
-@if (IsInitialized)
+@if (Post is not null)
 {
-    var title = Post.Id.ToString();
+    var title = Post.Title;
     <PageContainer Title="@title">
         <Breadcrumb>
             <Breadcrumb>
@@ -20,7 +20,7 @@
         <Content>
         </Content>
         <ChildContent>
-            <AntBlocksList TEntity="Post" Entity="Post" EntityUrl="@($"/Posts/{PostId}")" Mode="BlocksListMode.Full"></AntBlocksList>
+            <AntBlocksList TEntity="Post" Entity="Post" EntityBlocks="Post.Blocks" EntityUrl="@($"/Posts/{PostId}")" Options="@(new AntDesignBlocklyListOptions {Storage = GetService<IStorage<BlocklyStorageOptions>>()})"></AntBlocksList>
         </ChildContent>
     </PageContainer>
 }

@@ -2,6 +2,7 @@
 @using Sitko.Blockly.Demo.Data.Entities
 @using Sitko.Blockly.Demo.Data.Repositories
 @using Sitko.Blockly.Blazor.Display
+@using Sitko.Core.Storage
 @inherits BaseComponent
 @if (IsInitialized)
 {
@@ -22,14 +23,14 @@
         <ChildContent>
             @foreach (Post post in Posts)
             {
-                <Card Title="@post.Id.ToString()">
+                <Card Title="@post.Title">
                     <Extra>
                         <a href="/Posts/@post.Id/Edit">
                             <Button>Edit</Button>
                         </a>
                     </Extra>
                     <ChildContent>
-                        <AntBlocksList TEntity="Post" Entity="post" EntityUrl="@($"/Posts/{post.Id}")" Mode="BlocksListMode.Preview"></AntBlocksList>
+                        <AntBlocksList TEntity="Post" Entity="post" EntityBlocks="post.Blocks" Options="@(new AntDesignBlocklyListOptions {Storage = GetService<IStorage<BlocklyStorageOptions>>(), Mode = BlocksListMode.Preview})" EntityUrl="@($"/Posts/{post.Id}")"></AntBlocksList>
                     </ChildContent>
                 </Card>
             }
@@ -49,6 +50,6 @@
         MarkAsInitialized();
     }
 
-    private Post[] Posts { get; set; }
+    private Post[] Posts { get; set; } = new Post[0];
 
 }

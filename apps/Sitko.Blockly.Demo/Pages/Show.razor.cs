@@ -8,8 +8,7 @@ namespace Sitko.Blockly.Demo.Pages
 {
     public partial class Show
     {
-        [Parameter]
-        public Guid PostId { get; set; }
+        [Parameter] public Guid PostId { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -25,6 +24,6 @@ namespace Sitko.Blockly.Demo.Pages
             MarkAsInitialized();
         }
 
-        public Post Post { get; set; }
+        public Post? Post { get; set; }
     }
 }

@@ -1,15 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
 using Serilog.Events;
-using Sitko.Blazor.CKEditor.Bundle;
 using Sitko.Blockly.AntDesignComponents;
-using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Demo.Data;
-using Sitko.Blockly.Demo.Pages;
 using Sitko.Core.App;
 using Sitko.Core.App.Localization;
 using Sitko.Core.Blazor.AntDesignComponents;
@@ -58,9 +54,7 @@ namespace Sitko.Blockly.Demo
                 (_, _, moduleConfig) =>
                 {
                     moduleConfig.AddBlocks<AntDesignBlocklyModule>();
-                    moduleConfig.CKEditorTheme = CKEditorTheme.Dark;
-                    moduleConfig.ConfigureDefaultStorage<DemoBlockFormStorageOptions>();
-                    moduleConfig.ConfigureFormStorage<PostForm, PostDemoBlockFormStorageOptions>();
+                    moduleConfig.Theme = AntDesignBlocklyTheme.Dark;
                 });
             ConfigureLogLevel("System.Net.Http.HttpClient.health-checks", LogEventLevel.Error)
                 .ConfigureLogLevel("Microsoft.AspNetCore", LogEventLevel.Warning)
@@ -91,42 +85,10 @@ namespace Sitko.Blockly.Demo
         }
     }
 
-    public class DemoBlockFormStorageOptions : BlockFormStorageOptions<BlocklyStorageOptions>
-    {
-        public DemoBlockFormStorageOptions(IStorage<BlocklyStorageOptions> storage) : base(storage)
-        {
-            ImagesUploadPath = "images";
-            FilesUploadPath = "images";
-            MaxAllowedImages = 10;
-            MaxAllowedFiles = 10;
-            MaxFileSize = 100 * 1024 * 1024; // 100Mb
-            MaxImageSize = 2 * 1024 * 1024; // 2Mb
-            GenerateMetadata = (_, _) =>
-            {
-                var metadata = new TestMetadata(Guid.NewGuid(), "File");
-                return Task.FromResult<object>(metadata);
-            };
-            GenerateImageMetadata = (_, _) =>
-            {
-                var metadata = new TestMetadata(Guid.NewGuid(), "Image");
-                return Task.FromResult<object>(metadata);
-            };
-        }
-    }
-
-    public class PostDemoBlockFormStorageOptions : DemoBlockFormStorageOptions, IBlockFormStorageOptions<PostForm>
-    {
-        public PostDemoBlockFormStorageOptions(IStorage<BlocklyStorageOptions> storage) : base(storage)
-        {
-            ImagesUploadPath = "posts/images";
-            FilesUploadPath = "posts/files";
-        }
-    }
-
     public class BlocklyStorageOptions : StorageOptions, IFileSystemStorageOptions
     {
         public override string Name { get; set; } = "Blockly";
-        public string StoragePath { get; set; }
+        public string StoragePath { get; set; } = "";
     }
 
     public record TestMetadata(Guid Id, string Type);
