@@ -4,7 +4,7 @@ using Sitko.Core.App.Blazor.Forms;
 
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
-    public abstract class CutBlockForm<TForm> : BlockForm<TForm, CutBlock> where TForm : BaseForm, IBlocklyForm
+    public abstract class CutBlockForm<TForm> : BlockForm<TForm, CutBlock> where TForm : BaseForm
     {
         protected override FieldIdentifier CreateFieldIdentifier()
         {

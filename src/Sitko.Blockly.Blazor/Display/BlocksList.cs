@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
 using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display
 {
-    public abstract class BlocksList<TEntity> : BaseComponent where TEntity : IBlocklyEntity
+    public abstract class BlocksList<TEntity> : BaseComponent
     {
         [Parameter] public TEntity Entity { get; set; } = default!;
         [Parameter] public string EntityUrl { get; set; } = null!;
+        [Parameter] public IEnumerable<ContentBlock> EntityBlocks { get; set; } = null!;
         [Parameter] public BlocksListMode Mode { get; set; } = BlocksListMode.Full;
 
         protected IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
@@ -16,7 +18,7 @@ namespace Sitko.Blockly.Blazor.Display
 
         [Inject] protected IBlockly<IBlazorBlockDescriptor> Blockly { get; set; } = null!;
 
-        protected ContentBlock[] Blocks => Entity.Blocks.Where(b => b.Enabled).OrderBy(b => b.Position).ToArray();
+        protected ContentBlock[] Blocks => EntityBlocks.Where(b => b.Enabled).OrderBy(b => b.Position).ToArray();
 
         protected override void OnInitialized()
         {
@@ -52,6 +54,5 @@ namespace Sitko.Blockly.Blazor.Display
         Full
     }
 
-    public record BlockListContext<TEntity>(TEntity Entity, string EntityUrl, BlocksListMode Mode)
-        where TEntity : IBlocklyEntity;
+    public record BlockListContext<TEntity>(TEntity Entity, string EntityUrl, BlocksListMode Mode);
 }

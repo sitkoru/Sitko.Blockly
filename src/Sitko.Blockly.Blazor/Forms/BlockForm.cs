@@ -28,7 +28,7 @@ namespace Sitko.Blockly.Blazor.Forms
     }
 
     public abstract class BlockForm<TForm, TBlock> : BlockForm
-        where TForm : BaseForm, IBlocklyForm where TBlock : ContentBlock
+        where TForm : BaseForm where TBlock : ContentBlock
     {
         [Parameter] public TBlock Block { get; set; } = default!;
         [Parameter] public TForm Form { get; set; } = default!;
@@ -36,7 +36,7 @@ namespace Sitko.Blockly.Blazor.Forms
     }
 
     public abstract class BlockForm<TForm, TBlock, TOptions, TFormOptions> : BlockForm<TForm, TBlock>
-        where TForm : BaseForm, IBlocklyForm
+        where TForm : BaseForm
         where TOptions : class, IBlockOptions
         where TFormOptions : class, TOptions, IBlockFormOptions<TForm>
         where TBlock : ContentBlock

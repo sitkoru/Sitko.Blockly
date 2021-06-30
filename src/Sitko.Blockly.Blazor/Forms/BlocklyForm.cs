@@ -9,10 +9,11 @@ using Sitko.Core.App.Collections;
 
 namespace Sitko.Blockly.Blazor.Forms
 {
-    public abstract class BlocklyForm<TEntity, TForm> : ComponentBase where TForm : BaseForm<TEntity>, IBlocklyForm
-        where TEntity : class, IBlocklyEntity
+    public abstract class BlocklyForm<TEntity, TForm> : InputBase<List<ContentBlock>> where TForm : BaseForm<TEntity>
+        where TEntity : class
     {
         [Parameter] public TForm Form { get; set; } = null!;
+        [Parameter] public List<Type>? AllowedBlocks { get; set; }
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
 
         public IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
@@ -25,14 +26,14 @@ namespace Sitko.Blockly.Blazor.Forms
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            if (!Form.Blocks.Any())
+            if (!CurrentValue.Any())
             {
-                Form.Blocks.Add(new TextBlock());
+                CurrentValue.Add(new TextBlock());
             }
 
             BlockDescriptors = Blockly.Descriptors
-                .Where(d => Form.AllowedBlocks is null || Form.AllowedBlocks.Contains(d.Type)).ToArray();
-            Blocks.SetItems(Form.Blocks.OrderBy(b => b.Position));
+                .Where(d => AllowedBlocks is null || AllowedBlocks.Contains(d.Type)).ToArray();
+            Blocks.SetItems(CurrentValue.OrderBy(b => b.Position));
         }
 
         protected void AddBlock(Type blockType, ContentBlock? neighbor = null, bool after = true)
@@ -63,10 +64,10 @@ namespace Sitko.Blockly.Blazor.Forms
 
         private void UpdateForm()
         {
-            Form.Blocks = new List<ContentBlock>(Blocks.ToList());
+            CurrentValue = new List<ContentBlock>(Blocks.ToList());
             Form.NotifyChange();
         }
-        
+
         public RenderFragment RenderBlockForm(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
         {
             return builder =>
@@ -82,6 +83,14 @@ namespace Sitko.Blockly.Blazor.Forms
                 builder.AddAttribute(2, "Block", block);
                 builder.CloseComponent();
             };
+        }
+
+        protected override bool TryParseValueFromString(string value, out List<ContentBlock> result,
+            out string validationErrorMessage)
+        {
+            result = default!;
+            validationErrorMessage = "";
+            return false;
         }
     }
 }

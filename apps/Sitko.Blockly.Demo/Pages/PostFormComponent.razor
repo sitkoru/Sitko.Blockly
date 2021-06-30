@@ -1,7 +1,8 @@
 ﻿@using Sitko.Blockly.Demo.Data.Entities
 @inherits BaseComponent
 <AntRepositoryForm TEntity="Post" TEntityPk="Guid" TForm="PostForm" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
-    <BlocklyForm TEntity="Post" TForm="PostForm" Form="context"></BlocklyForm>
+    <BlocklyForm TEntity="Post" TForm="PostForm" @bind-Value="context.Blocks" Form="context"></BlocklyForm>
+    <BlocklyForm TEntity="Post" TForm="PostForm" @bind-Value="context.SecondaryBlocks" Form="context"></BlocklyForm>
     <Button Disabled="!context.CanSave()" OnClick="context.Save">Save</Button>
 </AntRepositoryForm>
 

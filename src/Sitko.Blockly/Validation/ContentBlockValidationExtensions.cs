@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using FluentValidation;
 using FluentValidation.Validators;
 
@@ -10,7 +12,7 @@ namespace Sitko.Blockly.Validation
             this IRuleBuilderInitialCollection<TModel, ContentBlock> options,
             IEnumerable<IBlockDescriptor> blockDescriptors, IEnumerable<IBlockValidator> validators,
             IEnumerable<AbstractValidator<ContentBlock>>? additionalValidators = null
-        ) where TModel : IBlocklyEntity
+        )
         {
             var validator = new BlockInheritanceValidator<TModel>();
             foreach (var descriptor in blockDescriptors)
@@ -46,12 +48,24 @@ namespace Sitko.Blockly.Validation
         }
     }
 
-    public abstract class AbstractBlocklyFormValidator<TForm> : AbstractValidator<TForm> where TForm : IBlocklyForm
+    public abstract class AbstractBlocklyFormValidator<TForm> : AbstractValidator<TForm>
     {
+        private readonly IEnumerable<IBlockDescriptor> _blockDescriptors;
+        private readonly IEnumerable<IBlockValidator> _validators;
+
         public AbstractBlocklyFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
             IEnumerable<IBlockValidator> validators)
         {
-            RuleForEach(f => f.Blocks).AddBlockValidators(blockDescriptors, validators, AdditionalValidators);
+            _blockDescriptors = blockDescriptors;
+            _validators = validators;
+        }
+
+        protected AbstractBlocklyFormValidator<TForm> AddBlocksValidators(
+            Expression<Func<TForm, IEnumerable<ContentBlock>>> fieldSelector)
+        {
+            RuleForEach(fieldSelector)
+                .AddBlockValidators(_blockDescriptors, _validators, AdditionalValidators);
+            return this;
         }
 
         protected virtual IEnumerable<AbstractValidator<ContentBlock>>? AdditionalValidators => null;

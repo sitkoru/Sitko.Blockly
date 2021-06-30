@@ -9,9 +9,10 @@ using Sitko.Core.Repository;
 
 namespace Sitko.Blockly.Demo.Pages
 {
-    public class PostForm : BaseRepositoryForm<Post, Guid>, IBlocklyForm
+    public class PostForm : BaseRepositoryForm<Post, Guid>
     {
         public List<ContentBlock> Blocks { get; set; }
+        public List<ContentBlock> SecondaryBlocks { get; set; }
 
         public PostForm(IRepository<Post, Guid> repository, ILogger<PostForm> logger) : base(repository, logger)
         {
@@ -20,12 +21,14 @@ namespace Sitko.Blockly.Demo.Pages
         protected override Task MapEntityAsync(Post entity)
         {
             entity.Blocks = Blocks;
+            entity.SecondaryBlocks = SecondaryBlocks;
             return Task.CompletedTask;
         }
 
         protected override Task MapFormAsync(Post entity)
         {
             Blocks = entity.Blocks;
+            SecondaryBlocks = entity.SecondaryBlocks;
             return Task.CompletedTask;
         }
 
@@ -37,6 +40,7 @@ namespace Sitko.Blockly.Demo.Pages
         public PostFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
             IEnumerable<IBlockValidator> validators) : base(blockDescriptors, validators)
         {
+            AddBlocksValidators(form => form.Blocks);
         }
     }
 }

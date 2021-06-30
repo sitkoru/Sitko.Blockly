@@ -8,7 +8,6 @@ namespace Sitko.Blockly.Blazor.Display
     public abstract class BlockComponent<TEntity, TBlock, TOptions> : BlockComponent<TEntity, TBlock>
         where TOptions : class, IBlockOptions
         where TBlock : ContentBlock
-        where TEntity : IBlocklyEntity
     {
         protected TOptions Options { get; private set; } = null!;
 
@@ -30,7 +29,7 @@ namespace Sitko.Blockly.Blazor.Display
     }
 
     public abstract class BlockComponent<TEntity, TBlock> : BaseComponent
-        where TBlock : ContentBlock where TEntity : IBlocklyEntity
+        where TBlock : ContentBlock
     {
         [Parameter] public TBlock Block { get; set; } = null!;
         [Parameter] public BlockListContext<TEntity> Context { get; set; } = null!;

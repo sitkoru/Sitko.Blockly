@@ -4,7 +4,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Forms.Blocks
 {
-    public partial class AntGalleryBlockForm<TForm> where TForm : BaseForm, IBlocklyForm
+    public partial class AntGalleryBlockForm<TForm> where TForm : BaseForm
     {
         [Inject] private ILocalizationProvider<AntGalleryBlockForm<TForm>> LocalizationProvider { get; set; } = null!;
     }

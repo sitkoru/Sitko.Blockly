@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Sitko.Blockly.Demo.Data;
@@ -9,9 +10,10 @@ using Sitko.Blockly.Demo.Data;
 namespace Sitko.Blockly.Demo.Migrations
 {
     [DbContext(typeof(BlocklyContext))]
-    partial class BlocklyContextModelSnapshot : ModelSnapshot
+    [Migration("20210630100829_AddSecondaryBlocksToPost")]
+    partial class AddSecondaryBlocksToPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

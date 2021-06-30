@@ -15,7 +15,8 @@ namespace Sitko.Blockly.Demo.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.RegisterBlocklyConversion<Post>();
+            modelBuilder.RegisterBlocklyConversion<Post>(post => post.Blocks, nameof(Post.Blocks));
+            modelBuilder.RegisterBlocklyConversion<Post>(post => post.SecondaryBlocks, nameof(Post.SecondaryBlocks));
         }
     }
 }

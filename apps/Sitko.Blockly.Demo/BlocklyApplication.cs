@@ -40,7 +40,9 @@ namespace Sitko.Blockly.Demo
             AddModule<FileSystemStorageModule<BlocklyStorageOptions>, BlocklyStorageOptions>(
                 (configuration, environment, moduleConfig) =>
                 {
-                    moduleConfig.PublicUri = new Uri(configuration["STORAGE_PUBLIC_URI"]);
+                    moduleConfig.PublicUri = !string.IsNullOrEmpty(configuration["STORAGE_PUBLIC_URI"])
+                        ? new Uri(configuration["STORAGE_PUBLIC_URI"])
+                        : new Uri("http://localhost");
                     moduleConfig.StoragePath = Path.Combine(Path.GetFullPath("wwwroot"), "static");
                     moduleConfig
                         .UseMetadata<PostgresStorageMetadataProvider<BlocklyStorageOptions>,

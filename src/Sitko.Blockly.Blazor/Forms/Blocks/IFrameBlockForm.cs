@@ -5,7 +5,7 @@ using Sitko.Core.App.Blazor.Forms;
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
     public abstract class IFrameBlockForm<TForm> : BlockForm<TForm, IframeBlock>
-        where TForm : BaseForm, IBlocklyForm
+        where TForm : BaseForm
     {
         protected override FieldIdentifier CreateFieldIdentifier()
         {

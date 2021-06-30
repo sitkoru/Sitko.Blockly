@@ -17,8 +17,9 @@ namespace Sitko.Blockly.Demo.Data.Entities
         }
     }
 
-    public class Post : BaseEntity, IBlocklyEntity
+    public class Post : BaseEntity
     {
         public List<ContentBlock> Blocks { get; set; } = new();
+        public List<ContentBlock> SecondaryBlocks { get; set; } = new();
     }
 }

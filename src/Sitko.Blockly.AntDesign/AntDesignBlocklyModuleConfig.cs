@@ -24,7 +24,7 @@ namespace Sitko.Blockly.AntDesignComponents
         }
 
         public AntDesignBlocklyModuleConfig ConfigureFormStorage<TForm, TBlockFormStorageOptions>()
-            where TForm : BaseForm, IBlocklyForm
+            where TForm : BaseForm
             where TBlockFormStorageOptions : class, IBlockFormStorageOptions<TForm>
         {
             ConfigureServicesActions.Add(services =>

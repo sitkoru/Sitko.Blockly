@@ -5,7 +5,7 @@ using Sitko.Core.App.Blazor.Forms;
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
     public abstract class FilesBlockForm<TForm> : BlockForm<TForm, FilesBlock, IBlockFormStorageOptions,
-        IBlockFormStorageOptions<TForm>> where TForm : BaseForm, IBlocklyForm
+        IBlockFormStorageOptions<TForm>> where TForm : BaseForm
     {
         protected override FieldIdentifier CreateFieldIdentifier()
         {

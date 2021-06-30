@@ -153,11 +153,11 @@ namespace Sitko.Blockly.Tests
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.RegisterBlocklyConversion<TestModel>();
+            modelBuilder.RegisterBlocklyConversion<TestModel>(model => model.Blocks, nameof(TestModel.Blocks));
         }
     }
 
-    public class TestModel : BlocklyEntity, IEntity<Guid>
+    public class TestModel : IEntity<Guid>
     {
         public object GetId()
         {
@@ -165,6 +165,8 @@ namespace Sitko.Blockly.Tests
         }
 
         public Guid Id { get; set; } = Guid.NewGuid();
+
+        public List<ContentBlock> Blocks { get; set; } = new();
     }
 
     public class TestRepository : EFRepository<TestModel, Guid, TestBlocklyDbContext>
@@ -175,7 +177,7 @@ namespace Sitko.Blockly.Tests
         }
     }
 
-    public class TestForm : BaseRepositoryForm<TestModel, Guid>, IBlocklyForm
+    public class TestForm : BaseRepositoryForm<TestModel, Guid>
     {
         public TestForm(IRepository<TestModel, Guid> repository, ILogger<TestForm> logger) : base(repository, logger)
         {
@@ -194,8 +196,5 @@ namespace Sitko.Blockly.Tests
         }
 
         public List<ContentBlock> Blocks { get; set; }
-#if NETCOREAPP3_1
-        public List<Type>? AllowedBlocks => null;
-#endif
     }
 }

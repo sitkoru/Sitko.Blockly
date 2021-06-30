@@ -35,7 +35,7 @@ namespace Sitko.Blockly.Blazor
     }
 
     public interface IBlockFormStorageOptions<TForm> : IBlockFormStorageOptions, IBlockFormOptions<TForm>
-        where TForm : BaseForm, IBlocklyForm
+        where TForm : BaseForm
     {
     }
 
@@ -58,7 +58,7 @@ namespace Sitko.Blockly.Blazor
         public Func<FileUploadRequest, FileStream, Task<object>>? GenerateImageMetadata { get; set; }
     }
 
-    public interface IBlockFormOptions<TForm> : IBlockOptions where TForm : BaseForm, IBlocklyForm
+    public interface IBlockFormOptions<TForm> : IBlockOptions where TForm : BaseForm
     {
     }
 }

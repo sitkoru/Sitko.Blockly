@@ -6,7 +6,6 @@ using Sitko.Blockly.Blazor.Helpers;
 namespace Sitko.Blockly.Blazor.Display.Blocks
 {
     public abstract class TwitchBlockComponent<TEntity> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitchBlock>
-        where TEntity : IBlocklyEntity
     {
         protected ElementReference ContainerRef;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;

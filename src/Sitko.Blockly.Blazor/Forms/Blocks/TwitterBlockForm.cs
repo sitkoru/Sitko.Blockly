@@ -9,7 +9,7 @@ using Sitko.Core.App.Blazor.Forms;
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
     public abstract class TwitterBlockForm<TForm> : BlockForm<TForm, TwitterBlock>
-        where TForm : BaseForm, IBlocklyForm
+        where TForm : BaseForm
     {
         protected ElementReference ContainerRef;
         private string? _lastRendered;
