@@ -6,12 +6,11 @@ using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display
 {
-    public abstract class BlocksList<TEntity> : BaseComponent
+    public abstract class BlocksList<TEntity, TOptions> : BaseComponent where TOptions : BlazorBlocklyListOptions, new()
     {
         [Parameter] public TEntity Entity { get; set; } = default!;
         [Parameter] public string EntityUrl { get; set; } = null!;
         [Parameter] public IEnumerable<ContentBlock> EntityBlocks { get; set; } = null!;
-        [Parameter] public BlocksListMode Mode { get; set; } = BlocksListMode.Full;
 
         protected IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
             Array.Empty<IBlazorBlockDescriptor>();
@@ -20,12 +19,30 @@ namespace Sitko.Blockly.Blazor.Display
 
         protected ContentBlock[] Blocks => EntityBlocks.Where(b => b.Enabled).OrderBy(b => b.Position).ToArray();
 
+        protected TOptions ListOptions = new();
+
+        [Parameter]
+        public TOptions? Options
+        {
+            get
+            {
+                return ListOptions;
+            }
+            set
+            {
+                if (value is not null)
+                {
+                    ListOptions = value;
+                }
+            }
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
 
             BlockDescriptors = Blockly.Descriptors.ToArray();
-            Context = new BlockListContext<TEntity>(Entity, EntityUrl, Mode);
+            Context = new BlockListContext<TEntity>(Entity, EntityUrl, ListOptions.Mode);
         }
 
         protected BlockListContext<TEntity> Context { get; private set; } = null!;
@@ -35,7 +52,7 @@ namespace Sitko.Blockly.Blazor.Display
             return builder =>
             {
                 var component = blockDescriptor.DisplayComponent;
-                if (blockDescriptor.FormComponent.IsGenericTypeDefinition)
+                if (blockDescriptor.DisplayComponent.IsGenericTypeDefinition)
                 {
                     component = blockDescriptor.DisplayComponent.MakeGenericType(typeof(TEntity));
                 }
@@ -43,6 +60,7 @@ namespace Sitko.Blockly.Blazor.Display
                 builder.OpenComponent(0, component);
                 builder.AddAttribute(1, "Block", block);
                 builder.AddAttribute(2, "Context", Context);
+                builder.AddAttribute(3, "Options", ListOptions);
                 builder.CloseComponent();
             };
         }

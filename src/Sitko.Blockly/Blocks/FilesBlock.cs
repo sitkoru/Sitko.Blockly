@@ -14,9 +14,11 @@ namespace Sitko.Blockly.Blocks
 
         public ValueCollection<StorageItem> Files { get; set; } = new();
     }
-    
+
     public record FilesBlockDescriptor : BlockDescriptor<FilesBlock>
     {
+        public override int Priority => 5;
+
         public FilesBlockDescriptor(ILocalizationProvider<FilesBlock> localizationProvider) : base(localizationProvider)
         {
         }

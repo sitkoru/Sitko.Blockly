@@ -6,7 +6,7 @@
 @code
 {
     [Parameter]
-    public BlockForm BlockForm { get; set; }
+    public BlockForm BlockForm { get; set; } = null!;
 
     [CascadingParameter]
     public EditContext CurrentEditContext { get; set; } = null!;

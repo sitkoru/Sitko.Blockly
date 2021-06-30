@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Forms.Blocks
 {
-    public partial class AntGalleryBlockForm<TForm> where TForm : BaseForm
+    public partial class AntGalleryBlockForm
     {
-        [Inject] private ILocalizationProvider<AntGalleryBlockForm<TForm>> LocalizationProvider { get; set; } = null!;
+        [Inject] private ILocalizationProvider<AntGalleryBlockForm> LocalizationProvider { get; set; } = null!;
     }
 }

@@ -15,7 +15,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("twitch");
-        public Type FormComponent => typeof(AntTwitchBlockForm<>);
+        public Type FormComponent => typeof(AntTwitchBlockForm);
         public Type DisplayComponent => typeof(AntTwitchBlockComponent<>);
     }
 }

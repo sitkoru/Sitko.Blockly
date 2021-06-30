@@ -15,7 +15,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("gallery");
-        public Type FormComponent => typeof(AntGalleryBlockForm<>);
+        public Type FormComponent => typeof(AntGalleryBlockForm);
         public Type DisplayComponent => typeof(AntGalleryBlockComponent<>);
     }
 }

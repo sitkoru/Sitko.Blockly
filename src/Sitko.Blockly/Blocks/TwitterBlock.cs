@@ -44,7 +44,10 @@ namespace Sitko.Blockly.Blocks
 
     public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>
     {
-        public TwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(localizationProvider)
+        public override int Priority => 7;
+
+        public TwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
+            localizationProvider)
         {
         }
     }

@@ -15,7 +15,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("twitter");
-        public Type FormComponent => typeof(AntTwitterBlockForm<>);
+        public Type FormComponent => typeof(AntTwitterBlockForm);
         public Type DisplayComponent => typeof(AntTwitterBlockComponent<>);
     }
 }

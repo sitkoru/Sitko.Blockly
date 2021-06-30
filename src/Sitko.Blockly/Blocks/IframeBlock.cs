@@ -13,10 +13,13 @@ namespace Sitko.Blockly.Blocks
         public int Width { get; set; } = 0;
         public int Height { get; set; } = 0;
     }
-    
+
     public record IframeBlockDescriptor : BlockDescriptor<IframeBlock>
     {
-        public IframeBlockDescriptor(ILocalizationProvider<IframeBlock> localizationProvider) : base(localizationProvider)
+        public override int Priority => 9;
+
+        public IframeBlockDescriptor(ILocalizationProvider<IframeBlock> localizationProvider) : base(
+            localizationProvider)
         {
         }
     }

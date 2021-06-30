@@ -50,6 +50,15 @@ namespace Sitko.Blockly
             }
         }
 
+        public BlocklyModuleConfig<TBlockDescriptor> ConfigureFormOptions(Action<BlocklyFormOptions> configure)
+        {
+            _configureActions.Add(services =>
+            {
+                services.Configure(configure);
+            });
+            return this;
+        }
+
         public BlocklyModuleConfig<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
             where TDescriptor : TBlockDescriptor
         {

@@ -124,10 +124,13 @@ namespace Sitko.Blockly.Blocks
         public string? ChannelId { get; set; }
         public string? CollectionId { get; set; }
     }
-    
+
     public record TwitchBlockDescriptor : BlockDescriptor<TwitchBlock>
     {
-        public TwitchBlockDescriptor(ILocalizationProvider<TwitchBlock> localizationProvider) : base(localizationProvider)
+        public override int Priority => 8;
+
+        public TwitchBlockDescriptor(ILocalizationProvider<TwitchBlock> localizationProvider) : base(
+            localizationProvider)
         {
         }
     }

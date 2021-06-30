@@ -14,10 +14,13 @@ namespace Sitko.Blockly.Blocks
 
         public ValueCollection<StorageItem> Pictures { get; set; } = new();
     }
-    
+
     public record GalleryBlockDescriptor : BlockDescriptor<GalleryBlock>
     {
-        public GalleryBlockDescriptor(ILocalizationProvider<GalleryBlock> localizationProvider) : base(localizationProvider)
+        public override int Priority => 3;
+
+        public GalleryBlockDescriptor(ILocalizationProvider<GalleryBlock> localizationProvider) : base(
+            localizationProvider)
         {
         }
     }

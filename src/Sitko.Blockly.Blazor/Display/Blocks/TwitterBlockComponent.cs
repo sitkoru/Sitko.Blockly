@@ -6,7 +6,8 @@ using Sitko.Blockly.Blazor.Helpers;
 namespace Sitko.Blockly.Blazor.Display.Blocks
 {
     public abstract class
-        TwitterBlockComponent<TEntity> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitterBlock>
+        TwitterBlockComponent<TEntity, TListOptions> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitterBlock,
+            TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
     {
         protected ElementReference ContainerRef;
         [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;

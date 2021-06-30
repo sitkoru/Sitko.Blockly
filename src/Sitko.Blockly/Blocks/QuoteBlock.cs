@@ -15,9 +15,11 @@ namespace Sitko.Blockly.Blocks
         public string? Link { get; set; }
         public StorageItem? Picture { get; set; }
     }
-    
+
     public record QuoteBlockDescriptor : BlockDescriptor<QuoteBlock>
     {
+        public override int Priority => 4;
+
         public QuoteBlockDescriptor(ILocalizationProvider<QuoteBlock> localizationProvider) : base(localizationProvider)
         {
         }

@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components
-@typeparam TForm
-@inherits Sitko.Blockly.Blazor.Forms.Blocks.TwitchBlockForm<TForm>
+@inherits Sitko.Blockly.Blazor.Forms.Blocks.TwitchBlockForm<AntDesignBlocklyFormOptions>
 
 <FormItem Label="@LocalizationProvider["Url"]">
     <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Twitch link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>

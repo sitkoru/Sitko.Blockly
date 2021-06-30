@@ -1,0 +1,10 @@
+﻿<div class="blockly-form-error">
+    <Alert Message="@Error" Type="@AlertType.Error"/>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Error { get; set; } = null!;
+
+}

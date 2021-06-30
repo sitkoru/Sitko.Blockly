@@ -1,0 +1,25 @@
+﻿@using Microsoft.Extensions.Hosting
+@using Sitko.Core.App.Localization
+<div class="blockly-error">
+    @if (Environment.IsDevelopment())
+    {
+        <Alert Message="@Error" Type="@AlertType.Error"/>
+    }
+    else
+    {
+        <Alert Message="@LocalizationProvider["Content error"]" Type="@AlertType.Error"/>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public string Error { get; set; } = null!;
+
+    [Inject]
+    private IHostEnvironment Environment { get; set; } = null!;
+
+    [Inject]
+    private ILocalizationProvider<BlockErrorComponent> LocalizationProvider { get; set; } = null!;
+
+}

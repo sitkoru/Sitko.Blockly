@@ -39,6 +39,10 @@
     height: 100%;
 }
 
+::deep .block-row .block-form .ant-spin-container {
+    cursor: default;
+}
+
 .block-row .block-controls {
     width: 30px;
     text-align: center;

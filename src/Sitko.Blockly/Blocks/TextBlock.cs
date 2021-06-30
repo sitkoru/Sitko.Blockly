@@ -14,6 +14,8 @@ namespace Sitko.Blockly.Blocks
     
     public record TextBlockDescriptor : BlockDescriptor<TextBlock>
     {
+        public override int Priority => 1;
+
         public TextBlockDescriptor(ILocalizationProvider<TextBlock> localizationProvider) : base(localizationProvider)
         {
         }

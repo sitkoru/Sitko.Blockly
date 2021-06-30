@@ -34,7 +34,7 @@ namespace Sitko.Blockly.Tests
             var repository = scope.Get<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
-            Assert.NotEmpty(model.Blocks);
+            Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
             model.Blocks.Add(new TextBlock {Text = "baz", Position = 3});
             Assert.True(await repository.HasChangesAsync(model));
@@ -47,7 +47,7 @@ namespace Sitko.Blockly.Tests
             var repository = scope.Get<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
-            Assert.NotEmpty(model.Blocks);
+            Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
             var blocks = new OrderedCollection<ContentBlock>();
             blocks.SetItems(model.Blocks);
@@ -65,7 +65,7 @@ namespace Sitko.Blockly.Tests
             var repository = scope.Get<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
-            Assert.NotEmpty(model.Blocks);
+            Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
             var blocks = new OrderedCollection<ContentBlock>();
             blocks.SetItems(model.Blocks);
@@ -83,7 +83,7 @@ namespace Sitko.Blockly.Tests
             var repository = scope.Get<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
-            Assert.NotEmpty(model.Blocks);
+            Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
             var editContext = new EditContext(model);
             var form = scope.Get<TestForm>();
@@ -195,6 +195,6 @@ namespace Sitko.Blockly.Tests
             return Task.CompletedTask;
         }
 
-        public List<ContentBlock> Blocks { get; set; }
+        public List<ContentBlock> Blocks { get; set; } = new();
     }
 }

@@ -1,6 +1,6 @@
 ﻿@using FormItem = AntDesign.FormItem
-@typeparam TForm
-@inherits YoutubeBlockForm<TForm>
+@inherits YoutubeBlockForm<AntDesignBlocklyFormOptions>
+<!--suppress HtmlDeprecatedAttribute -->
 <FormItem Label="@LocalizationProvider["Url"]">
     <Input placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url"/>
 </FormItem>
@@ -8,6 +8,7 @@
 {
     <div class="youtube-container-wrapper">
         <div class="youtube-container">
+            @* ReSharper disable once Html.Obsolete *@
             <iframe src="@Block.Url"
                     frameborder="0" allowfullscreen class="youtube-video">
             </iframe>

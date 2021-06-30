@@ -1,10 +1,17 @@
 ﻿@typeparam TEntity
-@inherits FilesBlockComponent<TEntity>
+@inherits FilesBlockComponent<TEntity, AntDesignBlocklyListOptions>
+@if (ListOptions.Storage is not null)
+{
 @foreach (var file in Block.Files)
 {
     <ul>
         <li>
-            <AntDesign.Icon Type="paper-clip"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@Options.Storage.PublicUri(file)">@file.FileName</a>&nbsp;(&nbsp;@file.HumanSize&nbsp;)
+            <AntDesign.Icon Type="paper-clip"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@ListOptions.Storage.PublicUri(file)">@file.FileName</a>&nbsp;(&nbsp;@file.HumanSize&nbsp;)
         </li>
     </ul>
+}
+}
+else
+{
+    <BlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></BlockErrorComponent>
 }

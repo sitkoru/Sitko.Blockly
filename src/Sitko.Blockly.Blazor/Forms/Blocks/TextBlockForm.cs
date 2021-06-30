@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Sitko.Blockly.Blocks;
-using Sitko.Core.App.Blazor.Forms;
 
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
-    public abstract class TextBlockForm<TForm> : BlockForm<TForm, TextBlock> where TForm : BaseForm
+    public abstract class TextBlockForm<TBlocklyFormOptions> : BlockForm<TextBlock, TBlocklyFormOptions>
+        where TBlocklyFormOptions : BlocklyFormOptions
     {
         protected override FieldIdentifier CreateFieldIdentifier()
         {

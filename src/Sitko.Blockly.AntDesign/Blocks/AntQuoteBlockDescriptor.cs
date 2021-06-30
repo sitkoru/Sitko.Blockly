@@ -15,7 +15,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("quote");
-        public Type FormComponent => typeof(AntQuoteBlockForm<>);
+        public Type FormComponent => typeof(AntQuoteBlockForm);
         public Type DisplayComponent => typeof(AntQuoteBlockComponent<>);
     }
 }

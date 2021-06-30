@@ -1,5 +1,5 @@
 ﻿@typeparam TEntity
-@inherits QuoteBlockComponent<TEntity>
+@inherits QuoteBlockComponent<TEntity, AntDesignBlocklyListOptions>
 <blockquote class="blockquote">
     <div>
         @((MarkupString) Block.Text)
@@ -24,9 +24,9 @@
         </cite>
     </footer>
 </blockquote>
-@if (Block.Picture != null)
+@if (ListOptions.Storage is not null && Block.Picture != null)
 {
     <div class="picture">
-        <img src="@Options.Storage.PublicUri(Block.Picture)" alt="@Block.Picture.FileName"/>
+        <img src="@ListOptions.Storage.PublicUri(Block.Picture)" alt="@Block.Picture.FileName"/>
     </div>
 }

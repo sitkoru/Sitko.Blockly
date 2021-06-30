@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Sitko.Blockly.Blazor.Helpers;
 using Sitko.Blockly.Blocks;
-using Sitko.Core.App.Blazor.Forms;
 
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
-    public abstract class TwitchBlockForm<TForm> : BlockForm<TForm, TwitchBlock>
-        where TForm : BaseForm
+    public abstract class
+        TwitchBlockForm<TBlocklyFormOptions> : BlockForm<TwitchBlock, TBlocklyFormOptions>
+        where TBlocklyFormOptions : BlocklyFormOptions
     {
         protected ElementReference ContainerRef;
         private bool _rendered;

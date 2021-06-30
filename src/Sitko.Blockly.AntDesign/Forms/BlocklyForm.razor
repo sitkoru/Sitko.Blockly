@@ -1,54 +1,54 @@
 ﻿@typeparam TEntity
 @typeparam TForm
 @using Sitko.Blockly.Blazor
-@inherits Sitko.Blockly.Blazor.Forms.BlocklyForm<TEntity, TForm>
+@inherits Sitko.Blockly.Blazor.Forms.BlocklyForm<TEntity, TForm, AntDesignBlocklyFormOptions>
 <ValidationSummary Model="Form"></ValidationSummary>
 <div id="blocks-@Form.GetHashCode()">
-    @foreach (var block in Blocks)
+    @if (Blocks.Any())
     {
-        var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
-        var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()}";
-        <div class="block-row" @key="block.Id">
-            <div class="block-content">
-                <AntDesign.Card Hoverable TitleTemplate="BlockTitleTemplate(blockDescriptor, block)" Title="@block.Enabled.ToString()" Class="@className">
-                    <Extra>
-                        <Switch Checked="block.Enabled" OnChange="_ => { block.Enabled = !block.Enabled; Form.NotifyChange(); }">
-                            @LocalizationProvider["Toogle block state"]
-                        </Switch>
-                    </Extra>
-                    <Body>
-                    <Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
-                        @(RenderBlockForm(blockDescriptor, block))
-                    </Spin>
-                    </Body>
-                </AntDesign.Card>
-            </div>
-            <div class="block-controls">
-                <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
-                    <Icon Type="up"></Icon>
-                </AntDesign.Button>
-                <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@LocalizationProvider["Delete block?"]"
-                                      OnConfirm="@(() => DeleteBlock(block))"
-                                      OkText="@LocalizationProvider["Delete block"]"
-                                      CancelText="@LocalizationProvider["Cancel"]">
-                    <AntDesign.Button Size="small">
-                        <Icon Type="delete"></Icon>
+        foreach (var block in Blocks)
+        {
+            var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
+            var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()}";
+            <div class="block-row" @key="block.Id">
+                <div class="block-content">
+                    <AntDesign.Card Hoverable TitleTemplate="BlockTitleTemplate(blockDescriptor, block)" Title="@block.Enabled.ToString()" Class="@className">
+                        <Extra>
+                            <Switch Checked="block.Enabled" OnChange="_ => { block.Enabled = !block.Enabled; Form.NotifyChange(); }">
+                                @LocalizationProvider["Toogle block state"]
+                            </Switch>
+                        </Extra>
+                        <Body>
+                        <Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
+                            @(RenderBlockForm(blockDescriptor, block))
+                        </Spin>
+                        </Body>
+                    </AntDesign.Card>
+                </div>
+                <div class="block-controls">
+                    <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
+                        <Icon Type="up"></Icon>
                     </AntDesign.Button>
-                </AntDesign.Popconfirm>
-                <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveDown(block)" OnClick="@(() => MoveBlockDown(block))">
-                    <Icon Type="down"></Icon>
-                </AntDesign.Button>
+                    <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@LocalizationProvider["Delete block?"]"
+                                          OnConfirm="@(() => DeleteBlock(block))"
+                                          OkText="@LocalizationProvider["Delete block"]"
+                                          CancelText="@LocalizationProvider["Cancel"]">
+                        <AntDesign.Button Size="small">
+                            <Icon Type="delete"></Icon>
+                        </AntDesign.Button>
+                    </AntDesign.Popconfirm>
+                    <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveDown(block)" OnClick="@(() => MoveBlockDown(block))">
+                        <Icon Type="down"></Icon>
+                    </AntDesign.Button>
+                </div>
             </div>
-        </div>
-        <div class="add-block-panel">
-            <Icon Class="plus-icon" Type="plus"></Icon>
-            @foreach (var descriptor in BlockDescriptors)
-            {
-                <span class="add-block-button" title="@descriptor.Title">
-                    <Button Size="@ButtonSize.Small" OnClick="@(() => AddBlock(descriptor.Type, block))">@descriptor.Icon</Button>
-                </span>
-            }
-        </div>
+            @AddPanelTemplate(block)
+        }
+    }
+    else
+    {
+        <div class="blocks-add-first">@LocalizationProvider["Wow! Such empty! Add first block!"]</div>
+        @AddPanelTemplate()
     }
 </div>
 
@@ -59,6 +59,26 @@
     private RenderFragment BlockTitleTemplate(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
     {
         return @<Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">@blockDescriptor.Icon</Spin>;
+    }
+
+    private RenderFragment AddPanelTemplate(ContentBlock? afterBlock = null)
+    {
+        return @<div class="add-block-panel">
+                   <AntDesign.Icon Class="plus-icon" Type="plus"></AntDesign.Icon>
+                   @if (CanAdd())
+                   {
+                       foreach (var descriptor in BlockDescriptors)
+                       {
+                           <span class="add-block-button" title="@descriptor.Title">
+                               <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Small" OnClick="() => AddBlock(descriptor, afterBlock)">@descriptor.Icon</AntDesign.Button>
+                           </span>
+                       }
+                   }
+                   else
+                   {
+                       <span class="max-blocks-error">@LocalizationProvider["Maximum blocks already added to form"]</span>
+                   }
+               </div>;
     }
 
 }

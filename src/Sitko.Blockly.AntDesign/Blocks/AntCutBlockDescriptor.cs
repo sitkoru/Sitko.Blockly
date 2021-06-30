@@ -15,7 +15,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("cut");
-        public Type FormComponent => typeof(AntCutBlockForm<>);
+        public Type FormComponent => typeof(AntCutBlockForm);
         public Type DisplayComponent => typeof(AntCutBlockComponent<>);
     }
 }

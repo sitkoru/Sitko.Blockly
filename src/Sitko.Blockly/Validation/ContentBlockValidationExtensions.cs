@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using FluentValidation;
 using FluentValidation.Validators;
@@ -15,12 +16,14 @@ namespace Sitko.Blockly.Validation
         )
         {
             var validator = new BlockInheritanceValidator<TModel>();
+            var validatorsArray = validators.ToArray();
+            var additionalValidatorsArray = additionalValidators?.ToArray();
             foreach (var descriptor in blockDescriptors)
             {
-                validator.Add(descriptor, validators);
-                if (additionalValidators is not null)
+                validator.Add(descriptor, validatorsArray);
+                if (additionalValidatorsArray is not null)
                 {
-                    foreach (var additionalValidator in additionalValidators)
+                    foreach (var additionalValidator in additionalValidatorsArray)
                     {
                         validator.Add(additionalValidator);
                     }

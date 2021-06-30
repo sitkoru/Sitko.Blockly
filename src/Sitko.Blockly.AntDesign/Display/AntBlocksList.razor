@@ -1,6 +1,6 @@
 ﻿@typeparam TEntity
 @using Sitko.Blockly.Blocks
-@inherits Sitko.Blockly.Blazor.Display.BlocksList<TEntity>
+@inherits Sitko.Blockly.Blazor.Display.BlocksList<TEntity, AntDesignBlocklyListOptions>
 @foreach (var block in Blocks)
 {
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());

@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Sitko.Blockly.Blazor.Helpers;
 using Sitko.Blockly.Blocks;
-using Sitko.Core.App.Blazor.Forms;
 
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
-    public abstract class TwitterBlockForm<TForm> : BlockForm<TForm, TwitterBlock>
-        where TForm : BaseForm
+    public abstract class
+        TwitterBlockForm<TBlocklyFormOptions> : BlockForm<TwitterBlock, TBlocklyFormOptions>
+        where TBlocklyFormOptions : BlocklyFormOptions
     {
         protected ElementReference ContainerRef;
         private string? _lastRendered;

@@ -1,20 +1,26 @@
 ﻿@using Sitko.Core.App.Collections
 @using Sitko.Core.Storage
-@typeparam TForm
-@inherits Sitko.Blockly.Blazor.Forms.Blocks.FilesBlockForm<TForm>
-<BlockFormItem BlockForm="this">
-    <AntStorageFilesInput
-        TCollection="ValueCollection<StorageItem>"
-        Storage="Options.Storage"
-        ContentTypes="@Options.FilesTypes"
-        UploadPath="@Options.FilesUploadPath"
-        MaxFileSize="@Options.MaxFileSize"
-        MaxAllowedFiles="@Options.MaxAllowedFiles"
-        GenerateMetadata="Options.GenerateMetadata"
-        UploadText="@LocalizationProvider["Upload"]"
-        RemoveText="@LocalizationProvider["Remove"]"
-        UpText="@LocalizationProvider["Move up"]"
-        DownText="@LocalizationProvider["Move down"]"
-        @bind-Value="Block.Files">
-    </AntStorageFilesInput>
-</BlockFormItem>
+@inherits Sitko.Blockly.Blazor.Forms.Blocks.FilesBlockForm<AntDesignBlocklyFormOptions>
+@if (FormOptions.Storage is not null)
+{
+    <BlockFormItem BlockForm="this">
+        <AntStorageFilesInput
+            TCollection="ValueCollection<StorageItem>"
+            Storage="FormOptions.Storage"
+            ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
+            UploadPath="@FormOptions.ImagesOptions.UploadPath"
+            MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
+            MaxAllowedFiles="@FormOptions.ImagesOptions.MaxAllowedFiles"
+            GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
+            UploadText="@LocalizationProvider["Upload"]"
+            RemoveText="@LocalizationProvider["Remove"]"
+            UpText="@LocalizationProvider["Move up"]"
+            DownText="@LocalizationProvider["Move down"]"
+            @bind-Value="Block.Files">
+        </AntStorageFilesInput>
+    </BlockFormItem>
+}
+else
+{
+    <BlockFormErrorComponent Error="@LocalizationProvider["Storage is not configured in form options"]"></BlockFormErrorComponent>
+}

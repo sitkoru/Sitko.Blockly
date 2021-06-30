@@ -18,5 +18,7 @@ namespace Sitko.Blockly.Blocks
         public CutBlockDescriptor(ILocalizationProvider<CutBlock> localizationProvider) : base(localizationProvider)
         {
         }
+        public override int Priority => 2;
+        public override int MaxCount => 1;
     }
 }

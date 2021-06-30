@@ -26,11 +26,13 @@ namespace Sitko.Blockly.AntDesignComponents
             IHostEnvironment environment)
         {
             base.ConfigureServices(services, configuration, environment);
-            services.AddCKEditorBundle(configuration, Config.CKEditorTheme);
-            foreach (var configureServicesAction in Config.ConfigureServicesActions)
+
+            services.AddCKEditorBundle(configuration, Config.Theme switch
             {
-                configureServicesAction(services);
-            }
+                AntDesignBlocklyTheme.Light => CKEditorTheme.Light,
+                AntDesignBlocklyTheme.Dark => CKEditorTheme.Dark,
+                _ => throw new ArgumentOutOfRangeException()
+            });
 
             services.Configure<JsonStringLocalizerOptions>(options =>
             {

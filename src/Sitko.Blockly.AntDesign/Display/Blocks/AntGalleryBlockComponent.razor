@@ -1,22 +1,28 @@
 ﻿@typeparam TEntity
-@inherits GalleryBlockComponent<TEntity>
-@if (Block.Pictures.Any())
+@inherits GalleryBlockComponent<TEntity, AntDesignBlocklyListOptions>
+@if (ListOptions.Storage is not null)
 {
-    if (Block.Pictures.Count > 1)
+    if (Block.Pictures.Any())
     {
-        <Carousel Autoplay="TimeSpan.FromSeconds(2)">
-            @foreach (var image in Block.Pictures)
-            {
-                <CarouselSlick>
-                    <img src="@Options.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
-                </CarouselSlick>
-            }
-        </Carousel>
-    }
-    else
-    {
-        var image = Block.Pictures.First();
-        <img src="@Options.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+        if (Block.Pictures.Count > 1)
+        {
+            <Carousel Autoplay="TimeSpan.FromSeconds(2)">
+                @foreach (var image in Block.Pictures)
+                {
+                    <CarouselSlick>
+                        <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+                    </CarouselSlick>
+                }
+            </Carousel>
+        }
+        else
+        {
+            var image = Block.Pictures.First();
+            <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+        }
     }
 }
-
+else
+{
+    <BlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></BlockErrorComponent>
+}

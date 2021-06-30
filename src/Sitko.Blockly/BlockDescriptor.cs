@@ -7,8 +7,11 @@ namespace Sitko.Blockly
     {
         string Title { get; }
         Type Type { get; }
+        int MaxCount { get; }
+        int Priority { get; }
     }
 
+    // ReSharper disable once UnusedTypeParameter
     public interface IBlockDescriptor<TBlock> : IBlockDescriptor where TBlock : ContentBlock
     {
     }
@@ -17,6 +20,8 @@ namespace Sitko.Blockly
     {
         public abstract string Title { get; }
         public abstract Type Type { get; }
+        public virtual int MaxCount { get; } = 0;
+        public virtual int Priority { get; } = int.MaxValue;
     }
 
     public abstract record BlockDescriptor<TBlock> : BlockDescriptor, IBlockDescriptor<TBlock>

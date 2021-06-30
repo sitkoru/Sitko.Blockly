@@ -16,7 +16,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("youtube");
-        public Type FormComponent => typeof(AntYoutubeBlockForm<>);
+        public Type FormComponent => typeof(AntYoutubeBlockForm);
         public Type DisplayComponent => typeof(AntYoutubeBlockComponent<>);
     }
 }

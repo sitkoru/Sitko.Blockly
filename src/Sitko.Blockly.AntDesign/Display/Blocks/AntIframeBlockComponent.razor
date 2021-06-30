@@ -1,6 +1,8 @@
 ﻿@typeparam TEntity
-@inherits IframeBlockComponent<TEntity>
+@inherits IframeBlockComponent<TEntity,AntDesignBlocklyListOptions>
+<!--suppress HtmlDeprecatedAttribute -->
 <div class="embed-container">
+    @* ReSharper disable once Html.Obsolete *@
     <iframe frameborder="0"
             allowfullscreen="allowfullscreen"
             width="560" height="315"

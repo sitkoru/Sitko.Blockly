@@ -1,5 +1,4 @@
-﻿@typeparam TForm
-@inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<TForm>
+﻿@inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<AntDesignBlocklyFormOptions>
 
 <BlockFormItem BlockForm="this">
     <CKEditor TextareaClass="ant-input" SwitchToEditorText="@LocalizationProvider["Back to editor"]" SwitchToHtmlText="@LocalizationProvider["Edit HTML"]" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
@@ -17,20 +16,23 @@
         </FormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="8">
-        <FormItem Label="@LocalizationProvider["Source picture"]">
-            <AntStorageImageInput
-                Avatar="true"
-                Size="small"
-                Storage="Options.Storage"
-                ContentTypes="@Options.ImagesTypes"
-                UploadPath="@Options.ImagesUploadPath"
-                MaxFileSize="@Options.MaxImageSize"
-                UploadText="@LocalizationProvider["Upload"]"
-                RemoveText="@LocalizationProvider["Remove"]"
-                PreviewText="@LocalizationProvider["Preview"]"
-                GenerateMetadata="Options.GenerateImageMetadata"
-                @bind-Value="Block.Picture">
-            </AntStorageImageInput>
-        </FormItem>
+        @if (FormOptions.Storage is not null)
+        {
+            <FormItem Label="@LocalizationProvider["Source picture"]">
+                <AntStorageImageInput
+                    Avatar="true"
+                    Size="small"
+                    Storage="FormOptions.Storage"
+                    ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
+                    UploadPath="@FormOptions.ImagesOptions.UploadPath"
+                    MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
+                    UploadText="@LocalizationProvider["Upload"]"
+                    RemoveText="@LocalizationProvider["Remove"]"
+                    PreviewText="@LocalizationProvider["Preview"]"
+                    GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
+                    @bind-Value="Block.Picture">
+                </AntStorageImageInput>
+            </FormItem>
+        }
     </AntDesign.Col>
 </Row>

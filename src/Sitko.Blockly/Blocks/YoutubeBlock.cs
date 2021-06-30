@@ -35,7 +35,10 @@ namespace Sitko.Blockly.Blocks
 
     public record YoutubeBlockDescriptor : BlockDescriptor<YoutubeBlock>
     {
-        public YoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(localizationProvider)
+        public override int Priority => 6;
+
+        public YoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
+            localizationProvider)
         {
         }
     }

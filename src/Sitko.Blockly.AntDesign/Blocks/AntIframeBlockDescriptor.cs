@@ -15,7 +15,7 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         }
 
         public RenderFragment Icon => builder => builder.AddIcon("embed");
-        public Type FormComponent => typeof(AntIFrameBlockForm<>);
+        public Type FormComponent => typeof(AntIFrameBlockForm);
         public Type DisplayComponent => typeof(AntIframeBlockComponent<>);
     }
 }
