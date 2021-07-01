@@ -14,7 +14,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents
 {
-    public class AntDesignBlocklyModule : BlocklyModule<IBlazorBlockDescriptor, AntDesignBlocklyModuleConfig>
+    public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor, AntDesignBlocklyModuleConfig>
     {
         public AntDesignBlocklyModule(AntDesignBlocklyModuleConfig config, Application application) :
             base(config,
