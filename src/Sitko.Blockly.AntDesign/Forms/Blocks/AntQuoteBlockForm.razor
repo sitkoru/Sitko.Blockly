@@ -1,7 +1,7 @@
 ﻿@inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<AntDesignBlocklyFormOptions>
 
 <BlockFormItem BlockForm="this">
-    <CKEditor TextareaClass="ant-input" SwitchToEditorText="@LocalizationProvider["Back to editor"]" SwitchToHtmlText="@LocalizationProvider["Edit HTML"]" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
+    <CKEditor TextareaClass="ant-input" AllowHtmlMode="false" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
 </BlockFormItem>
 <Divider/>
 <Row Gutter="24">
