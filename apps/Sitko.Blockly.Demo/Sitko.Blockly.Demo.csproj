@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+ <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,10 +13,10 @@
 
   <ItemGroup>
     <PackageReference Include="AntDesign.ProLayout" Version="0.1.0-nightly-210618061658" />
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="7.21.2" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="7.21.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7" />
-    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="7.21.2" />
-    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="7.21.2" />
+    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="7.21.3" />
+    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="7.21.3" />
   </ItemGroup>
 
 </Project>
