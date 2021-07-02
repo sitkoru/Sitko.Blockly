@@ -7,6 +7,8 @@ namespace Sitko.Blockly.Blazor
     {
         RenderFragment Icon { get; }
         Type FormComponent { get; }
+        string FormComponentCssClass => "";
         Type DisplayComponent { get; }
+        string DisplayComponentCssClass => "";
     }
 }

@@ -4,7 +4,7 @@
 @foreach (var block in Blocks)
 {
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
-    var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()}";
+    var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.DisplayComponentCssClass}";
     <div class="@className" @key="block.Id">
         @(RenderBlock(blockDescriptor, block))
     </div>

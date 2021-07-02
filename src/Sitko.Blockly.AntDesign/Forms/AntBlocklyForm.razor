@@ -11,7 +11,7 @@
         foreach (var block in Blocks)
         {
             var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
-            var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {(block.Enabled ? "block-enabled" : "block-disabled")}";
+            var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.FormComponentCssClass} {(block.Enabled ? "block-enabled" : "block-disabled")}";
             <div class="block-row" @key="block.Id">
                 <div class="block-content">
                     <AntDesign.Card Hoverable Class="@className">
