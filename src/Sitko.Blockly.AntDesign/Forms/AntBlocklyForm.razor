@@ -55,11 +55,13 @@
 
 @code{
 
-    private RenderFragment _disabledBlockIndicator = @<span class="block-disabled-icon"><Icon Type="eye-invisible"></Icon></span>;
+    private RenderFragment _disabledBlockIndicator = @<span class="block-disabled-icon">
+                                                         <Icon Type="eye-invisible"></Icon>
+                                                     </span>;
 
     private RenderFragment AddPanelTemplate(ContentBlock? afterBlock = null)
     {
-        return @<div class="add-block-panel">
+        return @<div class="add-block-panel @(CanAdd() ? "" : "add-block-panel-disabled")">
                    <AntDesign.Icon Class="plus-icon" Type="plus"></AntDesign.Icon>
                    @if (CanAdd())
                    {
