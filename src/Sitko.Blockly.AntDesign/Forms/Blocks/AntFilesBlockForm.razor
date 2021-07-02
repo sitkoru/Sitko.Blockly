@@ -3,9 +3,9 @@
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.FilesBlockForm<AntDesignBlocklyFormOptions>
 @if (FormOptions.Storage is not null)
 {
-    <BlockFormItem BlockForm="this">
+    <AntBlockFormItem BlockForm="this">
         <AntStorageFilesInput
-            TCollection="ValueCollection<StorageItem>"
+            TValue="ValueCollection<StorageItem>"
             Storage="FormOptions.Storage"
             ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
             UploadPath="@FormOptions.ImagesOptions.UploadPath"
@@ -18,9 +18,9 @@
             DownText="@LocalizationProvider["Move down"]"
             @bind-Value="Block.Files">
         </AntStorageFilesInput>
-    </BlockFormItem>
+    </AntBlockFormItem>
 }
 else
 {
-    <BlockFormErrorComponent Error="@LocalizationProvider["Storage is not configured in form options"]"></BlockFormErrorComponent>
+    <AntBlockFormErrorComponent Error="@LocalizationProvider["Storage is not configured in form options"]"></AntBlockFormErrorComponent>
 }
