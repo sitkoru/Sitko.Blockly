@@ -21,6 +21,7 @@ namespace Sitko.Blockly.Demo
             services.Configure<ProSettings>(settings =>
             {
                 settings.Title = "Blockly";
+                settings.NavTheme = "dark";
             });
         }
 
