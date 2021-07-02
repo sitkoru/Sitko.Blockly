@@ -12,7 +12,6 @@ using Sitko.Blockly.EntityFrameworkCore;
 using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Collections;
 using Sitko.Core.Blazor.AntDesignComponents;
-using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Xunit;
@@ -36,7 +35,7 @@ namespace Sitko.Blockly.Tests
             Assert.NotNull(model);
             Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
-            model.Blocks.Add(new TextBlock {Text = "baz", Position = 3});
+            model.Blocks.Add(new TextBlock { Text = "baz", Position = 3 });
             Assert.True(await repository.HasChangesAsync(model));
         }
 
@@ -53,7 +52,7 @@ namespace Sitko.Blockly.Tests
             blocks.SetItems(model.Blocks);
             model.Blocks = new List<ContentBlock>(blocks.ToList());
             Assert.False(await repository.HasChangesAsync(model));
-            blocks.AddItem(new TextBlock {Text = "baz", Position = 3});
+            blocks.AddItem(new TextBlock { Text = "baz", Position = 3 });
             model.Blocks = new List<ContentBlock>(blocks.ToList());
             Assert.True(await repository.HasChangesAsync(model));
         }
@@ -100,23 +99,17 @@ namespace Sitko.Blockly.Tests
         }
     }
 
-    public class BlocklyTestScope : DbBaseTestScope<TestApplication, BlocklyTestScope, TestBlocklyDbContext>
+    public class BlocklyTestScope : DbBaseTestScope<TestApplication, TestBlocklyDbContext>
     {
         protected override async Task InitDbContextAsync(TestBlocklyDbContext dbContext)
         {
             await base.InitDbContextAsync(dbContext);
             var model = new TestModel();
-            model.Blocks.Add(new TextBlock {Text = "Foo", Position = 0});
-            model.Blocks.Add(new CutBlock {ButtonText = "Cut", Position = 1});
-            model.Blocks.Add(new TextBlock {Text = "Bar", Position = 2});
+            model.Blocks.Add(new TextBlock { Text = "Foo", Position = 0 });
+            model.Blocks.Add(new CutBlock { ButtonText = "Cut", Position = 1 });
+            model.Blocks.Add(new TextBlock { Text = "Bar", Position = 2 });
             await dbContext.AddAsync(model);
             await dbContext.SaveChangesAsync();
-        }
-
-        protected override void GetPostgresConfig(IConfiguration configuration, IHostEnvironment environment,
-            PostgresDatabaseModuleConfig<TestBlocklyDbContext> moduleConfig, string dbName)
-        {
-            moduleConfig.Database = dbName;
         }
     }
 
@@ -124,8 +117,8 @@ namespace Sitko.Blockly.Tests
     {
         public TestApplication(string[] args) : base(args)
         {
-            AddModule<EFRepositoriesModule<TestBlocklyDbContext>, EFRepositoriesModuleConfig>();
-            AddModule<BlocklyModule, BlocklyModuleConfig>(
+            AddModule<EFRepositoriesModule<TestBlocklyDbContext>, EFRepositoriesModuleOptions>();
+            AddModule<BlocklyModule, BlocklyModuleOptions>(
                 (_, _, moduleConfig) =>
                 {
                     moduleConfig.AddBlock<TextBlockDescriptor, TextBlock>();

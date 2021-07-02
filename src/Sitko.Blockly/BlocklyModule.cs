@@ -1,44 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Sitko.Blockly.Validation;
 using Sitko.Core.App;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly
 {
-    public class BlocklyModule : BlocklyModule<IBlockDescriptor, BlocklyModuleConfig>
+    public class BlocklyModule : BlocklyModule<IBlockDescriptor, BlocklyModuleOptions>
     {
-        public BlocklyModule(BlocklyModuleConfig config, Application application) : base(config, application)
-        {
-        }
     }
 
     public class BlocklyModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TConfig>
-        where TBlockDescriptor : IBlockDescriptor where TConfig : BlocklyModuleConfig<TBlockDescriptor>, new()
+        where TBlockDescriptor : IBlockDescriptor where TConfig : BlocklyModuleOptions<TBlockDescriptor>, new()
     {
-        public BlocklyModule(TConfig config, Application application) : base(config,
-            application)
+        public override void ConfigureServices(ApplicationContext context, IServiceCollection services,
+            TConfig startupOptions)
         {
-        }
-
-        public override void ConfigureServices(IServiceCollection services, IConfiguration configuration,
-            IHostEnvironment environment)
-        {
-            base.ConfigureServices(services, configuration, environment);
-            Config.ConfigureServices(services);
+            base.ConfigureServices(context, services, startupOptions);
+            startupOptions.ConfigureServices(services);
 
             services.AddSingleton<IBlockly<TBlockDescriptor>, Blockly<TBlockDescriptor>>();
-            services.Configure<JsonStringLocalizerOptions>(options =>
+            services.Configure<JsonLocalizationModuleOptions>(options =>
             {
                 options.AddDefaultResource<Blockly>();
             });
         }
+
+        public override string GetOptionsKey()
+        {
+            return "Blockly";
+        }
     }
 
-    public abstract class BlocklyModuleConfig<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
+    public abstract class BlocklyModuleOptions<TBlockDescriptor> : BaseModuleOptions
+        where TBlockDescriptor : IBlockDescriptor
     {
         private readonly List<Action<IServiceCollection>> _configureActions = new();
 
@@ -50,7 +46,7 @@ namespace Sitko.Blockly
             }
         }
 
-        public BlocklyModuleConfig<TBlockDescriptor> ConfigureFormOptions(Action<BlocklyFormOptions> configure)
+        public BlocklyModuleOptions<TBlockDescriptor> ConfigureFormOptions(Action<BlocklyFormOptions> configure)
         {
             _configureActions.Add(services =>
             {
@@ -59,7 +55,7 @@ namespace Sitko.Blockly
             return this;
         }
 
-        public BlocklyModuleConfig<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
+        public BlocklyModuleOptions<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
             where TDescriptor : TBlockDescriptor
         {
             _configureActions.Add(services =>
@@ -76,7 +72,7 @@ namespace Sitko.Blockly
             return this;
         }
 
-        public BlocklyModuleConfig<TBlockDescriptor> AddBlocks<TAssembly>(bool withValidators = true)
+        public BlocklyModuleOptions<TBlockDescriptor> AddBlocks<TAssembly>(bool withValidators = true)
         {
             AddBlocks<TAssembly, TBlockDescriptor>();
             if (withValidators)
@@ -87,7 +83,7 @@ namespace Sitko.Blockly
             return this;
         }
 
-        public BlocklyModuleConfig<TBlockDescriptor> AddValidators<TAssembly, TValidator>()
+        public BlocklyModuleOptions<TBlockDescriptor> AddValidators<TAssembly, TValidator>()
             where TValidator : IBlockValidator
         {
             _configureActions.Add(services =>
@@ -100,7 +96,7 @@ namespace Sitko.Blockly
             return this;
         }
 
-        public BlocklyModuleConfig<TBlockDescriptor> AddBlock<TDescriptor, TBlock>(bool withValidator = true)
+        public BlocklyModuleOptions<TBlockDescriptor> AddBlock<TDescriptor, TBlock>(bool withValidator = true)
             where TDescriptor : TBlockDescriptor, IBlockDescriptor<TBlock> where TBlock : ContentBlock
         {
             AddBlocks<TDescriptor, TDescriptor>();
@@ -113,7 +109,7 @@ namespace Sitko.Blockly
         }
     }
 
-    public class BlocklyModuleConfig : BlocklyModuleConfig<IBlockDescriptor>
+    public class BlocklyModuleOptions : BlocklyModuleOptions<IBlockDescriptor>
     {
     }
 }

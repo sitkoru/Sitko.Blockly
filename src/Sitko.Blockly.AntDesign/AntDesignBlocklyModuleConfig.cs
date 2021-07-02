@@ -2,7 +2,7 @@
 
 namespace Sitko.Blockly.AntDesignComponents
 {
-    public class AntDesignBlocklyModuleConfig : BlazorBlocklyModuleConfig<IBlazorBlockDescriptor>
+    public class AntDesignBlocklyModuleOptions : BlazorBlocklyModuleOptions<IBlazorBlockDescriptor>
     {
         public AntDesignBlocklyTheme Theme { get; set; } = AntDesignBlocklyTheme.Light;
     }
