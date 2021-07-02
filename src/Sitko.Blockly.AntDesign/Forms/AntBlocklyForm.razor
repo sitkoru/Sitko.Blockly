@@ -62,21 +62,25 @@
     private RenderFragment AddPanelTemplate(ContentBlock? afterBlock = null)
     {
         return @<div class="add-block-panel @(CanAdd() ? "" : "add-block-panel-disabled")">
-                   <AntDesign.Icon Class="plus-icon" Type="plus"></AntDesign.Icon>
-                   @if (CanAdd())
-                   {
-                       foreach (var descriptor in BlockDescriptors)
+                   <div class="add-block-items_wrapper">
+                       <AntDesign.Icon Class="plus-icon" Type="plus"></AntDesign.Icon>
+                       @if (CanAdd())
                        {
-                           <span class="add-block-button" title="@descriptor.Title">
-                               <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Small" OnClick="() => AddBlock(descriptor, afterBlock)">@descriptor.Icon</AntDesign.Button>
-                           </span>
+                           foreach (var descriptor in BlockDescriptors)
+                           {
+                               <span class="add-block-button" title="@descriptor.Title">
+                                   <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Small" OnClick="() => AddBlock(descriptor, afterBlock)">@descriptor.Icon</AntDesign.Button>
+                               </span>
+                           }
                        }
-                   }
-                   else
-                   {
-                       <span class="max-blocks-error">@LocalizationProvider["Maximum blocks already added to form"]</span>
-                   }
+                       else
+                       {
+                           <span class="max-blocks-error">@LocalizationProvider["Maximum blocks already added to form"]</span>
+                       }
+                   </div>
                </div>;
     }
 
 }
+
+
