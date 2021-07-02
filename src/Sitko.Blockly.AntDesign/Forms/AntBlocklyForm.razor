@@ -1,6 +1,5 @@
 ﻿@typeparam TEntity
 @typeparam TForm
-@using Sitko.Blockly.Blazor
 @inherits Sitko.Blockly.Blazor.Forms.BlocklyForm<TEntity, TForm, AntDesignBlocklyFormOptions>
 <div class="blockly-form">
     @if (!string.IsNullOrEmpty(Label))
@@ -25,7 +24,7 @@
                     <div class="block-mainicon">
                         @blockDescriptor.Icon
                     </div>
-                    <AntDesign.Button Size="small" OnClick="@(() => block.Enabled = !block.Enabled)" Class="@(block.Enabled ? "enabled" : "disabled")">
+                    <AntDesign.Button Size="small" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
                         <Icon Type="eye-invisible"></Icon>
                     </AntDesign.Button>
                     <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@LocalizationProvider["Delete block?"]"

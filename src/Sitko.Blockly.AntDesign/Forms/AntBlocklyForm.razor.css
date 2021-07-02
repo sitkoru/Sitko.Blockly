@@ -2,22 +2,17 @@
     display: flex;
     margin-bottom: 20px;
     position: relative;
+    align-items: center;
 }
 
 ::deep .block-row .ant-card-body {
-    padding: 5px 24px 15px;
+    padding: 15px;
 }
 
 ::deep .block-row .add-block {
     position: absolute;
     left: 50%;
     margin-left: -10px;
-    /*border: solid 1px #ccc;*/
-    /*border-radius: 50%;*/
-    /*width: 20px;*/
-    /*height: 20px;*/
-    /*line-height: 20px;*/
-    /*text-align: center;*/
     cursor: pointer;
     visibility: hidden;
     z-index: 999;
@@ -44,14 +39,26 @@
 }
 
 .block-row .block-controls {
-    width: 30px;
+    width: 80px;
     text-align: center;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
+    flex-wrap: wrap;
     gap: 5px;
-    opacity: 0.1;
+    opacity: .3;
     align-items: center;
     justify-content: center;
+    transition-duration: .2s;
+}
+
+.block-mainicon {
+    width: 100%;
+    font-size: 1.3em;
+    color: #2f54eb;
+}
+
+.block-disabled .block-controls .block-disable-button .anticon {
+    color: #2f54eb;
 }
 
 .block-row:hover .block-controls {
@@ -66,7 +73,10 @@
 
 .block-row .block-content {
     flex: 1;
-    /*padding: 0 10px;*/
+}
+
+.block-row .block-content iframe {
+    max-width: 100%;
 }
 
 ::deep .block-row .block-controls .dropdown-toggle:before {
@@ -89,8 +99,7 @@
 
 ::deep .add-block-panel {
     padding: 10px;
-    margin: 10px 40px 20px 10px;
-    /*border: 1px dashed #303030;*/
+    margin: 10px 80px 20px 0;
     text-align: center;
     position: relative;
 }
@@ -130,10 +139,9 @@
 }
 
 ::deep .add-block-panel .add-block-button {
-    margin-right: 10px;
     visibility: visible;
     opacity: 0;
-    margin: 5px;
+    margin: 5px 10px 5px 5px;
     transition-duration: .2s;
     display: inline-block;
 }
@@ -160,11 +168,64 @@
     display: inline-flex;
     align-items: center;
     height: auto;
-    color: rgba(255,255,255,.85);
+    color: rgba(255, 255, 255, .85);
     font-size: 14px;
     margin: 0;
     padding: 0 0 8px;
     line-height: 1.5715;
     white-space: initial;
     text-align: left;
+}
+
+::deep .blazor-ck-editor-switch_mode {
+    margin-top: 10px;
+}
+
+::deep .ant-spin-nested-loading>div>.ant-spin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
+}
+
+::deep .ant-upload-list-item-card-actions {
+    position: absolute;
+    right: auto;
+    display: inline-flex;
+    margin-left: 20px;
+}
+
+::deep .ant-card-hoverable:hover {
+    border-color: #4a494b;
+    box-shadow: 0 1px 2px -2px rgba(0,0,0,.64),0 3px 6px 0 rgba(0,0,0,.48),0 5px 12px 4px rgba(0,0,0,.36);
+}
+
+::deep .ant-card-body .ant-form-item:last-child {
+    margin-bottom: 0;
+}
+
+::deep .ant-card-body .ant-form-item:first-child .ant-form-item-label {
+    margin-top: -.5em;
+}
+
+@media screen and (max-width: 900px) {
+    ::deep .block-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .block-row .block-content,
+    .block-row .block-controls {
+        width: 100%;
+    }
+
+    .block-mainicon {
+        width: auto;
+    }
+
+    ::deep .add-block-panel {
+        margin: 0 0 20px 0;
+    }
+
 }

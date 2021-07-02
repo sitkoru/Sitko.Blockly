@@ -9,7 +9,7 @@ using Sitko.Blockly.Blazor.Forms;
 
 namespace Sitko.Blockly.AntDesignComponents.Forms
 {
-    public partial class BlockFormItem
+    public partial class AntBlockFormItem
     {
         private static readonly Dictionary<string, object> s_noneColAttributes = new();
         private readonly string _prefixCls = "ant-form-item";
@@ -46,7 +46,7 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 
             if (CurrentEditContext is null)
             {
-                throw new Exception($"{nameof(BlockFormItem)} must be used inside EditForm");
+                throw new Exception($"{nameof(AntBlockFormItem)} must be used inside EditForm");
             }
 
             _validationStateChangedHandler = (_, _) =>
