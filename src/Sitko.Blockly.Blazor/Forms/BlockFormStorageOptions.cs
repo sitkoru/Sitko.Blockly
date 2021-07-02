@@ -12,6 +12,7 @@ namespace Sitko.Blockly.Blazor.Forms
         public long MaxFileSize { get; set; }
         public int? MaxAllowedFiles { get; set; }
 
-        public Func<FileUploadRequest, FileStream, Task<object>> GenerateMetadata { get; set; } = (_, _) => null!;
+        public Func<FileUploadRequest, FileStream, Task<object>> GenerateMetadata { get; set; } =
+            (_, _) => Task.FromResult((object)null!);
     }
 }
