@@ -11,7 +11,7 @@ namespace Sitko.Blockly.EntityFrameworkCore
         public static ModelBuilder RegisterBlocklyConversion<TEntity>(this ModelBuilder modelBuilder,
             Expression<Func<TEntity, List<ContentBlock>>> fieldSelector,
             string fieldName, bool isRequired = true)
-            where TEntity : class, new()
+            where TEntity : class
         {
             modelBuilder.RegisterJsonEnumerableConversion<TEntity, ContentBlock, List<ContentBlock>>(
                 fieldSelector,
