@@ -22,8 +22,8 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.2.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Sitko.Core.App.Web" Version="8.0.0-preview.22" />
-    <PackageReference Include="Sitko.Core.Storage" Version="8.0.0-preview.22" />
+    <PackageReference Include="Sitko.Core.App.Web" Version="8.0.0-preview.23" />
+    <PackageReference Include="Sitko.Core.Storage" Version="8.0.0-preview.23" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 

@@ -10,12 +10,12 @@
             ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
             UploadPath="@FormOptions.ImagesOptions.UploadPath"
             MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
-            MaxAllowedFiles="@FormOptions.ImagesOptions.MaxAllowedFiles"
+            MaxFiles="@FormOptions.ImagesOptions.MaxAllowedFiles"
             GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
             UploadText="@LocalizationProvider["Upload"]"
             RemoveText="@LocalizationProvider["Remove"]"
-            UpText="@LocalizationProvider["Move up"]"
-            DownText="@LocalizationProvider["Move down"]"
+            LeftText="@LocalizationProvider["Move left"]"
+            RightText="@LocalizationProvider["Move right"]"
             @bind-Value="Block.Files">
         </AntStorageFilesInput>
     </AntBlockFormItem>
