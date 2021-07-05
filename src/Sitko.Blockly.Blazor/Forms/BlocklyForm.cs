@@ -107,10 +107,9 @@ namespace Sitko.Blockly.Blazor.Forms
             if (_blockToScroll is not null)
             {
                 var element = BlockElements[_blockToScroll.Id];
-                var duration = _blockToScroll is TwitterBlock ? 200 : 0; // TODO: Remove demo hack
                 _blockToScroll = null;
 
-                await JsRuntime.InvokeVoidAsync("Blockly.scroll", element, duration).AsTask();
+                await JsRuntime.InvokeVoidAsync("Blockly.scroll", element).AsTask();
             }
         }
 

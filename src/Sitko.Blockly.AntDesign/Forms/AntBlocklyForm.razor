@@ -12,7 +12,7 @@
         {
             var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
             var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.FormComponentCssClass} {(block.Enabled ? "block-enabled" : "block-disabled")}";
-            <div class="@className" style="order: @block.Position" @ref="@BlockElements[block.Id]">
+            <div class="@className" style="order: @block.Position" @ref="@BlockElements[block.Id]" id="@block.Id">
                 <div class="block-row" @key="@block.Id">
                     <div @key="@block.Id" class="block-content">
                         <AntDesign.Card @key="@block.Id" Class="@className">
