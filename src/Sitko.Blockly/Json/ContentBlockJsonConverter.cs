@@ -19,13 +19,14 @@ namespace Sitko.Blockly.Json
 
             while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
             {
-                Utf8JsonReader readerClone = reader;
+                var readerClone = reader;
 
                 if (readerClone.TokenType != JsonTokenType.StartObject)
                 {
                     throw new JsonException();
                 }
 
+                var typePropertyFound = false;
                 while (readerClone.Read())
                 {
                     if (readerClone.TokenType != JsonTokenType.PropertyName)
@@ -39,25 +40,31 @@ namespace Sitko.Blockly.Json
                         continue;
                     }
 
+                    typePropertyFound = true;
+
                     break;
                 }
 
-                readerClone.Read();
-                if (readerClone.TokenType != JsonTokenType.String)
-                {
-                    throw new JsonException();
-                }
-
-                var key = readerClone.GetString();
                 ContentBlock? block = null;
-                if (!string.IsNullOrEmpty(key))
+                if (typePropertyFound)
                 {
-                    var descriptor = Blockly.GetDescriptor(key);
-                    if (descriptor is not null)
+                    readerClone.Read();
+                    if (readerClone.TokenType != JsonTokenType.String)
                     {
-                        if (JsonSerializer.Deserialize(ref reader, descriptor.Type) is ContentBlock contentBlock)
+                        throw new JsonException();
+                    }
+
+                    var key = readerClone.GetString();
+
+                    if (!string.IsNullOrEmpty(key))
+                    {
+                        var descriptor = Blockly.GetDescriptor(key);
+                        if (descriptor is not null)
                         {
-                            block = contentBlock;
+                            if (JsonSerializer.Deserialize(ref reader, descriptor.Type) is ContentBlock contentBlock)
+                            {
+                                block = contentBlock;
+                            }
                         }
                     }
                 }
@@ -68,9 +75,19 @@ namespace Sitko.Blockly.Json
                 }
                 else
                 {
-                    while (reader.TokenType != JsonTokenType.EndObject)
+                    var level = 1;
+                    while (level > 0)
                     {
                         reader.Read();
+                        switch (reader.TokenType)
+                        {
+                            case JsonTokenType.StartObject:
+                                level++;
+                                break;
+                            case JsonTokenType.EndObject:
+                                level--;
+                                break;
+                        }
                     }
                 }
             }
@@ -78,7 +95,8 @@ namespace Sitko.Blockly.Json
             return blocks;
         }
 
-        public override void Write(Utf8JsonWriter writer, IEnumerable<ContentBlock> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IEnumerable<ContentBlock> value,
+            JsonSerializerOptions options)
         {
             writer.WriteStartArray();
             foreach (var block in value)
