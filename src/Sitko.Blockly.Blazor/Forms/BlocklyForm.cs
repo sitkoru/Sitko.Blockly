@@ -93,9 +93,27 @@ namespace Sitko.Blockly.Blazor.Forms
             return true;
         }
 
-        protected Task ScrollToBlockAsync(ContentBlock block)
+        protected Task SaveBlockPositionAsync(ContentBlock block)
         {
-            return JsRuntime.InvokeVoidAsync("Blockly.scroll", BlockElements[block.Id]).AsTask();
+            return JsRuntime.InvokeVoidAsync("Blockly.savePosition", BlockElements[block.Id]).AsTask();
+        }
+
+        private ContentBlock? _blockToScroll;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+            if (_blockToScroll is not null)
+            {
+                await JsRuntime.InvokeVoidAsync("Blockly.scroll", BlockElements[_blockToScroll.Id]).AsTask();
+                _blockToScroll = null;
+            }
+        }
+
+        protected async Task ScrollToBlockAsync(ContentBlock block)
+        {
+            await SaveBlockPositionAsync(block);
+            _blockToScroll = block;
         }
 
         protected void AddBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock? neighbor = null,
