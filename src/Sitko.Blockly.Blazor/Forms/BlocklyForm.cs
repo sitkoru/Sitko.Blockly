@@ -96,6 +96,7 @@ namespace Sitko.Blockly.Blazor.Forms
             {
                 var block = Blockly.CreateBlock(blockDescriptor);
                 OrderedBlocks.AddItem(block, neighbor, after);
+                Blocks.Add(block);
                 UpdateForm();
                 ValidateBlock(block);
             }
@@ -146,6 +147,7 @@ namespace Sitko.Blockly.Blazor.Forms
         protected void DeleteBlock(ContentBlock block)
         {
             OrderedBlocks.RemoveItem(block);
+            Blocks.Remove(block);
             UpdateForm();
             EditContext.Validate();
             BlocklyFormService.Validate();
@@ -153,13 +155,6 @@ namespace Sitko.Blockly.Blazor.Forms
 
         private void UpdateForm()
         {
-            foreach (var orderedBlock in OrderedBlocks)
-            {
-                if (!Blocks.Contains(orderedBlock))
-                {
-                    Blocks.Add(orderedBlock);
-                }
-            }
             CurrentValue = new List<ContentBlock>(OrderedBlocks.ToList());
         }
 
