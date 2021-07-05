@@ -61,7 +61,8 @@ namespace Sitko.Blockly
             _configureActions.Add(services =>
             {
                 services.Scan(s =>
-                    s.FromAssemblyOf<TAssembly>().AddClasses(c => c.AssignableTo<TDescriptor>())
+                    s.FromAssemblyOf<TAssembly>()
+                        .AddClasses(c => c.AssignableTo<TDescriptor>().Where(d => !d.IsAbstract && d.IsClass))
                         .AsSelfWithInterfaces().WithSingletonLifetime());
             });
             if (withValidators)
@@ -89,8 +90,9 @@ namespace Sitko.Blockly
             _configureActions.Add(services =>
             {
                 services.Scan(s =>
-                    s.FromAssemblyOf<TAssembly>().FromAssemblyOf<Blockly>()
-                        .AddClasses(c => c.AssignableTo<TValidator>())
+                    s
+                        .FromAssemblyOf<TAssembly>().AddClasses(c => c.AssignableTo<TValidator>())
+                        .FromAssemblyOf<Blockly>().AddClasses(c => c.AssignableTo<TValidator>())
                         .AsSelfWithInterfaces().WithScopedLifetime());
             });
             return this;
