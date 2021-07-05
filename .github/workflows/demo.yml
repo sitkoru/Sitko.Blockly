@@ -54,7 +54,7 @@ jobs:
                 shell: bash
                 run: |
                     npm ci
-                    npm run prod
+                    npm run dev
             -   name: Publish demo
                 run: dotnet publish apps/${{ env.DEMO_PROJECT }}/${{ env.DEMO_PROJECT }}.csproj --output /app/ -c Release /p:Version=${{ steps.prep.outputs.version }}
             -   name: Set up Docker Buildx
