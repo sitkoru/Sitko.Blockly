@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Sitko.Blockly.Validation;
 using Sitko.Core.App;
@@ -30,6 +31,13 @@ namespace Sitko.Blockly
         public override string GetOptionsKey()
         {
             return "Blockly";
+        }
+
+        public override async Task InitAsync(ApplicationContext context, IServiceProvider serviceProvider)
+        {
+            await base.InitAsync(context, serviceProvider);
+            var blockly = serviceProvider.GetRequiredService<IBlockly<TBlockDescriptor>>();
+            await blockly.InitAsync();
         }
     }
 
