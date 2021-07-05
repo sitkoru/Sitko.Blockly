@@ -14,8 +14,8 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         {
         }
 
-        public RenderFragment Icon => builder => builder.AddIcon("attach");
-        public Type FormComponent => typeof(AntFilesBlockForm);
-        public Type DisplayComponent => typeof(AntFilesBlockComponent<>);
+        public virtual RenderFragment Icon => builder => builder.AddIcon("attach");
+        public virtual Type FormComponent => typeof(AntFilesBlockForm);
+        public virtual Type DisplayComponent => typeof(AntFilesBlockComponent<>);
     }
 }
