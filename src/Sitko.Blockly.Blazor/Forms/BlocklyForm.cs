@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Collections;
 
@@ -26,9 +28,11 @@ namespace Sitko.Blockly.Blazor.Forms
 
         [Inject] protected IBlockly<IBlazorBlockDescriptor> Blockly { get; set; } = null!;
         [Inject] protected BlocklyFormService BlocklyFormService { get; set; } = null!;
+        [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;
 
         protected readonly OrderedCollection<ContentBlock> OrderedBlocks = new();
         protected readonly List<ContentBlock> Blocks = new();
+        protected readonly Dictionary<Guid, ElementReference> BlockElements = new();
 
         protected TOptions FormOptions = new();
 
@@ -89,6 +93,11 @@ namespace Sitko.Blockly.Blazor.Forms
             return true;
         }
 
+        protected Task ScrollToBlockAsync(ContentBlock block)
+        {
+            return JsRuntime.InvokeVoidAsync("Blockly.scroll", BlockElements[block.Id]).AsTask();
+        }
+
         protected void AddBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock? neighbor = null,
             bool after = true)
         {
@@ -131,17 +140,19 @@ namespace Sitko.Blockly.Blazor.Forms
             return OrderedBlocks.CanMoveDown(block);
         }
 
-        protected void MoveBlockUp(ContentBlock block)
+        protected Task MoveBlockUpAsync(ContentBlock block)
         {
             OrderedBlocks.MoveUp(block);
             UpdateForm();
+            return ScrollToBlockAsync(block);
         }
 
 
-        protected void MoveBlockDown(ContentBlock block)
+        protected Task MoveBlockDownAsync(ContentBlock block)
         {
             OrderedBlocks.MoveDown(block);
             UpdateForm();
+            return ScrollToBlockAsync(block);
         }
 
         protected void DeleteBlock(ContentBlock block)

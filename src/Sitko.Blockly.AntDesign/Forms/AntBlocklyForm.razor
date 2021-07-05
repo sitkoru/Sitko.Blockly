@@ -12,7 +12,7 @@
         {
             var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
             var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.FormComponentCssClass} {(block.Enabled ? "block-enabled" : "block-disabled")}";
-            <div class="@className" style="order: @block.Position">
+            <div class="@className" style="order: @block.Position" @ref="@BlockElements[block.Id]">
                 <div class="block-row" @key="@block.Id">
                     <div @key="@block.Id" class="block-content">
                         <AntDesign.Card @key="@block.Id" Class="@className">
@@ -36,10 +36,10 @@
                                 <Icon Type="delete"></Icon>
                             </AntDesign.Button>
                         </AntDesign.Popconfirm>
-                        <AntDesign.Button Size="small" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUp(block))">
+                        <AntDesign.Button Size="small" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUpAsync(block))">
                             <Icon Type="up"></Icon>
                         </AntDesign.Button>
-                        <AntDesign.Button Size="small" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDown(block))">
+                        <AntDesign.Button Size="small" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDownAsync(block))">
                             <Icon Type="down"></Icon>
                         </AntDesign.Button>
                     </div>
