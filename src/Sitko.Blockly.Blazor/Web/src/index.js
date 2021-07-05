@@ -2,38 +2,45 @@ import './index.css';
 
 window.Blockly = {
     scroll: function (element) {
-        function inOutQuad(n){
+        function inOutQuad(n) {
             n *= 2;
             if (n < 1) return 0.5 * n * n;
-            return - 0.5 * (--n * (n - 2) - 1);
-        }
-        function doScrolling(elementY, duration) {
-            const startingY = window.pageYOffset;
-            const diff = elementY - startingY;
-            let start;
-
-            // Bootstrap our animation - it will get called right before next frame shall be rendered.
-            window.requestAnimationFrame(function step(timestamp) {
-                if (!start) start = timestamp;
-                // Elapsed milliseconds since start of scrolling.
-                const time = timestamp - start;
-                // Get percent of completion in range [0, 1].
-                const percent = Math.min(time / duration, 1);
-                const val = inOutQuad(percent);
-                window.scrollTo(0, startingY + diff * val);
-
-                // Proceed with animation as long as we wanted it to.
-                if (time < duration) {
-                    window.requestAnimationFrame(step);
-                }
-            })
+            return -0.5 * (--n * (n - 2) - 1);
         }
 
-        setTimeout(function () {
-            const rectangle = element.getBoundingClientRect();
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            doScrolling(scrollTop + rectangle.top, 200);
-        }, 100)
+        function doScrolling(element, duration) {
+            const rectangleBefore = element.getBoundingClientRect();
+
+            setTimeout(function () {
+                const rectangleAfter = element.getBoundingClientRect();
+                console.log(rectangleBefore.top, rectangleAfter.top);
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const diff = rectangleAfter.top - rectangleBefore.top;
+                let start;
+
+                // Bootstrap our animation - it will get called right before next frame shall be rendered.
+                window.requestAnimationFrame(function step(timestamp) {
+                    if (!start) start = timestamp;
+                    // Elapsed milliseconds since start of scrolling.
+                    const time = timestamp - start;
+                    // Get percent of completion in range [0, 1].
+                    const percent = Math.min(time / duration, 1);
+                    const val = inOutQuad(percent);
+                    window.scrollTo(0, scrollTop + diff * val);
+
+                    // Proceed with animation as long as we wanted it to.
+                    if (time < duration) {
+                        window.requestAnimationFrame(step);
+                    }
+                })
+            }, 10);
+
+        }
+
+        doScrolling(element, 200);
+        // setTimeout(function () {
+        //    
+        // }, 100)
     },
     Twitter: {
         load: function () {
