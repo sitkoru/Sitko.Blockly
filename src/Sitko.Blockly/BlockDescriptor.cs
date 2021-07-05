@@ -9,6 +9,7 @@ namespace Sitko.Blockly
         Type Type { get; }
         int MaxCount { get; }
         int Priority { get; }
+        string Key { get; }
     }
 
     // ReSharper disable once UnusedTypeParameter
@@ -20,6 +21,7 @@ namespace Sitko.Blockly
     {
         public abstract string Title { get; }
         public abstract Type Type { get; }
+        public abstract string Key { get; }
         public virtual int MaxCount { get; } = 0;
         public virtual int Priority { get; } = int.MaxValue;
     }
@@ -37,5 +39,6 @@ namespace Sitko.Blockly
         public override Type Type => typeof(TBlock);
 
         public override string Title => LocalizationProvider[typeof(TBlock).Name];
+        public override string Key => typeof(TBlock).Name.Replace("Block", "").ToLowerInvariant();
     }
 }
