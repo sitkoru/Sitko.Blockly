@@ -1,38 +1,46 @@
 ﻿@inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<AntDesignBlocklyFormOptions>
-
-<AntBlockFormItem BlockForm="this">
-    <CKEditor TextareaClass="ant-input" AllowHtmlMode="false" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
-</AntBlockFormItem>
-<Divider/>
-<Row Gutter="24">
-    <AntDesign.Col Span="8">
-        <FormItem Label="@LocalizationProvider["Source"]">
-            <Input Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author"/>
-        </FormItem>
+<Row Gutter="(24,20)">
+    <AntDesign.Col Span="24">
+        <AntBlockFormItem BlockForm="this">
+            <CKEditor TextareaClass="ant-input" AllowHtmlMode="false" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
+        </AntBlockFormItem>
     </AntDesign.Col>
-    <AntDesign.Col Span="8">
-        <FormItem Label="@LocalizationProvider["Url"]">
-            <Input Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link"/>
-        </FormItem>
+    <AntDesign.Col Span="24">
+        <Row Gutter="24">
+            <AntDesign.Col Md="8" Xs="24">
+                <FormItem Label="@LocalizationProvider["Source"]">
+                    <Input Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author"/>
+                </FormItem>
+            </AntDesign.Col>
+            <AntDesign.Col Md="8" Xs="24">
+                <FormItem Label="@LocalizationProvider["Url"]">
+                    <Input Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link"/>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
     </AntDesign.Col>
-    <AntDesign.Col Span="8">
-        @if (FormOptions.Storage is not null)
-        {
-            <FormItem Label="@LocalizationProvider["Source picture"]">
-                <AntStorageImageInput
-                    Avatar="true"
-                    Size="small"
-                    Storage="FormOptions.Storage"
-                    ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
-                    UploadPath="@FormOptions.ImagesOptions.UploadPath"
-                    MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
-                    UploadText="@LocalizationProvider["Upload"]"
-                    RemoveText="@LocalizationProvider["Remove"]"
-                    PreviewText="@LocalizationProvider["Preview"]"
-                    GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
-                    @bind-Value="Block.Picture">
-                </AntStorageImageInput>
-            </FormItem>
-        }
+    <AntDesign.Col Span="24">
+        <Row Gutter="24">
+            <AntDesign.Col Span="24">
+                @if (FormOptions.Storage is not null)
+                {
+                    <FormItem Label="@LocalizationProvider["Source picture"]">
+                        <AntStorageImageInput
+                            Avatar="true"
+                            Size="small"
+                            Storage="FormOptions.Storage"
+                            ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
+                            UploadPath="@FormOptions.ImagesOptions.UploadPath"
+                            MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
+                            UploadText="@LocalizationProvider["Upload"]"
+                            RemoveText="@LocalizationProvider["Remove"]"
+                            PreviewText="@LocalizationProvider["Preview"]"
+                            GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
+                            @bind-Value="Block.Picture">
+                        </AntStorageImageInput>
+                    </FormItem>
+                }
+            </AntDesign.Col>
+        </Row>
     </AntDesign.Col>
 </Row>

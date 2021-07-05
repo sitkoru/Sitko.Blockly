@@ -15,6 +15,19 @@
     align-items: center;
 }
 
+.blockly-form-dark {
+    --ck-custom-background: #141414;
+    --ck-color-toolbar-background: #141414;
+    --ck-color-base-foreground: #141414;
+    --ck-color-button-default-background: #141414;
+    --ck-color-button-default-disabled-background: #141414;
+    --ck-color-dropdown-panel-background: #141414;
+    --ck-color-input-background: #141414;
+    --ck-color-labeled-field-label-background: #141414;
+    --ck-color-list-background: #141414;
+    --ck-color-panel-background: #141414;
+}
+
 ::deep .block-row .ant-card-body {
     padding: 15px;
 }
@@ -103,15 +116,19 @@
     color: #2f54eb;
 }
 
-::deep .ant-card-head-title, ::deep .ant-card-extra {
+::deep .ant-card-head-title, 
+::deep .ant-card-extra {
     padding: 8px 0;
 }
 
 ::deep .add-block-panel {
-    padding: 10px;
+    padding: 10px 0;
     margin: 10px 80px 20px 0;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -120,57 +137,56 @@
     display: block;
     content: '';
     height: 1px;
-    position: absolute;
-    background-color: #303030;
-    top: 50%;
-    width: calc(50% - 30px);
     transition-duration: .2s;
+    flex-grow: 1;
+    background-color: #303030;
 }
 
 ::deep .add-block-panel:hover::after,
 ::deep .add-block-panel:hover::before,
 ::deep .add-block-panel:focus::after,
 ::deep .add-block-panel:focus::before {
-    width: calc(50% - 200px);
     background-color: #2f54eb;
 }
 
-::deep .add-block-panel:after {
-    left: 0;
-}
 
-::deep .add-block-panel:before {
-    right: 0;
-}
-
-::deep .add-block-panel:hover .add-block-button, ::deep .add-block-panel:focus .add-block-button {
-    visibility: visible;
-    opacity: 1;
-}
-
-::deep .add-block-panel .add-block-button {
-    visibility: visible;
-    opacity: 0;
-    margin: 5px 10px 5px 5px;
-    transition-duration: .2s;
+::deep .add-block-panel:hover .add-block-button, 
+::deep .add-block-panel:focus .add-block-button {
     display: inline-block;
 }
 
+::deep .add-block-panel .add-block-button {
+    margin: 6px;
+    transition-duration: .2s;
+    display: none;
+}
+
 ::deep .add-block-panel .plus-icon {
-    margin-right: 0;
+    margin: 4px;
     border: 1px dashed #303030;
     border-radius: 50%;
-    padding: 3px;
-    position: absolute;
-    top: calc(50% - 11px);
-    left: calc(50% - 11px);
-    opacity: 1;
-    transition-duration: .1s;
+    padding: 6px;
+    height: 28px;
+    display: inline-block;
+}
+::deep .add-block-panel-disabled.add-block-panel .plus-icon {
+    display: none;
+}
+
+::deep .add-block-items_wrapper {
+    margin: 0 10px;
+}
+
+
+::deep  .max-blocks-error {
+    display: inline-block;
+    line-height: 16px;
+    margin: 10px 5px;
 }
 
 ::deep .add-block-panel:hover .plus-icon,
 ::deep .add-block-panel:focus .plus-icon {
-    opacity: 0;
+    display: none;
 }
 
 ::deep .blockly-form-label {

@@ -1,6 +1,9 @@
 ﻿@page "/"
+@using Microsoft.Extensions.Options
+@using Sitko.Blockly.AntDesignComponents
 @namespace Sitko.Blockly.Demo.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IOptions<AntDesignBlocklyModuleOptions> _options
 @{
     Layout = null;
 }
@@ -13,7 +16,14 @@
     <title>Sitko.Blockly.Demo</title>
     <base href="~/"/>
     <link href="_content/AntDesign.ProLayout/css/ant-design-pro-layout-blazor.css" rel="stylesheet"/>
-    <link href="_content/AntDesign/css/ant-design-blazor.dark.css" rel="stylesheet"/>
+    @if (_options.Value.Theme == AntDesignBlocklyTheme.Dark)
+    {
+        <link href="_content/AntDesign/css/ant-design-blazor.dark.css" rel="stylesheet"/>
+    }
+    else
+    {
+        <link href="_content/AntDesign/css/ant-design-blazor.css" rel="stylesheet"/>
+    }
     <link href="_content/Sitko.Blockly.Blazor/Sitko.Blockly.Blazor.css" rel="stylesheet"/>
     <link href="_content/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.bundle.scp.css" rel="stylesheet"/>
     <link href="_content/Sitko.Core.Blazor.AntDesign/Sitko.Core.Blazor.AntDesign.css" rel="stylesheet"/>

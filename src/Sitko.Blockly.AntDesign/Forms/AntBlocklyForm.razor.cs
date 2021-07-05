@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Forms
@@ -8,6 +9,8 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
     {
         [Inject]
         protected ILocalizationProvider<AntBlocklyForm<TEntity, TForm>> LocalizationProvider { get; set; } = null!;
+
+        [Inject] protected IOptions<AntDesignBlocklyModuleOptions> ModuleOptions { get; set; } = null!;
 
         [Parameter] public string? Label { get; set; }
     }

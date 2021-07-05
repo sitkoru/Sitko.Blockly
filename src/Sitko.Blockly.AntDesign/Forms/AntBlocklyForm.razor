@@ -1,12 +1,12 @@
 ﻿@typeparam TEntity
 @typeparam TForm
 @inherits Sitko.Blockly.Blazor.Forms.BlocklyForm<TEntity, TForm, AntDesignBlocklyFormOptions>
-<div class="blockly-form">
+<div class="blockly-form blockly-form-@ModuleOptions.Value.Theme.ToString().ToLowerInvariant()">
     @if (!string.IsNullOrEmpty(Label))
     {
         <label class="blockly-form-label">@Label</label>
     }
-    @if (Blocks.Any() == true)
+    @if (Blocks.Any())
     {
         foreach (var block in Blocks)
         {
@@ -15,7 +15,7 @@
             <div class="@className" style="order: @block.Position">
                 <div class="block-row" @key="@block.Id">
                     <div @key="@block.Id" class="block-content">
-                        <AntDesign.Card @key="@block.Id" Hoverable Class="@className">
+                        <AntDesign.Card @key="@block.Id" Class="@className">
                             <Spin @key="@block.Id" Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
                                 @(RenderBlockForm(blockDescriptor, block))
                             </Spin>
