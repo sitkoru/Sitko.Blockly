@@ -6,40 +6,46 @@ window.Blockly = {
         this._oldBlockPosition = element.getBoundingClientRect().top;
         console.log("Save block position: ", this._oldBlockPosition);
     },
-    scroll: function (element) {
+    scroll: function (element, duration) {
         function inOutQuad(n) {
             n *= 2;
             if (n < 1) return 0.5 * n * n;
             return -0.5 * (--n * (n - 2) - 1);
         }
 
-        const duration = 200;
+        if (!duration) {
+            duration = 0;
+        }
 
         const rectangleAfter = element.getBoundingClientRect();
         console.log("Scroll to block. Old position: ", this._oldBlockPosition, "New position: ", rectangleAfter.top);
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
         const diff = rectangleAfter.top - this._oldBlockPosition;
         console.log("Scroll diff: ", diff);
-        let start;
+        if (duration > 0) {
+            let start;
 
-        // Bootstrap our animation - it will get called right before next frame shall be rendered.
-        window.requestAnimationFrame(function step(timestamp) {
-            if (!start) start = timestamp;
-            // Elapsed milliseconds since start of scrolling.
-            const time = timestamp - start;
-            // Get percent of completion in range [0, 1].
-            const percent = Math.min(time / duration, 1);
-            const val = inOutQuad(percent);
-            window.scrollTo(0, scrollTop + diff * val);
+            // Bootstrap our animation - it will get called right before next frame shall be rendered.
+            window.requestAnimationFrame(function step(timestamp) {
+                if (!start) start = timestamp;
+                // Elapsed milliseconds since start of scrolling.
+                const time = timestamp - start;
+                // Get percent of completion in range [0, 1].
+                const percent = Math.min(time / duration, 1);
+                const val = inOutQuad(percent);
+                window.scrollTo(0, scrollTop + diff * val);
 
-            // Proceed with animation as long as we wanted it to.
-            if (time < duration) {
-                window.requestAnimationFrame(step);
-            }
-            else{
-                console.log('Scroll done');
-            }
-        });
+                // Proceed with animation as long as we wanted it to.
+                if (time < duration) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    console.log('Scroll done');
+                }
+            });
+        } else {
+            window.scrollTo(scrollLeft, scrollTop + diff);
+        }
     },
     Twitter: {
         load: function () {

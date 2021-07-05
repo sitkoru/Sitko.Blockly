@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Collections;
 
@@ -106,8 +107,10 @@ namespace Sitko.Blockly.Blazor.Forms
             if (_blockToScroll is not null)
             {
                 var element = BlockElements[_blockToScroll.Id];
+                var duration = _blockToScroll is TwitterBlock ? 200 : 0; // TODO: Remove demo hack
                 _blockToScroll = null;
-                await JsRuntime.InvokeVoidAsync("Blockly.scroll", element).AsTask();
+
+                await JsRuntime.InvokeVoidAsync("Blockly.scroll", element, duration).AsTask();
             }
         }
 
