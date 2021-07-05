@@ -33,7 +33,7 @@ window.Blockly = {
             const rectangle = element.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             doScrolling(scrollTop + rectangle.top, 200);
-        }, 200)
+        }, 100)
     },
     Twitter: {
         load: function () {
