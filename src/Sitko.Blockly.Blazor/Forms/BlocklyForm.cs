@@ -105,8 +105,9 @@ namespace Sitko.Blockly.Blazor.Forms
             await base.OnAfterRenderAsync(firstRender);
             if (_blockToScroll is not null)
             {
-                await JsRuntime.InvokeVoidAsync("Blockly.scroll", BlockElements[_blockToScroll.Id]).AsTask();
+                var element = BlockElements[_blockToScroll.Id];
                 _blockToScroll = null;
+                await JsRuntime.InvokeVoidAsync("Blockly.scroll", element).AsTask();
             }
         }
 
