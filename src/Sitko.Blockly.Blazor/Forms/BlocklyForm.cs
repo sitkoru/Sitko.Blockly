@@ -92,7 +92,7 @@ namespace Sitko.Blockly.Blazor.Forms
         {
             if (CanAdd(blockDescriptor))
             {
-                var block = Blockly.CreateBlock(blockDescriptor.Type);
+                var block = Blockly.CreateBlock(blockDescriptor);
                 Blocks.AddItem(block, neighbor, after);
                 UpdateForm();
                 ValidateBlock(block);
