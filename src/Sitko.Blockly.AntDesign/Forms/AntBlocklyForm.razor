@@ -10,7 +10,7 @@
     {
         foreach (var block in Blocks)
         {
-            var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
+            var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
             var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.FormComponentCssClass} {(block.Enabled ? "block-enabled" : "block-disabled")}";
             <div class="@className" style="order: @block.Position">
                 <div class="block-row" @key="@block.Id">
