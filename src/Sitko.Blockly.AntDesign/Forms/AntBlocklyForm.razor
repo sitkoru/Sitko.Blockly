@@ -6,44 +6,46 @@
     {
         <label class="blockly-form-label">@Label</label>
     }
-    @if (Blocks.Any())
+    @if (Blocks.Any() == true)
     {
         foreach (var block in Blocks)
         {
             var blockDescriptor = @Blockly.GetBlockDescriptor(block.GetType());
             var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.FormComponentCssClass} {(block.Enabled ? "block-enabled" : "block-disabled")}";
-            <div class="block-row" @key="block.Id">
-                <div class="block-content">
-                    <AntDesign.Card Hoverable Class="@className">
-                        <Spin Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
-                            @(RenderBlockForm(blockDescriptor, block))
-                        </Spin>
-                    </AntDesign.Card>
-                </div>
-                <div class="block-controls">
-                    <div class="block-mainicon">
-                        @blockDescriptor.Icon
+            <div class="@className" style="order: @block.Position">
+                <div class="block-row" @key="@block.Id">
+                    <div @key="@block.Id" class="block-content">
+                        <AntDesign.Card @key="@block.Id" Hoverable Class="@className">
+                            <Spin @key="@block.Id" Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
+                                @(RenderBlockForm(blockDescriptor, block))
+                            </Spin>
+                        </AntDesign.Card>
                     </div>
-                    <AntDesign.Button Size="small" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
-                        <Icon Type="eye-invisible"></Icon>
-                    </AntDesign.Button>
-                    <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@LocalizationProvider["Delete block?"]"
-                                          OnConfirm="@(() => DeleteBlock(block))"
-                                          OkText="@LocalizationProvider["Delete block"]"
-                                          CancelText="@LocalizationProvider["Cancel"]">
-                        <AntDesign.Button Size="small">
-                            <Icon Type="delete"></Icon>
+                    <div class="block-controls">
+                        <div class="block-mainicon">
+                            @blockDescriptor.Icon
+                        </div>
+                        <AntDesign.Button Size="small" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
+                            <Icon Type="eye-invisible"></Icon>
                         </AntDesign.Button>
-                    </AntDesign.Popconfirm>
-                    <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveUp(block)" OnClick="@(() => MoveBlockUp(block))">
-                        <Icon Type="up"></Icon>
-                    </AntDesign.Button>
-                    <AntDesign.Button Size="small" Disabled="!Blocks.CanMoveDown(block)" OnClick="@(() => MoveBlockDown(block))">
-                        <Icon Type="down"></Icon>
-                    </AntDesign.Button>
+                        <AntDesign.Popconfirm Placement="@PlacementType.Left" Title="@LocalizationProvider["Delete block?"]"
+                                              OnConfirm="@(() => DeleteBlock(block))"
+                                              OkText="@LocalizationProvider["Delete block"]"
+                                              CancelText="@LocalizationProvider["Cancel"]">
+                            <AntDesign.Button Size="small">
+                                <Icon Type="delete"></Icon>
+                            </AntDesign.Button>
+                        </AntDesign.Popconfirm>
+                        <AntDesign.Button Size="small" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUp(block))">
+                            <Icon Type="up"></Icon>
+                        </AntDesign.Button>
+                        <AntDesign.Button Size="small" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDown(block))">
+                            <Icon Type="down"></Icon>
+                        </AntDesign.Button>
+                    </div>
                 </div>
+                @AddPanelTemplate(block)
             </div>
-            @AddPanelTemplate(block)
         }
     }
     else
@@ -82,5 +84,3 @@
     }
 
 }
-
-

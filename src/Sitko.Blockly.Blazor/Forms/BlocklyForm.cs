@@ -27,7 +27,8 @@ namespace Sitko.Blockly.Blazor.Forms
         [Inject] protected IBlockly<IBlazorBlockDescriptor> Blockly { get; set; } = null!;
         [Inject] protected BlocklyFormService BlocklyFormService { get; set; } = null!;
 
-        protected readonly OrderedCollection<ContentBlock> Blocks = new();
+        protected readonly OrderedCollection<ContentBlock> OrderedBlocks = new();
+        protected readonly List<ContentBlock> Blocks = new();
 
         protected TOptions FormOptions = new();
 
@@ -53,7 +54,8 @@ namespace Sitko.Blockly.Blazor.Forms
             BlockDescriptors = Blockly.Descriptors
                 .Where(d => FormOptions.AllowedBlocks.Any() == false || FormOptions.AllowedBlocks.Contains(d.Type))
                 .OrderBy(d => FormOptions.BlockPriority(d) ?? d.Priority).ThenBy(d => d.Type.FullName).ToArray();
-            Blocks.SetItems(CurrentValue?.OrderBy(b => b.Position) ?? new List<ContentBlock>().AsEnumerable());
+            OrderedBlocks.SetItems(CurrentValue?.OrderBy(b => b.Position) ?? new List<ContentBlock>().AsEnumerable());
+            Blocks.AddRange(CurrentValue ?? new List<ContentBlock>());
             BlocklyFormService.AddForm(this);
         }
 
@@ -93,7 +95,7 @@ namespace Sitko.Blockly.Blazor.Forms
             if (CanAdd(blockDescriptor))
             {
                 var block = Blockly.CreateBlock(blockDescriptor);
-                Blocks.AddItem(block, neighbor, after);
+                OrderedBlocks.AddItem(block, neighbor, after);
                 UpdateForm();
                 ValidateBlock(block);
             }
@@ -101,9 +103,12 @@ namespace Sitko.Blockly.Blazor.Forms
 
         public void ValidateBlocks()
         {
-            foreach (var contentBlock in Blocks)
+            if (CurrentValue is not null)
             {
-                ValidateBlock(contentBlock);
+                foreach (var contentBlock in CurrentValue)
+                {
+                    ValidateBlock(contentBlock);
+                }
             }
         }
 
@@ -115,22 +120,32 @@ namespace Sitko.Blockly.Blazor.Forms
             }
         }
 
+        protected bool CanMoveBlockUp(ContentBlock block)
+        {
+            return OrderedBlocks.CanMoveUp(block);
+        }
+
+        protected bool CanMoveBlockDown(ContentBlock block)
+        {
+            return OrderedBlocks.CanMoveDown(block);
+        }
+
         protected void MoveBlockUp(ContentBlock block)
         {
-            Blocks.MoveUp(block);
+            OrderedBlocks.MoveUp(block);
             UpdateForm();
         }
 
 
         protected void MoveBlockDown(ContentBlock block)
         {
-            Blocks.MoveDown(block);
+            OrderedBlocks.MoveDown(block);
             UpdateForm();
         }
 
         protected void DeleteBlock(ContentBlock block)
         {
-            Blocks.RemoveItem(block);
+            OrderedBlocks.RemoveItem(block);
             UpdateForm();
             EditContext.Validate();
             BlocklyFormService.Validate();
@@ -138,7 +153,14 @@ namespace Sitko.Blockly.Blazor.Forms
 
         private void UpdateForm()
         {
-            CurrentValue = new List<ContentBlock>(Blocks.ToList());
+            foreach (var orderedBlock in OrderedBlocks)
+            {
+                if (!Blocks.Contains(orderedBlock))
+                {
+                    Blocks.Add(orderedBlock);
+                }
+            }
+            CurrentValue = new List<ContentBlock>(OrderedBlocks.ToList());
         }
 
         protected RenderFragment RenderBlockForm(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
@@ -148,6 +170,7 @@ namespace Sitko.Blockly.Blazor.Forms
                 builder.OpenComponent(0, blockDescriptor.FormComponent);
                 builder.AddAttribute(1, "FormOptions", FormOptions);
                 builder.AddAttribute(2, "Block", block);
+                builder.SetKey(block.Id);
                 builder.CloseComponent();
             };
         }

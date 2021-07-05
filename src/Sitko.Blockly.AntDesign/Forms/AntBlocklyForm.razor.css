@@ -1,3 +1,13 @@
+.blockly-form {
+    display: flex;
+    flex-direction: column;
+}
+
+::deep .block-form {
+    display: flex;
+    flex-direction: column;
+}
+
 ::deep .block-row {
     display: flex;
     margin-bottom: 20px;
@@ -34,7 +44,7 @@
     height: 100%;
 }
 
-::deep .block-row .block-form .ant-spin-container {
+::deep .block-row .ant-spin-container {
     cursor: default;
 }
 
@@ -208,9 +218,9 @@
     margin-top: -.5em;
 }
 
-::deep .block-row .block-galleryblock .ant-card-body,
-::deep .block-row .block-quoteblock .ant-card-body,
-::deep .block-row .block-filesblock .ant-card-body {
+::deep .block-galleryblock .block-row .ant-card-body,
+::deep .block-quoteblock .block-row .ant-card-body,
+::deep .block-filesblock .block-row .ant-card-body {
     padding-bottom: 8px;
 }
 
