@@ -124,14 +124,12 @@ namespace Sitko.Blockly.HtmlParser.Tests
         protected override TestApplication ConfigureApplication(TestApplication application, string name)
         {
             base.ConfigureApplication(application, name);
-            application.AddModule<FileSystemStorageModule<TestBlocklyStorageOptions>, TestBlocklyStorageOptions>(
-                (_, _, moduleConfig) =>
-                {
-                    moduleConfig.StoragePath = Path.Combine(Path.GetTempPath(), nameof(BlocklyHtmlParserTestScope));
-                });
             application
-                .AddModule<FileSystemStorageMetadataModule<TestBlocklyStorageOptions>,
-                    FileSystemStorageMetadataProviderOptions>();
+                .AddFileSystemStorage<TestBlocklyStorageOptions>(moduleOptions =>
+                {
+                    moduleOptions.StoragePath = Path.Combine(Path.GetTempPath(), nameof(BlocklyHtmlParserTestScope));
+                })
+                .AddFileSystemStorageMetadata<TestBlocklyStorageOptions>();
             return application;
         }
 

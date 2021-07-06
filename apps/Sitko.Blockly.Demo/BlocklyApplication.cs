@@ -17,19 +17,18 @@ namespace Sitko.Blockly.Demo
     {
         public BlocklyApplication(string[] args) : base(args)
         {
-            AddModule<PostgresModule<BlocklyContext>, PostgresDatabaseModuleOptions<BlocklyContext>>();
-            AddModule<EFRepositoriesModule<BlocklyContext>, EFRepositoriesModuleOptions>();
-            AddModule<FileSystemStorageModule<BlocklyStorageOptions>, BlocklyStorageOptions>();
-            AddModule<PostgresStorageMetadataModule<BlocklyStorageOptions>, PostgresStorageMetadataProviderOptions>();
-            AddModule<AntDesignBlocklyModule, AntDesignBlocklyModuleOptions>(
-                (_, _, moduleConfig) =>
+            this.AddPostgresDatabase<BlocklyContext>()
+                .AddEFRepositories<BlocklyContext>()
+                .AddFileSystemStorage<BlocklyStorageOptions>()
+                .AddPostgresStorageMetadata<BlocklyStorageOptions>()
+                .AddJsonLocalization()
+                .AddAntDesignBlockly(moduleOptions =>
                 {
-                    moduleConfig.AddBlocks<AntDesignBlocklyModule>();
+                    moduleOptions.AddBlocks<AntDesignBlocklyModule>();
                 });
             ConfigureLogLevel("System.Net.Http.HttpClient.health-checks", LogEventLevel.Error)
                 .ConfigureLogLevel("Microsoft.AspNetCore", LogEventLevel.Warning)
                 .ConfigureLogLevel("Microsoft.EntityFrameworkCore", LogEventLevel.Warning);
-            AddModule<JsonLocalizationModule, JsonLocalizationModuleOptions>();
         }
 
         protected override bool LoggingEnableConsole(HostBuilderContext context)

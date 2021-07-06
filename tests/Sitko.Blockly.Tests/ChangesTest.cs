@@ -35,7 +35,7 @@ namespace Sitko.Blockly.Tests
             Assert.NotNull(model);
             Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
-            model.Blocks.Add(new TextBlock { Text = "baz", Position = 3 });
+            model.Blocks.Add(new TextBlock {Text = "baz", Position = 3});
             Assert.True(await repository.HasChangesAsync(model));
         }
 
@@ -52,7 +52,7 @@ namespace Sitko.Blockly.Tests
             blocks.SetItems(model.Blocks);
             model.Blocks = new List<ContentBlock>(blocks.ToList());
             Assert.False(await repository.HasChangesAsync(model));
-            blocks.AddItem(new TextBlock { Text = "baz", Position = 3 });
+            blocks.AddItem(new TextBlock {Text = "baz", Position = 3});
             model.Blocks = new List<ContentBlock>(blocks.ToList());
             Assert.True(await repository.HasChangesAsync(model));
         }
@@ -105,9 +105,9 @@ namespace Sitko.Blockly.Tests
         {
             await base.InitDbContextAsync(dbContext);
             var model = new TestModel();
-            model.Blocks.Add(new TextBlock { Text = "Foo", Position = 0 });
-            model.Blocks.Add(new CutBlock { ButtonText = "Cut", Position = 1 });
-            model.Blocks.Add(new TextBlock { Text = "Bar", Position = 2 });
+            model.Blocks.Add(new TextBlock {Text = "Foo", Position = 0});
+            model.Blocks.Add(new CutBlock {ButtonText = "Cut", Position = 1});
+            model.Blocks.Add(new TextBlock {Text = "Bar", Position = 2});
             await dbContext.AddAsync(model);
             await dbContext.SaveChangesAsync();
         }
@@ -117,12 +117,11 @@ namespace Sitko.Blockly.Tests
     {
         public TestApplication(string[] args) : base(args)
         {
-            AddModule<EFRepositoriesModule<TestBlocklyDbContext>, EFRepositoriesModuleOptions>();
-            AddModule<BlocklyModule, BlocklyModuleOptions>(
-                (_, _, moduleConfig) =>
+            this.AddEFRepositories<TestBlocklyDbContext>()
+                .AddBlockly(moduleOptions =>
                 {
-                    moduleConfig.AddBlock<TextBlockDescriptor, TextBlock>();
-                    moduleConfig.AddBlock<CutBlockDescriptor, CutBlock>();
+                    moduleOptions.AddBlock<TextBlockDescriptor, TextBlock>();
+                    moduleOptions.AddBlock<CutBlockDescriptor, CutBlock>();
                 });
         }
     }
