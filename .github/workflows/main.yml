@@ -50,7 +50,5 @@ jobs:
                 run: dotnet add tests/${{ env.TESTS_PROJECT_MAIN }}/${{ env.TESTS_PROJECT_MAIN }}.csproj package GitHubActionsTestLogger
             -   name: Run main tests
                 run: dotnet test --logger GitHubActions tests/${{ env.TESTS_PROJECT_MAIN }}/${{ env.TESTS_PROJECT_MAIN }}.csproj
-            -   name: Add Github Actions logger
-                run: dotnet add tests/${{ env.TESTS_PROJECT_PARSER }}/${{ env.TESTS_PROJECT_PARSER }}.csproj package GitHubActionsTestLogger
             -   name: Run html parser tests
                 run: dotnet test --logger GitHubActions tests/${{ env.TESTS_PROJECT_PARSER }}/${{ env.TESTS_PROJECT_PARSER }}.csproj
