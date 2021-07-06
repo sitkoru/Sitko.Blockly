@@ -15,7 +15,8 @@ jobs:
             BLAZOR_PROJECT: Sitko.Blockly.Blazor
             ANTDESIGN_PROJECT: Sitko.Blockly.AntDesign
             EF_PROJECT: Sitko.Blockly.EntityFrameworkCore
-            TESTS_PROJECT: Sitko.Blockly.Tests
+            TESTS_PROJECT_MAIN: Sitko.Blockly.Tests
+            TESTS_PROJECT_PARSER: Sitko.Blockly.HtmlParser.Tests
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v2.3.4
@@ -46,6 +47,10 @@ jobs:
             -   name: Create ef package
                 run: dotnet pack -c Release src/${{ env.EF_PROJECT }}
             -   name: Add Github Actions logger
-                run: dotnet add tests/${{ env.TESTS_PROJECT }}/${{ env.TESTS_PROJECT }}.csproj package GitHubActionsTestLogger
-            -   name: Run tests
-                run: dotnet test --logger GitHubActions tests/${{ env.TESTS_PROJECT }}/${{ env.TESTS_PROJECT }}.csproj
+                run: dotnet add tests/${{ env.TESTS_PROJECT_MAIN }}/${{ env.TESTS_PROJECT_MAIN }}.csproj package GitHubActionsTestLogger
+            -   name: Run main tests
+                run: dotnet test --logger GitHubActions tests/${{ env.TESTS_PROJECT_MAIN }}/${{ env.TESTS_PROJECT_MAIN }}.csproj
+            -   name: Add Github Actions logger
+                run: dotnet add tests/${{ env.TESTS_PROJECT_PARSER }}/${{ env.TESTS_PROJECT_PARSER }}.csproj package GitHubActionsTestLogger
+            -   name: Run html parser tests
+                run: dotnet test --logger GitHubActions tests/${{ env.TESTS_PROJECT_PARSER }}/${{ env.TESTS_PROJECT_PARSER }}.csproj
