@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Collections;
 
