@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Sitko.Blockly.Display;
 using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display

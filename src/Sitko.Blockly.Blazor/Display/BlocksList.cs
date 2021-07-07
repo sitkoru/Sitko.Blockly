@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
+using Sitko.Blockly.Display;
 using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display
@@ -65,12 +66,4 @@ namespace Sitko.Blockly.Blazor.Display
             };
         }
     }
-
-    public enum BlocksListMode
-    {
-        Preview,
-        Full
-    }
-
-    public record BlockListContext<TEntity>(TEntity Entity, string EntityUrl, BlocksListMode Mode);
 }

@@ -1,4 +1,5 @@
 using System;
+using Sitko.Blockly.Display;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly
@@ -10,6 +11,8 @@ namespace Sitko.Blockly
         int MaxCount { get; }
         int Priority { get; }
         string Key { get; }
+        bool ShouldRender(BlockListContext context, ContentBlock block) => true;
+        bool ShouldRenderNext(BlockListContext context, ContentBlock block) => true;
     }
 
     // ReSharper disable once UnusedTypeParameter

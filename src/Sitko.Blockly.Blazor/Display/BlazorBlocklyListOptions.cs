@@ -1,10 +1,8 @@
-using Sitko.Core.Storage;
+using Sitko.Blockly.Display;
 
 namespace Sitko.Blockly.Blazor.Display
 {
-    public class BlazorBlocklyListOptions
+    public class BlazorBlocklyListOptions : BlocklyListOptions
     {
-        public IStorage? Storage { get; set; }
-        public BlocksListMode Mode { get; set; } = BlocksListMode.Full;
     }
 }

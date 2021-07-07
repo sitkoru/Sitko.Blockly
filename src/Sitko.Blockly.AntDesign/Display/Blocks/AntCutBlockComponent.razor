@@ -1,23 +1,20 @@
 ﻿@typeparam TEntity
 @inherits CutBlockComponent<TEntity, AntDesignBlocklyListOptions>
-@if (Context.Mode == BlocksListMode.Preview)
-{
-    <a href="@Context.EntityUrl">
-        <Button>
-            @{
-                if (string.IsNullOrEmpty(Block.ButtonText))
-                {
-                    <span>
-                        "Read more..."
-                    </span>
-                }
-                else
-                {
-                    <span>
-                        @Block.ButtonText
-                    </span>
-                }
+<a href="@Context.EntityUrl">
+    <Button>
+        @{
+            if (string.IsNullOrEmpty(Block.ButtonText))
+            {
+                <span>
+                    @LocalizationProvider["Read more..."]
+                </span>
             }
-        </Button>
-    </a>
-}
+            else
+            {
+                <span>
+                    @Block.ButtonText
+                </span>
+            }
+        }
+    </Button>
+</a>

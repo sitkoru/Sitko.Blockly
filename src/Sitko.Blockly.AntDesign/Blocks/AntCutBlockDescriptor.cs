@@ -4,6 +4,7 @@ using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
+using Sitko.Blockly.Display;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Blocks
@@ -17,5 +18,15 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         public virtual RenderFragment Icon => builder => builder.AddIcon("cut");
         public virtual Type FormComponent => typeof(AntCutBlockForm);
         public virtual Type DisplayComponent => typeof(AntCutBlockComponent<>);
+
+        public bool ShouldRender(BlockListContext context, ContentBlock block)
+        {
+            return context.Mode == BlocksListMode.Preview;
+        }
+
+        public bool ShouldRenderNext(BlockListContext context, ContentBlock block)
+        {
+            return context.Mode == BlocksListMode.Full;
+        }
     }
 }

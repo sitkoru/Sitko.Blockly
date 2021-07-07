@@ -4,11 +4,14 @@
 @foreach (var block in Blocks)
 {
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
-    var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.DisplayComponentCssClass}";
-    <div class="@className" @key="block.Id">
-        @(RenderBlock(blockDescriptor, block))
-    </div>
-    if (Context.Mode == BlocksListMode.Preview && block is CutBlock)
+    if (blockDescriptor.ShouldRender(Context, block))
+    {
+        var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.DisplayComponentCssClass}";
+        <div class="@className" @key="block.Id">
+            @(RenderBlock(blockDescriptor, block))
+        </div>
+    }
+    if (!blockDescriptor.ShouldRenderNext(Context, block))
     {
         break;
     }
