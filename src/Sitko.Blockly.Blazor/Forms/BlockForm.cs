@@ -9,10 +9,10 @@ namespace Sitko.Blockly.Blazor.Forms
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
         public FieldIdentifier FieldIdentifier { get; private set; }
 
-        protected override void OnInitialized()
+        protected override void Initialize()
         {
+            base.Initialize();
             FieldIdentifier = CreateFieldIdentifier();
-            base.OnInitialized();
         }
 
         protected abstract FieldIdentifier CreateFieldIdentifier();

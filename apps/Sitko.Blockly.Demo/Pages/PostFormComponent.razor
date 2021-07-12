@@ -27,9 +27,9 @@
     private AntDesignBlocklyFormOptions? _blocksOptions;
     private AntDesignBlocklyFormOptions? _secondaryBlocksOptions;
 
-    protected override void OnInitialized()
+    protected override void Initialize()
     {
-        base.OnInitialized();
+        base.Initialize();
         var imagesStorageOptions = new BlockFormStorageOptions
         {
             UploadPath = "posts/images",
@@ -74,5 +74,4 @@
         _secondaryBlocksOptions.ConfigureBlockMaxCount<GalleryBlock>(1);
         _secondaryBlocksOptions.ConfigureBlockMaxCount<YoutubeBlock>(1);
     }
-
 }

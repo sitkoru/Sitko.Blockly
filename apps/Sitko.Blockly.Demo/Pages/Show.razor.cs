@@ -10,9 +10,9 @@ namespace Sitko.Blockly.Demo.Pages
     {
         [Parameter] public Guid PostId { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task InitializeAsync()
         {
-            await base.OnInitializedAsync();
+            await base.InitializeAsync();
             var post = await GetService<PostsRepository>().GetByIdAsync(PostId);
             if (post is null)
             {
@@ -21,7 +21,6 @@ namespace Sitko.Blockly.Demo.Pages
             }
 
             Post = post;
-            MarkAsInitialized();
         }
 
         public Post? Post { get; set; }

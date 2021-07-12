@@ -4,8 +4,6 @@
 @using Sitko.Blockly.Display
 @using Sitko.Core.Storage
 @inherits BaseComponent
-@if (IsInitialized)
-{
     <PageContainer Title="Posts">
         <Breadcrumb>
             <Breadcrumb>
@@ -37,17 +35,15 @@
 
         </ChildContent>
     </PageContainer>
-}
 
 
 @code{
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task InitializeAsync()
     {
-        await base.OnInitializedAsync();
+        await base.InitializeAsync();
         var posts = await GetService<PostsRepository>().GetAllAsync();
         Posts = posts.items;
-        MarkAsInitialized();
     }
 
     private Post[] Posts { get; set; } = new Post[0];

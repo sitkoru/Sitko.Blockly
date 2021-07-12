@@ -38,10 +38,9 @@ namespace Sitko.Blockly.Blazor.Display
             }
         }
 
-        protected override void OnInitialized()
+        protected override void Initialize()
         {
-            base.OnInitialized();
-
+            base.Initialize();
             BlockDescriptors = Blockly.Descriptors.ToArray();
             Context = new BlockListContext<TEntity>(Entity, EntityUrl, ListOptions.Mode);
         }
