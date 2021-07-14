@@ -1,26 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Collections;
 using Sitko.Core.Storage;
+using System.Globalization;
 
 namespace Sitko.Blockly.HtmlParser
 {
     public class HtmlParser<TStorageOptions> where TStorageOptions : StorageOptions
     {
-        private readonly ILogger<HtmlParser<TStorageOptions>> _logger;
+        private readonly ILogger<HtmlParser<TStorageOptions>> logger;
 
-        private readonly Regex _thumbUrlRegex = new("gallery\\/thumb\\/([0-9]+)\\/[0-9]+\\/[0-9]+\\/?([0-9]+)?");
-        private readonly FilesUploader<TStorageOptions> _filesUploader;
+        private readonly FilesUploader<TStorageOptions> filesUploader;
 
         public HtmlParser(FilesUploader<TStorageOptions> filesUploader, ILogger<HtmlParser<TStorageOptions>> logger)
         {
-            _logger = logger;
-            _filesUploader = filesUploader;
+            this.logger = logger;
+            this.filesUploader = filesUploader;
         }
 
         protected virtual Task<ContentBlock> ParseIframeAsync(HtmlNode node)
@@ -46,17 +45,7 @@ namespace Sitko.Blockly.HtmlParser
         protected virtual async Task<ContentBlock?> ParseImgAsync(HtmlNode node, string uploadPath)
         {
             var imgUrl = node.Attributes["src"].Value;
-            var thumbMatch = _thumbUrlRegex.Match(imgUrl);
-            if (thumbMatch.Success)
-            {
-                int.TryParse(thumbMatch.Groups[1].Value, out int _);
-                if (thumbMatch.Groups.Count > 1)
-                {
-                    int.TryParse(thumbMatch.Groups[2].Value, out int _);
-                }
-            }
-
-            var item = await _filesUploader.UploadFromUrlAsync(imgUrl, uploadPath);
+            var item = await filesUploader.UploadFromUrlAsync(imgUrl, uploadPath);
             if (item != null)
             {
                 var pictures = new ValueCollection<StorageItem> {item};
@@ -79,7 +68,8 @@ namespace Sitko.Blockly.HtmlParser
                         if (imgBlock != null)
                         {
                             extractedBlocks.Add(imgBlock);
-                            var newNodeStr = $"<block id=\"{extractedBlocks.Count.ToString()}\" />";
+                            var newNodeStr =
+                                $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
                             var newNode = HtmlNode.CreateNode(newNodeStr);
                             childNode.ParentNode.ReplaceChild(newNode, childNode);
                         }
@@ -90,7 +80,8 @@ namespace Sitko.Blockly.HtmlParser
                         if (frameBlock != null)
                         {
                             extractedBlocks.Add(frameBlock);
-                            var newNodeStr = $"<block id=\"{extractedBlocks.Count.ToString()}\" />";
+                            var newNodeStr =
+                                $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
                             var newNode = HtmlNode.CreateNode(newNodeStr);
                             childNode.ParentNode.ReplaceChild(newNode, childNode);
                         }
@@ -111,7 +102,7 @@ namespace Sitko.Blockly.HtmlParser
                             currentHtml = "";
                         }
 
-                        var id = int.Parse(childNode.Attributes["id"].Value);
+                        var id = int.Parse(childNode.Attributes["id"].Value, CultureInfo.InvariantCulture);
                         blocks.Add(extractedBlocks[id - 1]);
                         break;
                     default:
@@ -244,7 +235,7 @@ namespace Sitko.Blockly.HtmlParser
                     case "ol":
                     case "table":
                     case "hr":
-                        blocks.AddItem(await ParseHtmlAsync(childNode));
+                        blocks.AddItem(await HtmlParser<TStorageOptions>.ParseHtmlAsync(childNode));
                         break;
                     case "img":
                         var imgBlock = await ParseImgAsync(childNode, uploadPath);
@@ -255,7 +246,7 @@ namespace Sitko.Blockly.HtmlParser
 
                         break;
                     default:
-                        _logger.LogWarning("Unknown node type: {NodeType}", childNode.Name);
+                        logger.LogWarning("Unknown node type: {NodeType}", childNode.Name);
                         break;
                 }
             }
@@ -263,7 +254,7 @@ namespace Sitko.Blockly.HtmlParser
             return blocks.ToList();
         }
 
-        private Task<ContentBlock> ParseHtmlAsync(HtmlNode childNode)
+        private static Task<ContentBlock> ParseHtmlAsync(HtmlNode childNode)
         {
             ContentBlock block = new TextBlock {Text = childNode.OuterHtml.Trim()};
             return Task.FromResult(block);

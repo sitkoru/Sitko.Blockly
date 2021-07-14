@@ -41,11 +41,11 @@ namespace Sitko.Blockly
     public abstract class BlocklyModuleOptions<TBlockDescriptor> : BaseModuleOptions
         where TBlockDescriptor : IBlockDescriptor
     {
-        private readonly List<Action<IServiceCollection>> _configureActions = new();
+        private readonly List<Action<IServiceCollection>> configureActions = new();
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            foreach (var action in _configureActions)
+            foreach (var action in configureActions)
             {
                 action(serviceCollection);
             }
@@ -53,7 +53,7 @@ namespace Sitko.Blockly
 
         public BlocklyModuleOptions<TBlockDescriptor> ConfigureFormOptions(Action<BlocklyFormOptions> configure)
         {
-            _configureActions.Add(services =>
+            configureActions.Add(services =>
             {
                 services.Configure(configure);
             });
@@ -63,7 +63,7 @@ namespace Sitko.Blockly
         public BlocklyModuleOptions<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
             where TDescriptor : TBlockDescriptor
         {
-            _configureActions.Add(services =>
+            configureActions.Add(services =>
             {
                 services.Scan(s =>
                     s.FromAssemblyOf<TAssembly>()
@@ -92,7 +92,7 @@ namespace Sitko.Blockly
         public BlocklyModuleOptions<TBlockDescriptor> AddValidators<TAssembly, TValidator>()
             where TValidator : IBlockValidator
         {
-            _configureActions.Add(services =>
+            configureActions.Add(services =>
             {
                 services.Scan(s =>
                     s

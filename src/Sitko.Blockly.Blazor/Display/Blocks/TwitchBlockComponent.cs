@@ -9,7 +9,7 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
         TwitchBlockComponent<TEntity, TListOptions> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitchBlock,
             TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
     {
-        protected ElementReference ContainerRef;
+        protected ElementReference ContainerRef { get; set; }
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

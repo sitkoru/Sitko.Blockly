@@ -22,33 +22,26 @@ namespace Sitko.Blockly
     {
         protected static readonly List<IBlockDescriptor> StaticDescriptors = new();
 
-        public static IBlockDescriptor? GetDescriptor(string key)
-        {
-            return StaticDescriptors.FirstOrDefault(d => d.Key == key);
-        }
-        
-        public static IBlockDescriptor? GetDescriptor(Type type)
-        {
-            return StaticDescriptors.FirstOrDefault(d => d.Type == type);
-        }
+        public static IBlockDescriptor? GetDescriptor(string key) =>
+            StaticDescriptors.FirstOrDefault(d => d.Key == key);
+
+        public static IBlockDescriptor? GetDescriptor(Type type) =>
+            StaticDescriptors.FirstOrDefault(d => d.Type == type);
     }
 
     public class Blockly<TBlockDescriptor> : Blockly, IBlockly<TBlockDescriptor>
         where TBlockDescriptor : IBlockDescriptor
     {
-        private readonly List<TBlockDescriptor> _blockDescriptors;
-        private readonly ILogger<Blockly<TBlockDescriptor>> _logger;
+        private readonly List<TBlockDescriptor> blockDescriptors;
+        private readonly ILogger<Blockly<TBlockDescriptor>> logger;
 
         public Blockly(IEnumerable<TBlockDescriptor> blockDescriptors, ILogger<Blockly<TBlockDescriptor>> logger)
         {
-            _blockDescriptors = blockDescriptors.ToList();
-            _logger = logger;
+            this.blockDescriptors = blockDescriptors.ToList();
+            this.logger = logger;
         }
 
-        public ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock
-        {
-            return CreateBlock(typeof(TBlock));
-        }
+        public ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock => CreateBlock(typeof(TBlock));
 
         public ContentBlock CreateBlock(Type blockType)
         {
@@ -58,16 +51,14 @@ namespace Sitko.Blockly
 
         public ContentBlock CreateBlock(TBlockDescriptor blockDescriptor)
         {
-            _logger.LogDebug("Create new block {Title}", blockDescriptor.Title);
+            logger.LogDebug("Create new block {Title}", blockDescriptor.Title);
             var block = Activator.CreateInstance(blockDescriptor.Type) as ContentBlock;
             block!.Id = Guid.NewGuid();
             return block;
         }
 
-        public TBlockDescriptor GetBlockDescriptor<TBlock>() where TBlock : ContentBlock
-        {
-            return GetBlockDescriptor(typeof(TBlock));
-        }
+        public TBlockDescriptor GetBlockDescriptor<TBlock>() where TBlock : ContentBlock =>
+            GetBlockDescriptor(typeof(TBlock));
 
         public TBlockDescriptor GetBlockDescriptor(Type blockType)
         {
@@ -76,19 +67,20 @@ namespace Sitko.Blockly
                 throw new ArgumentException($"Block type {blockType} doesn't inherits from ContentBlock");
             }
 
-            var descriptor = _blockDescriptors.FirstOrDefault(d => d.Type == blockType);
+            var descriptor = blockDescriptors.FirstOrDefault(d => d.Type == blockType);
             if (descriptor is null)
             {
-                throw new Exception($"Can't find descriptor for {blockType}");
+                throw new InvalidOperationException($"Can't find descriptor for {blockType}");
             }
 
             return descriptor;
         }
 
-        public IEnumerable<TBlockDescriptor> Descriptors => _blockDescriptors;
+        public IEnumerable<TBlockDescriptor> Descriptors => blockDescriptors;
+
         public Task InitAsync()
         {
-            StaticDescriptors.AddRange(_blockDescriptors.Cast<IBlockDescriptor>());
+            StaticDescriptors.AddRange(blockDescriptors.Cast<IBlockDescriptor>());
             return Task.CompletedTask;
         }
     }

@@ -115,15 +115,13 @@ namespace Sitko.Blockly.Tests
 
     public class TestApplication : AntBlazorApplication<TestStartup>
     {
-        public TestApplication(string[] args) : base(args)
-        {
+        public TestApplication(string[] args) : base(args) =>
             this.AddEFRepositories<TestBlocklyDbContext>()
                 .AddBlockly(moduleOptions =>
                 {
                     moduleOptions.AddBlock<TextBlockDescriptor, TextBlock>();
                     moduleOptions.AddBlock<CutBlockDescriptor, CutBlock>();
                 });
-        }
     }
 
     public class TestStartup : AntBlazorStartup
@@ -151,10 +149,7 @@ namespace Sitko.Blockly.Tests
 
     public class TestModel : IEntity<Guid>
     {
-        public object GetId()
-        {
-            return Id;
-        }
+        public object GetId() => Id;
 
         public Guid Id { get; set; } = Guid.NewGuid();
 

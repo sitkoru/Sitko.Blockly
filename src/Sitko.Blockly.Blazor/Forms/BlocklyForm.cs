@@ -10,6 +10,8 @@ using Sitko.Core.App.Collections;
 
 namespace Sitko.Blockly.Blazor.Forms
 {
+    using JetBrains.Annotations;
+
     public interface IBlocklyForm
     {
         void ValidateBlocks();
@@ -20,9 +22,11 @@ namespace Sitko.Blockly.Blazor.Forms
         where TEntity : class
         where TOptions : BlazorBlocklyFormOptions, new()
     {
+        private ContentBlock? blockToScroll;
         [Parameter] public TForm Form { get; set; } = null!;
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
 
+        [PublicAPI]
         public IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
             Array.Empty<IBlazorBlockDescriptor>();
 
@@ -30,24 +34,32 @@ namespace Sitko.Blockly.Blazor.Forms
         [Inject] protected BlocklyFormService BlocklyFormService { get; set; } = null!;
         [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;
 
-        protected readonly OrderedCollection<ContentBlock> OrderedBlocks = new();
-        protected readonly List<ContentBlock> Blocks = new();
-        protected readonly Dictionary<Guid, ElementReference> BlockElements = new();
+        private OrderedCollection<ContentBlock> OrderedBlocks { get; } = new();
+        protected List<ContentBlock> Blocks { get; } = new();
+        protected Dictionary<Guid, ElementReference> BlockElements { get; } = new();
 
-        protected TOptions FormOptions = new();
+        private TOptions FormOptions { get; set; } = new();
 
         [Parameter]
         public TOptions? Options
         {
-            get
-            {
-                return FormOptions;
-            }
+            get => FormOptions;
             set
             {
                 if (value is not null)
                 {
                     FormOptions = value;
+                }
+            }
+        }
+
+        public void ValidateBlocks()
+        {
+            if (CurrentValue is not null)
+            {
+                foreach (var contentBlock in CurrentValue)
+                {
+                    ValidateBlock(contentBlock);
                 }
             }
         }
@@ -80,7 +92,7 @@ namespace Sitko.Blockly.Blazor.Forms
                 return false;
             }
 
-            int blockMaxCount = FormOptions.MaxBlockCount(blockDescriptor) ?? blockDescriptor.MaxCount;
+            var blockMaxCount = FormOptions.MaxBlockCount(blockDescriptor) ?? blockDescriptor.MaxCount;
             if (blockMaxCount > 0)
             {
                 var blocksCount = CurrentValue?.Count(b => b.GetType() == blockDescriptor.Type);
@@ -93,29 +105,25 @@ namespace Sitko.Blockly.Blazor.Forms
             return true;
         }
 
-        protected Task SaveBlockPositionAsync(ContentBlock block)
-        {
-            return JsRuntime.InvokeVoidAsync("Blockly.savePosition", BlockElements[block.Id]).AsTask();
-        }
-
-        private ContentBlock? _blockToScroll;
+        private Task SaveBlockPositionAsync(ContentBlock block) =>
+            JsRuntime.InvokeVoidAsync("Blockly.savePosition", BlockElements[block.Id]).AsTask();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
-            if (_blockToScroll is not null)
+            if (blockToScroll is not null)
             {
-                var element = BlockElements[_blockToScroll.Id];
-                _blockToScroll = null;
+                var element = BlockElements[blockToScroll.Id];
+                blockToScroll = null;
 
                 await JsRuntime.InvokeVoidAsync("Blockly.scroll", element).AsTask();
             }
         }
 
-        protected async Task ScrollToBlockAsync(ContentBlock block)
+        private async Task ScrollToBlockAsync(ContentBlock block)
         {
             await SaveBlockPositionAsync(block);
-            _blockToScroll = block;
+            blockToScroll = block;
         }
 
         protected void AddBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock? neighbor = null,
@@ -131,17 +139,6 @@ namespace Sitko.Blockly.Blazor.Forms
             }
         }
 
-        public void ValidateBlocks()
-        {
-            if (CurrentValue is not null)
-            {
-                foreach (var contentBlock in CurrentValue)
-                {
-                    ValidateBlock(contentBlock);
-                }
-            }
-        }
-
         private void ValidateBlock(ContentBlock block)
         {
             foreach (var property in block.GetType().GetProperties())
@@ -150,15 +147,9 @@ namespace Sitko.Blockly.Blazor.Forms
             }
         }
 
-        protected bool CanMoveBlockUp(ContentBlock block)
-        {
-            return OrderedBlocks.CanMoveUp(block);
-        }
+        protected bool CanMoveBlockUp(ContentBlock block) => OrderedBlocks.CanMoveUp(block);
 
-        protected bool CanMoveBlockDown(ContentBlock block)
-        {
-            return OrderedBlocks.CanMoveDown(block);
-        }
+        protected bool CanMoveBlockDown(ContentBlock block) => OrderedBlocks.CanMoveDown(block);
 
         protected Task MoveBlockUpAsync(ContentBlock block)
         {
@@ -184,14 +175,10 @@ namespace Sitko.Blockly.Blazor.Forms
             BlocklyFormService.Validate();
         }
 
-        private void UpdateForm()
-        {
-            CurrentValue = new List<ContentBlock>(OrderedBlocks.ToList());
-        }
+        private void UpdateForm() => CurrentValue = new List<ContentBlock>(OrderedBlocks.ToList());
 
-        protected RenderFragment RenderBlockForm(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
-        {
-            return builder =>
+        protected RenderFragment RenderBlockForm(IBlazorBlockDescriptor blockDescriptor, ContentBlock block) =>
+            builder =>
             {
                 builder.OpenComponent(0, blockDescriptor.FormComponent);
                 builder.AddAttribute(1, "FormOptions", FormOptions);
@@ -199,7 +186,6 @@ namespace Sitko.Blockly.Blazor.Forms
                 builder.SetKey(block.Id);
                 builder.CloseComponent();
             };
-        }
 
         protected override bool TryParseValueFromString(string? value, out List<ContentBlock> result,
             out string validationErrorMessage)

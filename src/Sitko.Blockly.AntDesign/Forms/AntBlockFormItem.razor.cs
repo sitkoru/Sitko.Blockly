@@ -11,25 +11,25 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 {
     public partial class AntBlockFormItem
     {
-        private static readonly Dictionary<string, object> s_noneColAttributes = new();
-        private readonly string _prefixCls = "ant-form-item";
+        private static readonly Dictionary<string, object> NoneColAttributes = new();
+        private readonly string prefixCls = "ant-form-item";
 
-        private bool _isValid;
+        private bool isValid;
 
-        private ClassMapper _labelClassMapper = new();
-        private string _labelCls = "";
-        private EventHandler<ValidationStateChangedEventArgs>? _validationStateChangedHandler;
+        private ClassMapper labelClassMapper = new();
+        private string labelCls = "";
+        private EventHandler<ValidationStateChangedEventArgs>? validationStateChangedHandler;
 
         [Parameter] public RenderFragment? LabelTemplate { get; set; }
 
         [Parameter] public string? Label { get; set; }
         [Parameter] public AntLabelAlignType? FormLabelAlign { get; set; } = AntLabelAlignType.Left;
 
-        [Parameter] public bool Required { get; set; } = false;
+        [Parameter] public bool Required { get; set; }
 
         [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
-        [Parameter] public bool NoStyle { get; set; } = false;
+        [Parameter] public bool NoStyle { get; set; }
 
         [Parameter] public BlockForm BlockForm { get; set; } = null!;
         [CascadingParameter] public EditContext? CurrentEditContext { get; set; }
@@ -46,13 +46,13 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 
             if (CurrentEditContext is null)
             {
-                throw new Exception($"{nameof(AntBlockFormItem)} must be used inside EditForm");
+                throw new InvalidOperationException($"{nameof(AntBlockFormItem)} must be used inside EditForm");
             }
 
-            _validationStateChangedHandler = (_, _) =>
+            validationStateChangedHandler = (_, _) =>
             {
                 var message = CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray();
-                _isValid = !message.Any();
+                isValid = !message.Any();
 
                 StateHasChanged();
             };
@@ -61,36 +61,33 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
         protected void SetClass()
         {
             this.ClassMapper
-                .Add(_prefixCls)
-                .If($"{_prefixCls}-with-help {_prefixCls}-has-error", () => _isValid == false)
-                .If($"{_prefixCls}-rtl", () => RTL)
+                .Add(prefixCls)
+                .If($"{prefixCls}-with-help {prefixCls}-has-error", () => isValid == false)
+                .If($"{prefixCls}-rtl", () => RTL)
                 ;
 
-            _labelClassMapper
-                .Add($"{_prefixCls}-label")
-                .If($"{_prefixCls}-label-left", () => FormLabelAlign == AntLabelAlignType.Left);
+            labelClassMapper
+                .Add($"{prefixCls}-label")
+                .If($"{prefixCls}-label-left", () => FormLabelAlign == AntLabelAlignType.Left);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (CurrentEditContext != null && _validationStateChangedHandler != null)
+            if (CurrentEditContext != null && validationStateChangedHandler != null)
             {
-                CurrentEditContext.OnValidationStateChanged -= _validationStateChangedHandler;
+                CurrentEditContext.OnValidationStateChanged -= validationStateChangedHandler;
             }
 
             base.Dispose(disposing);
         }
 
-        private string GetLabelClass()
-        {
-            return Required ? $"{_prefixCls}-required" : _labelCls;
-        }
+        private string GetLabelClass() => Required ? $"{prefixCls}-required" : labelCls;
 
         private Dictionary<string, object> GetLabelColAttributes()
         {
             if (NoStyle)
             {
-                return s_noneColAttributes;
+                return NoneColAttributes;
             }
 
             ColLayoutParam labelColParameter;
@@ -104,7 +101,7 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
         {
             if (NoStyle)
             {
-                return s_noneColAttributes;
+                return NoneColAttributes;
             }
 
             ColLayoutParam wrapperColParameter;

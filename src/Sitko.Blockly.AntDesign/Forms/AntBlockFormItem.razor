@@ -3,7 +3,7 @@
 <Row class="@ClassMapper.Class" style="@Style" id="@Id">
     @if (!string.IsNullOrEmpty(Label) || LabelTemplate != null)
     {
-        <AntDesign.Col @attributes="GetLabelColAttributes()" Class="@_labelClassMapper.Class">
+        <AntDesign.Col @attributes="GetLabelColAttributes()" Class="@labelClassMapper.Class">
             @if (LabelTemplate != null)
             {
                 @LabelTemplate
@@ -14,9 +14,9 @@
             }
         </AntDesign.Col>
     }
-    <AntDesign.Col @attributes="GetWrapperColAttributes()" Class=@($"{_prefixCls}-control")>
-        <div class=@($"{_prefixCls}-control-input")>
-            <div class=@($"{_prefixCls}-control-input-content")>
+    <AntDesign.Col @attributes="GetWrapperColAttributes()" Class=@($"{prefixCls}-control")>
+        <div class=@($"{prefixCls}-control-input")>
+            <div class=@($"{prefixCls}-control-input-content")>
                 @ChildContent
             </div>
         </div>

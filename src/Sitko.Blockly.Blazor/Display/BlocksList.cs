@@ -7,12 +7,15 @@ using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display
 {
+    using JetBrains.Annotations;
+
     public abstract class BlocksList<TEntity, TOptions> : BaseComponent where TOptions : BlazorBlocklyListOptions, new()
     {
         [Parameter] public TEntity Entity { get; set; } = default!;
         [Parameter] public string EntityUrl { get; set; } = null!;
         [Parameter] public IEnumerable<ContentBlock> EntityBlocks { get; set; } = null!;
 
+        [PublicAPI]
         protected IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
             Array.Empty<IBlazorBlockDescriptor>();
 
@@ -20,15 +23,12 @@ namespace Sitko.Blockly.Blazor.Display
 
         protected ContentBlock[] Blocks => EntityBlocks.Where(b => b.Enabled).OrderBy(b => b.Position).ToArray();
 
-        protected TOptions ListOptions = new();
+        protected TOptions ListOptions { get; set; } = new();
 
         [Parameter]
         public TOptions? Options
         {
-            get
-            {
-                return ListOptions;
-            }
+            get => ListOptions;
             set
             {
                 if (value is not null)
@@ -47,9 +47,9 @@ namespace Sitko.Blockly.Blazor.Display
 
         protected BlockListContext<TEntity> Context { get; private set; } = null!;
 
-        public RenderFragment RenderBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock block)
-        {
-            return builder =>
+        [PublicAPI]
+        public RenderFragment RenderBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock block) =>
+            builder =>
             {
                 var component = blockDescriptor.DisplayComponent;
                 if (blockDescriptor.DisplayComponent.IsGenericTypeDefinition)
@@ -63,6 +63,5 @@ namespace Sitko.Blockly.Blazor.Display
                 builder.AddAttribute(3, "Options", ListOptions);
                 builder.CloseComponent();
             };
-        }
     }
 }

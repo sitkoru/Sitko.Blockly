@@ -11,15 +11,12 @@ namespace Sitko.Blockly.Blazor.Display
         [Parameter] public TBlock Block { get; set; } = null!;
         [Parameter] public BlockListContext<TEntity> Context { get; set; } = null!;
 
-        protected TListOptions ListOptions = new();
+        protected TListOptions ListOptions { get; set; } = new();
 
         [Parameter]
         public TListOptions? Options
         {
-            get
-            {
-                return ListOptions;
-            }
+            get => ListOptions;
             set
             {
                 if (value is not null)

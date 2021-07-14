@@ -65,12 +65,11 @@ namespace Sitko.Blockly.HtmlParser.Tests
             CheckTwitchBlock(GetBlock(blocks, 17), "ourchickenlife");
         }
 
-        private void CheckTwitchBlock(ContentBlock block, string expectedChannel)
-        {
-            CheckBlock<TwitchBlock>(block, twitchBlock => Assert.Equal(expectedChannel, twitchBlock.ChannelId));
-        }
+        private static void CheckTwitchBlock(ContentBlock block, string expectedChannel) => CheckBlock<TwitchBlock>(
+            block,
+            twitchBlock => Assert.Equal(expectedChannel, twitchBlock.ChannelId));
 
-        private ContentBlock GetBlock(List<ContentBlock> blocks, int position)
+        private static ContentBlock GetBlock(List<ContentBlock> blocks, int position)
         {
             Assert.True(blocks.Count > position);
             var block = blocks[position];
@@ -78,7 +77,7 @@ namespace Sitko.Blockly.HtmlParser.Tests
             return block;
         }
 
-        private void CheckBlock<TContentBlock>(ContentBlock block, Action<TContentBlock> check)
+        private static void CheckBlock<TContentBlock>(ContentBlock block, Action<TContentBlock> check)
             where TContentBlock : ContentBlock
         {
             Assert.IsType<TContentBlock>(block);
@@ -88,35 +87,26 @@ namespace Sitko.Blockly.HtmlParser.Tests
             }
         }
 
-        private void CheckYoutubeBlock(ContentBlock block, string expectedYoutubeId)
-        {
-            CheckBlock<YoutubeBlock>(block, youtubeBlock => Assert.Equal(expectedYoutubeId, youtubeBlock.YoutubeId));
-        }
+        private static void CheckYoutubeBlock(ContentBlock block, string expectedYoutubeId) => CheckBlock<YoutubeBlock>(
+            block,
+            youtubeBlock => Assert.Equal(expectedYoutubeId, youtubeBlock.YoutubeId));
 
-        private void CheckIframeBlock(ContentBlock block, string expectedSrc)
-        {
+        private static void CheckIframeBlock(ContentBlock block, string expectedSrc) =>
             CheckBlock<IframeBlock>(block, iframeBlock => Assert.Equal(expectedSrc, iframeBlock.Src));
-        }
 
-        private void CheckTextBlock(ContentBlock block, string expectedText)
-        {
+        private static void CheckTextBlock(ContentBlock block, string expectedText) =>
             CheckBlock<TextBlock>(block, textBlock => Assert.Equal(expectedText, textBlock.Text));
-        }
 
-        private void CheckQuoteBlock(ContentBlock block, string expectedText)
-        {
+        private static void CheckQuoteBlock(ContentBlock block, string expectedText) =>
             CheckBlock<QuoteBlock>(block, quoteBlock => Assert.Equal(expectedText, quoteBlock.Text));
-        }
 
-        private void CheckGalleryBlock(ContentBlock block, string[] fileNames)
-        {
+        private static void CheckGalleryBlock(ContentBlock block, string[] fileNames) =>
             CheckBlock<GalleryBlock>(block, galleryBlock =>
             {
                 Assert.Equal(fileNames.Length, galleryBlock.Pictures.Count);
                 Assert.All(fileNames,
                     fileName => Assert.Single(galleryBlock.Pictures.Where(p => p.FileName == fileName)));
             });
-        }
     }
 
     public class BlocklyHtmlParserTestScope : BlocklyTestScope

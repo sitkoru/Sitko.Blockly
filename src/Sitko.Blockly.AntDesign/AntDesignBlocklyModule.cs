@@ -22,7 +22,7 @@ namespace Sitko.Blockly.AntDesignComponents
             {
                 AntDesignBlocklyTheme.Light => CKEditorTheme.Light,
                 AntDesignBlocklyTheme.Dark => CKEditorTheme.Dark,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(startupOptions.Theme))
             });
 
             services.Configure<JsonLocalizationModuleOptions>(options =>
@@ -42,14 +42,14 @@ namespace Sitko.Blockly.AntDesignComponents
 
     public static class CustomIconsProvider
     {
-        private static readonly Dictionary<string, string> _icons = new();
+        private static readonly Dictionary<string, string> Icons = new();
 
         public static async Task InitAsync()
         {
             var assembly = typeof(CustomIconsProvider).GetTypeInfo().Assembly;
             foreach (var resourceName in assembly.GetManifestResourceNames())
             {
-                if (resourceName.EndsWith(".svg"))
+                if (resourceName.EndsWith(".svg", StringComparison.InvariantCulture))
                 {
                     var resource = assembly.GetManifestResourceStream(resourceName);
                     if (resource is not null)
@@ -58,7 +58,7 @@ namespace Sitko.Blockly.AntDesignComponents
                         string text = await reader.ReadToEndAsync(); //hello world!
                         var name = resourceName.Replace("Sitko.Blockly.AntDesignComponents.Icons.", "")
                             .Replace(".svg", "");
-                        _icons.Add(name, text);
+                        Icons.Add(name, text);
                     }
                 }
             }
@@ -66,9 +66,9 @@ namespace Sitko.Blockly.AntDesignComponents
 
         public static RenderFragment GetIcon(string iconName) => builder =>
         {
-            if (_icons.ContainsKey(iconName))
+            if (Icons.ContainsKey(iconName))
             {
-                builder.AddMarkupContent(1, _icons[iconName]);
+                builder.AddMarkupContent(1, Icons[iconName]);
             }
         };
     }

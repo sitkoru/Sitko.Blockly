@@ -11,15 +11,12 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         TwitterBlockForm<TBlocklyFormOptions> : BlockForm<TwitterBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        protected ElementReference ContainerRef;
-        private string? _lastRendered;
+        protected ElementReference ContainerRef { get; set; }
+        private string? lastRendered;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
         protected virtual bool RenderOnInit => true;
 
-        protected override FieldIdentifier CreateFieldIdentifier()
-        {
-            return FieldIdentifier.Create(() => Block.Url);
-        }
+        protected override FieldIdentifier CreateFieldIdentifier() => FieldIdentifier.Create(() => Block.Url);
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -32,7 +29,7 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
 
         protected async Task RenderTweetAsync()
         {
-            if (Block.TweetId != _lastRendered)
+            if (Block.TweetId != lastRendered)
             {
                 if (!string.IsNullOrEmpty(Block.TweetId))
                 {
@@ -43,13 +40,10 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
                     await JsRuntime.ClearTweetAsync(ContainerRef);
                 }
 
-                _lastRendered = Block.TweetId;
+                lastRendered = Block.TweetId;
             }
         }
 
-        protected Task OnChangeAsync(string newUrl)
-        {
-            return RenderTweetAsync();
-        }
+        protected Task OnChangeAsync(string newUrl) => RenderTweetAsync();
     }
 }

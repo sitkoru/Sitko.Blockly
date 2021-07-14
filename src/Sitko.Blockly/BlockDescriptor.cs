@@ -34,10 +34,7 @@ namespace Sitko.Blockly
     {
         protected ILocalizationProvider<TBlock> LocalizationProvider { get; }
 
-        public BlockDescriptor(ILocalizationProvider<TBlock> localizationProvider)
-        {
-            LocalizationProvider = localizationProvider;
-        }
+        public BlockDescriptor(ILocalizationProvider<TBlock> localizationProvider) => LocalizationProvider = localizationProvider;
 
         public override Type Type => typeof(TBlock);
 

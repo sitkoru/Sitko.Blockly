@@ -78,15 +78,15 @@ namespace Sitko.Blockly.Blocks
                             ChannelId = null;
                         }
                     }
-                    else if ((uri.Host == "twitch.tv" || uri.Host == "www.twitch.tv"))
+                    else if (uri.Host == "twitch.tv" || uri.Host == "www.twitch.tv")
                     {
-                        if (uri.AbsolutePath.StartsWith("/videos"))
+                        if (uri.AbsolutePath.StartsWith("/videos", StringComparison.InvariantCulture))
                         {
                             VideoId = uri.AbsolutePath.Split('/').Last();
                             CollectionId = null;
                             ChannelId = null;
                         }
-                        else if (uri.AbsolutePath.StartsWith("/collections"))
+                        else if (uri.AbsolutePath.StartsWith("/collections", StringComparison.InvariantCulture))
                         {
                             VideoId = null;
                             CollectionId = uri.AbsolutePath.Split('/').Last();
@@ -115,10 +115,7 @@ namespace Sitko.Blockly.Blocks
             }
         }
 
-        public override string ToString()
-        {
-            return $"Twitch: {VideoId}{ChannelId}{CollectionId}";
-        }
+        public override string ToString() => $"Twitch: {VideoId}{ChannelId}{CollectionId}";
 
         public string? VideoId { get; set; }
         public string? ChannelId { get; set; }

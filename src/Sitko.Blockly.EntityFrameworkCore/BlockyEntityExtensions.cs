@@ -8,17 +8,19 @@ using Sitko.Blockly.Json;
 
 namespace Sitko.Blockly.EntityFrameworkCore
 {
+    using JetBrains.Annotations;
+
     public static class BlocklyEntityExtensions
     {
+        [PublicAPI]
         public static ModelBuilder RegisterBlocklyConversion<TEntity>(this ModelBuilder modelBuilder,
             Expression<Func<TEntity, List<ContentBlock>>> fieldSelector,
             string fieldName, bool isRequired = true)
-            where TEntity : class
-        {
-            return modelBuilder.RegisterBlocklyConversion(fieldSelector, fieldName,
+            where TEntity : class =>
+            modelBuilder.RegisterBlocklyConversion(fieldSelector, fieldName,
                 isRequired, new List<ContentBlock>());
-        }
 
+        [PublicAPI]
         public static ModelBuilder RegisterBlocklyConversion<TEntity, TEnumerable>(this ModelBuilder modelBuilder,
             Expression<Func<TEntity, TEnumerable>> fieldSelector,
             string fieldName, bool isRequired = true, TEnumerable? defaultValue = default)

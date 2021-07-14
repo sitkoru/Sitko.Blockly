@@ -11,17 +11,14 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         TwitchBlockForm<TBlocklyFormOptions> : BlockForm<TwitchBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        protected ElementReference ContainerRef;
-        private bool _rendered;
-        private string? _lastRendered;
+        protected ElementReference ContainerRef { get; set; }
+        private bool rendered;
+        private string? lastRendered;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
 
         protected virtual bool RenderOnInit => true;
 
-        protected override FieldIdentifier CreateFieldIdentifier()
-        {
-            return FieldIdentifier.Create(() => Block.Url);
-        }
+        protected override FieldIdentifier CreateFieldIdentifier() => FieldIdentifier.Create(() => Block.Url);
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -34,29 +31,26 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
 
         protected async Task RenderVideoAsync()
         {
-            if (Block.Url != _lastRendered)
+            if (Block.Url != lastRendered)
             {
                 if (!string.IsNullOrEmpty(Block.Url))
                 {
                     await JsRuntime.RenderTwitchAsync(ContainerRef, Block.VideoId, Block.ChannelId, Block.CollectionId);
-                    _rendered = true;
+                    rendered = true;
                 }
                 else
                 {
-                    if (_rendered)
+                    if (rendered)
                     {
                         await JsRuntime.InvokeAsync<string>("Blockly.Twitch.clear", ContainerRef);
-                        _rendered = false;
+                        rendered = false;
                     }
                 }
 
-                _lastRendered = Block.Url;
+                lastRendered = Block.Url;
             }
         }
 
-        protected Task OnChangeAsync(string newUrl)
-        {
-            return RenderVideoAsync();
-        }
+        protected Task OnChangeAsync(string newUrl) => RenderVideoAsync();
     }
 }

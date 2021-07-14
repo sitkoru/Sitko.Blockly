@@ -14,11 +14,9 @@ namespace Sitko.Blockly.Validation
     public abstract class BlockValidator<TBlock> : AbstractValidator<TBlock>, IBlockValidator<TBlock>
         where TBlock : ContentBlock
     {
-        protected readonly ILocalizationProvider<TBlock> LocalizationProvider;
+        protected ILocalizationProvider<TBlock> LocalizationProvider { get; }
 
-        public BlockValidator(ILocalizationProvider<TBlock> localizationProvider)
-        {
+        protected BlockValidator(ILocalizationProvider<TBlock> localizationProvider) =>
             LocalizationProvider = localizationProvider;
-        }
     }
 }

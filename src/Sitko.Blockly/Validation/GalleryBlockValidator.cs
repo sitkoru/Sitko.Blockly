@@ -7,10 +7,8 @@ namespace Sitko.Blockly.Validation
     public class GalleryBlockValidator : BlockValidator<GalleryBlock>
     {
         public GalleryBlockValidator(ILocalizationProvider<GalleryBlock> localizationProvider) : base(
-            localizationProvider)
-        {
+            localizationProvider) =>
             RuleFor(d => d.Pictures).NotEmpty().WithMessage(LocalizationProvider["Choose at least 1 picture"])
                 .When(b => b.Enabled);
-        }
     }
 }

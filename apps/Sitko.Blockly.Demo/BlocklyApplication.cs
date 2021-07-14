@@ -31,10 +31,7 @@ namespace Sitko.Blockly.Demo
                 .ConfigureLogLevel("Microsoft.EntityFrameworkCore", LogEventLevel.Warning);
         }
 
-        protected override bool LoggingEnableConsole(HostBuilderContext context)
-        {
-            return true;
-        }
+        protected override bool LoggingEnableConsole(HostBuilderContext context) => true;
     }
 
     public class BlocklyStorageOptions : StorageOptions, IFileSystemStorageOptions
