@@ -144,7 +144,6 @@ namespace Sitko.Blockly.HtmlParser.Tests
 
     public class TestBlocklyStorageOptions : StorageOptions, IFileSystemStorageOptions
     {
-        public override string Name { get; set; } = "Blockly";
         public string StoragePath { get; set; } = "";
     }
 }

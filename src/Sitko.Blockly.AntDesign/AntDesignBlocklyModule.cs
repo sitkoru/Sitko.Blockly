@@ -31,10 +31,7 @@ namespace Sitko.Blockly.AntDesignComponents
             });
         }
 
-        public override string GetOptionsKey()
-        {
-            return "Blockly:AntDesign";
-        }
+        public override string OptionsKey => "Blockly:AntDesign";
 
         public override async Task InitAsync(ApplicationContext context, IServiceProvider serviceProvider)
         {

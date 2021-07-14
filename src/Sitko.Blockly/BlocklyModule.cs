@@ -28,10 +28,7 @@ namespace Sitko.Blockly
             });
         }
 
-        public override string GetOptionsKey()
-        {
-            return "Blockly";
-        }
+        public override string OptionsKey => "Blockly";
 
         public override async Task InitAsync(ApplicationContext context, IServiceProvider serviceProvider)
         {

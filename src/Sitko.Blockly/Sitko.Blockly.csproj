@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Sitko.Core.App.Web" Version="8.0.0-preview.31" />
-    <PackageReference Include="Sitko.Core.Storage" Version="8.0.0-preview.31" />
+    <PackageReference Include="Sitko.Core.App.Web" Version="8.0.0-preview.33" />
+    <PackageReference Include="Sitko.Core.Storage" Version="8.0.0-preview.33" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 

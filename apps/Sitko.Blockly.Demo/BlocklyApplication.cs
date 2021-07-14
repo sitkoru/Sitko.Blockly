@@ -39,7 +39,6 @@ namespace Sitko.Blockly.Demo
 
     public class BlocklyStorageOptions : StorageOptions, IFileSystemStorageOptions
     {
-        public override string Name { get; set; } = "Blockly";
         public string StoragePath { get; set; } = "";
     }
 
