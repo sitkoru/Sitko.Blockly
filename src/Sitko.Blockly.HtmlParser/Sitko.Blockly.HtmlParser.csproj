@@ -21,7 +21,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="8.0.0-preview.28" />
+    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="8.0.0-preview.30" />
   </ItemGroup>
 
   <ItemGroup>
