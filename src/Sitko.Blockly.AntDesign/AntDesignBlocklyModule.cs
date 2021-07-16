@@ -18,13 +18,7 @@ namespace Sitko.Blockly.AntDesignComponents
             AntDesignBlocklyModuleOptions startupOptions)
         {
             base.ConfigureServices(context, services, startupOptions);
-            services.AddCKEditorBundle(context.Configuration, startupOptions.Theme switch
-            {
-                AntDesignBlocklyTheme.Light => CKEditorTheme.Light,
-                AntDesignBlocklyTheme.Dark => CKEditorTheme.Dark,
-                _ => throw new ArgumentOutOfRangeException(nameof(startupOptions.Theme))
-            });
-
+            services.AddCKEditorBundle(context.Configuration);
             services.Configure<JsonLocalizationModuleOptions>(options =>
             {
                 options.AddDefaultResource<AntDesignBlocklyModule>();
