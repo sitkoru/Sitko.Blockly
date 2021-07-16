@@ -1,4 +1,4 @@
-﻿using Sitko.Blockly.Blazor;
+using Sitko.Blockly.Blazor;
 
 namespace Sitko.Blockly.AntDesignComponents
 {
