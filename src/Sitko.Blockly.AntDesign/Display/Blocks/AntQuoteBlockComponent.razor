@@ -5,12 +5,24 @@
         @((MarkupString) Block.Text)
     </div>
     <footer class="author">
+        @if (ListOptions.Storage is not null && Block.Picture != null)
+        {
+            <div class="picture" style="background-image: url(@ListOptions.Storage.PublicUri(Block.Picture))">
+            </div>
+        }
         <cite>
+            @{
+                var authorText = Block.Author;
+                @if (ListOptions.Storage is null || Block.Picture is null)
+                {
+                    authorText = $"— {authorText}";
+                }
+            }
             @if (!string.IsNullOrEmpty(Block.Link))
             {
                 if (!string.IsNullOrEmpty(Block.Author))
                 {
-                    <a href="@Block.Link">&mdash; @Block.Author</a>
+                    <a href="@Block.Link">@authorText</a>
                 }
                 else
                 {
@@ -19,14 +31,10 @@
             }
             else if (!string.IsNullOrEmpty(Block.Author))
             {
-                <text>&mdash; @Block.Author</text>
+
+                @authorText
             }
         </cite>
     </footer>
 </blockquote>
-@if (ListOptions.Storage is not null && Block.Picture != null)
-{
-    <div class="picture">
-        <img src="@ListOptions.Storage.PublicUri(Block.Picture)" alt="@Block.Picture.FileName"/>
-    </div>
-}
+

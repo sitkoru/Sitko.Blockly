@@ -10,7 +10,7 @@
                 @foreach (var image in Block.Pictures)
                 {
                     <CarouselSlick>
-                        <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+                        <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
                     </CarouselSlick>
                 }
             </Carousel>
@@ -18,7 +18,9 @@
         else
         {
             var image = Block.Pictures.First();
-            <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="@image.FileName"/>
+            <div class="single-image">
+                <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
+            </div>
         }
     }
 }
@@ -26,3 +28,5 @@ else
 {
     <AntBlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></AntBlockErrorComponent>
 }
+
+

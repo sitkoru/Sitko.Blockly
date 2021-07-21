@@ -1,3 +1,28 @@
-::deep img {
-    max-width: 100%;
-} 
+blockquote {
+  border-left: 2px solid rgba(128, 128, 128, .2);
+  padding-left: 1.5em;;
+}
+
+::deep p {
+  font-size: 1.5em;
+  margin-bottom: .5em;
+}
+
+::deep .picture {
+  width: 2em;
+  height: 2em;
+  margin-right: .5em;
+  background-size: cover;
+  background-position: center;
+  border-radius: 1em;
+}
+
+::deep .picture {
+  height: 2em;
+  width: 2em;
+}
+
+::deep .author {
+  display: flex;
+  align-items: center;
+}
