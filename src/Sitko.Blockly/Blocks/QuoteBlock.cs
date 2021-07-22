@@ -5,10 +5,7 @@ namespace Sitko.Blockly.Blocks
 {
     public record QuoteBlock : ContentBlock
     {
-        public override string ToString()
-        {
-            return $"{Author}: {Text} ({Link})";
-        }
+        public override string ToString() => $"{Author}: {Text} ({Link})";
 
         public string Text { get; set; } = string.Empty;
         public string? Author { get; set; }

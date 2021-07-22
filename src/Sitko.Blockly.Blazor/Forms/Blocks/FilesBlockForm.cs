@@ -6,9 +6,6 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
     public abstract class FilesBlockForm<TBlocklyFormOptions> : BlockForm<FilesBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        protected override FieldIdentifier CreateFieldIdentifier()
-        {
-            return FieldIdentifier.Create(() => Block.Files);
-        }
+        protected override FieldIdentifier CreateFieldIdentifier() => FieldIdentifier.Create(() => Block.Files);
     }
 }

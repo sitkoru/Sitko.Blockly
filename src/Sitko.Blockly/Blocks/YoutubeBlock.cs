@@ -25,10 +25,7 @@ namespace Sitko.Blockly.Blocks
             }
         }
 
-        public override string ToString()
-        {
-            return $"Youtube: {YoutubeId}";
-        }
+        public override string ToString() => $"Youtube: {YoutubeId}";
 
         public string YoutubeId { get; set; } = "";
     }

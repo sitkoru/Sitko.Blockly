@@ -35,16 +35,12 @@ namespace Sitko.Blockly.Demo.Pages
             SecondaryBlocks = entity.SecondaryBlocks;
             return Task.CompletedTask;
         }
-
-        // public List<Type> AllowedBlocks => new() {typeof(TextBlock)};
     }
 
     public class PostFormValidator : AbstractBlocklyFormValidator<PostForm>
     {
         public PostFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
-            IEnumerable<IBlockValidator> validators) : base(blockDescriptors, validators)
-        {
+            IEnumerable<IBlockValidator> validators) : base(blockDescriptors, validators) =>
             RuleFor(f => f.Title).NotEmpty();
-        }
     }
 }

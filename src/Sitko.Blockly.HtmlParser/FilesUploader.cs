@@ -10,18 +10,19 @@ namespace Sitko.Blockly.HtmlParser
 {
     public class FilesUploader<TStorageOptions> where TStorageOptions : StorageOptions
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IStorage<TStorageOptions> _storage;
-        private readonly ILogger<FilesUploader<TStorageOptions>> _logger;
-        private readonly Func<string, HttpResponseHeaders, MemoryStream, Task<object>>? _generateMetadata;
+        private readonly IHttpClientFactory httpClientFactory;
+        private readonly IStorage<TStorageOptions> storage;
+        private readonly ILogger<FilesUploader<TStorageOptions>> logger;
+        private readonly Func<string, HttpResponseHeaders, MemoryStream, Task<object>>? generateMetadata;
 
         public FilesUploader(IHttpClientFactory httpClientFactory, IStorage<TStorageOptions> storage,
-            ILogger<FilesUploader<TStorageOptions>> logger, Func<string, HttpResponseHeaders, MemoryStream, Task<object>>? generateMetadata = null)
+            ILogger<FilesUploader<TStorageOptions>> logger,
+            Func<string, HttpResponseHeaders, MemoryStream, Task<object>>? generateMetadata = null)
         {
-            _httpClientFactory = httpClientFactory;
-            _storage = storage;
-            _logger = logger;
-            _generateMetadata = generateMetadata;
+            this.httpClientFactory = httpClientFactory;
+            this.storage = storage;
+            this.logger = logger;
+            this.generateMetadata = generateMetadata;
         }
 
         public async Task<StorageItem?> UploadFromUrlAsync(string url, string path, string? fileName = null)
@@ -31,35 +32,35 @@ namespace Sitko.Blockly.HtmlParser
             {
                 if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) || string.IsNullOrEmpty(uri.Host))
                 {
-                    _logger.LogInformation("Add base domain to url");
+                    logger.LogInformation("Add base domain to url");
                 }
                 else
                 {
-                    _logger.LogInformation("Url is ok");
+                    logger.LogInformation("Url is ok");
                 }
 
-                _logger.LogInformation("Downloading file from url {Url}", url);
+                logger.LogInformation("Downloading file from url {Url}", url);
                 try
                 {
-                    var fileData = await _httpClientFactory.CreateClient().GetAsync(url);
+                    var fileData = await httpClientFactory.CreateClient().GetAsync(url);
                     if (fileData.IsSuccessStatusCode)
                     {
                         var memoryStream = new MemoryStream();
                         var content = await fileData.Content.ReadAsStreamAsync();
                         await content.CopyToAsync(memoryStream);
                         object? metadata = null;
-                        if (_generateMetadata is not null)
+                        if (generateMetadata is not null)
                         {
-                            metadata = await _generateMetadata(fileName, fileData.Headers, memoryStream);
+                            metadata = await generateMetadata(fileName, fileData.Headers, memoryStream);
                         }
 
-                        var item = await _storage.SaveAsync(memoryStream, fileName, path, metadata);
+                        var item = await storage.SaveAsync(memoryStream, fileName, path, metadata);
                         return item;
                     }
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error while uploading file from url: {Url}: {ErrorText}", url, ex.ToString());
+                    logger.LogError(ex, "Error while uploading file from url: {Url}: {ErrorText}", url, ex.ToString());
                 }
             }
 

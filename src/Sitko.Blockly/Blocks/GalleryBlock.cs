@@ -7,10 +7,7 @@ namespace Sitko.Blockly.Blocks
 {
     public record GalleryBlock : ContentBlock
     {
-        public override string ToString()
-        {
-            return $"Gallery: {string.Join(", ", Pictures.Select(p => p.FileName))}";
-        }
+        public override string ToString() => $"Gallery: {string.Join(", ", Pictures.Select(p => p.FileName))}";
 
         public ValueCollection<StorageItem> Pictures { get; set; } = new();
     }

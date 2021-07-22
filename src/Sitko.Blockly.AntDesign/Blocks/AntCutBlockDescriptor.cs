@@ -19,14 +19,10 @@ namespace Sitko.Blockly.AntDesignComponents.Blocks
         public virtual Type FormComponent => typeof(AntCutBlockForm);
         public virtual Type DisplayComponent => typeof(AntCutBlockComponent<>);
 
-        public bool ShouldRender(BlockListContext context, ContentBlock block)
-        {
-            return context.Mode == BlocksListMode.Preview;
-        }
+        public bool ShouldRender(BlockListContext context, ContentBlock block) =>
+            context.Mode == BlocksListMode.Preview;
 
-        public bool ShouldRenderNext(BlockListContext context, ContentBlock block)
-        {
-            return context.Mode == BlocksListMode.Full;
-        }
+        public bool ShouldRenderNext(BlockListContext context, ContentBlock block) =>
+            context.Mode == BlocksListMode.Full;
     }
 }

@@ -7,9 +7,6 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         YoutubeBlockForm<TBlocklyFormOptions> : BlockForm<YoutubeBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        protected override FieldIdentifier CreateFieldIdentifier()
-        {
-            return FieldIdentifier.Create(() => Block.YoutubeId);
-        }
+        protected override FieldIdentifier CreateFieldIdentifier() => FieldIdentifier.Create(() => Block.YoutubeId);
     }
 }

@@ -4,20 +4,17 @@ namespace Sitko.Blockly.Blocks
 {
     public abstract record UrlContentBlock : ContentBlock
     {
-        private string? _currentUrl;
+        private string? currentUrl;
         protected abstract bool IsEmpty { get; }
         protected abstract string FinalUrl { get; }
 
         [JsonIgnore]
         public string? Url
         {
-            get
-            {
-                return IsEmpty ? _currentUrl : FinalUrl;
-            }
+            get => IsEmpty ? currentUrl : FinalUrl;
             set
             {
-                _currentUrl = value;
+                currentUrl = value;
                 ParseUrl(value);
             }
         }

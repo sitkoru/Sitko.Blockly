@@ -9,9 +9,6 @@ namespace Sitko.Blockly
         public int Position { get; set; }
         public bool Enabled { get; set; } = true;
 
-        public override string ToString()
-        {
-            return GetType().Name;
-        }
+        public override string ToString() => GetType().Name;
     }
 }

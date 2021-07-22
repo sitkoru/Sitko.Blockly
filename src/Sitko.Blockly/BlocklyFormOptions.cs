@@ -6,19 +6,19 @@ namespace Sitko.Blockly
 {
     public class BlocklyFormOptions
     {
-        private readonly Dictionary<Type, int> _maxBlockCounts = new();
-        private readonly Dictionary<Type, int> _blockPriorities = new();
+        private readonly Dictionary<Type, int> maxBlockCounts = new();
+        private readonly Dictionary<Type, int> blockPriorities = new();
         public int MaxBlocks { get; set; }
-        private readonly HashSet<Type> _allowedBlocks = new();
-        public IEnumerable<Type> AllowedBlocks => _allowedBlocks;
+        private readonly HashSet<Type> allowedBlocks = new();
+        public IEnumerable<Type> AllowedBlocks => allowedBlocks;
 
         public IStorage? Storage { get; set; }
 
         public int? MaxBlockCount(IBlockDescriptor descriptor)
         {
-            if (_maxBlockCounts.ContainsKey(descriptor.Type))
+            if (maxBlockCounts.ContainsKey(descriptor.Type))
             {
-                return _maxBlockCounts[descriptor.Type];
+                return maxBlockCounts[descriptor.Type];
             }
 
             return null;
@@ -26,9 +26,9 @@ namespace Sitko.Blockly
 
         public int? BlockPriority(IBlockDescriptor descriptor)
         {
-            if (_blockPriorities.ContainsKey(descriptor.Type))
+            if (blockPriorities.ContainsKey(descriptor.Type))
             {
-                return _blockPriorities[descriptor.Type];
+                return blockPriorities[descriptor.Type];
             }
 
             return null;
@@ -36,38 +36,38 @@ namespace Sitko.Blockly
 
         public BlocklyFormOptions ClearBlockMaxCounts()
         {
-            _maxBlockCounts.Clear();
+            maxBlockCounts.Clear();
             return this;
         }
 
         public BlocklyFormOptions ConfigureBlockMaxCount<TBlock>(int maxCount) where TBlock : ContentBlock
         {
-            _maxBlockCounts.TryAdd(typeof(TBlock), maxCount);
+            maxBlockCounts.TryAdd(typeof(TBlock), maxCount);
             return this;
         }
 
         public BlocklyFormOptions ClearBlockPriorities()
         {
-            _blockPriorities.Clear();
+            blockPriorities.Clear();
             return this;
         }
 
         public BlocklyFormOptions ConfigureBlockPriority<TBlock>(int priority) where TBlock : ContentBlock
         {
-            _blockPriorities.TryAdd(typeof(TBlock), priority);
+            blockPriorities.TryAdd(typeof(TBlock), priority);
             return this;
         }
 
         public BlocklyFormOptions ClearAllowedBlocks()
         {
-            _allowedBlocks.Clear();
+            allowedBlocks.Clear();
             return this;
         }
 
-        public BlocklyFormOptions SetAllowedBlocks(IEnumerable<Type> allowedBlocks)
+        public BlocklyFormOptions SetAllowedBlocks(IEnumerable<Type> blocks)
         {
             ClearAllowedBlocks();
-            foreach (var allowedBlock in allowedBlocks)
+            foreach (var allowedBlock in blocks)
             {
                 AddAllowedBlock(allowedBlock);
             }
@@ -77,13 +77,13 @@ namespace Sitko.Blockly
 
         public BlocklyFormOptions AddAllowedBlock(Type allowedBlock)
         {
-            _allowedBlocks.Add(allowedBlock);
+            allowedBlocks.Add(allowedBlock);
             return this;
         }
 
         public BlocklyFormOptions AddAllowedBlock<TBlock>() where TBlock : ContentBlock
         {
-            _allowedBlocks.Add(typeof(TBlock));
+            allowedBlocks.Add(typeof(TBlock));
             return this;
         }
     }

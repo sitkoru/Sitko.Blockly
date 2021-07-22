@@ -53,21 +53,21 @@ namespace Sitko.Blockly.Validation
 
     public abstract class AbstractBlocklyFormValidator<TForm> : AbstractValidator<TForm>
     {
-        private readonly IEnumerable<IBlockDescriptor> _blockDescriptors;
-        private readonly IEnumerable<IBlockValidator> _validators;
+        private readonly IEnumerable<IBlockDescriptor> blockDescriptors;
+        private readonly IEnumerable<IBlockValidator> validators;
 
         public AbstractBlocklyFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
             IEnumerable<IBlockValidator> validators)
         {
-            _blockDescriptors = blockDescriptors;
-            _validators = validators;
+            this.blockDescriptors = blockDescriptors;
+            this.validators = validators;
         }
 
         protected AbstractBlocklyFormValidator<TForm> AddBlocksValidators(
             Expression<Func<TForm, IEnumerable<ContentBlock>>> fieldSelector)
         {
             RuleForEach(fieldSelector)
-                .AddBlockValidators(_blockDescriptors, _validators, AdditionalValidators);
+                .AddBlockValidators(blockDescriptors, validators, AdditionalValidators);
             return this;
         }
 

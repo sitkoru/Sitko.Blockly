@@ -5,18 +5,17 @@ using Sitko.Core.App;
 
 namespace Sitko.Blockly
 {
+    using JetBrains.Annotations;
+
+    [PublicAPI]
     public static class ApplicationExtensions
     {
         public static Application AddBlockly(this Application application,
-            Action<IConfiguration, IHostEnvironment, BlocklyModuleOptions> configure, string? configKey = null)
-        {
-            return application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
-        }
+            Action<IConfiguration, IHostEnvironment, BlocklyModuleOptions> configure, string? configKey = null) =>
+            application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
 
         public static Application AddBlockly(this Application application,
-            Action<BlocklyModuleOptions>? configure = null, string? configKey = null)
-        {
-            return application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
-        }
+            Action<BlocklyModuleOptions>? configure = null, string? configKey = null) =>
+            application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
     }
 }

@@ -4,21 +4,15 @@ namespace Sitko.Blockly.Blazor.Forms
 {
     public class BlocklyFormService
     {
-        private readonly List<IBlocklyForm> _forms = new();
+        private readonly List<IBlocklyForm> forms = new();
 
-        public void AddForm(IBlocklyForm blocklyForm)
-        {
-            _forms.Add(blocklyForm);
-        }
+        public void AddForm(IBlocklyForm blocklyForm) => forms.Add(blocklyForm);
 
-        public void RemoveForm(IBlocklyForm blocklyForm)
-        {
-            _forms.Remove(blocklyForm);
-        }
+        public void RemoveForm(IBlocklyForm blocklyForm) => forms.Remove(blocklyForm);
 
         public void Validate()
         {
-            foreach (var form in _forms)
+            foreach (var form in forms)
             {
                 form.ValidateBlocks();
             }

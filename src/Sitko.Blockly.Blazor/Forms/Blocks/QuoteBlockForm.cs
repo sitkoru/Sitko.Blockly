@@ -6,9 +6,6 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
     public abstract class QuoteBlockForm<TBlocklyFormOptions> : BlockForm<QuoteBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        protected override FieldIdentifier CreateFieldIdentifier()
-        {
-            return FieldIdentifier.Create(() => Block.Text);
-        }
+        protected override FieldIdentifier CreateFieldIdentifier() => FieldIdentifier.Create(() => Block.Text);
     }
 }

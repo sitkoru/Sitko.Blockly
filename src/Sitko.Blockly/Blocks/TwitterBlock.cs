@@ -36,10 +36,7 @@ namespace Sitko.Blockly.Blocks
             }
         }
 
-        public override string ToString()
-        {
-            return $"Twitter: {TweetId} by {TweetAuthor}";
-        }
+        public override string ToString() => $"Twitter: {TweetId} by {TweetAuthor}";
     }
 
     public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>

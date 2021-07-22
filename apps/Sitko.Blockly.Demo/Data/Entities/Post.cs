@@ -11,10 +11,7 @@ namespace Sitko.Blockly.Demo.Data.Entities
         [Required] public DateTimeOffset DateAdded { get; set; } = DateTimeOffset.UtcNow;
         [Required] public DateTimeOffset DateUpdated { get; set; } = DateTimeOffset.UtcNow;
 
-        public object GetId()
-        {
-            return Id;
-        }
+        public object GetId() => Id;
     }
 
     public class Post : BaseEntity
