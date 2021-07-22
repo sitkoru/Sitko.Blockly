@@ -5,6 +5,6 @@ namespace Sitko.Blockly.AntDesignComponents.Forms.Blocks
 {
     public partial class AntQuoteBlockForm
     {
-        [Inject] private ILocalizationProvider<AntQuoteBlockForm> LocalizationProvider { get; set; } = null!;
+        [Inject] protected ILocalizationProvider<AntQuoteBlockForm> LocalizationProvider { get; set; } = null!;
     }
 }
