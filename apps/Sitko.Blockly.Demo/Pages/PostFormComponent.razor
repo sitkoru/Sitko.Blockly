@@ -3,6 +3,7 @@
 @using Sitko.Blockly.Blazor
 @using Sitko.Blockly.Blazor.Forms
 @using Sitko.Core.Storage
+@using Sitko.Blazor.CKEditor.Bundle
 @inherits BaseComponent
 <AntRepositoryForm Layout="@FormLayout.Vertical" TEntity="Post" TEntityPk="Guid" TForm="PostForm" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
     <FormItem Label="Title">
@@ -52,11 +53,13 @@
                 return Task.FromResult<object>(metadata);
             }
         };
+        var ckEditorConfig = CKEditorBundleOptions.DefaultConfig.WithHtmlEditing();
+        ckEditorConfig.Language = "ru";
         _blocksOptions = new AntDesignBlocklyFormOptions
         {
             Storage = GetService<IStorage<BlocklyStorageOptions>>(),
             ImagesOptions = imagesStorageOptions,
-            FilesOptions = filesStorageOptions
+            FilesOptions = filesStorageOptions, CKEditorConfig = ckEditorConfig
         };
 
         _secondaryBlocksOptions = new AntDesignBlocklyFormOptions
@@ -74,4 +77,5 @@
         _secondaryBlocksOptions.ConfigureBlockMaxCount<GalleryBlock>(1);
         _secondaryBlocksOptions.ConfigureBlockMaxCount<YoutubeBlock>(1);
     }
+
 }
