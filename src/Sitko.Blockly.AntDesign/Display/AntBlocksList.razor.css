@@ -1,7 +1,12 @@
 .blockly {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .blockly.blockly-galleryblock img {
-    max-width: 100%;
+  max-width: 100%;
+}
+
+::deep .block-content {
+  background-color: rgba(128, 128, 128, .1);
+  padding: 2em 0;
 }

@@ -2,14 +2,14 @@
 @inherits FilesBlockComponent<TEntity, AntDesignBlocklyListOptions>
 @if (ListOptions.Storage is not null)
 {
-@foreach (var file in Block.Files)
-{
     <ul>
-        <li>
-            <AntDesign.Icon Type="paper-clip"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@ListOptions.Storage.PublicUri(file)">@file.FileName</a>&nbsp;(&nbsp;@file.HumanSize&nbsp;)
-        </li>
+        @foreach (var file in Block.Files)
+        {
+            <li>
+                <AntDesign.Icon Type="paper-clip"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@ListOptions.Storage.PublicUri(file)">@file.FileName</a><span class="filesize">&nbsp;(@file.HumanSize)</span>
+            </li>
+        }
     </ul>
-}
 }
 else
 {

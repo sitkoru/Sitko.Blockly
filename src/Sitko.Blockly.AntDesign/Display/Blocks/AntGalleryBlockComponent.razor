@@ -4,16 +4,18 @@
 {
     if (Block.Pictures.Any())
     {
-        if (Block.Pictures.Count > 1)
+        @if (Block.Pictures.Count > 1)
         {
-            <Carousel Autoplay="TimeSpan.FromSeconds(2)">
-                @foreach (var image in Block.Pictures)
-                {
-                    <CarouselSlick>
-                        <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
-                    </CarouselSlick>
-                }
-            </Carousel>
+            <div class="block-content">
+                <Carousel Autoplay="TimeSpan.FromSeconds(2)">
+                    @foreach (var image in Block.Pictures)
+                    {
+                        <CarouselSlick>
+                            <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
+                        </CarouselSlick>
+                    }
+                </Carousel>
+            </div>
         }
         else
         {
@@ -28,5 +30,3 @@ else
 {
     <AntBlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></AntBlockErrorComponent>
 }
-
-

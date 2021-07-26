@@ -1,11 +1,13 @@
 ﻿@typeparam TEntity
 @inherits IframeBlockComponent<TEntity, AntDesignBlocklyListOptions>
 <!--suppress HtmlDeprecatedAttribute -->
-<div class="iframe-container-wrapper">
-    <div class="iframe-container">
-        @* ReSharper disable once Html.Obsolete *@
-        <iframe src="@Block.Src"
-                frameborder="0" allowfullscreen class="iframe-content">
-        </iframe>
+<div class="block-content">
+    <div class="iframe-container-wrapper">
+        <div class="iframe-container">
+            @* ReSharper disable once Html.Obsolete *@
+            <iframe src="@Block.Src"
+                    frameborder="0" allowfullscreen class="iframe-content">
+            </iframe>
+        </div>
     </div>
 </div>
