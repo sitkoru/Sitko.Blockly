@@ -28,15 +28,15 @@ namespace Sitko.Blockly.HtmlParser
             ContentBlock block;
             if (srcUrl.Contains("youtube.com"))
             {
-                block = new YoutubeBlock {Url = srcUrl};
+                block = new YoutubeBlock { Url = srcUrl };
             }
             else if (srcUrl.Contains("player.twitch.tv"))
             {
-                block = new TwitchBlock {Url = srcUrl};
+                block = new TwitchBlock { Url = srcUrl };
             }
             else
             {
-                block = new IframeBlock {Src = srcUrl};
+                block = new IframeBlock { Src = srcUrl };
             }
 
             return Task.FromResult(block);
@@ -48,8 +48,8 @@ namespace Sitko.Blockly.HtmlParser
             var item = await filesUploader.UploadFromUrlAsync(imgUrl, uploadPath);
             if (item != null)
             {
-                var pictures = new ValueCollection<StorageItem> {item};
-                return new GalleryBlock {Pictures = pictures};
+                var pictures = new ValueCollection<StorageItem> { item };
+                return new GalleryBlock { Pictures = pictures };
             }
 
             return null;
@@ -68,23 +68,20 @@ namespace Sitko.Blockly.HtmlParser
                         if (imgBlock != null)
                         {
                             extractedBlocks.Add(imgBlock);
-                            var newNodeStr =
+                            var imgNodeStr =
                                 $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
-                            var newNode = HtmlNode.CreateNode(newNodeStr);
-                            childNode.ParentNode.ReplaceChild(newNode, childNode);
+                            var imgNode = HtmlNode.CreateNode(imgNodeStr);
+                            childNode.ParentNode.ReplaceChild(imgNode, childNode);
                         }
 
                         break;
                     case "iframe":
                         var frameBlock = await ParseIframeAsync(childNode);
-                        if (frameBlock != null)
-                        {
-                            extractedBlocks.Add(frameBlock);
-                            var newNodeStr =
-                                $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
-                            var newNode = HtmlNode.CreateNode(newNodeStr);
-                            childNode.ParentNode.ReplaceChild(newNode, childNode);
-                        }
+                        extractedBlocks.Add(frameBlock);
+                        var iFrameStr =
+                            $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
+                        var iFrame = HtmlNode.CreateNode(iFrameStr);
+                        childNode.ParentNode.ReplaceChild(iFrame, childNode);
 
                         break;
                 }
@@ -98,7 +95,7 @@ namespace Sitko.Blockly.HtmlParser
                     case "block":
                         if (!string.IsNullOrEmpty(currentHtml))
                         {
-                            blocks.Add(new TextBlock {Text = currentHtml.Trim()});
+                            blocks.Add(new TextBlock { Text = currentHtml.Trim() });
                             currentHtml = "";
                         }
 
@@ -117,7 +114,7 @@ namespace Sitko.Blockly.HtmlParser
 
             if (!string.IsNullOrEmpty(currentHtml))
             {
-                blocks.Add(new TextBlock {Position = blocks.Count, Text = currentHtml.Trim()});
+                blocks.Add(new TextBlock { Position = blocks.Count, Text = currentHtml.Trim() });
             }
 
             return blocks;
@@ -256,13 +253,13 @@ namespace Sitko.Blockly.HtmlParser
 
         private static Task<ContentBlock> ParseHtmlAsync(HtmlNode childNode)
         {
-            ContentBlock block = new TextBlock {Text = childNode.OuterHtml.Trim()};
+            ContentBlock block = new TextBlock { Text = childNode.OuterHtml.Trim() };
             return Task.FromResult(block);
         }
 
         protected virtual Task<ContentBlock> ParseBlockQuoteAsync(HtmlNode childNode)
         {
-            var block = new QuoteBlock {Text = childNode.InnerHtml.Trim()};
+            var block = new QuoteBlock { Text = childNode.InnerHtml.Trim() };
             return Task.FromResult<ContentBlock>(block);
         }
     }

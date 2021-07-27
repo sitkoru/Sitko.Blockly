@@ -29,7 +29,7 @@ namespace Sitko.Blockly.EntityFrameworkCore
         {
             var valueComparer = new ValueComparer<TEnumerable>(
                 (c1, c2) => c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v!.GetHashCode())),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                 c => BlocklyJsonExtensions.DeserializeBlocks<TEnumerable>(BlocklyJsonExtensions.SerializeBlocks(c))!);
             modelBuilder
                 .Entity<TEntity>()

@@ -16,7 +16,7 @@
                 <div class="block-row" @key="@block.Id">
                     <div @key="@block.Id" class="block-content">
                         <AntDesign.Card @key="@block.Id" Class="@className">
-                            <Spin @key="@block.Id" Spinning="!block.Enabled" Indicator="_disabledBlockIndicator">
+                            <Spin @key="@block.Id" Spinning="!block.Enabled" Indicator="disabledBlockIndicator">
                                 @(RenderBlockForm(blockDescriptor, block))
                             </Spin>
                         </AntDesign.Card>
@@ -57,7 +57,7 @@
 
 @code{
 
-    private RenderFragment _disabledBlockIndicator = @<span class="block-disabled-icon">
+    private RenderFragment disabledBlockIndicator = @<span class="block-disabled-icon">
                                                          <Icon Type="eye-invisible"></Icon>
                                                      </span>;
 

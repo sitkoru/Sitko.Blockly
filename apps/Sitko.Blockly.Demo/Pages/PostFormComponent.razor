@@ -9,8 +9,8 @@
     <FormItem Label="Title">
         <Input @bind-Value="context.Title"/>
     </FormItem>
-    <AntBlocklyForm Label="Blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Blocks" Form="context" Options="_blocksOptions"></AntBlocklyForm>
-    <AntBlocklyForm Label="Secondary blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.SecondaryBlocks" Form="context" Options="_secondaryBlocksOptions"></AntBlocklyForm>
+    <AntBlocklyForm Label="Blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Blocks" Form="context" Options="blocksOptions"></AntBlocklyForm>
+    <AntBlocklyForm Label="Secondary blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.SecondaryBlocks" Form="context" Options="secondaryBlocksOptions"></AntBlocklyForm>
     <Button Disabled="@(!context.CanSave())" OnClick="context.Save">Save</Button>
 </AntRepositoryForm>
 
@@ -25,8 +25,8 @@
         return Task.CompletedTask;
     }
 
-    private AntDesignBlocklyFormOptions? _blocksOptions;
-    private AntDesignBlocklyFormOptions? _secondaryBlocksOptions;
+    private AntDesignBlocklyFormOptions? blocksOptions;
+    private AntDesignBlocklyFormOptions? secondaryBlocksOptions;
 
     protected override void Initialize()
     {
@@ -55,27 +55,27 @@
         };
         var ckEditorConfig = CKEditorBundleOptions.DefaultConfig.WithHtmlEditing();
         ckEditorConfig.Language = "ru";
-        _blocksOptions = new AntDesignBlocklyFormOptions
+        blocksOptions = new AntDesignBlocklyFormOptions
         {
             Storage = GetService<IStorage<BlocklyStorageOptions>>(),
             ImagesOptions = imagesStorageOptions,
             FilesOptions = filesStorageOptions, CKEditorConfig = ckEditorConfig
         };
 
-        _secondaryBlocksOptions = new AntDesignBlocklyFormOptions
+        secondaryBlocksOptions = new AntDesignBlocklyFormOptions
         {
             MaxBlocks = 5, Storage = GetService<IStorage<BlocklyStorageOptions>>(),
             ImagesOptions = imagesStorageOptions,
             FilesOptions = filesStorageOptions
         };
-        _secondaryBlocksOptions.AddAllowedBlock<TextBlock>();
-        _secondaryBlocksOptions.AddAllowedBlock<GalleryBlock>();
-        _secondaryBlocksOptions.AddAllowedBlock<YoutubeBlock>();
-        _secondaryBlocksOptions.ConfigureBlockPriority<YoutubeBlock>(1);
-        _secondaryBlocksOptions.ConfigureBlockPriority<TextBlock>(2);
-        _secondaryBlocksOptions.ConfigureBlockPriority<GalleryBlock>(3);
-        _secondaryBlocksOptions.ConfigureBlockMaxCount<GalleryBlock>(1);
-        _secondaryBlocksOptions.ConfigureBlockMaxCount<YoutubeBlock>(1);
+        secondaryBlocksOptions.AddAllowedBlock<TextBlock>();
+        secondaryBlocksOptions.AddAllowedBlock<GalleryBlock>();
+        secondaryBlocksOptions.AddAllowedBlock<YoutubeBlock>();
+        secondaryBlocksOptions.ConfigureBlockPriority<YoutubeBlock>(1);
+        secondaryBlocksOptions.ConfigureBlockPriority<TextBlock>(2);
+        secondaryBlocksOptions.ConfigureBlockPriority<GalleryBlock>(3);
+        secondaryBlocksOptions.ConfigureBlockMaxCount<GalleryBlock>(1);
+        secondaryBlocksOptions.ConfigureBlockMaxCount<YoutubeBlock>(1);
     }
 
 }

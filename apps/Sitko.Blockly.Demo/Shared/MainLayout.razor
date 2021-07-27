@@ -1,7 +1,7 @@
 @using Layout = AntDesign.ProLayout.Layout
 @inherits LayoutComponentBase
 
-<BasicLayout MenuData="_menuData" Theme="MenuTheme.Dark" Layout="Layout.Top" Logo="@("/logo.png")">
+<BasicLayout MenuData="menuData" Theme="MenuTheme.Dark" Layout="Layout.Top" Logo="@("/logo.png")">
     <ChildContent>
         @Body
     </ChildContent>
@@ -18,7 +18,7 @@
 
 @code
 {
-    private readonly MenuDataItem[] _menuData =
+    private readonly MenuDataItem[] menuData =
     {
         new()
         {
