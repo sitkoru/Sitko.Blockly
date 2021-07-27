@@ -30,7 +30,7 @@ namespace Sitko.Blockly.Tests
         public async Task Changes()
         {
             var scope = await GetScopeAsync();
-            var repository = scope.Get<TestRepository>();
+            var repository = scope.GetService<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
             Assert.NotEmpty(model!.Blocks);
@@ -43,7 +43,7 @@ namespace Sitko.Blockly.Tests
         public async Task FormChanges()
         {
             var scope = await GetScopeAsync();
-            var repository = scope.Get<TestRepository>();
+            var repository = scope.GetService<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
             Assert.NotEmpty(model!.Blocks);
@@ -61,7 +61,7 @@ namespace Sitko.Blockly.Tests
         public async Task FormPositionChanges()
         {
             var scope = await GetScopeAsync();
-            var repository = scope.Get<TestRepository>();
+            var repository = scope.GetService<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
             Assert.NotEmpty(model!.Blocks);
@@ -79,13 +79,13 @@ namespace Sitko.Blockly.Tests
         public async Task Form()
         {
             var scope = await GetScopeAsync();
-            var repository = scope.Get<TestRepository>();
+            var repository = scope.GetService<TestRepository>();
             var model = await repository.GetAsync();
             Assert.NotNull(model);
             Assert.NotEmpty(model!.Blocks);
             Assert.False(await repository.HasChangesAsync(model));
             var editContext = new EditContext(model);
-            var form = scope.Get<TestForm>();
+            var form = scope.GetService<TestForm>();
             form.SetEditContext(editContext);
             await form.InitializeAsync(model);
             Assert.True(editContext.Validate());

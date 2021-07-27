@@ -29,9 +29,9 @@ namespace Sitko.Blockly.HtmlParser.Tests
         public async Task Parse()
         {
             var scope = await GetScopeAsync();
-            var storage = scope.Get<IStorage<TestBlocklyStorageOptions>>();
+            var storage = scope.GetService<IStorage<TestBlocklyStorageOptions>>();
             var filesUploaderLogger = scope.GetLogger<FilesUploader<TestBlocklyStorageOptions>>();
-            var httpClientFactory = scope.Get<IHttpClientFactory>();
+            var httpClientFactory = scope.GetService<IHttpClientFactory>();
             var parserLogger = scope.GetLogger<HtmlParser<TestBlocklyStorageOptions>>();
             var filesUploader =
                 new FilesUploader<TestBlocklyStorageOptions>(httpClientFactory, storage, filesUploaderLogger,
