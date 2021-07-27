@@ -27,10 +27,17 @@ namespace Sitko.Blockly.EntityFrameworkCore
             where TEntity : class
             where TEnumerable : IEnumerable<ContentBlock>, new()
         {
-            var valueComparer = new ValueComparer<TEnumerable>(
-                (c1, c2) => c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-                c => BlocklyJsonExtensions.DeserializeBlocks<TEnumerable>(BlocklyJsonExtensions.SerializeBlocks(c))!);
+            Expression<Func<TEnumerable?, TEnumerable?, bool>> equalsExpression = (oldBlocks, newBlock) =>
+                (oldBlocks == null && newBlock == null) ||
+                (oldBlocks != null && newBlock != null && oldBlocks.SequenceEqual(newBlock));
+            Expression<Func<TEnumerable, int>> hashCodeExpression = blocks => blocks.Aggregate(0,
+                (accumulator, block) => HashCode.Combine(accumulator, block.GetHashCode()));
+            Expression<Func<TEnumerable?, TEnumerable?>> snapshotExpression = blocks => blocks == null
+                ? blocks
+                : BlocklyJsonExtensions.DeserializeBlocks<TEnumerable>(
+                    BlocklyJsonExtensions.SerializeBlocks(blocks));
+            var valueComparer =
+                new ValueComparer<TEnumerable>(equalsExpression, hashCodeExpression, snapshotExpression);
             modelBuilder
                 .Entity<TEntity>()
                 .Property(fieldSelector)
