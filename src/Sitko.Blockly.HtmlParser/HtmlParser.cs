@@ -10,6 +10,8 @@ using System.Globalization;
 
 namespace Sitko.Blockly.HtmlParser
 {
+    using System;
+
     public class HtmlParser<TStorageOptions> where TStorageOptions : StorageOptions
     {
         private readonly ILogger<HtmlParser<TStorageOptions>> logger;
@@ -53,71 +55,6 @@ namespace Sitko.Blockly.HtmlParser
             }
 
             return null;
-        }
-
-        protected virtual async Task<List<ContentBlock>> ParseTextAsync(HtmlNode node, string uploadPath)
-        {
-            var blocks = new List<ContentBlock>();
-            var extractedBlocks = new List<ContentBlock>();
-            foreach (var childNode in node.ChildNodes.ToArray())
-            {
-                switch (childNode.Name)
-                {
-                    case "img":
-                        var imgBlock = await ParseImgAsync(childNode, uploadPath);
-                        if (imgBlock != null)
-                        {
-                            extractedBlocks.Add(imgBlock);
-                            var imgNodeStr =
-                                $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
-                            var imgNode = HtmlNode.CreateNode(imgNodeStr);
-                            childNode.ParentNode.ReplaceChild(imgNode, childNode);
-                        }
-
-                        break;
-                    case "iframe":
-                        var frameBlock = await ParseIframeAsync(childNode);
-                        extractedBlocks.Add(frameBlock);
-                        var iFrameStr =
-                            $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
-                        var iFrame = HtmlNode.CreateNode(iFrameStr);
-                        childNode.ParentNode.ReplaceChild(iFrame, childNode);
-
-                        break;
-                }
-            }
-
-            var currentHtml = "";
-            foreach (var childNode in node.ChildNodes)
-            {
-                switch (childNode.Name)
-                {
-                    case "block":
-                        if (!string.IsNullOrEmpty(currentHtml))
-                        {
-                            blocks.Add(new TextBlock { Text = currentHtml.Trim() });
-                            currentHtml = "";
-                        }
-
-                        var id = int.Parse(childNode.Attributes["id"].Value, CultureInfo.InvariantCulture);
-                        blocks.Add(extractedBlocks[id - 1]);
-                        break;
-                    default:
-                        if (!string.IsNullOrEmpty(childNode.InnerText.Replace("&nbsp;", "").Trim()))
-                        {
-                            currentHtml += childNode.OuterHtml;
-                        }
-
-                        break;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(currentHtml))
-            {
-                blocks.Add(new TextBlock { Position = blocks.Count, Text = currentHtml.Trim() });
-            }
-
-            return blocks;
         }
 
         public async Task<List<ContentBlock>> ParseAsync(string html, string uploadPath)
@@ -209,43 +146,118 @@ namespace Sitko.Blockly.HtmlParser
 
             foreach (var childNode in nodes)
             {
-                switch (childNode.Name)
+                var nodeBlocks = await ParseNodeAsync(childNode, uploadPath);
+                if (nodeBlocks.Length > 0)
                 {
-                    case "p":
-                    case "#text":
-                        blocks.AddItems(await ParseTextAsync(childNode, uploadPath));
-                        break;
-                    case "div":
-                        blocks.AddItems(await ParseTextAsync(childNode, uploadPath));
-                        break;
-                    case "blockquote":
-                        blocks.AddItem(await ParseBlockQuoteAsync(childNode));
-                        break;
-                    case "iframe":
-                        blocks.AddItem(await ParseIframeAsync(childNode));
-                        break;
-                    case "ul":
-                    case "ol":
-                    case "table":
-                    case "hr":
-                        blocks.AddItem(await HtmlParser<TStorageOptions>.ParseHtmlAsync(childNode));
-                        break;
-                    case "img":
-                        var imgBlock = await ParseImgAsync(childNode, uploadPath);
-                        if (imgBlock != null)
-                        {
-                            blocks.AddItem(imgBlock);
-                        }
-
-                        break;
-                    default:
-                        logger.LogWarning("Unknown node type: {NodeType}", childNode.Name);
-                        break;
+                    blocks.AddItems(nodeBlocks);
                 }
             }
 
             return blocks.ToList();
         }
+
+        protected async Task<ContentBlock[]> ParseAsync(HtmlNode node, string uploadPath)
+        {
+            var blocks = new List<ContentBlock>();
+            var extractedBlocks = new List<ContentBlock>();
+            foreach (var childNode in node.ChildNodes.ToArray())
+            {
+                var nodeBlocks = await ParseNodeAsync(childNode, uploadPath);
+                if (nodeBlocks.Length > 0)
+                {
+                    extractedBlocks.AddRange(nodeBlocks);
+                    var nodeNewHtml =
+                        $"<block id=\"{extractedBlocks.Count.ToString(CultureInfo.InvariantCulture)}\" />";
+                    var newNode = HtmlNode.CreateNode(nodeNewHtml);
+                    childNode.ParentNode.ReplaceChild(newNode, childNode);
+                }
+            }
+
+            var currentHtml = "";
+            foreach (var childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "block":
+                        if (!string.IsNullOrEmpty(currentHtml))
+                        {
+                            blocks.Add(new TextBlock { Text = currentHtml.Trim() });
+                            currentHtml = "";
+                        }
+
+                        var id = int.Parse(childNode.Attributes["id"].Value, CultureInfo.InvariantCulture);
+                        blocks.Add(extractedBlocks[id - 1]);
+                        break;
+                    default:
+                        if (!string.IsNullOrEmpty(childNode.InnerText.Replace("&nbsp;", "").Trim()))
+                        {
+                            currentHtml += childNode.OuterHtml;
+                        }
+
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentHtml))
+            {
+                blocks.Add(new TextBlock { Position = blocks.Count, Text = currentHtml.Trim() });
+            }
+
+            return blocks.ToArray();
+        }
+
+        protected async Task<ContentBlock[]> ParseNodeAsync(HtmlNode childNode, string uploadPath)
+        {
+            var blocks = new List<ContentBlock>();
+            switch (childNode.Name)
+            {
+                case "p":
+                case "#text":
+                    blocks.AddRange(await ParseAsync(childNode, uploadPath));
+                    break;
+                case "div":
+                    blocks.AddRange(await ParseAsync(childNode, uploadPath));
+                    break;
+                case "blockquote":
+                    blocks.Add(await ParseBlockQuoteAsync(childNode));
+                    break;
+                case "iframe":
+                    blocks.Add(await ParseIframeAsync(childNode));
+                    break;
+                case "ul":
+                case "ol":
+                case "table":
+                case "hr":
+                    blocks.Add(await ParseHtmlAsync(childNode));
+                    break;
+                case "img":
+                    var imgBlock = await ParseImgAsync(childNode, uploadPath);
+                    if (imgBlock != null)
+                    {
+                        blocks.Add(imgBlock);
+                    }
+
+                    break;
+                default:
+                    var (parsed, parsedBlocks) = await TryParseAsync(childNode, uploadPath);
+                    if (parsed)
+                    {
+                        blocks.AddRange(parsedBlocks);
+                    }
+                    else
+                    {
+                        logger.LogWarning("Unknown node type: {NodeType}", childNode.Name);
+                    }
+
+                    break;
+            }
+
+            return blocks.ToArray();
+        }
+
+        protected virtual Task<(bool parsed, ContentBlock[] contentBlocks)> TryParseAsync(HtmlNode childNode,
+            string uploadPath) =>
+            Task.FromResult((false, Array.Empty<ContentBlock>()));
 
         private static Task<ContentBlock> ParseHtmlAsync(HtmlNode childNode)
         {
