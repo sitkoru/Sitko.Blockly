@@ -12,6 +12,7 @@
     <Summary>Sitko.Blockly is a library for building structured content editors</Summary>
     <Copyright>Copyright © Sitko.ru 2021</Copyright>
     <RepositoryUrl>https://github.com/sitkoru/Sitko.Blockly</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/sitkoru/Sitko.Blockly</PackageProjectUrl>
     <PackageIcon>packageIcon.png</PackageIcon>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
@@ -21,7 +22,6 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="8.0.0-preview.39" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,6 +12,7 @@
     <Summary>Sitko.Blockly is a library for building structured content editors</Summary>
     <Copyright>Copyright © Sitko.ru 2021</Copyright>
     <RepositoryUrl>https://github.com/sitkoru/Sitko.Blockly</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/sitkoru/Sitko.Blockly</PackageProjectUrl>
     <PackageIcon>packageIcon.png</PackageIcon>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
