@@ -137,11 +137,7 @@ namespace Sitko.Blockly.HtmlParser
             document.LoadHtml(html);
             var xpath = "//text()[not(normalize-space())]";
             var emptyNodes = document.DocumentNode.SelectNodes(xpath);
-
-            foreach (HtmlNode emptyNode in emptyNodes)
-            {
-                emptyNode.Remove();
-            }
+            emptyNodes?.ToList().ForEach(emptyNode => emptyNode.Remove());
 
             var nodes = new List<HtmlNode>();
             string? currentTextNode = null;
