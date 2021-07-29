@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.0.0-preview.40" />
-    <PackageReference Include="Sitko.Core.Xunit" Version="8.0.0-preview.40" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.0.0-preview.41" />
+    <PackageReference Include="Sitko.Core.Xunit" Version="8.0.0-preview.41" />
   </ItemGroup>
   <!-- Workaround for this bug (https://github.com/dotnet/sdk/issues/18148) (replace the analyzer name with the one you need to exclude (filename only, no extension) -->
   <Target Name="RemoveLoggingAnalyzer" AfterTargets="ResolveLockFileAnalyzers">
