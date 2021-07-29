@@ -7,14 +7,21 @@ using Sitko.Blockly.Blocks;
 
 namespace Sitko.Blockly.Blazor.Forms.Blocks
 {
+    using Sitko.Blazor.ScriptInjector;
+
     public abstract class
         TwitchBlockForm<TBlocklyFormOptions> : BlockForm<TwitchBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
+        private readonly ScriptInjectRequest twitchScriptRequest = ScriptInjectRequest.FromUrl(
+            "twitchTwitter",
+            "/_content/Sitko.Blockly.Blazor/twitch.js");
+
         protected ElementReference ContainerRef { get; set; }
         private bool rendered;
         private string? lastRendered;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+        [Inject] protected IScriptInjector ScriptInjector { get; set; } = null!;
 
         protected virtual bool RenderOnInit => true;
 
@@ -25,7 +32,7 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender && RenderOnInit)
             {
-                await RenderVideoAsync();
+                await ScriptInjector.InjectAsync(twitchScriptRequest, _ => RenderVideoAsync());
             }
         }
 

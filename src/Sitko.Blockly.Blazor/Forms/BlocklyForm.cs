@@ -11,6 +11,7 @@ using Sitko.Core.App.Collections;
 namespace Sitko.Blockly.Blazor.Forms
 {
     using JetBrains.Annotations;
+    using Sitko.Blazor.ScriptInjector;
 
     public interface IBlocklyForm
     {
@@ -22,6 +23,9 @@ namespace Sitko.Blockly.Blazor.Forms
         where TEntity : class
         where TOptions : BlazorBlocklyFormOptions, new()
     {
+        private readonly ScriptInjectRequest formsScriptRequest = ScriptInjectRequest.FromUrl(
+            "blocklyForms", "/_content/Sitko.Blockly.Blazor/forms.js");
+
         private ContentBlock? blockToScroll;
         [Parameter] public TForm Form { get; set; } = null!;
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
@@ -33,6 +37,7 @@ namespace Sitko.Blockly.Blazor.Forms
         [Inject] protected IBlockly<IBlazorBlockDescriptor> Blockly { get; set; } = null!;
         [Inject] protected BlocklyFormService BlocklyFormService { get; set; } = null!;
         [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;
+        [Inject] protected IScriptInjector ScriptInjector { get; set; } = null!;
 
         private OrderedCollection<ContentBlock> OrderedBlocks { get; } = new();
         protected List<ContentBlock> Blocks { get; } = new();
@@ -106,17 +111,22 @@ namespace Sitko.Blockly.Blazor.Forms
         }
 
         private Task SaveBlockPositionAsync(ContentBlock block) =>
-            JsRuntime.InvokeVoidAsync("Blockly.savePosition", BlockElements[block.Id]).AsTask();
+            JsRuntime.InvokeVoidAsync("Blockly.Forms.savePosition", BlockElements[block.Id]).AsTask();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
+            if (firstRender)
+            {
+                await ScriptInjector.InjectAsync(formsScriptRequest);
+            }
+
             if (blockToScroll is not null)
             {
                 var element = BlockElements[blockToScroll.Id];
                 blockToScroll = null;
 
-                await JsRuntime.InvokeVoidAsync("Blockly.scroll", element).AsTask();
+                await JsRuntime.InvokeVoidAsync("Blockly.Forms.scroll", element).AsTask();
             }
         }
 

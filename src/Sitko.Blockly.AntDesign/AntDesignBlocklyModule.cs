@@ -12,8 +12,13 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents
 {
+    using Sitko.Blazor.ScriptInjector;
+
     public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor, AntDesignBlocklyModuleOptions>
     {
+        public static readonly CssInjectRequest AntDesignBlocklyCssRequest = CssInjectRequest.FromUrl(
+            "blocklyAnt", "/_content/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.bundle.scp.css");
+
         public override void ConfigureServices(ApplicationContext context, IServiceCollection services,
             AntDesignBlocklyModuleOptions startupOptions)
         {

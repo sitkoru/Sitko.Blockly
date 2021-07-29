@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sitko.Blockly.Blazor.Forms;
 using Sitko.Core.App;
+using Sitko.Blazor.ScriptInjector;
 
 namespace Sitko.Blockly.Blazor
 {
@@ -13,6 +14,7 @@ namespace Sitko.Blockly.Blazor
         {
             base.ConfigureServices(context, services, startupOptions);
             services.AddScoped<BlocklyFormService>();
+            services.AddScriptInjector();
         }
     }
 }
