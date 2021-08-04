@@ -7,7 +7,7 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
     using System.Threading.Tasks;
     using Sitko.Blazor.ScriptInjector;
 
-    public partial class AntBlocklyForm<TEntity, TForm> where TEntity : class
+    public partial class AntBlocklyForm<TEntity, TForm> where TEntity : class, new()
         where TForm : Sitko.Core.App.Blazor.Forms.BaseForm<TEntity>
     {
         [Inject]

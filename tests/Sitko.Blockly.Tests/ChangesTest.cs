@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.EntityFrameworkCore;
-using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Collections;
 using Sitko.Core.Blazor.AntDesignComponents;
 using Sitko.Core.Repository;
@@ -73,29 +70,6 @@ namespace Sitko.Blockly.Tests
             blocks.MoveUp(model.Blocks.Last());
             model.Blocks = new List<ContentBlock>(blocks.ToList());
             Assert.True(await repository.HasChangesAsync(model));
-        }
-
-        [Fact]
-        public async Task Form()
-        {
-            var scope = await GetScopeAsync();
-            var repository = scope.GetService<TestRepository>();
-            var model = await repository.GetAsync();
-            Assert.NotNull(model);
-            Assert.NotEmpty(model!.Blocks);
-            Assert.False(await repository.HasChangesAsync(model));
-            var editContext = new EditContext(model);
-            var form = scope.GetService<TestForm>();
-            form.SetEditContext(editContext);
-            await form.InitializeAsync(model);
-            Assert.True(editContext.Validate());
-            var blocks = new OrderedCollection<ContentBlock>();
-            blocks.SetItems(form.Blocks);
-            blocks.MoveUp(model.Blocks.Last());
-            Assert.True(await repository.HasChangesAsync(model));
-            Assert.False(form.CanSave());
-            await form.FieldChangedAsync(FieldIdentifier.Create(() => model.Blocks));
-            Assert.True(editContext.Validate());
         }
     }
 
@@ -162,26 +136,5 @@ namespace Sitko.Blockly.Tests
             repositoryContext)
         {
         }
-    }
-
-    public class TestForm : BaseRepositoryForm<TestModel, Guid>
-    {
-        public TestForm(IRepository<TestModel, Guid> repository, ILogger<TestForm> logger) : base(repository, logger)
-        {
-        }
-
-        protected override Task MapEntityAsync(TestModel entity)
-        {
-            entity.Blocks = new List<ContentBlock>(Blocks);
-            return Task.CompletedTask;
-        }
-
-        protected override Task MapFormAsync(TestModel entity)
-        {
-            Blocks = new List<ContentBlock>(entity.Blocks);
-            return Task.CompletedTask;
-        }
-
-        public List<ContentBlock> Blocks { get; set; } = new();
     }
 }

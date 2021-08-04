@@ -22,6 +22,9 @@ namespace Sitko.Blockly
     {
         protected static readonly List<IBlockDescriptor> StaticDescriptors = new();
 
+        public static IBlockDescriptor[] GetDescriptors() =>
+            StaticDescriptors.ToArray();
+
         public static IBlockDescriptor? GetDescriptor(string key) =>
             StaticDescriptors.FirstOrDefault(d => d.Key == key);
 
@@ -80,7 +83,14 @@ namespace Sitko.Blockly
 
         public Task InitAsync()
         {
-            StaticDescriptors.AddRange(blockDescriptors.Cast<IBlockDescriptor>());
+            foreach (var blockDescriptor in blockDescriptors.Cast<IBlockDescriptor>())
+            {
+                if (StaticDescriptors.All(descriptor => descriptor.Type != blockDescriptor.Type))
+                {
+                    StaticDescriptors.Add(blockDescriptor);
+                }
+            }
+
             return Task.CompletedTask;
         }
     }
