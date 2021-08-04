@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Sitko.Blockly
 {
+    using System.Collections.Concurrent;
+
     public interface IBlockly<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
     {
         ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock;
@@ -20,16 +22,16 @@ namespace Sitko.Blockly
 
     public class Blockly
     {
-        protected static readonly List<IBlockDescriptor> StaticDescriptors = new();
+        protected static readonly ConcurrentDictionary<Type, IBlockDescriptor> StaticDescriptors = new();
 
         public static IBlockDescriptor[] GetDescriptors() =>
-            StaticDescriptors.ToArray();
+            StaticDescriptors.Values.ToArray();
 
         public static IBlockDescriptor? GetDescriptor(string key) =>
-            StaticDescriptors.FirstOrDefault(d => d.Key == key);
+            StaticDescriptors.Values.FirstOrDefault(d => d.Key == key);
 
         public static IBlockDescriptor? GetDescriptor(Type type) =>
-            StaticDescriptors.FirstOrDefault(d => d.Type == type);
+            StaticDescriptors.Values.FirstOrDefault(d => d.Type == type);
     }
 
     public class Blockly<TBlockDescriptor> : Blockly, IBlockly<TBlockDescriptor>
@@ -85,10 +87,7 @@ namespace Sitko.Blockly
         {
             foreach (var blockDescriptor in blockDescriptors.Cast<IBlockDescriptor>())
             {
-                if (StaticDescriptors.All(descriptor => descriptor.Type != blockDescriptor.Type))
-                {
-                    StaticDescriptors.Add(blockDescriptor);
-                }
+                StaticDescriptors.TryAdd(blockDescriptor.Type, blockDescriptor);
             }
 
             return Task.CompletedTask;
