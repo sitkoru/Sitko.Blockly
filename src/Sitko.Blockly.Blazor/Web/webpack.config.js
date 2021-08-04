@@ -3,9 +3,21 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
   entry: {
-    forms: path.resolve(__dirname, 'src', 'forms.js'),
-    twitch: path.resolve(__dirname, 'src', 'twitch.js'),
-    twitter: path.resolve(__dirname, 'src', 'twitter.js'),
+    forms: path.resolve(__dirname, 'src', 'forms.ts'),
+    twitch: path.resolve(__dirname, 'src', 'twitch.ts'),
+    twitter: path.resolve(__dirname, 'src', 'twitter.ts'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: '[name].js',
