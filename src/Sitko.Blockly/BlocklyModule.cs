@@ -8,9 +8,6 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly
 {
-    using Core.App.Compare;
-    using KellermanSoftware.CompareNetObjects;
-
     public class BlocklyModule : BlocklyModule<IBlockDescriptor, BlocklyModuleOptions>
     {
     }
@@ -29,7 +26,6 @@ namespace Sitko.Blockly
             {
                 options.AddDefaultResource<Blockly>();
             });
-            services.AddCompareLogicConfigurator<BlocklyCompareLogicConfigurator>();
         }
 
         public override string OptionsKey => "Blockly";
@@ -39,17 +35,6 @@ namespace Sitko.Blockly
             await base.InitAsync(context, serviceProvider);
             var blockly = serviceProvider.GetRequiredService<IBlockly<TBlockDescriptor>>();
             await blockly.InitAsync();
-        }
-    }
-
-    public class BlocklyCompareLogicConfigurator : ICompareLogicConfigurator
-    {
-        public void Configure(ComparisonConfig config)
-        {
-            foreach (var descriptor in Blockly.GetDescriptors())
-            {
-                config.CollectionMatchingSpec.Add(descriptor.Type, new[] { nameof(ContentBlock.Id) });
-            }
         }
     }
 
