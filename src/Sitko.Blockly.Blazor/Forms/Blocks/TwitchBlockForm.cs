@@ -13,10 +13,6 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         TwitchBlockForm<TBlocklyFormOptions> : BlockForm<TwitchBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        private readonly ScriptInjectRequest twitchScriptRequest = ScriptInjectRequest.FromUrl(
-            "twitchTwitter",
-            "/_content/Sitko.Blockly.Blazor/twitch.js");
-
         protected ElementReference ContainerRef { get; set; }
         private bool rendered;
         private string? lastRendered;
@@ -32,7 +28,7 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender && RenderOnInit)
             {
-                await ScriptInjector.InjectAsync(twitchScriptRequest, _ => RenderVideoAsync());
+                await ScriptInjector.InjectAsync(JsHelper.TwitchScriptRequest, _ => RenderVideoAsync());
             }
         }
 

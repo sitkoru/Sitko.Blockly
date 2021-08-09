@@ -27,7 +27,7 @@ class BlocklyForms {
     if (duration > 0) {
       document.querySelectorAll('.block-form').forEach(b => {
         const rectangleAfter = b.getBoundingClientRect();
-        const oldPosition = window.Blockly._oldBlockPositions[b.id];
+        const oldPosition = this._oldBlockPositions[b.id];
         console.log("Scroll to block. Old position: ", oldPosition, "New position: ", rectangleAfter.top);
 
         const deltaY = oldPosition - rectangleAfter.top;
@@ -74,7 +74,7 @@ class BlocklyForms {
       });
     } else {
       const rectangleAfter = element.getBoundingClientRect();
-      const oldPosition = window.Blockly._oldBlockPositions[element.id];
+      const oldPosition = this._oldBlockPositions[element.id];
       diff = rectangleAfter.top - oldPosition;
       console.log("Scroll diff: ", diff);
       window.scrollTo(scrollLeft, scrollTop + diff);

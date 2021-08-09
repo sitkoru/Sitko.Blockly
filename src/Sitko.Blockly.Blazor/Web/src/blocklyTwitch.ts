@@ -31,9 +31,9 @@ class BlocklyTwitch {
     }
     console.debug('render twitch', container, video, channel, collection);
     container.innerHTML = '';
-    TwitchPlayer.FromOptions('twitch-player', {
-      width: 1280,
-      height: 720,
+    TwitchPlayer.FromOptions(container.id, {
+      width: 640,
+      height: 360,
       autoplay: false,
       video: video,
       channel: channel,

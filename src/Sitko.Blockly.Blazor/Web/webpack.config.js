@@ -3,9 +3,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
   entry: {
-    forms: path.resolve(__dirname, 'src', 'forms.ts'),
-    twitch: path.resolve(__dirname, 'src', 'twitch.ts'),
-    twitter: path.resolve(__dirname, 'src', 'twitter.ts'),
+    blocklyForms: path.resolve(__dirname, 'src', 'blocklyForms'),
+    blocklyTwitch: path.resolve(__dirname, 'src', 'blocklyTwitch'),
+    blocklyTwitter: path.resolve(__dirname, 'src', 'blocklyTwitter'),
   },
   module: {
     rules: [

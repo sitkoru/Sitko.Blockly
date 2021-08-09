@@ -11,10 +11,6 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
         TwitterBlockComponent<TEntity, TListOptions> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitterBlock,
             TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
     {
-        private readonly ScriptInjectRequest twitterScriptRequest = ScriptInjectRequest.FromUrl(
-            "blocklyTwitter",
-            "/_content/Sitko.Blockly.Blazor/twitter.js");
-
         protected ElementReference ContainerRef { get; set; }
         [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;
         [Inject] protected IScriptInjector ScriptInjector { get; set; } = null!;
@@ -24,7 +20,7 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await ScriptInjector.InjectAsync(twitterScriptRequest,
+                await ScriptInjector.InjectAsync(JsHelper.TwitterScriptRequest,
                     async _ => await JsRuntime.RenderTweetAsync(Block.TweetId, ContainerRef));
             }
         }
