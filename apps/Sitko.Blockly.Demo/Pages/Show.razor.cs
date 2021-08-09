@@ -13,7 +13,7 @@ namespace Sitko.Blockly.Demo.Pages
         protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            var post = await GetService<PostsRepository>().GetByIdAsync(PostId);
+            var post = await GetRequiredService<PostsRepository>().GetByIdAsync(PostId);
             if (post is null)
             {
                 NavigationManager.NavigateTo("/404");

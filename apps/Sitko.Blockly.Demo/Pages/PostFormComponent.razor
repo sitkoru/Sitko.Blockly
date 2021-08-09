@@ -5,14 +5,14 @@
 @using Sitko.Core.Storage
 @using Sitko.Blazor.CKEditor.Bundle
 @inherits BaseComponent
-<AntRepositoryForm Layout="@FormLayout.Vertical" TEntity="Post" TEntityPk="Guid" TForm="PostForm" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
+<PostForm Layout="@FormLayout.Vertical" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
     <FormItem Label="Title">
-        <Input @bind-Value="context.Title"/>
+        <Input @bind-Value="context.Entity.Title"/>
     </FormItem>
-    <AntBlocklyForm Label="Blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Blocks" Form="context" Options="blocksOptions"></AntBlocklyForm>
-    <AntBlocklyForm Label="Secondary blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.SecondaryBlocks" Form="context" Options="secondaryBlocksOptions"></AntBlocklyForm>
+    <AntBlocklyForm Label="Blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Entity.Blocks" Form="context" Options="blocksOptions"></AntBlocklyForm>
+    <AntBlocklyForm Label="Secondary blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Entity.SecondaryBlocks" Form="context" Options="secondaryBlocksOptions"></AntBlocklyForm>
     <Button Disabled="@(!context.CanSave())" OnClick="context.Save">Save</Button>
-</AntRepositoryForm>
+</PostForm>
 
 @code {
 

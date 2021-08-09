@@ -20,7 +20,7 @@ namespace Sitko.Blockly.Blazor.Forms
 
     public abstract class BlocklyForm<TEntity, TForm, TOptions> : InputBase<List<ContentBlock>>, IBlocklyForm
         where TForm : BaseForm<TEntity>
-        where TEntity : class
+        where TEntity : class, new()
         where TOptions : BlazorBlocklyFormOptions, new()
     {
         private readonly ScriptInjectRequest formsScriptRequest = ScriptInjectRequest.FromUrl(
