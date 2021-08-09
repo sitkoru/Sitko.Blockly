@@ -13,10 +13,6 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
         TwitterBlockForm<TBlocklyFormOptions> : BlockForm<TwitterBlock, TBlocklyFormOptions>
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        private readonly ScriptInjectRequest twitterScriptRequest = ScriptInjectRequest.FromUrl(
-            "blocklyTwitter",
-            "/_content/Sitko.Blockly.Blazor/twitter.js");
-
         protected ElementReference ContainerRef { get; set; }
         private string? lastRendered;
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
@@ -30,7 +26,7 @@ namespace Sitko.Blockly.Blazor.Forms.Blocks
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender && RenderOnInit)
             {
-                await ScriptInjector.InjectAsync(twitterScriptRequest, _ => RenderTweetAsync());
+                await ScriptInjector.InjectAsync(JsHelper.TwitterScriptRequest, _ => RenderTweetAsync());
             }
         }
 

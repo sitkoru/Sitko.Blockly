@@ -1,11 +1,25 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 
 const config = {
   entry: {
-    forms: path.resolve(__dirname, 'src', 'forms.js'),
-    twitch: path.resolve(__dirname, 'src', 'twitch.js'),
-    twitter: path.resolve(__dirname, 'src', 'twitter.js'),
+    blocklyForms: path.resolve(__dirname, 'src', 'blocklyForms'),
+    blocklyTwitch: path.resolve(__dirname, 'src', 'blocklyTwitch'),
+    blocklyTwitter: path.resolve(__dirname, 'src', 'blocklyTwitter'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: '[name].js',
@@ -31,6 +45,12 @@ module.exports = (env, argv) => {
       ],
     }
   }
+
+  config.plugins = [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.config({path: `./.env.${argv.mode}`}).parsed)
+    })
+  ];
 
   return config;
 };

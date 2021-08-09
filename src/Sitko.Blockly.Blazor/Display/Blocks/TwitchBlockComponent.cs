@@ -11,10 +11,6 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
         TwitchBlockComponent<TEntity, TListOptions> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitchBlock,
             TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
     {
-        private readonly ScriptInjectRequest twitchScriptRequest = ScriptInjectRequest.FromUrl(
-            "twitchTwitter",
-            "/_content/Sitko.Blockly.Blazor/twitch.js");
-
         protected ElementReference ContainerRef { get; set; }
         [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
         [Inject] protected IScriptInjector ScriptInjector { get; set; } = null!;
@@ -24,7 +20,7 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await ScriptInjector.InjectAsync(twitchScriptRequest,
+                await ScriptInjector.InjectAsync(JsHelper.TwitchScriptRequest,
                     async _ => await JsRuntime.RenderTwitchAsync(ContainerRef, Block.VideoId, Block.ChannelId,
                         Block.CollectionId));
             }

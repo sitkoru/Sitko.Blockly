@@ -10,6 +10,7 @@ using Sitko.Core.App.Collections;
 
 namespace Sitko.Blockly.Blazor.Forms
 {
+    using Helpers;
     using JetBrains.Annotations;
     using Sitko.Blazor.ScriptInjector;
 
@@ -23,9 +24,6 @@ namespace Sitko.Blockly.Blazor.Forms
         where TEntity : class, new()
         where TOptions : BlazorBlocklyFormOptions, new()
     {
-        private readonly ScriptInjectRequest formsScriptRequest = ScriptInjectRequest.FromUrl(
-            "blocklyForms", "/_content/Sitko.Blockly.Blazor/forms.js");
-
         private ContentBlock? blockToScroll;
         [Parameter] public TForm Form { get; set; } = null!;
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
@@ -118,7 +116,7 @@ namespace Sitko.Blockly.Blazor.Forms
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await ScriptInjector.InjectAsync(formsScriptRequest);
+                await ScriptInjector.InjectAsync(JsHelper.FormsScriptRequest);
             }
 
             if (blockToScroll is not null)
