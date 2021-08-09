@@ -1,8 +1,13 @@
 import {TwitchPlayer} from "twitch-player";
+import {BlocklyBase} from "./base";
 
-class BlocklyTwitch {
+class BlocklyTwitch extends BlocklyBase {
   private _isLoaded = false;
   private _onReady: Function[] = [];
+
+  constructor() {
+    super('BlocklyTwitch');
+  }
 
   private load() {
     let d = document;
@@ -29,7 +34,7 @@ class BlocklyTwitch {
       });
       return;
     }
-    console.debug('render twitch', container, video, channel, collection);
+    this.debug('render twitch', container, video, channel, collection);
     container.innerHTML = '';
     TwitchPlayer.FromOptions(container.id, {
       width: 640,

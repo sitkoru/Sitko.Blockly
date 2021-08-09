@@ -1,5 +1,7 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 
 const config = {
   entry: {
@@ -43,6 +45,12 @@ module.exports = (env, argv) => {
       ],
     }
   }
+
+  config.plugins = [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.config({path: `./.env.${argv.mode}`}).parsed)
+    })
+  ];
 
   return config;
 };

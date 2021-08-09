@@ -1,12 +1,19 @@
-class BlocklyForms {
+import {BlocklyBase} from "./base";
+
+class BlocklyForms extends BlocklyBase {
   private _oldBlockPositions: { [id: string]: number; } = {};
   private _scrollAnimationDuration = 200;
+
+  constructor() {
+    super('BlocklyForms');
+  }
 
   public savePosition() {
     document.querySelectorAll('.block-form').forEach(b => {
       this._oldBlockPositions[b.id] = b.getBoundingClientRect().top;
-    });``
-    console.debug("Save block positions: ", this._oldBlockPositions);
+    });
+    ``
+    this.debug("Save block positions: ", this._oldBlockPositions);
   }
 
   private static inOutQuad(n: number) {
@@ -28,7 +35,7 @@ class BlocklyForms {
       document.querySelectorAll('.block-form').forEach(b => {
         const rectangleAfter = b.getBoundingClientRect();
         const oldPosition = this._oldBlockPositions[b.id];
-        console.log("Scroll to block. Old position: ", oldPosition, "New position: ", rectangleAfter.top);
+        this.debug("Scroll to block. Old position: ", oldPosition, "New position: ", rectangleAfter.top);
 
         const deltaY = oldPosition - rectangleAfter.top;
 
@@ -47,7 +54,7 @@ class BlocklyForms {
             element.style.transition = `transform ${duration}ms`;
             if (b === element) {
               diff = rectangleAfter.top - oldPosition;
-              console.log("Scroll diff: ", diff);
+              this.debug("Scroll diff: ", diff);
               // Bootstrap our animation - it will get called right before next frame shall be rendered.
               const step = (timestamp: DOMHighResTimeStamp) => {
                 if (!start) start = timestamp;
@@ -62,7 +69,7 @@ class BlocklyForms {
                 if (time < duration) {
                   window.requestAnimationFrame(step);
                 } else {
-                  console.log('Scroll done');
+                  this.debug('Scroll done');
                 }
               };
               window.requestAnimationFrame(step);
@@ -76,7 +83,7 @@ class BlocklyForms {
       const rectangleAfter = element.getBoundingClientRect();
       const oldPosition = this._oldBlockPositions[element.id];
       diff = rectangleAfter.top - oldPosition;
-      console.log("Scroll diff: ", diff);
+      this.debug("Scroll diff: ", diff);
       window.scrollTo(scrollLeft, scrollTop + diff);
     }
   }

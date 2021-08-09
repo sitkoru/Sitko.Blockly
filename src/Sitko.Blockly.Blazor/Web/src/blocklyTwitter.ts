@@ -1,4 +1,11 @@
-class BlocklyTwitter {
+import {BlocklyBase} from "./base";
+
+class BlocklyTwitter extends BlocklyBase {
+
+  constructor() {
+    super('BlocklyTwitter');
+  }
+
   private load(): TwitterLike {
     let d = document;
     let id = "twitter-wjs";
@@ -19,10 +26,10 @@ class BlocklyTwitter {
   }
 
   public render(tweetId: string, container: HTMLElement) {
-    console.log('render tweet', tweetId, container);
+    this.debug('render tweet', tweetId, container);
     window.twttr = this.load();
-    window.twttr.ready(function (tw) {
-      console.debug("Twitter is ready");
+    window.twttr.ready((tw) => {
+      this.debug("Twitter is ready");
       container.innerHTML = '';
       tw.widgets.createTweet(
         tweetId + '', container,
