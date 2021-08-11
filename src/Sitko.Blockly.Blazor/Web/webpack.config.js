@@ -23,7 +23,7 @@ const config = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '..', 'wwwroot'),
+    path: path.resolve(__dirname, 'dist'),
   }
 };
 module.exports = (env, argv) => {
