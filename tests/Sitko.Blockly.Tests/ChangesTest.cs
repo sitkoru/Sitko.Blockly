@@ -121,11 +121,9 @@ namespace Sitko.Blockly.Tests
         }
     }
 
-    public class TestModel : IEntity<Guid>
+    public class TestModel : Entity<Guid>
     {
-        public object GetId() => Id;
-
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public override Guid Id { get; set; } = Guid.NewGuid();
 
         public List<ContentBlock> Blocks { get; set; } = new();
     }
