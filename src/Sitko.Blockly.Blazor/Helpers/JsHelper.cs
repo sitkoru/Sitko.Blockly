@@ -4,19 +4,15 @@
 
     public class JsHelper
     {
-        // TODO: .NET 6 Preview 7 sdk can't pack multiple files as static web assets. Return to static web assets when .NET 6 is fixed.
-        // TODO: Probably https://github.com/dotnet/sdk/pull/19482. Try in RC1.
-        public static ScriptInjectRequest TwitchScriptRequest { get; } = ScriptInjectRequest.FromResource(
+        public static ScriptInjectRequest TwitchScriptRequest { get; } = ScriptInjectRequest.FromUrl(
             "blocklyTwitch",
-            typeof(JsHelper).Assembly,
-            "blocklyTwitch.js");
+            "/_content/Sitko.Blockly.Blazor/blocklyTwitch.js");
 
-        public static ScriptInjectRequest TwitterScriptRequest { get; } = ScriptInjectRequest.FromResource(
+        public static ScriptInjectRequest TwitterScriptRequest { get; } = ScriptInjectRequest.FromUrl(
             "blocklyTwitter",
-            typeof(JsHelper).Assembly,
-            "blocklyTwitter.js");
+            "/_content/Sitko.Blockly.Blazor/blocklyTwitter.js");
 
-        public static ScriptInjectRequest FormsScriptRequest { get; } = ScriptInjectRequest.FromResource(
-            "blocklyForms", typeof(JsHelper).Assembly, "blocklyForms.js");
+        public static ScriptInjectRequest FormsScriptRequest { get; } = ScriptInjectRequest.FromUrl(
+            "blocklyForms", "/_content/Sitko.Blockly.Blazor/blocklyForms.js");
     }
 }
