@@ -28,8 +28,17 @@ namespace Sitko.Blockly.Blazor.Forms
         where TBlock : ContentBlock
         where TBlocklyFormOptions : BlocklyFormOptions
     {
-        [Parameter] public TBlock Block { get; set; } = default!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public TBlock Block { get; set; } = default!;
+
         [Inject] protected IBlazorBlockDescriptor<TBlock> BlockDescriptor { get; set; } = default!;
-        [Parameter] public TBlocklyFormOptions FormOptions { get; set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public TBlocklyFormOptions FormOptions { get; set; } = null!;
     }
 }

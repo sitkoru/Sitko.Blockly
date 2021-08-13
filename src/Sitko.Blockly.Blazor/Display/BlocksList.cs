@@ -11,9 +11,21 @@ namespace Sitko.Blockly.Blazor.Display
 
     public abstract class BlocksList<TEntity, TOptions> : BaseComponent where TOptions : BlazorBlocklyListOptions, new()
     {
-        [Parameter] public TEntity Entity { get; set; } = default!;
-        [Parameter] public string EntityUrl { get; set; } = null!;
-        [Parameter] public IEnumerable<ContentBlock> EntityBlocks { get; set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public TEntity Entity { get; set; } = default!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public string EntityUrl { get; set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public IEnumerable<ContentBlock> EntityBlocks { get; set; } = null!;
 
         [PublicAPI]
         protected IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =

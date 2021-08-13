@@ -31,7 +31,12 @@ namespace Sitko.Blockly.AntDesignComponents.Forms
 
         [Parameter] public bool NoStyle { get; set; }
 
-        [Parameter] public BlockForm BlockForm { get; set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public BlockForm BlockForm { get; set; } = null!;
+
         [CascadingParameter] public EditContext? CurrentEditContext { get; set; }
 
         [Parameter] public ColLayoutParam? LabelCol { get; set; }

@@ -25,7 +25,12 @@ namespace Sitko.Blockly.Blazor.Forms
         where TOptions : BlazorBlocklyFormOptions, new()
     {
         private ContentBlock? blockToScroll;
-        [Parameter] public TForm Form { get; set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public TForm Form { get; set; } = null!;
+
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
 
         [PublicAPI]

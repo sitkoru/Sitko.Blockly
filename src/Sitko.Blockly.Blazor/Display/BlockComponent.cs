@@ -8,8 +8,17 @@ namespace Sitko.Blockly.Blazor.Display
         where TListOptions : BlazorBlocklyListOptions, new()
         where TBlock : ContentBlock
     {
-        [Parameter] public TBlock Block { get; set; } = null!;
-        [Parameter] public BlockListContext<TEntity> Context { get; set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public TBlock Block { get; set; } = null!;
+
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public BlockListContext<TEntity> Context { get; set; } = null!;
 
         protected TListOptions ListOptions { get; set; } = new();
 
