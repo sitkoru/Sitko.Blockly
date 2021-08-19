@@ -77,6 +77,16 @@
   justify-content: center;
   transition-duration: .2s;
 }
+.block-row .block-controls.block-controls-default {
+  width: 130px;
+}
+
+::deep .block-row .block-controls.block-controls-default .ant-btn-default {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 3px 14px;
+}
+
 
 .block-mainicon {
   width: 100%;
@@ -135,6 +145,10 @@
   justify-content: center;
 }
 
+::deep .add-block-panel.add-block-panel-default {
+  margin: 10px 130px 20px 0;
+}
+
 
 ::deep .add-block-panel::after,
 ::deep .add-block-panel::before {
@@ -173,6 +187,19 @@
   height: 28px;
   display: inline-block;
 }
+
+::deep .add-block-panel .plus-icon.plus-icon_default {
+  height: 36px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+::deep .add-block-panel .ant-btn-default {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 3px 14px;
+}
+
 
 ::deep .add-block-panel-disabled.add-block-panel .plus-icon {
   display: none;

@@ -1,5 +1,6 @@
 .blockly {
   margin-bottom: 40px;
+  position: relative;
 }
 
 .blockly.blockly-galleryblock img {

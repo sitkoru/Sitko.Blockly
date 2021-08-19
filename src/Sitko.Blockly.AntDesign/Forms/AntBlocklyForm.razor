@@ -21,12 +21,12 @@
                             </Spin>
                         </AntDesign.Card>
                     </div>
-                    <div class="block-controls">
+                    <div class="block-controls block-controls-default">
                         <div class="block-mainicon" title="@blockDescriptor.Title">
                             @blockDescriptor.Icon
                         </div>
                         <span title="@(block.Enabled ? LocalizationProvider["Disable block"] : LocalizationProvider["Enable block"])">
-                            <AntDesign.Button Size="small" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
+                            <AntDesign.Button Size="Default" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
                                 <Icon Type="eye-invisible"></Icon>
                             </AntDesign.Button>
                         </span>
@@ -35,18 +35,18 @@
                                                   OnConfirm="@(() => DeleteBlock(block))"
                                                   OkText="@LocalizationProvider["Delete block"]"
                                                   CancelText="@LocalizationProvider["Cancel"]">
-                                <AntDesign.Button Size="small">
+                                <AntDesign.Button Size="Default">
                                     <Icon Type="delete"></Icon>
                                 </AntDesign.Button>
                             </AntDesign.Popconfirm>
                         </span>
                         <span title="@LocalizationProvider["Move up"]">
-                            <AntDesign.Button Size="small" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUpAsync(block))">
+                            <AntDesign.Button Size="Default" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUpAsync(block))">
                                 <Icon Type="up"></Icon>
                             </AntDesign.Button>
                         </span>
                         <span title="@LocalizationProvider["Move down"]">
-                            <AntDesign.Button Size="small" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDownAsync(block))">
+                            <AntDesign.Button Size="Default" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDownAsync(block))">
                                 <Icon Type="down"></Icon>
                             </AntDesign.Button>
                         </span>
@@ -71,15 +71,15 @@
 
     private RenderFragment AddPanelTemplate(ContentBlock? afterBlock = null)
     {
-        return @<div class="add-block-panel @(CanAdd() ? "" : "add-block-panel-disabled")">
+        return @<div class="add-block-panel add-block-panel-default @(CanAdd() ? "" : "add-block-panel-disabled")">
                    <div class="add-block-items_wrapper">
-                       <AntDesign.Icon Class="plus-icon" Type="plus"></AntDesign.Icon>
+                       <AntDesign.Icon Class="plus-icon plus-icon_default" Type="plus"></AntDesign.Icon>
                        @if (CanAdd())
                        {
                            foreach (var descriptor in BlockDescriptors)
                            {
                                <span class="add-block-button" title="@descriptor.Title">
-                                   <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Small" OnClick="() => AddBlock(descriptor, afterBlock)">@descriptor.Icon</AntDesign.Button>
+                                   <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Default" OnClick="() => AddBlock(descriptor, afterBlock)">@descriptor.Icon</AntDesign.Button>
                                </span>
                            }
                        }
