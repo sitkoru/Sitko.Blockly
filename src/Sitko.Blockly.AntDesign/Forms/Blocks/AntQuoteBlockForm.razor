@@ -1,9 +1,10 @@
 ﻿@inherits Sitko.Blockly.Blazor.Forms.Blocks.QuoteBlockForm<AntDesignBlocklyFormOptions>
 <Row Gutter="(24,20)">
     <AntDesign.Col Span="24">
-        <AntBlockFormItem BlockForm="this">
+        <AntFormItem>
             <CKEditor Config="FormOptions.CKEditorConfig" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
-        </AntBlockFormItem>
+            <AntBlockValidationMessage BlockForm="this"></AntBlockValidationMessage>
+        </AntFormItem>
     </AntDesign.Col>
     <AntDesign.Col Span="24">
         <Row Gutter="24">

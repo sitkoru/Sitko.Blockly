@@ -3,7 +3,7 @@
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.GalleryBlockForm<AntDesignBlocklyFormOptions>
 @if (FormOptions.Storage is not null)
 {
-    <AntBlockFormItem BlockForm="this">
+    <AntFormItem>
         <AntStorageImagesInput
             TValue="ValueCollection<StorageItem>"
             Storage="FormOptions.Storage"
@@ -19,7 +19,8 @@
             RightText="@LocalizationProvider["Move right"]"
             @bind-Value="Block.Pictures">
         </AntStorageImagesInput>
-    </AntBlockFormItem>
+        <AntBlockValidationMessage BlockForm="this"></AntBlockValidationMessage>
+    </AntFormItem>
 }
 else
 {
