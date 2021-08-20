@@ -1,3 +1,4 @@
 {
-    "Button text": "Текст кнопки"
+  "Button text": "Текст кнопки",
+  "Text on button when block rendered in preview list mode": "Текст на кнопке когда блок отображается в предварительном просмотре"
 }

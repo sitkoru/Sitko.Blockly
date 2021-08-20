@@ -1,7 +1,9 @@
 {
-    "Source": "Источник цитаты",
-    "Author name, site title, etc...": "Имя автора, название сайта и тд...",
-    "Link": "Ссылка на источник",
-    "Source picture": "Картинка к источнику",
-    "Quote text": "Текст цитаты"
+  "Source": "Источник цитаты",
+  "Author name, site title, etc...": "Имя автора, название сайта и тд...",
+  "Link": "Ссылка на источник",
+  "Source picture": "Картинка к источнику",
+  "Quote text": "Текст цитаты",
+  "Link to page where this quote comes from": "Ссылка на страницу откуда взята цитата",
+  "Author photo, site logo, etc...": "Фото автора, логотип сайта и т.д."
 }

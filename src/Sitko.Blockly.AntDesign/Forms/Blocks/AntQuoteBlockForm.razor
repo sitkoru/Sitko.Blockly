@@ -8,14 +8,14 @@
     <AntDesign.Col Span="24">
         <Row Gutter="24">
             <AntDesign.Col Md="8" Xs="24">
-                <FormItem Label="@LocalizationProvider["Source"]">
+                <AntFormItem Label="@LocalizationProvider["Source"]" Hint="@LocalizationProvider["Author name, site title, etc..."]">
                     <Input Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author"/>
-                </FormItem>
+                </AntFormItem>
             </AntDesign.Col>
             <AntDesign.Col Md="8" Xs="24">
-                <FormItem Label="@LocalizationProvider["Url"]">
+                <AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Link to page where this quote comes from"]">
                     <Input Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link"/>
-                </FormItem>
+                </AntFormItem>
             </AntDesign.Col>
         </Row>
     </AntDesign.Col>
@@ -24,7 +24,7 @@
             <AntDesign.Col Span="24">
                 @if (FormOptions.Storage is not null)
                 {
-                    <FormItem Label="@LocalizationProvider["Source picture"]">
+                    <AntFormItem Label="@LocalizationProvider["Source picture"]" Hint="@LocalizationProvider["Author photo, site logo, etc..."]">
                         <AntStorageImageInput
                             Avatar="true"
                             Size="small"
@@ -38,7 +38,7 @@
                             GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
                             @bind-Value="Block.Picture">
                         </AntStorageImageInput>
-                    </FormItem>
+                    </AntFormItem>
                 }
             </AntDesign.Col>
         </Row>

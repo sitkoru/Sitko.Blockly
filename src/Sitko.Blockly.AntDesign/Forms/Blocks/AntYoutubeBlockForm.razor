@@ -1,9 +1,8 @@
-﻿@using FormItem = AntDesign.FormItem
-@inherits YoutubeBlockForm<AntDesignBlocklyFormOptions>
+﻿@inherits YoutubeBlockForm<AntDesignBlocklyFormOptions>
 <!--suppress HtmlDeprecatedAttribute -->
-<FormItem Label="@LocalizationProvider["Url"]">
+<AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Full YouTube video url"]">
     <Input placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url"/>
-</FormItem>
+</AntFormItem>
 @if (!string.IsNullOrEmpty(Block.YoutubeId))
 {
     <div class="youtube-container-wrapper">

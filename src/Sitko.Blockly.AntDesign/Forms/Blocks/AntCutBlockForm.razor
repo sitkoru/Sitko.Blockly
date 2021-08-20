@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components
 @inherits Sitko.Blockly.Blazor.Forms.Blocks.CutBlockForm<AntDesignBlocklyFormOptions>
-<FormItem Label="@LocalizationProvider["Button text"]">
+<AntFormItem Label="@LocalizationProvider["Button text"]" Hint="@LocalizationProvider["Text on button when block rendered in preview list mode"]">
     <Input @bind-Value="@Block.ButtonText"/>
-</FormItem>
+</AntFormItem>
