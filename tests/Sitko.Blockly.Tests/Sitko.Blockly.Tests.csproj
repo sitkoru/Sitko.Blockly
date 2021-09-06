@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.0.0-preview.62" />
-    <PackageReference Include="Sitko.Core.Xunit" Version="8.0.0-preview.62" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.0.1" />
+    <PackageReference Include="Sitko.Core.Xunit" Version="8.0.1" />
   </ItemGroup>
   <!-- Workaround for .NET 6 Preview 7 (https://devblogs.microsoft.com/dotnet/announcing-net-6-preview-7/#comment-9902)-->
   <PropertyGroup>
