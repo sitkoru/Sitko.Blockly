@@ -27,7 +27,7 @@
     <ItemGroup>
       <PackageReference Include="Sitko.Core.App.Blazor" Version="8.0.1" />
       <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-      <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="8.0.1" />
+      <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="8.2.0" />
     </ItemGroup>
 
   <ItemGroup>
