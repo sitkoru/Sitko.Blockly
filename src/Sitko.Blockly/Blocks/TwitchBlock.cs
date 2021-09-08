@@ -4,6 +4,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(8)]
     public record TwitchBlock : UrlContentBlock
     {
         protected override bool IsEmpty => string.IsNullOrEmpty(VideoId) && string.IsNullOrEmpty(ChannelId) &&
@@ -124,8 +125,6 @@ namespace Sitko.Blockly.Blocks
 
     public record TwitchBlockDescriptor : BlockDescriptor<TwitchBlock>
     {
-        public override int Priority => 8;
-
         public TwitchBlockDescriptor(ILocalizationProvider<TwitchBlock> localizationProvider) : base(
             localizationProvider)
         {

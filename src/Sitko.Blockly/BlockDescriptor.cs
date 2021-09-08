@@ -8,8 +8,6 @@ namespace Sitko.Blockly
     {
         string Title { get; }
         Type Type { get; }
-        int MaxCount { get; }
-        int Priority { get; }
         string Key { get; }
         bool ShouldRender(BlockListContext context, ContentBlock block) => true;
         bool ShouldRenderNext(BlockListContext context, ContentBlock block) => true;
@@ -25,8 +23,6 @@ namespace Sitko.Blockly
         public abstract string Title { get; }
         public abstract Type Type { get; }
         public abstract string Key { get; }
-        public virtual int MaxCount { get; } = 0;
-        public virtual int Priority { get; } = int.MaxValue;
     }
 
     public abstract record BlockDescriptor<TBlock> : BlockDescriptor, IBlockDescriptor<TBlock>

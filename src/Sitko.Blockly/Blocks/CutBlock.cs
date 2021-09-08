@@ -2,6 +2,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(2, 1)]
     public record CutBlock : ContentBlock
 
     {
@@ -15,7 +16,5 @@ namespace Sitko.Blockly.Blocks
         public CutBlockDescriptor(ILocalizationProvider<CutBlock> localizationProvider) : base(localizationProvider)
         {
         }
-        public override int Priority => 2;
-        public override int MaxCount => 1;
     }
 }

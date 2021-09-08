@@ -14,24 +14,24 @@ namespace Sitko.Blockly
 
         public IStorage? Storage { get; set; }
 
-        public int? MaxBlockCount(IBlockDescriptor descriptor)
+        public int MaxBlockCount(IBlockDescriptor descriptor)
         {
             if (maxBlockCounts.ContainsKey(descriptor.Type))
             {
                 return maxBlockCounts[descriptor.Type];
             }
 
-            return null;
+            return Blockly.GetMetadata(descriptor).MaxCount;
         }
 
-        public int? BlockPriority(IBlockDescriptor descriptor)
+        public int BlockPriority(IBlockDescriptor descriptor)
         {
             if (blockPriorities.ContainsKey(descriptor.Type))
             {
                 return blockPriorities[descriptor.Type];
             }
 
-            return null;
+            return Blockly.GetMetadata(descriptor).Priority;
         }
 
         public BlocklyFormOptions ClearBlockMaxCounts()

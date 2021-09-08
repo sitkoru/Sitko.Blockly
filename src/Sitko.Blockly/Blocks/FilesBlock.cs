@@ -5,6 +5,7 @@ using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(5)]
     public record FilesBlock : ContentBlock
     {
         public override string ToString() => $"Files: {string.Join(", ", Files.Select(p => p.FileName))}";
@@ -14,8 +15,6 @@ namespace Sitko.Blockly.Blocks
 
     public record FilesBlockDescriptor : BlockDescriptor<FilesBlock>
     {
-        public override int Priority => 5;
-
         public FilesBlockDescriptor(ILocalizationProvider<FilesBlock> localizationProvider) : base(localizationProvider)
         {
         }

@@ -2,6 +2,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(9)]
     public record IframeBlock : ContentBlock
     {
         public override string ToString() => $"Frame: {Src}";
@@ -11,8 +12,6 @@ namespace Sitko.Blockly.Blocks
 
     public record IframeBlockDescriptor : BlockDescriptor<IframeBlock>
     {
-        public override int Priority => 9;
-
         public IframeBlockDescriptor(ILocalizationProvider<IframeBlock> localizationProvider) : base(
             localizationProvider)
         {

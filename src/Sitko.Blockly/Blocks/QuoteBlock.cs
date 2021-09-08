@@ -3,6 +3,7 @@ using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(4)]
     public record QuoteBlock : ContentBlock
     {
         public override string ToString() => $"{Author}: {Text} ({Link})";
@@ -15,8 +16,6 @@ namespace Sitko.Blockly.Blocks
 
     public record QuoteBlockDescriptor : BlockDescriptor<QuoteBlock>
     {
-        public override int Priority => 4;
-
         public QuoteBlockDescriptor(ILocalizationProvider<QuoteBlock> localizationProvider) : base(localizationProvider)
         {
         }

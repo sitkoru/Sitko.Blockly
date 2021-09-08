@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace Sitko.Blockly
 {
     using System.Collections.Concurrent;
+    using System.Reflection;
 
     public interface IBlockly<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
     {
@@ -23,6 +24,7 @@ namespace Sitko.Blockly
     public class Blockly
     {
         protected static readonly ConcurrentDictionary<Type, IBlockDescriptor> StaticDescriptors = new();
+        protected static readonly ConcurrentDictionary<Type, IContentBlockMetadata> StaticMetadata = new();
 
         public static IBlockDescriptor[] GetDescriptors() =>
             StaticDescriptors.Values.ToArray();
@@ -32,12 +34,16 @@ namespace Sitko.Blockly
 
         public static IBlockDescriptor? GetDescriptor(Type type) =>
             StaticDescriptors.Values.FirstOrDefault(d => d.Type == type);
+
+        public static IContentBlockMetadata GetMetadata(IBlockDescriptor descriptor) =>
+            StaticMetadata.Values.First(d => d.BlockType == descriptor.Type);
     }
 
     public class Blockly<TBlockDescriptor> : Blockly, IBlockly<TBlockDescriptor>
         where TBlockDescriptor : IBlockDescriptor
     {
         private readonly List<TBlockDescriptor> blockDescriptors;
+        private readonly List<IContentBlockMetadata> blocksMetadata = new();
         private readonly ILogger<Blockly<TBlockDescriptor>> logger;
 
         public Blockly(IEnumerable<TBlockDescriptor> blockDescriptors, ILogger<Blockly<TBlockDescriptor>> logger)
@@ -88,6 +94,15 @@ namespace Sitko.Blockly
             foreach (var blockDescriptor in blockDescriptors.Cast<IBlockDescriptor>())
             {
                 StaticDescriptors.TryAdd(blockDescriptor.Type, blockDescriptor);
+                var metadataAttribute = blockDescriptor.Type.GetCustomAttribute<ContentBlockMetadataAttribute>() ??
+                                        new ContentBlockMetadataAttribute();
+                blocksMetadata.Add(new ContentBlockMetadata(blockDescriptor.Type, metadataAttribute.Priority,
+                    metadataAttribute.MaxCount));
+            }
+
+            foreach (var blockMetadata in blocksMetadata)
+            {
+                StaticMetadata.TryAdd(blockMetadata.BlockType, blockMetadata);
             }
 
             return Task.CompletedTask;

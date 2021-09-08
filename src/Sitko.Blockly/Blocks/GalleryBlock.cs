@@ -5,6 +5,7 @@ using Sitko.Core.Storage;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(3)]
     public record GalleryBlock : ContentBlock
     {
         public override string ToString() => $"Gallery: {string.Join(", ", Pictures.Select(p => p.FileName))}";
@@ -14,8 +15,6 @@ namespace Sitko.Blockly.Blocks
 
     public record GalleryBlockDescriptor : BlockDescriptor<GalleryBlock>
     {
-        public override int Priority => 3;
-
         public GalleryBlockDescriptor(ILocalizationProvider<GalleryBlock> localizationProvider) : base(
             localizationProvider)
         {

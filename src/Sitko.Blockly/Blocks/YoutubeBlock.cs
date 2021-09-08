@@ -4,6 +4,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(6)]
     public record YoutubeBlock : UrlContentBlock
     {
         protected override bool IsEmpty => string.IsNullOrEmpty(YoutubeId);
@@ -32,8 +33,6 @@ namespace Sitko.Blockly.Blocks
 
     public record YoutubeBlockDescriptor : BlockDescriptor<YoutubeBlock>
     {
-        public override int Priority => 6;
-
         public YoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
             localizationProvider)
         {

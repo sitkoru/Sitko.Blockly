@@ -4,6 +4,7 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(7)]
     public record TwitterBlock : UrlContentBlock
     {
         protected override bool IsEmpty => string.IsNullOrEmpty(TweetId);
@@ -41,8 +42,6 @@ namespace Sitko.Blockly.Blocks
 
     public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>
     {
-        public override int Priority => 7;
-
         public TwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
             localizationProvider)
         {

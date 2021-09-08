@@ -77,7 +77,7 @@ namespace Sitko.Blockly.Blazor.Forms
             base.OnInitialized();
             BlockDescriptors = Blockly.Descriptors
                 .Where(d => FormOptions.AllowedBlocks.Any() == false || FormOptions.AllowedBlocks.Contains(d.Type))
-                .OrderBy(d => FormOptions.BlockPriority(d) ?? d.Priority).ThenBy(d => d.Type.FullName).ToArray();
+                .OrderBy(d => FormOptions.BlockPriority(d)).ThenBy(d => d.Type.FullName).ToArray();
             OrderedBlocks.SetItems(CurrentValue?.OrderBy(b => b.Position) ?? new List<ContentBlock>().AsEnumerable());
             Blocks.AddRange(CurrentValue ?? new List<ContentBlock>());
             BlocklyFormService.AddForm(this);
@@ -100,7 +100,7 @@ namespace Sitko.Blockly.Blazor.Forms
                 return false;
             }
 
-            var blockMaxCount = FormOptions.MaxBlockCount(blockDescriptor) ?? blockDescriptor.MaxCount;
+            var blockMaxCount = FormOptions.MaxBlockCount(blockDescriptor);
             if (blockMaxCount > 0)
             {
                 var blocksCount = CurrentValue?.Count(b => b.GetType() == blockDescriptor.Type);

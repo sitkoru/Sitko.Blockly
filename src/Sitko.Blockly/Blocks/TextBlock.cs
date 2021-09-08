@@ -2,6 +2,7 @@
 
 namespace Sitko.Blockly.Blocks
 {
+    [ContentBlockMetadata(1)]
     public record TextBlock : ContentBlock
     {
         public override string ToString() => Text;
@@ -11,8 +12,6 @@ namespace Sitko.Blockly.Blocks
 
     public record TextBlockDescriptor : BlockDescriptor<TextBlock>
     {
-        public override int Priority => 1;
-
         public TextBlockDescriptor(ILocalizationProvider<TextBlock> localizationProvider) : base(localizationProvider)
         {
         }
