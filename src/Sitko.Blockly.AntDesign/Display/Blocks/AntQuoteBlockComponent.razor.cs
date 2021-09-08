@@ -1,6 +1,6 @@
 ﻿namespace Sitko.Blockly.AntDesignComponents.Display.Blocks
 {
-    public partial class AntQuoteBlockComponent<TEntity>
+    public partial class AntQuoteBlockComponent
     {
     }
 }

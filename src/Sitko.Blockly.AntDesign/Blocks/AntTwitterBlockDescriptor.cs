@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
@@ -8,14 +7,14 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Blocks
 {
-    public record AntTwitterBlockDescriptor : TwitterBlockDescriptor, IBlazorBlockDescriptor<TwitterBlock>
+    public record
+        AntTwitterBlockDescriptor : BlazorBlockDescriptor<TwitterBlock, AntTwitterBlockComponent, AntTwitterBlockForm>
     {
-        public AntTwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(localizationProvider)
+        public AntTwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
+            localizationProvider)
         {
         }
 
-        public virtual RenderFragment Icon => builder => builder.AddIcon("twitter");
-        public virtual Type FormComponent => typeof(AntTwitterBlockForm);
-        public virtual Type DisplayComponent => typeof(AntTwitterBlockComponent<>);
+        public override RenderFragment Icon => builder => builder.AddIcon("twitter");
     }
 }

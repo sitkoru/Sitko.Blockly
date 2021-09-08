@@ -1,6 +1,6 @@
 ﻿namespace Sitko.Blockly.AntDesignComponents.Display.Blocks
 {
-    public partial class AntTwitterBlockComponent<TEntity>
+    public partial class AntTwitterBlockComponent
     {
     }
 }

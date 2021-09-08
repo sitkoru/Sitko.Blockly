@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
@@ -8,15 +7,14 @@ using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.AntDesignComponents.Blocks
 {
-    public record AntYoutubeBlockDescriptor : YoutubeBlockDescriptor, IBlazorBlockDescriptor<YoutubeBlock>
+    public record
+        AntYoutubeBlockDescriptor : BlazorBlockDescriptor<YoutubeBlock, AntYoutubeBlockComponent, AntYoutubeBlockForm>
     {
         public AntYoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
             localizationProvider)
         {
         }
 
-        public virtual RenderFragment Icon => builder => builder.AddIcon("youtube");
-        public virtual Type FormComponent => typeof(AntYoutubeBlockForm);
-        public virtual Type DisplayComponent => typeof(AntYoutubeBlockComponent<>);
+        public override RenderFragment Icon => builder => builder.AddIcon("youtube");
     }
 }

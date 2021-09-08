@@ -1,17 +1,16 @@
-﻿@typeparam TEntity
-@using Sitko.Blockly.Blocks
-@inherits Sitko.Blockly.Blazor.Display.BlocksList<TEntity, AntDesignBlocklyListOptions>
+﻿@using Sitko.Blockly.Blocks
+@inherits Sitko.Blockly.Blazor.Display.BlocksList<AntDesignBlocklyListOptions>
 @foreach (var block in Blocks)
 {
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
-    if (blockDescriptor.ShouldRender(Context, block))
+    if (blockDescriptor.ShouldRender(Context!, block))
     {
         var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.DisplayComponentCssClass}";
         <div class="@className" @key="block.Id">
             @(RenderBlock(blockDescriptor, block))
         </div>
     }
-    if (!blockDescriptor.ShouldRenderNext(Context, block))
+    if (!blockDescriptor.ShouldRenderNext(Context!, block))
     {
         break;
     }
