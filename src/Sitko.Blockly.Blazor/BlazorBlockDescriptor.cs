@@ -19,7 +19,7 @@ namespace Sitko.Blockly.Blazor
         }
 
         public abstract RenderFragment Icon { get; }
-        public Type FormComponent => typeof(TFormComponent);
-        public Type DisplayComponent => typeof(TDisplayComponent);
+        public virtual Type FormComponent => typeof(TFormComponent);
+        public virtual Type DisplayComponent => typeof(TDisplayComponent);
     }
 }
