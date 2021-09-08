@@ -35,7 +35,7 @@ namespace Sitko.Blockly.HtmlParser.Tests
             var storage = scope.GetService<IStorage<TestBlocklyStorageOptions>>();
             var filesUploaderLogger = scope.GetLogger<FilesUploader<TestBlocklyStorageOptions>>();
             var httpClientFactory = scope.GetService<IHttpClientFactory>();
-            var parserLogger = scope.GetLogger<HtmlParser<TestBlocklyStorageOptions>>();
+            var parserLogger = scope.GetLogger<TestHtmlParser<TestBlocklyStorageOptions>>();
             var filesUploader =
                 new FilesUploader<TestBlocklyStorageOptions>(httpClientFactory, storage, filesUploaderLogger,
                     (_, headers, _) =>
@@ -143,7 +143,7 @@ namespace Sitko.Blockly.HtmlParser.Tests
     public class TestHtmlParser<TStorageOptions> : HtmlParser<TStorageOptions> where TStorageOptions : StorageOptions
     {
         public TestHtmlParser(FilesUploader<TStorageOptions> filesUploader,
-            ILogger<HtmlParser<TStorageOptions>> logger) : base(filesUploader, logger)
+            ILogger<TestHtmlParser<TStorageOptions>> logger) : base(filesUploader, logger)
         {
         }
 
