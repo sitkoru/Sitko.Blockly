@@ -2,7 +2,7 @@
 {
     public abstract class
         CutBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.CutBlock, TListOptions>
-        where TListOptions : BlazorBlocklyListOptions, new()
+        where TListOptions : BlazorBlocklyListOptions
     {
     }
 }

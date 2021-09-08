@@ -5,6 +5,4 @@
         Preview,
         Full
     }
-
-    public record BlockListContext(string EntityUrl, BlocksListMode Mode);
 }

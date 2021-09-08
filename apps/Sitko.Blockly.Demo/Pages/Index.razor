@@ -4,37 +4,39 @@
 @using Sitko.Blockly.Display
 @using Sitko.Core.Storage
 @inherits BaseComponent
-    <PageContainer Title="Posts">
+<PageContainer Title="Posts">
+    <Breadcrumb>
         <Breadcrumb>
-            <Breadcrumb>
-                <BreadcrumbItem>Home</BreadcrumbItem>
-                <BreadcrumbItem>Posts</BreadcrumbItem>
-            </Breadcrumb>
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem>Posts</BreadcrumbItem>
         </Breadcrumb>
-        <Content>
-        </Content>
-        <ExtraContent>
-            <Button>
-                <a href="/Posts/Add">Add</a>
-            </Button>
-        </ExtraContent>
-        <ChildContent>
-            @foreach (Post post in Posts)
-            {
-                <Card Title="@post.Title">
-                    <Extra>
-                        <a href="/Posts/@post.Id/Edit">
-                            <Button>Edit</Button>
-                        </a>
-                    </Extra>
-                    <ChildContent>
-                        <AntBlocksList TEntity="Post" Entity="post" EntityBlocks="post.Blocks" Options="@(new AntDesignBlocklyListOptions {Storage = GetService<IStorage<BlocklyStorageOptions>>(), Mode = BlocksListMode.Preview})" EntityUrl="@($"/Posts/{post.Id}")"></AntBlocksList>
-                    </ChildContent>
-                </Card>
-            }
+    </Breadcrumb>
+    <Content>
+    </Content>
+    <ExtraContent>
+        <Button>
+            <a href="/Posts/Add">Add</a>
+        </Button>
+    </ExtraContent>
+    <ChildContent>
+        @foreach (Post post in Posts)
+        {
+            <Card Title="@post.Title">
+                <Extra>
+                    <a href="/Posts/@post.Id/Edit">
+                        <Button>Edit</Button>
+                    </a>
+                </Extra>
+                <ChildContent>
+                    <AntBlocksList
+                        EntityBlocks="post.Blocks" Options="@(new AntDesignBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage<BlocklyStorageOptions>>(), $"Posts/{post.Id}"))">
+                    </AntBlocksList>
+                </ChildContent>
+            </Card>
+        }
 
-        </ChildContent>
-    </PageContainer>
+    </ChildContent>
+</PageContainer>
 
 
 @code{

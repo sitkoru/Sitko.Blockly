@@ -4,15 +4,15 @@
         @((MarkupString) Block.Text)
     </div>
     <footer class="author">
-        @if (ListOptions.Storage is not null && Block.Picture != null)
+        @if (Options.Storage is not null && Block.Picture != null)
         {
-            <div class="picture" style="background-image: url(@ListOptions.Storage.PublicUri(Block.Picture))">
+            <div class="picture" style="background-image: url(@Options.Storage.PublicUri(Block.Picture))">
             </div>
         }
         <cite>
             @{
                 var authorText = Block.Author;
-                @if (ListOptions.Storage is null || Block.Picture is null)
+                @if (Options.Storage is null || Block.Picture is null)
                 {
                     authorText = $"— {authorText}";
                 }

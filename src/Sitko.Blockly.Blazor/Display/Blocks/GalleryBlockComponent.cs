@@ -2,7 +2,7 @@
 {
     public abstract class
         GalleryBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.GalleryBlock,
-            TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
+            TListOptions> where TListOptions : BlazorBlocklyListOptions
     {
     }
 }

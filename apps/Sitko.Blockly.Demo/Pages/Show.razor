@@ -1,6 +1,6 @@
 ﻿@page "/Posts/{PostId:guid}"
-@using Sitko.Blockly.Demo.Data.Entities
 @using Sitko.Core.Storage
+@using Sitko.Blockly.Display
 @inherits BaseComponent
 @if (Post is not null)
 {
@@ -20,7 +20,7 @@
         <Content>
         </Content>
         <ChildContent>
-            <AntBlocksList TEntity="Post" Entity="Post" EntityBlocks="Post.Blocks" EntityUrl="@($"/Posts/{PostId}")" Options="@(new AntDesignBlocklyListOptions {Storage = GetService<IStorage<BlocklyStorageOptions>>()})"></AntBlocksList>
+            <AntBlocksList EntityBlocks="Post.Blocks" Options="@(new AntDesignBlocklyListOptions(BlocksListMode.Full, GetService<IStorage<BlocklyStorageOptions>>()))"></AntBlocksList>
         </ChildContent>
     </PageContainer>
 }

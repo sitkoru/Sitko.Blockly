@@ -1,5 +1,5 @@
 ﻿@inherits GalleryBlockComponent<AntDesignBlocklyListOptions>
-@if (ListOptions.Storage is not null)
+@if (Options.Storage is not null)
 {
     if (Block.Pictures.Any())
     {
@@ -10,7 +10,7 @@
                     @foreach (var image in Block.Pictures)
                     {
                         <CarouselSlick>
-                            <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
+                            <img src="@Options.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
                         </CarouselSlick>
                     }
                 </Carousel>
@@ -20,7 +20,7 @@
         {
             var image = Block.Pictures.First();
             <div class="single-image">
-                <img src="@ListOptions.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
+                <img src="@Options.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
             </div>
         }
     }

@@ -2,7 +2,7 @@
 {
     public abstract class
         IframeBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.IframeBlock,
-            TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
+            TListOptions> where TListOptions : BlazorBlocklyListOptions
     {
     }
 }
