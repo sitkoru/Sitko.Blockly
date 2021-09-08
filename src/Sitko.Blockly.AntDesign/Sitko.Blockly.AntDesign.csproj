@@ -30,7 +30,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="3.0.3" />
-    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="8.0.1" />
+    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="8.2.0" />
   </ItemGroup>
 
   <ItemGroup>
