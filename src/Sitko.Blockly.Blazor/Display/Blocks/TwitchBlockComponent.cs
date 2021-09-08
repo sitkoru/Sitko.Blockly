@@ -8,7 +8,7 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
     using Sitko.Blazor.ScriptInjector;
 
     public abstract class
-        TwitchBlockComponent<TEntity, TListOptions> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitchBlock,
+        TwitchBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.TwitchBlock,
             TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
     {
         protected ElementReference ContainerRef { get; set; }

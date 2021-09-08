@@ -8,7 +8,7 @@ namespace Sitko.Blockly.Blazor.Display.Blocks
     using Sitko.Blazor.ScriptInjector;
 
     public abstract class
-        TwitterBlockComponent<TEntity, TListOptions> : BlockComponent<TEntity, Sitko.Blockly.Blocks.TwitterBlock,
+        TwitterBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.TwitterBlock,
             TListOptions> where TListOptions : BlazorBlocklyListOptions, new()
     {
         protected ElementReference ContainerRef { get; set; }

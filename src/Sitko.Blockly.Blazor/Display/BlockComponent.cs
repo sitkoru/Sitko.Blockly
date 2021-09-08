@@ -4,8 +4,7 @@ using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display
 {
-    public abstract class BlockComponent<TEntity, TBlock, TListOptions> : BaseComponent
-        where TListOptions : BlazorBlocklyListOptions, new()
+    public abstract class BlockComponent<TBlock> : BaseComponent
         where TBlock : ContentBlock
     {
 #if NET6_0_OR_GREATER
@@ -13,12 +12,17 @@ namespace Sitko.Blockly.Blazor.Display
 #endif
         [Parameter]
         public TBlock Block { get; set; } = null!;
+    }
 
+    public abstract class BlockComponent<TBlock, TListOptions> : BlockComponent<TBlock>
+        where TListOptions : BlazorBlocklyListOptions, new()
+        where TBlock : ContentBlock
+    {
 #if NET6_0_OR_GREATER
         [EditorRequired]
 #endif
         [Parameter]
-        public BlockListContext<TEntity> Context { get; set; } = null!;
+        public BlockListContext Context { get; set; } = null!;
 
         protected TListOptions ListOptions { get; set; } = new();
 

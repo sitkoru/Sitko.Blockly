@@ -9,18 +9,8 @@ namespace Sitko.Blockly.Blazor.Display
 {
     using JetBrains.Annotations;
 
-    public abstract class BlocksList<TEntity, TOptions> : BaseComponent where TOptions : BlazorBlocklyListOptions, new()
+    public abstract class BlocksList<TOptions> : BaseComponent where TOptions : BlazorBlocklyListOptions, new()
     {
-#if NET6_0_OR_GREATER
-        [EditorRequired]
-#endif
-        [Parameter]
-        public TEntity Entity { get; set; } = default!;
-#if NET6_0_OR_GREATER
-        [EditorRequired]
-#endif
-        [Parameter]
-        public string EntityUrl { get; set; } = null!;
 #if NET6_0_OR_GREATER
         [EditorRequired]
 #endif
@@ -54,21 +44,23 @@ namespace Sitko.Blockly.Blazor.Display
         {
             base.Initialize();
             BlockDescriptors = Blockly.Descriptors.ToArray();
-            Context = new BlockListContext<TEntity>(Entity, EntityUrl, ListOptions.Mode);
+            if (Context is null)
+            {
+                throw new InvalidOperationException(LocalizationProvider["You must provide block list context"]);
+            }
         }
 
-        protected BlockListContext<TEntity> Context { get; private set; } = null!;
+#if NET6_0_OR_GREATER
+        [EditorRequired]
+#endif
+        [Parameter]
+        public BlockListContext? Context { get; set; }
 
         [PublicAPI]
         public RenderFragment RenderBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock block) =>
             builder =>
             {
                 var component = blockDescriptor.DisplayComponent;
-                if (blockDescriptor.DisplayComponent.IsGenericTypeDefinition)
-                {
-                    component = blockDescriptor.DisplayComponent.MakeGenericType(typeof(TEntity));
-                }
-
                 builder.OpenComponent(0, component);
                 builder.AddAttribute(1, "Block", block);
                 builder.AddAttribute(2, "Context", Context);
