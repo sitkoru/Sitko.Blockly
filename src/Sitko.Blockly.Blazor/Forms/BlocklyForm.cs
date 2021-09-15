@@ -160,9 +160,13 @@ namespace Sitko.Blockly.Blazor.Forms
             }
         }
 
-        protected bool CanMoveBlockUp(ContentBlock block) => block.Enabled && OrderedBlocks.CanMoveUp(block);
+        protected bool CanMoveBlockUp(ContentBlock block) =>
+            block.Enabled && FormOptions.CanMoveBlock(block) && OrderedBlocks.CanMoveUp(block);
 
-        protected bool CanMoveBlockDown(ContentBlock block) => block.Enabled && OrderedBlocks.CanMoveDown(block);
+        protected bool CanMoveBlockDown(ContentBlock block) =>
+            block.Enabled && FormOptions.CanMoveBlock(block) && OrderedBlocks.CanMoveDown(block);
+
+        protected bool CanDeleteBlock(ContentBlock block) => block.Enabled && FormOptions.CanDeleteBlock(block);
 
         protected Task MoveBlockUpAsync(ContentBlock block)
         {
