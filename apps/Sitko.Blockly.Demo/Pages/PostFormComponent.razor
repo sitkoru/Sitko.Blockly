@@ -61,6 +61,8 @@
             ImagesOptions = imagesStorageOptions,
             FilesOptions = filesStorageOptions, CKEditorConfig = ckEditorConfig
         };
+        blocksOptions.DisableBlocksDelete(new[] { typeof(TextBlock), typeof(CutBlock), typeof(GalleryBlock), typeof(YoutubeBlock) });
+        blocksOptions.DisableBlocksMove(new[] { typeof(CutBlock), typeof(GalleryBlock) });
 
         secondaryBlocksOptions = new AntDesignBlocklyFormOptions
         {
