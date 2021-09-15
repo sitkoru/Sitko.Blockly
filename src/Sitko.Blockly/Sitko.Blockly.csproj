@@ -21,8 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.App.Web" Version="8.3.1" />
-    <PackageReference Include="Sitko.Core.Storage" Version="8.3.1" />
+    <PackageReference Include="Sitko.Core.App.Web" Version="8.5.0" />
+    <PackageReference Include="Sitko.Core.Storage" Version="8.5.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
