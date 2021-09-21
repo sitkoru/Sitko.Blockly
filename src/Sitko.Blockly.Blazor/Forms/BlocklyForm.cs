@@ -31,6 +31,8 @@ namespace Sitko.Blockly.Blazor.Forms
         [Parameter]
         public TForm Form { get; set; } = null!;
 
+        protected Dictionary<Guid, BlockForm> BlockForms { get; } = new();
+
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
 
         [PublicAPI]
@@ -183,8 +185,10 @@ namespace Sitko.Blockly.Blazor.Forms
             return ScrollToBlockAsync(block);
         }
 
-        protected void DeleteBlock(ContentBlock block)
+        protected async Task DeleteBlockAsync(ContentBlock block)
         {
+            var blockForm = BlockForms[block.Id];
+            await blockForm.OnDeleteAsync();
             OrderedBlocks.RemoveItem(block);
             Blocks.Remove(block);
             UpdateForm();
@@ -200,6 +204,10 @@ namespace Sitko.Blockly.Blazor.Forms
                 builder.OpenComponent(0, blockDescriptor.FormComponent);
                 builder.AddAttribute(1, "FormOptions", FormOptions);
                 builder.AddAttribute(2, "Block", block);
+                builder.AddComponentReferenceCapture(3, reference =>
+                {
+                    BlockForms[block.Id] = (BlockForm)reference;
+                });
                 builder.SetKey(block.Id);
                 builder.CloseComponent();
             };

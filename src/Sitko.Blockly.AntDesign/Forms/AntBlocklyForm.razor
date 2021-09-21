@@ -32,7 +32,7 @@
                         </span>
                         <span title="@LocalizationProvider["Delete block"]">
                             <AntDesign.Popconfirm Disabled="!CanDeleteBlock(block)" Placement="@Placement.Left" Title="@LocalizationProvider["Delete block?"]"
-                                                  OnConfirm="@(() => DeleteBlock(block))"
+                                                  OnConfirm="@(async () => await DeleteBlockAsync(block))"
                                                   OkText="@LocalizationProvider["Delete block"]"
                                                   CancelText="@LocalizationProvider["Cancel"]">
                                 <AntDesign.Button Disabled="!CanDeleteBlock(block)" Size="Default">

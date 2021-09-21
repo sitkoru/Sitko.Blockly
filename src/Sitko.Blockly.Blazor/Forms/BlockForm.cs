@@ -4,6 +4,8 @@ using Sitko.Core.App.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Forms
 {
+    using System.Threading.Tasks;
+
     public abstract class BlockForm : BaseComponent
     {
         [CascadingParameter] public EditContext CurrentEditContext { get; set; } = null!;
@@ -22,6 +24,8 @@ namespace Sitko.Blockly.Blazor.Forms
             CurrentEditContext.NotifyFieldChanged(FieldIdentifier);
             StateHasChanged();
         }
+
+        public virtual Task OnDeleteAsync() => Task.CompletedTask;
     }
 
     public abstract class BlockForm<TBlock> : BlockForm where TBlock : ContentBlock
