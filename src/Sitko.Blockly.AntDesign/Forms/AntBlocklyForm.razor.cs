@@ -5,13 +5,10 @@ using Sitko.Core.App.Localization;
 namespace Sitko.Blockly.AntDesignComponents.Forms
 {
     using System.Threading.Tasks;
-    using Sitko.Blazor.ScriptInjector;
 
-    public partial class AntBlocklyForm<TEntity, TForm> where TEntity : class, new()
-        where TForm : Sitko.Core.App.Blazor.Forms.BaseForm<TEntity>
+    public partial class AntBlocklyForm
     {
-        [Inject]
-        protected ILocalizationProvider<AntBlocklyForm<TEntity, TForm>> LocalizationProvider { get; set; } = null!;
+        [Inject] protected ILocalizationProvider<AntBlocklyForm> LocalizationProvider { get; set; } = null!;
 
         [Inject] protected IOptions<AntDesignBlocklyModuleOptions> ModuleOptions { get; set; } = null!;
 

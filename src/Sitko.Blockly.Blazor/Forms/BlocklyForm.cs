@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using Sitko.Core.App.Blazor.Forms;
 using Sitko.Core.App.Collections;
 
 namespace Sitko.Blockly.Blazor.Forms
@@ -19,17 +18,10 @@ namespace Sitko.Blockly.Blazor.Forms
         void ValidateBlocks();
     }
 
-    public abstract class BlocklyForm<TEntity, TForm, TOptions> : InputBase<List<ContentBlock>>, IBlocklyForm
-        where TForm : BaseForm<TEntity>
-        where TEntity : class, new()
+    public abstract class BlocklyForm<TOptions> : InputBase<List<ContentBlock>>, IBlocklyForm
         where TOptions : BlazorBlocklyFormOptions, new()
     {
         private ContentBlock? blockToScroll;
-#if NET6_0_OR_GREATER
-        [EditorRequired]
-#endif
-        [Parameter]
-        public TForm Form { get; set; } = null!;
 
         protected Dictionary<Guid, BlockForm> BlockForms { get; } = new();
 
@@ -158,7 +150,7 @@ namespace Sitko.Blockly.Blazor.Forms
         {
             foreach (var property in block.GetType().GetProperties())
             {
-                Form.NotifyChange(new FieldIdentifier(block, property.Name));
+                EditContext.NotifyFieldChanged(new FieldIdentifier(block, property.Name));
             }
         }
 

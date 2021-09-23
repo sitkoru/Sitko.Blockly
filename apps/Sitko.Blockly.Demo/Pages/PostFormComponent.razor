@@ -9,8 +9,8 @@
     <FormItem Label="Title">
         <Input @bind-Value="context.Entity.Title"/>
     </FormItem>
-    <AntBlocklyForm Label="Blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Entity.Blocks" Form="context" Options="blocksOptions"></AntBlocklyForm>
-    <AntBlocklyForm Label="Secondary blocks" TEntity="Post" TForm="PostForm" @bind-Value="context.Entity.SecondaryBlocks" Form="context" Options="secondaryBlocksOptions"></AntBlocklyForm>
+    <AntBlocklyForm Label="Blocks" @bind-Value="context.Entity.Blocks" Options="blocksOptions"></AntBlocklyForm>
+    <AntBlocklyForm Label="Secondary blocks" @bind-Value="context.Entity.SecondaryBlocks" Options="secondaryBlocksOptions"></AntBlocklyForm>
     <Button Disabled="@(!context.CanSave())" OnClick="context.Save">Save</Button>
 </PostForm>
 
