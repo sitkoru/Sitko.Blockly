@@ -39,7 +39,7 @@ jobs:
       - name: Install .NET 6.0.x
         uses: actions/setup-dotnet@v1.8.2
         with:
-          dotnet-version: '6.0.100-rc.2.21474.31'
+          dotnet-version: '6.0.x'
           include-prerelease: true
       - name: Build blazor js
         working-directory: src/${{ env.BLAZOR_PROJECT }}/Web
