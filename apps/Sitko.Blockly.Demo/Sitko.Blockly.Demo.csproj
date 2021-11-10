@@ -19,7 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="8.16.0" />
-    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="8.16.0" />
+    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="8.20.0" />
     <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="8.16.0" />
   </ItemGroup>
 
