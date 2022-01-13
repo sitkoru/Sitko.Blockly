@@ -54,7 +54,7 @@ namespace Sitko.Blockly.AntDesignComponents
                     if (resource is not null)
                     {
                         StreamReader reader = new(resource);
-                        string text = await reader.ReadToEndAsync(); //hello world!
+                        var text = await reader.ReadToEndAsync(); //hello world!
                         var name = resourceName.Replace("Sitko.Blockly.AntDesignComponents.Icons.", "")
                             .Replace(".svg", "");
                         Icons.Add(name, text);

@@ -37,7 +37,7 @@ namespace Sitko.Blockly.EntityFrameworkCore
                 : BlocklyJsonExtensions.DeserializeBlocks<TEnumerable>(
                     BlocklyJsonExtensions.SerializeBlocks(blocks));
             var valueComparer =
-                new ValueComparer<TEnumerable>(equalsExpression, hashCodeExpression, snapshotExpression);
+                new ValueComparer<TEnumerable>(equalsExpression, hashCodeExpression, snapshotExpression!);
             modelBuilder
                 .Entity<TEntity>()
                 .Property(fieldSelector)
