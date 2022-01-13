@@ -1,4 +1,4 @@
-﻿@inherits Sitko.Blockly.Blazor.Forms.Blocks.IFrameBlockForm<AntDesignBlocklyFormOptions>
+﻿@inherits IFrameBlockForm<AntDesignBlocklyFormOptions>
 <!--suppress HtmlDeprecatedAttribute -->
 <AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Page url to embed"]">
     <Input @bind-Value="@Block.Src" Placeholder="@LocalizationProvider["Source"]"/>

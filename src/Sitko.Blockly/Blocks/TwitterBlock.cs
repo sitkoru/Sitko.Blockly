@@ -1,50 +1,47 @@
-using System;
-using System.Linq;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.Blocks
+namespace Sitko.Blockly.Blocks;
+
+[ContentBlockMetadata(7)]
+public record TwitterBlock : UrlContentBlock
 {
-    [ContentBlockMetadata(7)]
-    public record TwitterBlock : UrlContentBlock
+    protected override bool IsEmpty => string.IsNullOrEmpty(TweetId);
+    protected override string FinalUrl => $"https://twitter.com/{TweetAuthor}/status/{TweetId}";
+
+    public string TweetId { get; set; } = "";
+    public string TweetAuthor { get; set; } = "";
+
+    protected override void ParseUrl(string? url)
     {
-        protected override bool IsEmpty => string.IsNullOrEmpty(TweetId);
-        protected override string FinalUrl => $"https://twitter.com/{TweetAuthor}/status/{TweetId}";
-
-        public string TweetId { get; set; } = "";
-        public string TweetAuthor { get; set; } = "";
-
-        protected override void ParseUrl(string? url)
+        if (!string.IsNullOrEmpty(url))
         {
-            if (!string.IsNullOrEmpty(url))
-            {
-                var uri = new Uri(url);
+            var uri = new Uri(url);
 
-                if (uri.Segments.Length == 4)
+            if (uri.Segments.Length == 4)
+            {
+                var author = uri.Segments[1].Replace("/", "");
+                var tweetId = uri.Segments.Last();
+                if (TweetAuthor != author || TweetId != tweetId)
                 {
-                    var author = uri.Segments[1].Replace("/", "");
-                    var tweetId = uri.Segments.Last();
-                    if (TweetAuthor != author || TweetId != tweetId)
-                    {
-                        TweetAuthor = author;
-                        TweetId = tweetId;
-                    }
+                    TweetAuthor = author;
+                    TweetId = tweetId;
                 }
             }
-            else
-            {
-                TweetId = string.Empty;
-                TweetAuthor = string.Empty;
-            }
         }
-
-        public override string ToString() => $"Twitter: {TweetId} by {TweetAuthor}";
+        else
+        {
+            TweetId = string.Empty;
+            TweetAuthor = string.Empty;
+        }
     }
 
-    public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>
+    public override string ToString() => $"Twitter: {TweetId} by {TweetAuthor}";
+}
+
+public record TwitterBlockDescriptor : BlockDescriptor<TwitterBlock>
+{
+    public TwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
+        localizationProvider)
     {
-        public TwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
-            localizationProvider)
-        {
-        }
     }
 }

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DA312F56-FDB4-4853-A7A1-A8B2527399FC}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly", "src\Sitko.Blockly\Sitko.Blockly.csproj", "{0367FAD9-C3FD-4E07-9CBE-103A17666A1D}"
 EndProject
@@ -18,6 +21,7 @@ ProjectSection(SolutionItems) = preProject
 	LICENSE.md = LICENSE.md
 	README.md = README.md
 	docker-compose.yml = docker-compose.yml
+	release.config.js = release.config.js
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BE2C5E4A-BFBD-4645-AE0A-8B57A9EC1CB2}"
@@ -33,7 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 ProjectSection(SolutionItems) = preProject
 	.github\workflows\main.yml = .github\workflows\main.yml
 	.github\workflows\release.yml = .github\workflows\release.yml
-	.github\workflows\demo.yml = .github\workflows\demo.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{32D6C989-DF2C-4C06-BD48-C322E72888B9}"

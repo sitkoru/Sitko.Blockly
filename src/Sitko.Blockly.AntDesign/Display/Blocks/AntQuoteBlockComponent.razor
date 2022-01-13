@@ -1,7 +1,7 @@
 ﻿@inherits QuoteBlockComponent<AntDesignBlocklyListOptions>
 <blockquote class="blockquote">
     <div>
-        @((MarkupString) Block.Text)
+        @((MarkupString)Block.Text)
     </div>
     <footer class="author">
         @if (Options.Storage is not null && Block.Picture != null)
@@ -30,10 +30,8 @@
             }
             else if (!string.IsNullOrEmpty(Block.Author))
             {
-
                 @authorText
             }
         </cite>
     </footer>
 </blockquote>
-

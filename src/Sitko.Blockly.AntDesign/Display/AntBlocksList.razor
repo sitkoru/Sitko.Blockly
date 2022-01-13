@@ -1,5 +1,4 @@
-﻿@using Sitko.Blockly.Blocks
-@inherits Sitko.Blockly.Blazor.Display.BlocksList<AntDesignBlocklyListOptions>
+﻿@inherits BlocksList<AntDesignBlocklyListOptions>
 @foreach (var block in Blocks)
 {
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());

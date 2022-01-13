@@ -1,6 +1,5 @@
-namespace Sitko.Blockly
+namespace Sitko.Blockly;
+
+public abstract class BlocklyFormBlockOptions
 {
-    public abstract class BlocklyFormBlockOptions
-    {
-    }
 }

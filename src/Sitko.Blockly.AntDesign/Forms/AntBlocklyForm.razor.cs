@@ -1,26 +1,24 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.AntDesignComponents.Forms
+namespace Sitko.Blockly.AntDesignComponents.Forms;
+
+public partial class AntBlocklyForm
 {
-    using System.Threading.Tasks;
+    [Inject] protected ILocalizationProvider<AntBlocklyForm> LocalizationProvider { get; set; } = null!;
 
-    public partial class AntBlocklyForm
+    [Inject] protected IOptions<AntDesignBlocklyModuleOptions> ModuleOptions { get; set; } = null!;
+
+    [Parameter] public string? Label { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        [Inject] protected ILocalizationProvider<AntBlocklyForm> LocalizationProvider { get; set; } = null!;
-
-        [Inject] protected IOptions<AntDesignBlocklyModuleOptions> ModuleOptions { get; set; } = null!;
-
-        [Parameter] public string? Label { get; set; }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
         {
-            await base.OnAfterRenderAsync(firstRender);
-            if (firstRender)
-            {
-                await ScriptInjector.InjectAsync(AntDesignBlocklyModule.AntDesignBlocklyCssRequest);
-            }
+            await ScriptInjector.InjectAsync(AntDesignBlocklyModule.AntDesignBlocklyCssRequest);
         }
     }
 }

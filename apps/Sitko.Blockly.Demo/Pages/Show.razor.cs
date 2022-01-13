@@ -4,25 +4,24 @@ using Microsoft.AspNetCore.Components;
 using Sitko.Blockly.Demo.Data.Entities;
 using Sitko.Blockly.Demo.Data.Repositories;
 
-namespace Sitko.Blockly.Demo.Pages
+namespace Sitko.Blockly.Demo.Pages;
+
+public partial class Show
 {
-    public partial class Show
+    [Parameter] public Guid PostId { get; set; }
+
+    protected override async Task InitializeAsync()
     {
-        [Parameter] public Guid PostId { get; set; }
-
-        protected override async Task InitializeAsync()
+        await base.InitializeAsync();
+        var post = await GetRequiredService<PostsRepository>().GetByIdAsync(PostId);
+        if (post is null)
         {
-            await base.InitializeAsync();
-            var post = await GetRequiredService<PostsRepository>().GetByIdAsync(PostId);
-            if (post is null)
-            {
-                NavigationManager.NavigateTo("/404");
-                return;
-            }
-
-            Post = post;
+            NavigationManager.NavigateTo("/404");
+            return;
         }
 
-        public Post? Post { get; set; }
+        Post = post;
     }
+
+    public Post? Post { get; set; }
 }

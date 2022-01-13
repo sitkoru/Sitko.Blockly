@@ -5,15 +5,14 @@ using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.AntDesignComponents.Blocks
-{
-    public record AntTextBlockDescriptor : BlazorBlockDescriptor<TextBlock, AntTextBlockComponent, AntTextBlockForm>
-    {
-        public AntTextBlockDescriptor(ILocalizationProvider<TextBlock> localizationProvider) : base(
-            localizationProvider)
-        {
-        }
+namespace Sitko.Blockly.AntDesignComponents.Blocks;
 
-        public override RenderFragment Icon => builder => builder.AddIcon("text");
+public record AntTextBlockDescriptor : BlazorBlockDescriptor<TextBlock, AntTextBlockComponent, AntTextBlockForm>
+{
+    public AntTextBlockDescriptor(ILocalizationProvider<TextBlock> localizationProvider) : base(
+        localizationProvider)
+    {
     }
+
+    public override RenderFragment Icon => builder => builder.AddIcon("text");
 }
