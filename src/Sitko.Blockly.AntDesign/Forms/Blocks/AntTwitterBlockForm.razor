@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components
-@inherits Sitko.Blockly.Blazor.Forms.Blocks.TwitterBlockForm<AntDesignBlocklyFormOptions>
+﻿@inherits TwitterBlockForm<AntDesignBlocklyFormOptions>
 
 <AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Full tweet url"]">
     <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Tweet link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>

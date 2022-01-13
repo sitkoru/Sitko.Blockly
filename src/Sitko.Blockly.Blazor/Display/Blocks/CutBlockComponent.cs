@@ -1,8 +1,9 @@
-﻿namespace Sitko.Blockly.Blazor.Display.Blocks
+﻿using Sitko.Blockly.Blocks;
+
+namespace Sitko.Blockly.Blazor.Display.Blocks;
+
+public abstract class
+    CutBlockComponent<TListOptions> : BlockComponent<CutBlock, TListOptions>
+    where TListOptions : BlazorBlocklyListOptions
 {
-    public abstract class
-        CutBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.CutBlock, TListOptions>
-        where TListOptions : BlazorBlocklyListOptions
-    {
-    }
 }

@@ -1,111 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 
-namespace Sitko.Blockly
+namespace Sitko.Blockly;
+
+public interface IBlockly<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
 {
-    using System.Collections.Concurrent;
-    using System.Reflection;
+    IEnumerable<TBlockDescriptor> Descriptors { get; }
+    ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock;
+    ContentBlock CreateBlock(Type blockType);
+    ContentBlock CreateBlock(TBlockDescriptor blockDescriptor);
 
-    public interface IBlockly<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
+    TBlockDescriptor GetBlockDescriptor<TBlock>() where TBlock : ContentBlock;
+    TBlockDescriptor GetBlockDescriptor(Type blockType);
+    Task InitAsync();
+}
+
+public class Blockly
+{
+    protected static readonly ConcurrentDictionary<Type, IBlockDescriptor> StaticDescriptors = new();
+    protected static readonly ConcurrentDictionary<Type, IContentBlockMetadata> StaticMetadata = new();
+
+    public static IBlockDescriptor[] GetDescriptors() =>
+        StaticDescriptors.Values.ToArray();
+
+    public static IBlockDescriptor? GetDescriptor(string key) =>
+        StaticDescriptors.Values.FirstOrDefault(d => d.Key == key);
+
+    public static IBlockDescriptor? GetDescriptor(Type type) =>
+        StaticDescriptors.Values.FirstOrDefault(d => d.Type == type);
+
+    public static IContentBlockMetadata GetMetadata(IBlockDescriptor descriptor) =>
+        StaticMetadata.Values.First(d => d.BlockType == descriptor.Type);
+}
+
+public class Blockly<TBlockDescriptor> : Blockly, IBlockly<TBlockDescriptor>
+    where TBlockDescriptor : IBlockDescriptor
+{
+    private readonly List<TBlockDescriptor> blockDescriptors;
+    private readonly List<IContentBlockMetadata> blocksMetadata = new();
+    private readonly ILogger<Blockly<TBlockDescriptor>> logger;
+
+    public Blockly(IEnumerable<TBlockDescriptor> blockDescriptors, ILogger<Blockly<TBlockDescriptor>> logger)
     {
-        ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock;
-        ContentBlock CreateBlock(Type blockType);
-        ContentBlock CreateBlock(TBlockDescriptor blockDescriptor);
-
-        TBlockDescriptor GetBlockDescriptor<TBlock>() where TBlock : ContentBlock;
-        TBlockDescriptor GetBlockDescriptor(Type blockType);
-        IEnumerable<TBlockDescriptor> Descriptors { get; }
-        Task InitAsync();
+        this.blockDescriptors = blockDescriptors.ToList();
+        this.logger = logger;
     }
 
-    public class Blockly
+    public ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock => CreateBlock(typeof(TBlock));
+
+    public ContentBlock CreateBlock(Type blockType)
     {
-        protected static readonly ConcurrentDictionary<Type, IBlockDescriptor> StaticDescriptors = new();
-        protected static readonly ConcurrentDictionary<Type, IContentBlockMetadata> StaticMetadata = new();
-
-        public static IBlockDescriptor[] GetDescriptors() =>
-            StaticDescriptors.Values.ToArray();
-
-        public static IBlockDescriptor? GetDescriptor(string key) =>
-            StaticDescriptors.Values.FirstOrDefault(d => d.Key == key);
-
-        public static IBlockDescriptor? GetDescriptor(Type type) =>
-            StaticDescriptors.Values.FirstOrDefault(d => d.Type == type);
-
-        public static IContentBlockMetadata GetMetadata(IBlockDescriptor descriptor) =>
-            StaticMetadata.Values.First(d => d.BlockType == descriptor.Type);
+        var descriptor = GetBlockDescriptor(blockType);
+        return CreateBlock(descriptor);
     }
 
-    public class Blockly<TBlockDescriptor> : Blockly, IBlockly<TBlockDescriptor>
-        where TBlockDescriptor : IBlockDescriptor
+    public ContentBlock CreateBlock(TBlockDescriptor blockDescriptor)
     {
-        private readonly List<TBlockDescriptor> blockDescriptors;
-        private readonly List<IContentBlockMetadata> blocksMetadata = new();
-        private readonly ILogger<Blockly<TBlockDescriptor>> logger;
+        logger.LogDebug("Create new block {Title}", blockDescriptor.Title);
+        var block = Activator.CreateInstance(blockDescriptor.Type) as ContentBlock;
+        block!.Id = Guid.NewGuid();
+        return block;
+    }
 
-        public Blockly(IEnumerable<TBlockDescriptor> blockDescriptors, ILogger<Blockly<TBlockDescriptor>> logger)
+    public TBlockDescriptor GetBlockDescriptor<TBlock>() where TBlock : ContentBlock =>
+        GetBlockDescriptor(typeof(TBlock));
+
+    public TBlockDescriptor GetBlockDescriptor(Type blockType)
+    {
+        if (!typeof(ContentBlock).IsAssignableFrom(blockType))
         {
-            this.blockDescriptors = blockDescriptors.ToList();
-            this.logger = logger;
+            throw new ArgumentException($"Block type {blockType} doesn't inherits from ContentBlock");
         }
 
-        public ContentBlock CreateBlock<TBlock>() where TBlock : ContentBlock => CreateBlock(typeof(TBlock));
-
-        public ContentBlock CreateBlock(Type blockType)
+        var descriptor = blockDescriptors.FirstOrDefault(d => d.Type == blockType);
+        if (descriptor is null)
         {
-            var descriptor = GetBlockDescriptor(blockType);
-            return CreateBlock(descriptor);
+            throw new InvalidOperationException($"Can't find descriptor for {blockType}");
         }
 
-        public ContentBlock CreateBlock(TBlockDescriptor blockDescriptor)
+        return descriptor;
+    }
+
+    public IEnumerable<TBlockDescriptor> Descriptors => blockDescriptors;
+
+    public Task InitAsync()
+    {
+        foreach (var blockDescriptor in blockDescriptors.Cast<IBlockDescriptor>())
         {
-            logger.LogDebug("Create new block {Title}", blockDescriptor.Title);
-            var block = Activator.CreateInstance(blockDescriptor.Type) as ContentBlock;
-            block!.Id = Guid.NewGuid();
-            return block;
+            StaticDescriptors.TryAdd(blockDescriptor.Type, blockDescriptor);
+            var metadataAttribute = blockDescriptor.Type.GetCustomAttribute<ContentBlockMetadataAttribute>() ??
+                                    new ContentBlockMetadataAttribute();
+            blocksMetadata.Add(new ContentBlockMetadata(blockDescriptor.Type, metadataAttribute.Priority,
+                metadataAttribute.MaxCount));
         }
 
-        public TBlockDescriptor GetBlockDescriptor<TBlock>() where TBlock : ContentBlock =>
-            GetBlockDescriptor(typeof(TBlock));
-
-        public TBlockDescriptor GetBlockDescriptor(Type blockType)
+        foreach (var blockMetadata in blocksMetadata)
         {
-            if (!typeof(ContentBlock).IsAssignableFrom(blockType))
-            {
-                throw new ArgumentException($"Block type {blockType} doesn't inherits from ContentBlock");
-            }
-
-            var descriptor = blockDescriptors.FirstOrDefault(d => d.Type == blockType);
-            if (descriptor is null)
-            {
-                throw new InvalidOperationException($"Can't find descriptor for {blockType}");
-            }
-
-            return descriptor;
+            StaticMetadata.TryAdd(blockMetadata.BlockType, blockMetadata);
         }
 
-        public IEnumerable<TBlockDescriptor> Descriptors => blockDescriptors;
-
-        public Task InitAsync()
-        {
-            foreach (var blockDescriptor in blockDescriptors.Cast<IBlockDescriptor>())
-            {
-                StaticDescriptors.TryAdd(blockDescriptor.Type, blockDescriptor);
-                var metadataAttribute = blockDescriptor.Type.GetCustomAttribute<ContentBlockMetadataAttribute>() ??
-                                        new ContentBlockMetadataAttribute();
-                blocksMetadata.Add(new ContentBlockMetadata(blockDescriptor.Type, metadataAttribute.Priority,
-                    metadataAttribute.MaxCount));
-            }
-
-            foreach (var blockMetadata in blocksMetadata)
-            {
-                StaticMetadata.TryAdd(blockMetadata.BlockType, blockMetadata);
-            }
-
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

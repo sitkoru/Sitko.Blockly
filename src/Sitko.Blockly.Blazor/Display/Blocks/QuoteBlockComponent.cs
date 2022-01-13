@@ -1,7 +1,8 @@
-﻿namespace Sitko.Blockly.Blazor.Display.Blocks
+﻿using Sitko.Blockly.Blocks;
+
+namespace Sitko.Blockly.Blazor.Display.Blocks;
+
+public abstract class QuoteBlockComponent<TListOptions> : BlockComponent<QuoteBlock,
+    TListOptions> where TListOptions : BlazorBlocklyListOptions
 {
-    public abstract class QuoteBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.QuoteBlock,
-        TListOptions> where TListOptions : BlazorBlocklyListOptions
-    {
-    }
 }

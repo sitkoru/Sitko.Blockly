@@ -1,6 +1,5 @@
-﻿namespace Sitko.Blockly.AntDesignComponents.Forms.Blocks
+﻿namespace Sitko.Blockly.AntDesignComponents.Forms.Blocks;
+
+public partial class AntTextBlockForm
 {
-    public partial class AntTextBlockForm
-    {
-    }
 }

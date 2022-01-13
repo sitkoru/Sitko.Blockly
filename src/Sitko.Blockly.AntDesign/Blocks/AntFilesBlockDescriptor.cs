@@ -5,15 +5,14 @@ using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.AntDesignComponents.Blocks
-{
-    public record AntFilesBlockDescriptor : BlazorBlockDescriptor<FilesBlock, AntFilesBlockComponent, AntFilesBlockForm>
-    {
-        public AntFilesBlockDescriptor(ILocalizationProvider<FilesBlock> localizationProvider) : base(
-            localizationProvider)
-        {
-        }
+namespace Sitko.Blockly.AntDesignComponents.Blocks;
 
-        public override RenderFragment Icon => builder => builder.AddIcon("attach");
+public record AntFilesBlockDescriptor : BlazorBlockDescriptor<FilesBlock, AntFilesBlockComponent, AntFilesBlockForm>
+{
+    public AntFilesBlockDescriptor(ILocalizationProvider<FilesBlock> localizationProvider) : base(
+        localizationProvider)
+    {
     }
+
+    public override RenderFragment Icon => builder => builder.AddIcon("attach");
 }

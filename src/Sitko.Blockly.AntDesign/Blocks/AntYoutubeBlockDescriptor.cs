@@ -5,16 +5,15 @@ using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.AntDesignComponents.Blocks
-{
-    public record
-        AntYoutubeBlockDescriptor : BlazorBlockDescriptor<YoutubeBlock, AntYoutubeBlockComponent, AntYoutubeBlockForm>
-    {
-        public AntYoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
-            localizationProvider)
-        {
-        }
+namespace Sitko.Blockly.AntDesignComponents.Blocks;
 
-        public override RenderFragment Icon => builder => builder.AddIcon("youtube");
+public record
+    AntYoutubeBlockDescriptor : BlazorBlockDescriptor<YoutubeBlock, AntYoutubeBlockComponent, AntYoutubeBlockForm>
+{
+    public AntYoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
+        localizationProvider)
+    {
     }
+
+    public override RenderFragment Icon => builder => builder.AddIcon("youtube");
 }

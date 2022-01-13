@@ -1,4 +1,4 @@
-﻿@inherits Sitko.Blockly.Blazor.Forms.Blocks.TextBlockForm<AntDesignBlocklyFormOptions>
+﻿@inherits TextBlockForm<AntDesignBlocklyFormOptions>
 <AntFormItem>
     <CKEditor Config="FormOptions.CKEditorConfig" TextareaClass="ant-input" Placeholder="@LocalizationProvider["Block content"]" @bind-Value="Block.Text"></CKEditor>
     <AntBlockValidationMessage BlockForm="this"></AntBlockValidationMessage>

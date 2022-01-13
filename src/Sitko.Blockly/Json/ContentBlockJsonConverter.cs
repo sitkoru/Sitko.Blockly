@@ -1,123 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Sitko.Blockly.Json
+namespace Sitko.Blockly.Json;
+
+public class ContentBlockJsonConverter : JsonConverter<IEnumerable<ContentBlock>>
 {
-    public class ContentBlockJsonConverter : JsonConverter<IEnumerable<ContentBlock>>
+    public const string BlocklyKey = "BlocklyKey";
+
+    public override bool CanConvert(Type typeToConvert) =>
+        typeof(IEnumerable<ContentBlock>).IsAssignableFrom(typeToConvert);
+
+    public override IEnumerable<ContentBlock> Read(
+        ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        public const string BlocklyKey = "BlocklyKey";
+        var blocks = new List<ContentBlock>();
 
-        public override bool CanConvert(Type typeToConvert) =>
-            typeof(IEnumerable<ContentBlock>).IsAssignableFrom(typeToConvert);
-
-        public override IEnumerable<ContentBlock> Read(
-            ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
         {
-            var blocks = new List<ContentBlock>();
+            var readerClone = reader;
 
-            while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+            if (readerClone.TokenType != JsonTokenType.StartObject)
             {
-                var readerClone = reader;
+                throw new JsonException();
+            }
 
-                if (readerClone.TokenType != JsonTokenType.StartObject)
+            var typePropertyFound = false;
+            while (readerClone.Read())
+            {
+                if (readerClone.TokenType != JsonTokenType.PropertyName)
+                {
+                    continue;
+                }
+
+                var propertyName = readerClone.GetString();
+                if (propertyName != BlocklyKey)
+                {
+                    continue;
+                }
+
+                typePropertyFound = true;
+
+                break;
+            }
+
+            ContentBlock? block = null;
+            if (typePropertyFound)
+            {
+                readerClone.Read();
+                if (readerClone.TokenType != JsonTokenType.String)
                 {
                     throw new JsonException();
                 }
 
-                var typePropertyFound = false;
-                while (readerClone.Read())
+                var key = readerClone.GetString();
+
+                if (!string.IsNullOrEmpty(key))
                 {
-                    if (readerClone.TokenType != JsonTokenType.PropertyName)
+                    var descriptor = Blockly.GetDescriptor(key);
+                    if (descriptor is not null)
                     {
-                        continue;
-                    }
-
-                    var propertyName = readerClone.GetString();
-                    if (propertyName != BlocklyKey)
-                    {
-                        continue;
-                    }
-
-                    typePropertyFound = true;
-
-                    break;
-                }
-
-                ContentBlock? block = null;
-                if (typePropertyFound)
-                {
-                    readerClone.Read();
-                    if (readerClone.TokenType != JsonTokenType.String)
-                    {
-                        throw new JsonException();
-                    }
-
-                    var key = readerClone.GetString();
-
-                    if (!string.IsNullOrEmpty(key))
-                    {
-                        var descriptor = Blockly.GetDescriptor(key);
-                        if (descriptor is not null)
+                        if (JsonSerializer.Deserialize(ref reader, descriptor.Type) is ContentBlock contentBlock)
                         {
-                            if (JsonSerializer.Deserialize(ref reader, descriptor.Type) is ContentBlock contentBlock)
-                            {
-                                block = contentBlock;
-                            }
-                        }
-                    }
-                }
-
-                if (block is not null)
-                {
-                    blocks.Add(block);
-                }
-                else
-                {
-                    var level = 1;
-                    while (level > 0)
-                    {
-                        reader.Read();
-                        switch (reader.TokenType)
-                        {
-                            case JsonTokenType.StartObject:
-                                level++;
-                                break;
-                            case JsonTokenType.EndObject:
-                                level--;
-                                break;
+                            block = contentBlock;
                         }
                     }
                 }
             }
 
-            return blocks;
-        }
-
-        public override void Write(Utf8JsonWriter writer, IEnumerable<ContentBlock> value,
-            JsonSerializerOptions options)
-        {
-            writer.WriteStartArray();
-            foreach (var block in value)
+            if (block is not null)
             {
-                var descriptor = Blockly.GetDescriptor(block.GetType());
-                if (descriptor is not null)
+                blocks.Add(block);
+            }
+            else
+            {
+                var level = 1;
+                while (level > 0)
                 {
-                    writer.WriteStartObject();
-                    writer.WriteString(BlocklyKey, descriptor.Key);
-                    foreach (var property in block.GetType().GetProperties())
+                    reader.Read();
+                    switch (reader.TokenType)
                     {
-                        var val = property.GetValue(block);
-                        writer.WritePropertyName(property.Name);
-                        JsonSerializer.Serialize(writer, val, property.PropertyType, options);
+                        case JsonTokenType.StartObject:
+                            level++;
+                            break;
+                        case JsonTokenType.EndObject:
+                            level--;
+                            break;
                     }
-
-                    writer.WriteEndObject();
                 }
             }
-
-            writer.WriteEndArray();
         }
+
+        return blocks;
+    }
+
+    public override void Write(Utf8JsonWriter writer, IEnumerable<ContentBlock> value,
+        JsonSerializerOptions options)
+    {
+        writer.WriteStartArray();
+        foreach (var block in value)
+        {
+            var descriptor = Blockly.GetDescriptor(block.GetType());
+            if (descriptor is not null)
+            {
+                writer.WriteStartObject();
+                writer.WriteString(BlocklyKey, descriptor.Key);
+                foreach (var property in block.GetType().GetProperties())
+                {
+                    var val = property.GetValue(block);
+                    writer.WritePropertyName(property.Name);
+                    JsonSerializer.Serialize(writer, val, property.PropertyType, options);
+                }
+
+                writer.WriteEndObject();
+            }
+        }
+
+        writer.WriteEndArray();
     }
 }

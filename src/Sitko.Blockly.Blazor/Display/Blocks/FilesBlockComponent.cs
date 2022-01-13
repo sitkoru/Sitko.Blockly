@@ -1,8 +1,9 @@
-﻿namespace Sitko.Blockly.Blazor.Display.Blocks
+﻿using Sitko.Blockly.Blocks;
+
+namespace Sitko.Blockly.Blazor.Display.Blocks;
+
+public abstract class
+    FilesBlockComponent<TListOptions> : BlockComponent<FilesBlock,
+        TListOptions> where TListOptions : BlazorBlocklyListOptions
 {
-    public abstract class
-        FilesBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.FilesBlock,
-            TListOptions> where TListOptions : BlazorBlocklyListOptions
-    {
-    }
 }
