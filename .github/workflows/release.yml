@@ -38,35 +38,35 @@ jobs:
         uses: sitkoru/nuget-release-action@v1
         with:
           version: ${{ steps.prep.outputs.version }}
-          project_path: src/MYCG.Blockly/MYCG.Blockly.csproj
+          project_path: src/Sitko.Blockly/Sitko.Blockly.csproj
           nuget_host: https://api.nuget.org/v3/index.json
           nuget_token: ${{ secrets.NUGET_API_KEY }}
       - name: Publish Blazor library
         uses: sitkoru/nuget-release-action@v1
         with:
           version: ${{ steps.prep.outputs.version }}
-          project_path: src/MYCG.Blockly.Blazor/MYCG.Blockly.Blazor.csproj
+          project_path: src/Sitko.Blockly.Blazor/Sitko.Blockly.Blazor.csproj
           nuget_host: https://api.nuget.org/v3/index.json
           nuget_token: ${{ secrets.NUGET_API_KEY }}
       - name: Publish AntDesign library
         uses: sitkoru/nuget-release-action@v1
         with:
           version: ${{ steps.prep.outputs.version }}
-          project_path: src/MYCG.Blockly.AntDesign/MYCG.Blockly.AntDesign.csproj
+          project_path: src/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.csproj
           nuget_host: https://api.nuget.org/v3/index.json
           nuget_token: ${{ secrets.NUGET_API_KEY }}
       - name: Publish EF library
         uses: sitkoru/nuget-release-action@v1
         with:
           version: ${{ steps.prep.outputs.version }}
-          project_path: src/MYCG.Blockly.EntityFrameworkCore/MYCG.Blockly.EntityFrameworkCore.csproj
+          project_path: src/Sitko.Blockly.EntityFrameworkCore/Sitko.Blockly.EntityFrameworkCore.csproj
           nuget_host: https://api.nuget.org/v3/index.json
           nuget_token: ${{ secrets.NUGET_API_KEY }}
       - name: Publish HtmlParser library
         uses: sitkoru/nuget-release-action@v1
         with:
           version: ${{ steps.prep.outputs.version }}
-          project_path: src/MYCG.Blockly.HtmlParser/MYCG.Blockly.HtmlParser.csproj
+          project_path: src/Sitko.Blockly.HtmlParser/Sitko.Blockly.HtmlParser.csproj
           nuget_host: https://api.nuget.org/v3/index.json
           nuget_token: ${{ secrets.NUGET_API_KEY }}
 
