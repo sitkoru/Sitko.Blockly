@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.1...1.0.0-beta.2) (2022-01-13)
+
+
+### Bug Fixes
+
+* **ci:** fix paths to csproj ([9014590](https://github.com/sitkoru/Sitko.Blockly/commit/90145906e458fe1bb914eaddeb6d12dbf5c37f93))
+
 # 1.0.0-beta.1 (2022-01-13)
 
 
