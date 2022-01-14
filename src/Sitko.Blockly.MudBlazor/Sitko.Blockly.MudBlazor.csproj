@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <RootNamespace>Sitko.Blockly.MudBlazor</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sitko.Blockly.Blazor\Sitko.Blockly.Blazor.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="3.0.3" />
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="9.0.0-beta.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Icons\*.svg" />
+    <Content Include="Display\AntBlocksList.razor.css" />
+    <Content Include="Display\Blocks\AntFilesBlockComponent.razor.css" />
+    <Content Include="Display\Blocks\AntGalleryBlockComponent.razor.css" />
+    <Content Include="Display\Blocks\AntIframeBlockComponent.razor.css" />
+    <Content Include="Display\Blocks\AntQuoteBlockComponent.razor.css" />
+    <Content Include="Display\Blocks\AntTwitchBlockComponent.razor.css" />
+    <Content Include="Display\Blocks\AntTwitterBlockComponent.razor.css" />
+    <Content Include="Display\Blocks\AntYoutubeBlockComponent.razor.css" />
+    <Content Include="Forms\AntBlocklyForm.razor.css" />
+    <Content Include="Forms\Blocks\AntIFrameBlockForm.razor.css" />
+    <Content Include="Forms\Blocks\AntTextBlockForm.razor.css" />
+    <Content Include="Forms\Blocks\AntTwitchBlockForm.razor.css" />
+    <Content Include="Forms\Blocks\AntTwitterBlockForm.razor.css" />
+    <Content Include="Forms\Blocks\AntYoutubeBlockForm.razor.css" />
+    <EmbeddedResource Include="Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Display\AntBlockErrorComponent.razor" />
+    <AdditionalFiles Include="Display\AntBlocksList.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntCutBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntFilesBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntGalleryBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntIframeBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntQuoteBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntTextBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntTwitchBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntTwitterBlockComponent.razor" />
+    <AdditionalFiles Include="Display\Blocks\AntYoutubeBlockComponent.razor" />
+    <AdditionalFiles Include="Forms\AntBlockFormErrorComponent.razor" />
+    <AdditionalFiles Include="Forms\AntBlocklyForm.razor" />
+    <AdditionalFiles Include="Forms\AntBlockValidationMessage.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntCutBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntFilesBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntGalleryBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntIFrameBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntQuoteBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntTextBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntTwitchBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntTwitterBlockForm.razor" />
+    <AdditionalFiles Include="Forms\Blocks\AntYoutubeBlockForm.razor" />
+  </ItemGroup>
+</Project>
