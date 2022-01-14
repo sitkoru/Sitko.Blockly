@@ -6,9 +6,7 @@ namespace Sitko.Blockly.Blazor.Display;
 
 public abstract class BlocksList<TOptions> : BaseComponent where TOptions : BlazorBlocklyListOptions
 {
-#if NET6_0_OR_GREATER
     [EditorRequired]
-#endif
     [Parameter]
     public IEnumerable<ContentBlock> EntityBlocks { get; set; } = null!;
 

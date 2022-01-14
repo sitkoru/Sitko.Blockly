@@ -28,9 +28,7 @@ public abstract class BlockForm : BaseComponent
 
 public abstract class BlockForm<TBlock> : BlockForm where TBlock : ContentBlock
 {
-#if NET6_0_OR_GREATER
     [EditorRequired]
-#endif
     [Parameter]
     public TBlock Block { get; set; } = default!;
 
@@ -41,9 +39,7 @@ public abstract class BlockForm<TBlock, TBlocklyFormOptions> : BlockForm<TBlock>
     where TBlock : ContentBlock
     where TBlocklyFormOptions : BlocklyFormOptions
 {
-#if NET6_0_OR_GREATER
     [EditorRequired]
-#endif
     [Parameter]
     public TBlocklyFormOptions FormOptions { get; set; } = null!;
 }
