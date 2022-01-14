@@ -1,3 +1,11 @@
+# [1.0.0-beta.3](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.2...1.0.0-beta.3) (2022-01-14)
+
+
+### Features
+
+* **antdesign:** fix validation messages ([b7004f0](https://github.com/sitkoru/Sitko.Blockly/commit/b7004f0fa65e8f3c5a1a5fb64bec9546b87a6c4a))
+* move to Sitko.Core 9 ([531806d](https://github.com/sitkoru/Sitko.Blockly/commit/531806d98bd6fc40c446fbc66afe9f52aa951113))
+
 # [1.0.0-beta.2](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.1...1.0.0-beta.2) (2022-01-13)
 
 
