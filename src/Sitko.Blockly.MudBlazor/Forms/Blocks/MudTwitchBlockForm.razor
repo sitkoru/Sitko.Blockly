@@ -1,0 +1,6 @@
+﻿@inherits TwitchBlockForm<MudBlazorBlocklyFormOptions>
+
+<AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Twitch video, channel or collection url"]">
+    <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Twitch link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
+</AntFormItem>
+<div @ref="ContainerRef" class="twitch-video" id="twitch-@Block.Id"></div>

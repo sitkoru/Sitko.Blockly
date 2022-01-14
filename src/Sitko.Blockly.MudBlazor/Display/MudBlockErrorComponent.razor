@@ -1,0 +1,27 @@
+﻿@using Microsoft.Extensions.Hosting
+@using Sitko.Core.App.Localization
+@using global::MudBlazor
+<div class="blockly-error">
+    @if (Environment.IsDevelopment())
+    {
+        <MudAlert Severity="@Severity.Error">@Error</MudAlert>
+    }
+    else
+    {
+        <MudAlert Severity="@Severity.Error">@LocalizationProvider["Content error"]</MudAlert>
+    }
+</div>
+
+@code {
+
+    [EditorRequired]
+    [Parameter]
+    public string Error { get; set; } = null!;
+
+    [Inject]
+    private IHostEnvironment Environment { get; set; } = null!;
+
+    [Inject]
+    private ILocalizationProvider<MudBlockErrorComponent> LocalizationProvider { get; set; } = null!;
+
+}

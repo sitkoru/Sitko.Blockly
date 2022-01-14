@@ -1,0 +1,16 @@
+﻿@inherits YoutubeBlockForm<MudBlazorBlocklyFormOptions>
+<!--suppress HtmlDeprecatedAttribute -->
+<AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Full YouTube video url"]">
+    <Input placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url"/>
+</AntFormItem>
+@if (!string.IsNullOrEmpty(Block.YoutubeId))
+{
+    <div class="youtube-container-wrapper">
+        <div class="youtube-container">
+            @* ReSharper disable once Html.Obsolete *@
+            <iframe src="@Block.Url"
+                    frameborder="0" allowfullscreen class="youtube-video">
+            </iframe>
+        </div>
+    </div>
+}

@@ -1,0 +1,19 @@
+ul {
+  padding: 0;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+li {
+  display: inline-block;
+}
+
+li + li {
+  margin-left: 1em;
+}
+
+li span.filesize {
+  color: rgba(128, 128, 128, .5);
+  font-size: .8em;
+  vertical-align: bottom;
+}

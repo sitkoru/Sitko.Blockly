@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@foreach (var message in CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray())
+{
+    <div class=@($"ant-form-item-explain ant-form-item-explain-error") @key="message">
+        <div role="alert">
+            @message
+        </div>
+    </div>
+}
+
+@code
+{
+    [EditorRequired]
+    [Parameter]
+    public BlockForm BlockForm { get; set; } = null!;
+
+    [CascadingParameter]
+    public EditContext CurrentEditContext { get; set; } = null!;
+}

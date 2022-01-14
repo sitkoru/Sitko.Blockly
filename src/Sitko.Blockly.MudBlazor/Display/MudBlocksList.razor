@@ -1,0 +1,16 @@
+﻿@inherits BlocksList<MudBlazorBlocklyListOptions>
+@foreach (var block in Blocks)
+{
+    var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
+    if (block.ShouldRender(Options))
+    {
+        var className = $"blockly blockly-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.DisplayComponentCssClass}";
+        <div class="@className" @key="block.Id">
+            @(RenderBlock(blockDescriptor, block))
+        </div>
+    }
+    if (!block.ShouldRenderNext(Options))
+    {
+        break;
+    }
+}
