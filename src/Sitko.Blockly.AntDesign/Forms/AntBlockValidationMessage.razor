@@ -1,7 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @foreach (var message in CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray())
 {
-    <FormValidationMessageItem Message="@message" @key="message"></FormValidationMessageItem>
+    <div class=@($"ant-form-item-explain ant-form-item-explain-error") @key="message">
+        <div role="alert">
+            @message
+        </div>
+    </div>
 }
 
 @code
