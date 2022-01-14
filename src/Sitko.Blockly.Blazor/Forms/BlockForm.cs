@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Sitko.Core.App.Blazor.Components;
+using Sitko.Core.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Forms;
 

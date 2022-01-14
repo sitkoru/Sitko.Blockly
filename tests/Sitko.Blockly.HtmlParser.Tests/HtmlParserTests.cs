@@ -1,10 +1,9 @@
 ﻿using HtmlAgilityPack;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.Tests;
+using Sitko.Core.App;
 using Sitko.Core.Storage;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Xunit;
@@ -119,12 +118,11 @@ public class BlocklyHtmlParserTestScope : BlocklyTestScope
         return application;
     }
 
-    protected override IServiceCollection ConfigureServices(IConfiguration configuration,
-        IHostEnvironment environment,
+    protected override IServiceCollection ConfigureServices(IApplicationContext applicationContext,
         IServiceCollection services, string name)
     {
         services.AddHttpClient();
-        return base.ConfigureServices(configuration, environment, services, name);
+        return base.ConfigureServices(applicationContext, services, name);
     }
 }
 

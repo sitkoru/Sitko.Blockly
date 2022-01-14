@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.WebUtilities;
+using System.Web;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks;
@@ -52,27 +52,27 @@ public record TwitchBlock : UrlContentBlock
             {
                 if (uri.Host == "player.twitch.tv")
                 {
-                    var queryParams = QueryHelpers.ParseQuery(uri.Query);
-                    if (queryParams.ContainsKey("collection"))
+                    var queryParams = HttpUtility.ParseQueryString(uri.Query);
+                    if (queryParams.AllKeys.Contains("collection"))
                     {
-                        CollectionId = queryParams["collection"][0];
+                        CollectionId = queryParams["collection"];
                         ChannelId = null;
-                        if (queryParams.ContainsKey("video"))
+                        if (queryParams.AllKeys.Contains("video"))
                         {
-                            VideoId = queryParams["video"][0];
+                            VideoId = queryParams["video"];
                         }
                     }
-                    else if (queryParams.ContainsKey("video"))
+                    else if (queryParams.AllKeys.Contains("video"))
                     {
-                        VideoId = queryParams["video"][0];
+                        VideoId = queryParams["video"];
                         CollectionId = null;
                         ChannelId = null;
                     }
-                    else if (queryParams.ContainsKey("channel"))
+                    else if (queryParams.AllKeys.Contains("channel"))
                     {
                         VideoId = null;
                         CollectionId = null;
-                        ChannelId = queryParams["channel"][0];
+                        ChannelId = queryParams["channel"];
                     }
 
                     else

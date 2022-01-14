@@ -14,7 +14,7 @@ public class BlocklyModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TC
 {
     public override string OptionsKey => "Blockly";
 
-    public override void ConfigureServices(ApplicationContext context, IServiceCollection services,
+    public override void ConfigureServices(IApplicationContext context, IServiceCollection services,
         TConfig startupOptions)
     {
         base.ConfigureServices(context, services, startupOptions);
@@ -27,7 +27,7 @@ public class BlocklyModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TC
         });
     }
 
-    public override async Task InitAsync(ApplicationContext context, IServiceProvider serviceProvider)
+    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider)
     {
         await base.InitAsync(context, serviceProvider);
         var blockly = serviceProvider.GetRequiredService<IBlockly<TBlockDescriptor>>();

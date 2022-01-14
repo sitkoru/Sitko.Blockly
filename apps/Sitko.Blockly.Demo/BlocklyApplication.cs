@@ -3,7 +3,7 @@ using Serilog.Events;
 using Sitko.Blockly.AntDesignComponents;
 using Sitko.Blockly.Demo.Data;
 using Sitko.Core.App.Localization;
-using Sitko.Core.Blazor.AntDesignComponents;
+using Sitko.Core.Blazor.AntDesign.Server;
 using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage;

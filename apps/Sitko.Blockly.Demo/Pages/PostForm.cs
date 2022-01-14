@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FluentValidation;
 using Sitko.Blockly.Demo.Data.Entities;
 using Sitko.Blockly.Validation;
-using Sitko.Core.App.Blazor.Forms;
+using Sitko.Core.Blazor.Forms;
 
 namespace Sitko.Blockly.Demo.Pages;
 

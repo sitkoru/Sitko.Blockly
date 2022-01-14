@@ -1,4 +1,5 @@
-﻿@foreach (var message in CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray())
+﻿@using Microsoft.AspNetCore.Components.Forms
+@foreach (var message in CurrentEditContext.GetValidationMessages(BlockForm.FieldIdentifier).Distinct().ToArray())
 {
     <FormValidationMessageItem Message="@message" @key="message"></FormValidationMessageItem>
 }

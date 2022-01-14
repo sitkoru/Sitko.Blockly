@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.AspNetCore.Components;
-using Sitko.Core.App.Blazor.Components;
+using Sitko.Core.Blazor.Components;
 
 namespace Sitko.Blockly.Blazor.Display;
 

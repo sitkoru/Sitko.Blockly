@@ -1,6 +1,4 @@
 ﻿using JetBrains.Annotations;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Sitko.Core.App;
 
 namespace Sitko.Blockly;
@@ -9,7 +7,7 @@ namespace Sitko.Blockly;
 public static class ApplicationExtensions
 {
     public static Application AddBlockly(this Application application,
-        Action<IConfiguration, IHostEnvironment, BlocklyModuleOptions> configure, string? configKey = null) =>
+        Action<IApplicationContext, BlocklyModuleOptions> configure, string? configKey = null) =>
         application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
 
     public static Application AddBlockly(this Application application,

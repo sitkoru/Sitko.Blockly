@@ -16,7 +16,7 @@ public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor
 
     public override string OptionsKey => "Blockly:AntDesign";
 
-    public override void ConfigureServices(ApplicationContext context, IServiceCollection services,
+    public override void ConfigureServices(IApplicationContext context, IServiceCollection services,
         AntDesignBlocklyModuleOptions startupOptions)
     {
         base.ConfigureServices(context, services, startupOptions);
@@ -27,7 +27,7 @@ public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor
         });
     }
 
-    public override async Task InitAsync(ApplicationContext context, IServiceProvider serviceProvider)
+    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider)
     {
         await base.InitAsync(context, serviceProvider);
         await CustomIconsProvider.InitAsync();

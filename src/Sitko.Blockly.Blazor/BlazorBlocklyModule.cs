@@ -9,7 +9,7 @@ public abstract class BlazorBlocklyModule<TDescriptor, TConfig> : BlocklyModule<
     where TDescriptor : IBlazorBlockDescriptor
     where TConfig : BlazorBlocklyModuleOptions<TDescriptor>, new()
 {
-    public override void ConfigureServices(ApplicationContext context, IServiceCollection services,
+    public override void ConfigureServices(IApplicationContext context, IServiceCollection services,
         TConfig startupOptions)
     {
         base.ConfigureServices(context, services, startupOptions);

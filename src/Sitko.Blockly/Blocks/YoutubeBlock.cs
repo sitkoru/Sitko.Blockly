@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.WebUtilities;
+using System.Web;
 using Sitko.Core.App.Localization;
 
 namespace Sitko.Blockly.Blocks;
@@ -17,9 +17,9 @@ public record YoutubeBlock : UrlContentBlock
         {
             var uri = new Uri(url);
 
-            var queryParams = QueryHelpers.ParseQuery(uri.Query);
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-            YoutubeId = queryParams.ContainsKey("v") ? queryParams["v"][0] : uri.Segments.Last();
+            YoutubeId = queryParams["v"] ?? uri.Segments.Last();
         }
         else
         {

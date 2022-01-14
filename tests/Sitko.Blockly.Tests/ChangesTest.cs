@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.EntityFrameworkCore;
 using Sitko.Core.App.Collections;
-using Sitko.Core.Blazor.AntDesignComponents;
+using Sitko.Core.Blazor.AntDesign.Server;
 using Sitko.Core.Repository;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Xunit;

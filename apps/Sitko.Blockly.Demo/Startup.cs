@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sitko.Core.Blazor.AntDesignComponents;
+using Sitko.Core.Blazor.AntDesign.Server;
 
 namespace Sitko.Blockly.Demo;
 
