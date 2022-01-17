@@ -1,6 +1,6 @@
 using Sitko.Blockly.Blazor;
 
-namespace Sitko.Blockly.MudBlazor;
+namespace Sitko.Blockly.MudBlazorComponents;
 
 public class MudBlazorBlocklyModuleOptions : BlazorBlocklyModuleOptions<IBlazorBlockDescriptor>
 {

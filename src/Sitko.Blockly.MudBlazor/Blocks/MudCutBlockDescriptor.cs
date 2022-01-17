@@ -2,11 +2,11 @@
 using MudBlazor;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
-using Sitko.Blockly.MudBlazor.Display.Blocks;
-using Sitko.Blockly.MudBlazor.Forms.Blocks;
+using Sitko.Blockly.MudBlazorComponents.Display.Blocks;
+using Sitko.Blockly.MudBlazorComponents.Forms.Blocks;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.MudBlazor.Blocks;
+namespace Sitko.Blockly.MudBlazorComponents.Blocks;
 
 public record MudCutBlockDescriptor : BlazorBlockDescriptor<CutBlock, MudCutBlockComponent, MudCutBlockForm>
 {

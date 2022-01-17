@@ -1,4 +1,4 @@
-﻿namespace Sitko.Blockly.MudBlazor.Display.Blocks;
+﻿namespace Sitko.Blockly.MudBlazorComponents.Display.Blocks;
 
 public partial class MudTextBlockComponent
 {

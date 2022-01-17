@@ -2,7 +2,7 @@
 using Sitko.Blockly.Display;
 using Sitko.Core.Storage;
 
-namespace Sitko.Blockly.MudBlazor.Display;
+namespace Sitko.Blockly.MudBlazorComponents.Display;
 
 public class MudBlazorBlocklyListOptions : BlazorBlocklyListOptions
 {

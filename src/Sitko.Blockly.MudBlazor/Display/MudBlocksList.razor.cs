@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Sitko.Blazor.ScriptInjector;
 
-namespace Sitko.Blockly.MudBlazor.Display;
+namespace Sitko.Blockly.MudBlazorComponents.Display;
 
 public partial class MudBlocksList
 {

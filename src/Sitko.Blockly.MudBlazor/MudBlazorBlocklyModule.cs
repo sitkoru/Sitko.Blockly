@@ -7,7 +7,7 @@ using Sitko.Blockly.Blazor;
 using Sitko.Core.App;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.MudBlazor;
+namespace Sitko.Blockly.MudBlazorComponents;
 
 public class MudBlazorBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor, MudBlazorBlocklyModuleOptions>
 {

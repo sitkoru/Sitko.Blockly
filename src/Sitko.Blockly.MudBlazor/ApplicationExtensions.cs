@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Sitko.Core.App;
 
-namespace Sitko.Blockly.MudBlazor;
+namespace Sitko.Blockly.MudBlazorComponents;
 
 [PublicAPI]
 public static class ApplicationExtensions

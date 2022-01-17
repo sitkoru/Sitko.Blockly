@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using MudBlazor;
 
-namespace Sitko.Blockly.MudBlazor;
+namespace Sitko.Blockly.MudBlazorComponents;
 
 public static class RenderTreeBuilderExtensions
 {

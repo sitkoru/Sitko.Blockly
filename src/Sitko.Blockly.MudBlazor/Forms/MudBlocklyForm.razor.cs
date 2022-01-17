@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.MudBlazor.Forms;
+namespace Sitko.Blockly.MudBlazorComponents.Forms;
 
 public partial class MudBlocklyForm
 {

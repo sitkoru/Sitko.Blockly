@@ -1,5 +1,4 @@
-﻿@using global::MudBlazor
-@inherits TwitchBlockForm<MudBlazorBlocklyFormOptions>
+﻿@inherits TwitchBlockForm<MudBlazorBlocklyFormOptions>
 
 <MudITem>
     <MudTextField T="string" @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Twitch link"]" OnChange="OnChangeAsync" AllowClear="true" Label="@LocalizationProvider["Url"]"/>

@@ -1,5 +1,4 @@
-﻿@using global::MudBlazor
-@inherits QuoteBlockForm<MudBlazorBlocklyFormOptions>
+﻿@inherits QuoteBlockForm<MudBlazorBlocklyFormOptions>
 <MudGrid>
     <MudItem xs="12">
         <CKEditor Config="FormOptions.CKEditorConfig" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>

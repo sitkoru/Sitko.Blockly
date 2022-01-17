@@ -1,5 +1,4 @@
-﻿@using global::MudBlazor
-@inherits BlocklyForm<MudBlazorBlocklyFormOptions>
+﻿@inherits BlocklyForm<MudBlazorBlocklyFormOptions>
 <div class="blockly-form blockly-form-@ModuleOptions.Value.Theme.ToString().ToLowerInvariant()">
     @if (!string.IsNullOrEmpty(Label))
     {
@@ -65,7 +64,7 @@
 @code{
 
     private RenderFragment disabledBlockIndicator = @<span class="block-disabled-icon">
-                                                        <Icon Type="eye-invisible"></Icon>
+                                                        <MudIcon Icon="@Icons.Filled.DisabledVisible"></MudIcon>
                                                     </span>;
 
     private RenderFragment AddPanelTemplate(ContentBlock? afterBlock = null)
