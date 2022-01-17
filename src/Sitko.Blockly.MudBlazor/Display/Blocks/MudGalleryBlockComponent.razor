@@ -6,7 +6,7 @@
         @if (Block.Pictures.Count > 1)
         {
             <div class="block-content">
-                <MudCarousel AutoCycle="TimeSpan.FromSeconds(2)" ItemsSource="Block.Pictures">
+                <MudCarousel AutoCycle="true" AutoCycleTime="TimeSpan.FromSeconds(2)" ItemsSource="Block.Pictures">
                     <ItemTemplate>
                          <img src="@Options.Storage.PublicUri(context).ToString()" alt="Image: @context.FileName"/>
                     </ItemTemplate>
