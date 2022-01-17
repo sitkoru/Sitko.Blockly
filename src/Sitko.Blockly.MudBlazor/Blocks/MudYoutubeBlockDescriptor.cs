@@ -16,5 +16,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.Bathtub);
+    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Custom.Brands.YouTube);
 }
