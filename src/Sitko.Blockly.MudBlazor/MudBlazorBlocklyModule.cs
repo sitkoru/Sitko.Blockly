@@ -12,7 +12,7 @@ namespace Sitko.Blockly.MudBlazorComponents;
 public class MudBlazorBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor, MudBlazorBlocklyModuleOptions>
 {
      public static readonly CssInjectRequest MudBlazorBlocklyCssRequest = CssInjectRequest.FromUrl(
-         "blocklyAnt", "/_content/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.bundle.scp.css");
+         "blocklyMud", "/_content/Sitko.Blockly.MudBlazor/Sitko.Blockly.MudBlazor.bundle.scp.css");
 
     public override string OptionsKey => "Blockly:MudBlazor";
 
@@ -50,7 +50,7 @@ public static class CustomIconsProvider
                 {
                     StreamReader reader = new(resource);
                     var text = await reader.ReadToEndAsync();
-                    var name = resourceName.Replace("Sitko.Blockly.AntDesignComponents.Icons.", "")
+                    var name = resourceName.Replace("Sitko.Blockly.MudBlazor.Icons.", "")
                         .Replace(".svg", "");
                     Icons.Add(name, text);
                 }
