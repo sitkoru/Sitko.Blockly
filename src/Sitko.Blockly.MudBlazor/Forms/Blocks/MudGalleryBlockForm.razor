@@ -5,19 +5,22 @@
 {
     <MudItem>
         <MudFilesUpload
-            TValue="ValueCollection<StorageItem>"
             Storage="FormOptions.Storage"
+            TCollection="ValueCollection<StorageItem>"
+            DisplayMode="FileUploadDisplayMode.Image"
+            @bind-Value="Block.Pictures"
+            For="() => Block.Pictures"
             ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
             UploadPath="@FormOptions.ImagesOptions.UploadPath"
             MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
-            MaxAllowedFiles="@FormOptions.ImagesOptions.MaxAllowedFiles"
+            MaxAllowedFiles="@(FormOptions.ImagesOptions.MaxAllowedFiles??0)"
             GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
             UploadText="@LocalizationProvider["Upload"]"
             RemoveText="@LocalizationProvider["Remove"]"
             PreviewText="@LocalizationProvider["Preview"]"
             LeftText="@LocalizationProvider["Move left"]"
-            RightText="@LocalizationProvider["Move right"]"
-            @bind-Value="Block.Pictures"/>
+            RightText="@LocalizationProvider["Move right"]">
+        </MudFilesUpload>
         <MudBlockValidationMessage BlockForm="this"></MudBlockValidationMessage>
     </MudItem>
 }

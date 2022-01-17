@@ -22,7 +22,7 @@
 
     @if (FormOptions.Storage is not null)
     {
-        <MudItem  xs="12">
+        <MudItem xs="12">
             <MudFileUpload
                 Storage="FormOptions.Storage"
                 ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
@@ -32,7 +32,8 @@
                 RemoveText="@LocalizationProvider["Remove"]"
                 PreviewText="@LocalizationProvider["Preview"]"
                 GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
-                @bind-Value="Block.Picture"/>
+                @bind-Value="Block.Picture"
+                For="() => Block.Picture"/>
             <MudTooltip Text="@LocalizationProvider["Author photo, site logo, etc..."]">
                 <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
             </MudTooltip>
