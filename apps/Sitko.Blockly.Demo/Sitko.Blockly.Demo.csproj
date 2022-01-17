@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Sitko.Blockly.AntDesign\Sitko.Blockly.AntDesign.csproj" />
+    <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj" />
     <ProjectReference Include="..\..\src\Sitko.Blockly.EntityFrameworkCore\Sitko.Blockly.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
