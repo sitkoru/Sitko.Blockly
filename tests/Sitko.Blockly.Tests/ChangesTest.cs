@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.EntityFrameworkCore;
 using Sitko.Core.App.Collections;
-using Sitko.Core.Blazor.AntDesign.Server;
 using Sitko.Core.Repository;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Xunit;
@@ -81,29 +78,22 @@ public class BlocklyTestScope : DbBaseTestScope<TestApplication, TestBlocklyDbCo
         await dbContext.AddAsync(model);
         await dbContext.SaveChangesAsync();
     }
+
+    protected override TestApplication ConfigureApplication(TestApplication application, string name)
+    {
+        base.ConfigureApplication(application, name);
+        application.AddEFRepositories<ChangesTest>();
+        application.AddBlockly(moduleOptions =>
+        {
+            moduleOptions.AddBlock<TextBlockDescriptor, TextBlock>();
+            moduleOptions.AddBlock<CutBlockDescriptor, CutBlock>();
+        });
+        return application;
+    }
 }
 
 public class BlocklyTestScopeConfig : BaseDbTestConfig
 {
-}
-
-public class TestApplication : AntBlazorApplication<TestStartup>
-{
-    public TestApplication(string[] args) : base(args) =>
-        this.AddEFRepositories<TestBlocklyDbContext>()
-            .AddBlockly(moduleOptions =>
-            {
-                moduleOptions.AddBlock<TextBlockDescriptor, TextBlock>();
-                moduleOptions.AddBlock<CutBlockDescriptor, CutBlock>();
-            });
-}
-
-public class TestStartup : AntBlazorStartup
-{
-    public TestStartup(IConfiguration configuration, IHostEnvironment environment) : base(configuration,
-        environment)
-    {
-    }
 }
 
 public class TestBlocklyDbContext : DbContext
