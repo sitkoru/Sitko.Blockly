@@ -5,8 +5,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Blazor" Version="9.0.0-beta.1"/>
-    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="9.0.0-beta.1"/>
+    <PackageReference Include="Sitko.Core.Blazor" Version="9.0.0-beta.2"/>
+    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="9.0.0-beta.2"/>
   </ItemGroup>
 
 </Project>
