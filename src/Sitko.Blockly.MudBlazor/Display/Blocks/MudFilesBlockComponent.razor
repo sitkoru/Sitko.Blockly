@@ -1,16 +1,17 @@
-﻿@inherits FilesBlockComponent<MudBlazorBlocklyListOptions>
+﻿@using global::MudBlazor
+@inherits FilesBlockComponent<MudBlazorBlocklyListOptions>
 @if (Options.Storage is not null)
 {
     <ul>
         @foreach (var file in Block.Files)
         {
             <li>
-                <AntDesign.Icon Type="paper-clip"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@Options.Storage.PublicUri(file)">@file.FileName</a><span class="filesize">&nbsp;(@file.HumanSize)</span>
+                <MudIcon Icon="@Icons.Filled.AttachFile"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@Options.Storage.PublicUri(file)">@file.FileName</a><span class="filesize">&nbsp;(@file.HumanSize)</span>
             </li>
         }
     </ul>
 }
 else
 {
-    <AntBlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></AntBlockErrorComponent>
+    <MudBlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></MudBlockErrorComponent>
 }

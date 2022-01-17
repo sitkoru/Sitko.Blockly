@@ -2,7 +2,7 @@
 @if (Options.EntityUrl is not null)
 {
     <a href="@Options.EntityUrl">
-        <Button>
+        <MudButton>
             @{
                 if (string.IsNullOrEmpty(Block.ButtonText))
                 {
@@ -17,10 +17,10 @@
                     </span>
                 }
             }
-        </Button>
+        </MudButton>
     </a>
 }
 else
 {
-    <AntBlockErrorComponent Error="@LocalizationProvider["Not Entity url provided"]"></AntBlockErrorComponent>
+    <MudBlockErrorComponent Error="@LocalizationProvider["Not Entity url provided"]"></MudBlockErrorComponent>
 }

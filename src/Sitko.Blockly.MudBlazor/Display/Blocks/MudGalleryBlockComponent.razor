@@ -1,4 +1,5 @@
-﻿@inherits GalleryBlockComponent<MudBlazorBlocklyListOptions>
+﻿@using Sitko.Core.Storage
+@inherits GalleryBlockComponent<MudBlazorBlocklyListOptions>
 @if (Options.Storage is not null)
 {
     if (Block.Pictures.Any())
@@ -6,14 +7,11 @@
         @if (Block.Pictures.Count > 1)
         {
             <div class="block-content">
-                <Carousel Autoplay="TimeSpan.FromSeconds(2)">
-                    @foreach (var image in Block.Pictures)
-                    {
-                        <CarouselSlick>
-                            <img src="@Options.Storage.PublicUri(image).ToString()" alt="Image: @image.FileName"/>
-                        </CarouselSlick>
-                    }
-                </Carousel>
+                <MudCarousel AutoCycle="TimeSpan.FromSeconds(2)" ItemsSource="Block.Pictures">
+                    <ItemTemplate>
+                         <img src="@Options.Storage.PublicUri(context).ToString()" alt="Image: @context.FileName"/>
+                    </ItemTemplate>
+                </MudCarousel>
             </div>
         }
         else
@@ -27,5 +25,5 @@
 }
 else
 {
-    <AntBlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></AntBlockErrorComponent>
+    <MudBlockErrorComponent Error="@LocalizationProvider["Storage is not configured"]"></MudBlockErrorComponent>
 }
