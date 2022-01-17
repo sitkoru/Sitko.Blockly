@@ -1,10 +1,9 @@
 ﻿using System;
 using Serilog.Events;
-using Sitko.Blockly.AntDesignComponents;
 using Sitko.Blockly.Demo.Data;
+using Sitko.Blockly.MudBlazorComponents;
 using Sitko.Core.App.Localization;
 using Sitko.Core.Blazor.MudBlazor.Server;
-using Sitko.Core.Blazor.Server;
 using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage;
@@ -22,9 +21,9 @@ public class BlocklyApplication : MudBlazorApplication<Startup>
             .AddFileSystemStorage<BlocklyStorageOptions>()
             .AddPostgresStorageMetadata<BlocklyStorageOptions>()
             .AddJsonLocalization()
-            .AddAntDesignBlockly(moduleOptions =>
+            .AddMudBlazorBlockly(moduleOptions =>
             {
-                moduleOptions.AddBlocks<AntDesignBlocklyModule>();
+                moduleOptions.AddBlocks<MudBlazorBlocklyModule>();
             });
         ConfigureLogLevel("System.Net.Http.HttpClient.health-checks", LogEventLevel.Error)
             .ConfigureLogLevel("Microsoft.AspNetCore", LogEventLevel.Warning)

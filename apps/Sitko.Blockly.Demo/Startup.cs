@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MudBlazor.Services;
 using Sitko.Core.Blazor.MudBlazor.Server;
-using Sitko.Core.Blazor.Server;
 
 namespace Sitko.Blockly.Demo;
 
