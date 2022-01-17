@@ -1,4 +1,8 @@
-﻿@inherits CutBlockForm<MudBlazorBlocklyFormOptions>
-<AntFormItem Label="@LocalizationProvider["Button text"]" Hint="@LocalizationProvider["Text on button when block rendered in preview list mode"]">
-    <Input @bind-Value="@Block.ButtonText"/>
-</AntFormItem>
+﻿@using global::MudBlazor
+@inherits CutBlockForm<MudBlazorBlocklyFormOptions>
+<MudItem>
+    <MudTextField @bind-Value="@Block.ButtonText" Label="@LocalizationProvider["Button text"]" />
+    <MudTooltip Text="@LocalizationProvider["Text on button when block rendered in preview list mode"]">
+         <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info" />
+     </MudTooltip>
+</MudItem >

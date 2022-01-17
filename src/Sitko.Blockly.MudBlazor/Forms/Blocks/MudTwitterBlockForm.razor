@@ -1,7 +1,11 @@
-﻿@inherits TwitterBlockForm<MudBlazorBlocklyFormOptions>
+﻿@using global::MudBlazor
+@inherits TwitterBlockForm<MudBlazorBlocklyFormOptions>
 
-<AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Full tweet url"]">
-    <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Tweet link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
-</AntFormItem>
+<MudItem>
+    <MudTextField @bind-Value="Block.Url" Label="@LocalizationProvider["Url"]" Placeholder="@LocalizationProvider["Tweet link"]" AllowClear="true" OnChange="OnChangeAsync" T="string"/>
+    <MudTooltip Text="@LocalizationProvider["Full tweet url"]">
+        <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info" />
+    </MudTooltip>
+</MudItem>
 <div @ref="ContainerRef" class="tweet">
 </div>

@@ -3,26 +3,25 @@
 @inherits GalleryBlockForm<MudBlazorBlocklyFormOptions>
 @if (FormOptions.Storage is not null)
 {
-    <AntFormItem>
-        <AntStorageImagesInput
+    <MudItem>
+        <MudFilesUpload
             TValue="ValueCollection<StorageItem>"
             Storage="FormOptions.Storage"
             ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
             UploadPath="@FormOptions.ImagesOptions.UploadPath"
             MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
-            MaxFiles="@FormOptions.ImagesOptions.MaxAllowedFiles"
+            MaxAllowedFiles="@FormOptions.ImagesOptions.MaxAllowedFiles"
             GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
             UploadText="@LocalizationProvider["Upload"]"
             RemoveText="@LocalizationProvider["Remove"]"
             PreviewText="@LocalizationProvider["Preview"]"
             LeftText="@LocalizationProvider["Move left"]"
             RightText="@LocalizationProvider["Move right"]"
-            @bind-Value="Block.Pictures">
-        </AntStorageImagesInput>
-        <AntBlockValidationMessage BlockForm="this"></AntBlockValidationMessage>
-    </AntFormItem>
+            @bind-Value="Block.Pictures"/>
+        <MudBlockValidationMessage BlockForm="this"></MudBlockValidationMessage>
+    </MudItem>
 }
 else
 {
-    <AntBlockFormErrorComponent Error="@LocalizationProvider["Storage is not configured in form options"]"></AntBlockFormErrorComponent>
+    <MudBlockFormErrorComponent Error="@LocalizationProvider["Storage is not configured in form options"]"></MudBlockFormErrorComponent>
 }

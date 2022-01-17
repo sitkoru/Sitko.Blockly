@@ -1,5 +1,5 @@
 ﻿@inherits TextBlockForm<MudBlazorBlocklyFormOptions>
-<AntFormItem>
+<MudItem>
     <CKEditor Config="FormOptions.CKEditorConfig" TextareaClass="ant-input" Placeholder="@LocalizationProvider["Block content"]" @bind-Value="Block.Text"></CKEditor>
-    <AntBlockValidationMessage BlockForm="this"></AntBlockValidationMessage>
-</AntFormItem>
+    <MudBlockValidationMessage BlockForm="this"></MudBlockValidationMessage>
+</MudItem>

@@ -1,8 +1,12 @@
-﻿@inherits IFrameBlockForm<MudBlazorBlocklyFormOptions>
+﻿@using global::MudBlazor
+@inherits IFrameBlockForm<MudBlazorBlocklyFormOptions>
 <!--suppress HtmlDeprecatedAttribute -->
-<AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Page url to embed"]">
-    <Input @bind-Value="@Block.Src" Placeholder="@LocalizationProvider["Source"]"/>
-</AntFormItem>
+<MudItem>
+    <MudTextField @bind-Value="@Block.Src" Placeholder="@LocalizationProvider["Source"]" Label="@LocalizationProvider["Url"]" />
+    <MudTooltip Text="@LocalizationProvider["Page url to embed"]">
+             <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info" />
+         </MudTooltip>
+</MudItem>
 @if (!string.IsNullOrEmpty(Block.Src))
 {
     <div class="iframe-container-wrapper">

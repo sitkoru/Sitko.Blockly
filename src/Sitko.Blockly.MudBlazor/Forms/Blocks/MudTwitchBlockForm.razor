@@ -1,6 +1,10 @@
-﻿@inherits TwitchBlockForm<MudBlazorBlocklyFormOptions>
+﻿@using global::MudBlazor
+@inherits TwitchBlockForm<MudBlazorBlocklyFormOptions>
 
-<AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Twitch video, channel or collection url"]">
-    <Input @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Twitch link"]" AllowClear="true" OnChange="OnChangeAsync" TValue="string"/>
-</AntFormItem>
+<MudITem>
+    <MudTextField T="string" @bind-Value="Block.Url" Placeholder="@LocalizationProvider["Twitch link"]" OnChange="OnChangeAsync" AllowClear="true" Label="@LocalizationProvider["Url"]"/>
+    <MudTooltip Text="@LocalizationProvider["Twitch video, channel or collection url"]">
+        <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info" />
+    </MudTooltip>
+</MudITem>
 <div @ref="ContainerRef" class="twitch-video" id="twitch-@Block.Id"></div>

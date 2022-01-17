@@ -1,47 +1,43 @@
-﻿@inherits QuoteBlockForm<MudBlazorBlocklyFormOptions>
-<Row Gutter="(24,20)">
-    <AntDesign.Col Span="24">
-        <AntFormItem>
-            <CKEditor Config="FormOptions.CKEditorConfig" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
-            <AntBlockValidationMessage BlockForm="this"></AntBlockValidationMessage>
-        </AntFormItem>
-    </AntDesign.Col>
-    <AntDesign.Col Span="24">
-        <Row Gutter="24">
-            <AntDesign.Col Md="8" Xs="24">
-                <AntFormItem Label="@LocalizationProvider["Source"]" Hint="@LocalizationProvider["Author name, site title, etc..."]">
-                    <Input Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author"/>
-                </AntFormItem>
-            </AntDesign.Col>
-            <AntDesign.Col Md="8" Xs="24">
-                <AntFormItem Label="@LocalizationProvider["Url"]" Hint="@LocalizationProvider["Link to page where this quote comes from"]">
-                    <Input Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link"/>
-                </AntFormItem>
-            </AntDesign.Col>
-        </Row>
-    </AntDesign.Col>
-    <AntDesign.Col Span="24">
-        <Row Gutter="24">
-            <AntDesign.Col Span="24">
-                @if (FormOptions.Storage is not null)
-                {
-                    <AntFormItem Label="@LocalizationProvider["Source picture"]" Hint="@LocalizationProvider["Author photo, site logo, etc..."]">
-                        <AntStorageImageInput
-                            Avatar="true"
-                            Size="small"
-                            Storage="FormOptions.Storage"
-                            ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
-                            UploadPath="@FormOptions.ImagesOptions.UploadPath"
-                            MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
-                            UploadText="@LocalizationProvider["Upload"]"
-                            RemoveText="@LocalizationProvider["Remove"]"
-                            PreviewText="@LocalizationProvider["Preview"]"
-                            GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
-                            @bind-Value="Block.Picture">
-                        </AntStorageImageInput>
-                    </AntFormItem>
-                }
-            </AntDesign.Col>
-        </Row>
-    </AntDesign.Col>
-</Row>
+﻿@using global::MudBlazor
+@inherits QuoteBlockForm<MudBlazorBlocklyFormOptions>
+<MudGrid>
+    <MudItem xs="12">
+        <CKEditor Config="FormOptions.CKEditorConfig" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
+        <MudBlockValidationMessage BlockForm="this"></MudBlockValidationMessage>
+    </MudItem>
+
+    <MudItem md="4" xs="12">
+        <MudTextField Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author" Label="@LocalizationProvider["Source"]"/>
+        <MudTooltip Text="@LocalizationProvider["Author name, site title, etc..."]">
+            <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
+        </MudTooltip>
+    </MudItem>
+
+    <MudItem md="4" xs="12">
+        <MudTextField Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link" Label="@LocalizationProvider["Url"]"/>
+        <MudTooltip Text="@LocalizationProvider["Link to page where this quote comes from"]">
+            <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
+        </MudTooltip>
+    </MudItem>
+
+
+    @if (FormOptions.Storage is not null)
+    {
+        <MudItem  xs="12">
+            <MudFileUpload
+                Storage="FormOptions.Storage"
+                ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
+                UploadPath="@FormOptions.ImagesOptions.UploadPath"
+                MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
+                UploadText="@LocalizationProvider["Upload"]"
+                RemoveText="@LocalizationProvider["Remove"]"
+                PreviewText="@LocalizationProvider["Preview"]"
+                GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
+                @bind-Value="Block.Picture"/>
+            <MudTooltip Text="@LocalizationProvider["Author photo, site logo, etc..."]">
+                <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
+            </MudTooltip>
+        </MudItem>
+    }
+
+</MudGrid>

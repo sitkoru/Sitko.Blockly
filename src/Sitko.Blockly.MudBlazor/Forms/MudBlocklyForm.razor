@@ -30,14 +30,14 @@
                             </MudButton>
                         </span>
                         <span title="@LocalizationProvider["Delete block"]">
-                            <AntDesign.Popconfirm Disabled="!CanDeleteBlock(block)" Placement="@Placement.Left" Title="@LocalizationProvider["Delete block?"]"
+                            <MudPopover Disabled="!CanDeleteBlock(block)" Placement="@Placement.Left" Title="@LocalizationProvider["Delete block?"]"
                                                   OnConfirm="@(async () => await DeleteBlockAsync(block))"
                                                   OkText="@LocalizationProvider["Delete block"]"
                                                   CancelText="@LocalizationProvider["Cancel"]">
                                 <MudButton Disabled="!CanDeleteBlock(block)" Size="Size.Medium">
                                     <MudIcon Icon="@Icons.Filled.Delete"></MudIcon>
                                 </MudButton>
-                            </AntDesign.Popconfirm>
+                            </MudPopover>
                         </span>
                         <span title="@LocalizationProvider["Move up"]">
                             <MudButton Size="Size.Medium" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUpAsync(block))">
