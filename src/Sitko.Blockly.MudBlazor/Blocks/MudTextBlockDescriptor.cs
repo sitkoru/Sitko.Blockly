@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.MudBlazorComponents.Display.Blocks;
@@ -14,5 +15,5 @@ public record MudTextBlockDescriptor : BlazorBlockDescriptor<TextBlock, MudTextB
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("text");
+    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.TextFields);
 }

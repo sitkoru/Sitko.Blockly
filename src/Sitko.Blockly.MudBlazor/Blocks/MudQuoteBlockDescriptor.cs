@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.MudBlazorComponents.Display.Blocks;
@@ -14,5 +15,5 @@ public record MudQuoteBlockDescriptor : BlazorBlockDescriptor<QuoteBlock, MudQuo
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("quote");
+    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.FormatQuote);
 }
