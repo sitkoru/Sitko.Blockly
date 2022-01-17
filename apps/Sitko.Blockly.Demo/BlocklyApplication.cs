@@ -3,7 +3,8 @@ using Serilog.Events;
 using Sitko.Blockly.AntDesignComponents;
 using Sitko.Blockly.Demo.Data;
 using Sitko.Core.App.Localization;
-using Sitko.Core.Blazor.AntDesign.Server;
+using Sitko.Core.Blazor.MudBlazor.Server;
+using Sitko.Core.Blazor.Server;
 using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage;
@@ -12,7 +13,7 @@ using Sitko.Core.Storage.Metadata.Postgres;
 
 namespace Sitko.Blockly.Demo;
 
-public class BlocklyApplication : AntBlazorApplication<Startup>
+public class BlocklyApplication : MudBlazorApplication<Startup>
 {
     public BlocklyApplication(string[] args) : base(args)
     {

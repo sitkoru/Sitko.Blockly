@@ -1,14 +1,15 @@
-﻿using AntDesign.ProLayout;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sitko.Core.Blazor.AntDesign.Server;
+using MudBlazor.Services;
+using Sitko.Core.Blazor.MudBlazor.Server;
+using Sitko.Core.Blazor.Server;
 
 namespace Sitko.Blockly.Demo;
 
-public class Startup : AntBlazorStartup
+public class Startup : MudBlazorStartup
 {
     public Startup(IConfiguration configuration, IHostEnvironment environment) : base(configuration, environment)
     {
@@ -18,11 +19,9 @@ public class Startup : AntBlazorStartup
     {
         base.ConfigureAppServices(services);
         services.AddValidatorsFromAssemblyContaining<Startup>();
-        services.Configure<ProSettings>(settings =>
-        {
-            settings.Title = "Blockly";
-            settings.NavTheme = "dark";
-        });
+        services.AddMudServices();
+        services.AddServerSideBlazor().AddCircuitOptions(options => {  options.DetailedErrors = true; });
+
     }
 
     protected override void ConfigureAfterRoutingMiddleware(IApplicationBuilder app)

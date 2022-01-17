@@ -29,7 +29,7 @@
                 </Extra>
                 <ChildContent>
                     <MudBlocksList
-                        EntityBlocks="post.Blocks" Options="@(new AntDesignBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage<BlocklyStorageOptions>>(), $"Posts/{post.Id}"))">
+                        EntityBlocks="post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage<BlocklyStorageOptions>>(), $"Posts/{post.Id}"))">
                     </MudBlocksList>
                 </ChildContent>
             </Card>

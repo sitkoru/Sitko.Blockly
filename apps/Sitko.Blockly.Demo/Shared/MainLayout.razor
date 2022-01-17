@@ -1,30 +1,14 @@
-@using Layout = AntDesign.ProLayout.Layout
 @inherits LayoutComponentBase
 
-<BasicLayout MenuData="menuData" Theme="MenuTheme.Dark" Layout="Layout.Top" Logo="@("/logo.png")">
+<BasicMudLayout>
+    <Menu>
+        <MudNavMenu>
+            <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Posts</MudNavLink>
+        </MudNavMenu>
+    </Menu>
     <ChildContent>
         @Body
     </ChildContent>
-    <FooterRender>
-        <GlobalFooter>
-            <Copyright>
-                <div>
-                    Sitko.ru <Icon Type="copyright"/> @DateTimeOffset.UtcNow.Year
-                </div>
-            </Copyright>
-        </GlobalFooter>
-    </FooterRender>
-</BasicLayout>
+      Sitko.ru <MudIcon Icon="@Icons.Filled.Copyright"/> @DateTimeOffset.UtcNow.Year
+</BasicMudLayout>
 
-@code
-{
-    private readonly MenuDataItem[] menuData =
-    {
-        new()
-        {
-            Path = "/",
-            Name = "Posts",
-            Key = "posts"
-        }
-    };
-}

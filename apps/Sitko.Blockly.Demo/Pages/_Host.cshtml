@@ -15,15 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sitko.Blockly.Demo</title>
     <base href="~/"/>
-    <link href="_content/AntDesign.ProLayout/css/ant-design-pro-layout-blazor.css" rel="stylesheet"/>
-    @if (options.CurrentValue.Theme == AntDesignBlocklyTheme.Dark)
-    {
-        <link href="_content/AntDesign/css/ant-design-blazor.dark.css" rel="stylesheet"/>
-    }
-    else
-    {
-        <link href="_content/AntDesign/css/ant-design-blazor.css" rel="stylesheet"/>
-    }
+    <link href="~/Sitko.Core.Apps.MudBlazor.styles.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link href="_content/MudBlazor/MudBlazor.min.css?v=5.0.14" rel="stylesheet"/>
     <link href="css/site.css" rel="stylesheet"/>
 </head>
 <body>
@@ -39,7 +33,7 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
-<script src="_content/AntDesign/js/ant-design-blazor.js"></script>
 <script src="_framework/blazor.server.js"></script>
+<script src="_content/MudBlazor/MudBlazor.min.js?v=5.0.14"></script>
 </body>
 </html>
