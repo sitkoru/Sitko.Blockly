@@ -14,14 +14,15 @@
                 <div class="block-row" @key="@block.Id">
                     <div @key="@block.Id" class="block-content">
                         <MudCard @key="@block.Id" Class="@className">
-                            @if (block.Enabled)
-                            {
+                            <MudCardContent Style="position: relative">
                                 @(RenderBlockForm(blockDescriptor, block))
-                            }
-                            else
-                            {
-                                <MudIcon Icon="@Icons.Material.Filled.VisibilityOff" Style="font-size: 4rem;" />
-                            }
+                                @if (!block.Enabled)
+                                {
+                                    <MudOverlay Visible="true" LightBackground="true" Absolute="true" Style="backdrop-filter: blur(1px);">
+                                        <MudIcon Color="Color.Primary" Icon="@Icons.Material.Filled.VisibilityOff" Style="font-size: 4rem;"/>
+                                    </MudOverlay>
+                                }
+                            </MudCardContent>
                         </MudCard>
                     </div>
                     <div class="block-controls block-controls-default">
@@ -30,7 +31,7 @@
                         </div>
                         <span title="@(block.Enabled ? LocalizationProvider["Disable block"] : LocalizationProvider["Enable block"])">
                             <MudButton Size="Size.Medium" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
-                                <MudIcon Icon="@Icons.Filled.VisibilityOff"></MudIcon>
+                                <MudIcon Icon="@(block.Enabled ? Icons.Filled.VisibilityOff : Icons.Filled.Visibility)"></MudIcon>
                             </MudButton>
                         </span>
                         <span title="@LocalizationProvider["Delete block"]">
