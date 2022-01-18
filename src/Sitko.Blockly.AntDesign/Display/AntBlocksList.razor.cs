@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Sitko.Blazor.ScriptInjector;
 
 namespace Sitko.Blockly.AntDesignComponents.Display;
