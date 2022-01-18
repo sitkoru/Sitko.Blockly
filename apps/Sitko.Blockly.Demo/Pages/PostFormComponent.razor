@@ -8,7 +8,7 @@
 @inherits BaseComponent
 <PostForm EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
     <MudItem>
-        <MudTextField Label="Title" @bind-Value="context.Entity.Title"/>
+        <MudTextField Label="Title" @bind-Value="context.Entity.Title" For="() => context.Entity.Title"/>
     </MudItem>
     <MudBlocklyForm Label="Blocks" @bind-Value="context.Entity.Blocks" Options="blocksOptions"></MudBlocklyForm>
     <MudBlocklyForm Label="Secondary blocks" @bind-Value="context.Entity.SecondaryBlocks" Options="secondaryBlocksOptions"></MudBlocklyForm>

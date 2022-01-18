@@ -2,25 +2,11 @@
 @using Sitko.Core.Storage
 @using Sitko.Blockly.Display
 @inherits BaseComponent
-@if (Post is not null)
-{
-    var title = Post.Title;
-    <PageContainer Title="@title">
-        <Breadcrumb>
-            <Breadcrumb>
-                <BreadcrumbItem>Home</BreadcrumbItem>
-                <BreadcrumbItem>Posts</BreadcrumbItem>
-            </Breadcrumb>
-        </Breadcrumb>
-        <ExtraContent>
-            <Button>
-                <a href="/Posts/@Post.Id/Edit/">Edit</a>
-            </Button>
-        </ExtraContent>
-        <Content>
-        </Content>
-        <ChildContent>
-            <MudBlocksList EntityBlocks="Post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Full, GetService<IStorage<BlocklyStorageOptions>>()))"></MudBlocksList>
-        </ChildContent>
-    </PageContainer>
-}
+<MudPageLayout Title="@Post.Title">
+    <Extra>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" Link="@($"/Posts/{Post.Id}/Edit/")">Edit</MudButton>
+    </Extra>
+    <ChildContent>
+        <MudBlocksList EntityBlocks="Post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Full, GetService<IStorage<BlocklyStorageOptions>>()))"></MudBlocksList>
+    </ChildContent>
+</MudPageLayout>

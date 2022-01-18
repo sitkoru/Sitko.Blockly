@@ -1,14 +1,9 @@
 @inherits LayoutComponentBase
-
 <BasicMudLayout>
     <Menu>
-        <MudNavMenu>
-            <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Posts</MudNavLink>
-        </MudNavMenu>
+        <NavMenu/>
     </Menu>
     <ChildContent>
         @Body
     </ChildContent>
-      Sitko.ru <MudIcon Icon="@Icons.Filled.Copyright"/> @DateTimeOffset.UtcNow.Year
 </BasicMudLayout>
-

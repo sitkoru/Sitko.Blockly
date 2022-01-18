@@ -4,40 +4,29 @@
 @using Sitko.Blockly.Display
 @using Sitko.Core.Storage
 @inherits BaseComponent
-<PageContainer Title="Posts">
-    <Breadcrumb>
-        <Breadcrumb>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Posts</BreadcrumbItem>
-        </Breadcrumb>
-    </Breadcrumb>
-    <Content>
-    </Content>
-    <ExtraContent>
-        <Button>
-            <a href="/Posts/Add">Add</a>
-        </Button>
-    </ExtraContent>
+<MudPageLayout Title="@LocalizationProvider["Posts"]">
+    <Extra>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" Link="/Posts/Add">Add</MudButton>
+    </Extra>
     <ChildContent>
-        @foreach (Post post in Posts)
-        {
-            <Card Title="@post.Title">
-                <Extra>
-                    <a href="/Posts/@post.Id/Edit">
-                        <Button>Edit</Button>
-                    </a>
-                </Extra>
-                <ChildContent>
-                    <MudBlocksList
-                        EntityBlocks="post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage<BlocklyStorageOptions>>(), $"Posts/{post.Id}"))">
-                    </MudBlocksList>
-                </ChildContent>
-            </Card>
-        }
-
+        @foreach (var post in Posts)
+                {
+                    <MudCard>
+                        <MudCardHeader>
+                            <MudText Typo="Typo.h6">@post.Title</MudText>
+                        </MudCardHeader>
+                        <MudCardActions>
+                            <MudButton Link="@($"/Posts/{post.Id}/Edit")" Variant="Variant.Text" Color="Color.Primary">Edit</MudButton>
+                        </MudCardActions>
+                        <MudCardContent>
+                            <MudBlocksList
+                                                            EntityBlocks="post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage<BlocklyStorageOptions>>(), $"Posts/{post.Id}"))">
+                                                        </MudBlocksList>
+                        </MudCardContent>
+                    </MudCard>
+                }
     </ChildContent>
-</PageContainer>
-
+</MudPageLayout>
 
 @code{
 
@@ -48,6 +37,6 @@
         Posts = posts.items;
     }
 
-    private Post[] Posts { get; set; } = new Post[0];
+    private Post[] Posts { get; set; } = Array.Empty<Post>();
 
 }
