@@ -34,14 +34,14 @@
                             </MudButton>
                         </span>
                         <span title="@LocalizationProvider["Delete block"]">
-                            <MudPopover Disabled="!CanDeleteBlock(block)" Placement="@Placement.Left" Title="@LocalizationProvider["Delete block?"]"
-                                        OnConfirm="@(async () => await DeleteBlockAsync(block))"
-                                        OkText="@LocalizationProvider["Delete block"]"
-                                        CancelText="@LocalizationProvider["Cancel"]">
-
+                            <MudPopover Open="@(_openBlockId==block.Id)" Fixed="true" Class="px-4 pt-4" Tag="block.Id">
+                                <div class="d-flex flex-column">
+                                    <MudText>@LocalizationProvider["Delete block?"]</MudText>
+                                    <MudButton OnClick="@(async () => await DeleteBlockAsync(block))" Class="ml-auto mr-n3 mb-1" Color="Color.Error">@LocalizationProvider["Delete block"]</MudButton>
+                                    <MudButton OnClick="@(()=>ToggleOpen(block.Id))" Class="ml-auto mr-n3 mb-1" Color="Color.Error">@LocalizationProvider["Cancel"]</MudButton>
+                                </div>
                             </MudPopover>
-
-                            <MudButton Disabled="!CanDeleteBlock(block)" Size="Size.Medium">
+                            <MudButton Disabled="!CanDeleteBlock(block)" Size="Size.Medium" OnClick="@(()=>ToggleOpen(block.Id))">
                                 <MudIcon Icon="@Icons.Filled.Delete"></MudIcon>
                             </MudButton>
                         </span>
