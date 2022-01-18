@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Microsoft.Extensions.Options
 @using Sitko.Blockly.MudBlazorComponents
+@using Sitko.Core.App
 @namespace Sitko.Blockly.Demo.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject IOptionsMonitor<MudBlazorBlocklyModuleOptions> options
+@inject IApplicationContext applicationContext
 @{
     Layout = null;
 }
@@ -15,10 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sitko.Blockly.Demo</title>
     <base href="~/"/>
-    <link href="~/Sitko.Core.Blazor.MudBlazor.styles.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <link href="_content/MudBlazor/MudBlazor.min.css?v=5.0.14" rel="stylesheet"/>
-    <link href="css/site.css" rel="stylesheet"/>
+    <link href="_content/MudBlazor/MudBlazor.min.css?v=@applicationContext.Version" rel="stylesheet"/>
+    <link href="css/site.css?v=@applicationContext.Version" rel="stylesheet"/>
 </head>
 <body>
 <component type="typeof(App)" render-mode="ServerPrerendered"/>
@@ -33,7 +34,7 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
-<script src="_framework/blazor.server.js"></script>
-<script src="_content/MudBlazor/MudBlazor.min.js?v=5.0.14"></script>
+<script src="_framework/blazor.server.js?v=@applicationContext.Version"></script>
+<script src="_content/MudBlazor/MudBlazor.min.js?v=@applicationContext.Version"></script>
 </body>
 </html>
