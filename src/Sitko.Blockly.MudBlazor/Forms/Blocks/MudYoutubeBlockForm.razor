@@ -1,10 +1,7 @@
 ﻿@inherits YoutubeBlockForm<MudBlazorBlocklyFormOptions>
 <!--suppress HtmlDeprecatedAttribute -->
 <MudItem>
-    <MudTextField Label="@LocalizationProvider["Url"]" Placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url"/>
-    <MudTooltip Text="@LocalizationProvider["Full YouTube video url"]">
-        <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info" />
-    </MudTooltip>
+    <MudTextField Label="@LocalizationProvider["Url"]" HelperText="@LocalizationProvider["Full YouTube video url"]" Placeholder="@LocalizationProvider["Video url"]" @bind-Value="@Block.Url" For="() => Block.Url"/>
 </MudItem>
 @if (!string.IsNullOrEmpty(Block.YoutubeId))
 {
