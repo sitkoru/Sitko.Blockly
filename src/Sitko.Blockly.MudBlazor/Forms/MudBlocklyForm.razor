@@ -14,9 +14,14 @@
                 <div class="block-row" @key="@block.Id">
                     <div @key="@block.Id" class="block-content">
                         <MudCard @key="@block.Id" Class="@className">
-                            <MudProgressCircular @key="@block.Id" Indeterminate="!block.Enabled">
+                            @if (block.Enabled)
+                            {
                                 @(RenderBlockForm(blockDescriptor, block))
-                            </MudProgressCircular>
+                            }
+                            else
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.DisabledVisible" Style="font-size: 4rem;" />
+                            }
                         </MudCard>
                     </div>
                     <div class="block-controls block-controls-default">
@@ -30,13 +35,15 @@
                         </span>
                         <span title="@LocalizationProvider["Delete block"]">
                             <MudPopover Disabled="!CanDeleteBlock(block)" Placement="@Placement.Left" Title="@LocalizationProvider["Delete block?"]"
-                                                  OnConfirm="@(async () => await DeleteBlockAsync(block))"
-                                                  OkText="@LocalizationProvider["Delete block"]"
-                                                  CancelText="@LocalizationProvider["Cancel"]">
-                                <MudButton Disabled="!CanDeleteBlock(block)" Size="Size.Medium">
-                                    <MudIcon Icon="@Icons.Filled.Delete"></MudIcon>
-                                </MudButton>
+                                        OnConfirm="@(async () => await DeleteBlockAsync(block))"
+                                        OkText="@LocalizationProvider["Delete block"]"
+                                        CancelText="@LocalizationProvider["Cancel"]">
+
                             </MudPopover>
+
+                            <MudButton Disabled="!CanDeleteBlock(block)" Size="Size.Medium">
+                                <MudIcon Icon="@Icons.Filled.Delete"></MudIcon>
+                            </MudButton>
                         </span>
                         <span title="@LocalizationProvider["Move up"]">
                             <MudButton Size="Size.Medium" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUpAsync(block))">
