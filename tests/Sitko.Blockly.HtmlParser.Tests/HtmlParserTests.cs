@@ -9,7 +9,6 @@ using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Xunit;
 using Xunit;
 using Xunit.Abstractions;
-using TestApplication = Sitko.Blockly.Tests.TestApplication;
 
 namespace Sitko.Blockly.HtmlParser.Tests;
 
