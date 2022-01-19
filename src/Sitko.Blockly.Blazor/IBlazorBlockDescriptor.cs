@@ -8,7 +8,6 @@ public interface IBlazorBlockDescriptor : IBlockDescriptor
 {
     string DisplayComponentCssClass => "";
     string FormComponentCssClass => "";
-    RenderFragment Icon { get; }
     Type FormComponent { get; }
     Type DisplayComponent { get; }
 }

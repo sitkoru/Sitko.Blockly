@@ -17,7 +17,6 @@ public abstract record BlazorBlockDescriptor<TBlock, TDisplayComponent, TFormCom
     {
     }
 
-    public abstract RenderFragment Icon { get; }
     public virtual Type FormComponent => typeof(TFormComponent);
     public virtual Type DisplayComponent => typeof(TDisplayComponent);
 }

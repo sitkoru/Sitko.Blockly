@@ -13,8 +13,8 @@ public record CutBlock : ContentBlock
     public override bool ShouldRender(BlocklyListOptions listOptions) =>
         listOptions.Mode == BlocksListMode.Preview;
 
-    public override bool ShouldRenderNext(BlocklyListOptions options) =>
-        options.Mode == BlocksListMode.Full;
+    public override bool ShouldRenderNext(BlocklyListOptions listOptions) =>
+        listOptions.Mode == BlocksListMode.Full;
 }
 
 public record CutBlockDescriptor : BlockDescriptor<CutBlock>
