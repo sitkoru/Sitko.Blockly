@@ -55,6 +55,13 @@ jobs:
           project_path: src/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.csproj
           nuget_host: https://api.nuget.org/v3/index.json
           nuget_token: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish MudBlazor library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly.MudBlazor/Sitko.Blockly.MudBlazor.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
       - name: Publish EF library
         uses: sitkoru/nuget-release-action@v1
         with:
