@@ -1,7 +1,4 @@
 ﻿@inherits CutBlockForm<MudBlazorBlocklyFormOptions>
 <MudItem>
-    <MudTextField @bind-Value="@Block.ButtonText" Label="@LocalizationProvider["Button text"]" />
-    <MudTooltip Text="@LocalizationProvider["Text on button when block rendered in preview list mode"]">
-         <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info" />
-     </MudTooltip>
+    <MudTextField @bind-Value="@Block.ButtonText" For="() => Block.ButtonText" Label="@LocalizationProvider["Button text"]" HelperText="@LocalizationProvider["Text on button when block rendered in preview list mode"]"/>
 </MudItem >

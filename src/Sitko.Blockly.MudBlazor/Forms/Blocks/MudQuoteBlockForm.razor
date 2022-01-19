@@ -6,17 +6,11 @@
     </MudItem>
 
     <MudItem md="4" xs="12">
-        <MudTextField Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author" Label="@LocalizationProvider["Source"]"/>
-        <MudTooltip Text="@LocalizationProvider["Author name, site title, etc..."]">
-            <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
-        </MudTooltip>
+        <MudTextField Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author" Label="@LocalizationProvider["Source"]" For="() => Block.Author" HelperText="@LocalizationProvider["Author name, site title, etc..."]"/>
     </MudItem>
 
     <MudItem md="4" xs="12">
-        <MudTextField Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link" Label="@LocalizationProvider["Url"]"/>
-        <MudTooltip Text="@LocalizationProvider["Link to page where this quote comes from"]">
-            <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
-        </MudTooltip>
+        <MudTextField Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link" Label="@LocalizationProvider["Url"]" For="() => Block.Link" HelperText="@LocalizationProvider["Link to page where this quote comes from"]"/>
     </MudItem>
 
 
