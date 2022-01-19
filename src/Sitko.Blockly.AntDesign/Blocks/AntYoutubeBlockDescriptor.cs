@@ -15,5 +15,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("youtube");
+    public override string Icon => "youtube";
 }

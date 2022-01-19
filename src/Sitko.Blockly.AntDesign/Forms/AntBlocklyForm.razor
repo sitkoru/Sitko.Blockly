@@ -21,7 +21,7 @@
                     </div>
                     <div class="block-controls block-controls-default">
                         <div class="block-mainicon" title="@blockDescriptor.Title">
-                            @blockDescriptor.Icon
+                            <CustomAntIcon Icon="@blockDescriptor.Icon"></CustomAntIcon>
                         </div>
                         <span title="@(block.Enabled ? LocalizationProvider["Disable block"] : LocalizationProvider["Enable block"])">
                             <AntDesign.Button Size="Default" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
@@ -77,7 +77,7 @@
                            foreach (var descriptor in BlockDescriptors)
                            {
                                <span class="add-block-button" title="@descriptor.Title">
-                                   <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Default" OnClick="() => AddBlock(descriptor, afterBlock)">@descriptor.Icon</AntDesign.Button>
+                                   <AntDesign.Button Disabled="!CanAdd(descriptor)" Size="@AntSizeLDSType.Default" OnClick="() => AddBlock(descriptor, afterBlock)"><CustomAntIcon Icon="@descriptor.Icon"></CustomAntIcon></AntDesign.Button>
                                </span>
                            }
                        }

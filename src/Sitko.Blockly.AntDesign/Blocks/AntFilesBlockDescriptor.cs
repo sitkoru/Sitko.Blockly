@@ -14,5 +14,5 @@ public record AntFilesBlockDescriptor : BlazorBlockDescriptor<FilesBlock, AntFil
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("attach");
+    public override string Icon => "attach";
 }
