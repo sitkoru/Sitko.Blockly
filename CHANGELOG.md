@@ -1,3 +1,11 @@
+# [1.0.0-beta.6](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.5...1.0.0-beta.6) (2022-01-19)
+
+
+### Features
+
+* add mudblazor package to ci ([311c1a0](https://github.com/sitkoru/Sitko.Blockly/commit/311c1a0b6018a06df1dfadf2f1f53113f0058096))
+* add mudblazor package to ci ([6dcb6c4](https://github.com/sitkoru/Sitko.Blockly/commit/6dcb6c4a4c4d9eed605d7be9d5854e9eb1bd4f2d))
+
 # [1.0.0-beta.5](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.4...1.0.0-beta.5) (2022-01-19)
 
 
