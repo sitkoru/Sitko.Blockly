@@ -1,3 +1,47 @@
+# [1.0.0-beta.5](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.4...1.0.0-beta.5) (2022-01-19)
+
+
+### Bug Fixes
+
+* **demo:** fix mudblazor connection ([045be01](https://github.com/sitkoru/Sitko.Blockly/commit/045be01d6e41f7a8118e4093d7c7ec5ee3cff9b5))
+* **demo:** remove duplicated mud components ([88282c6](https://github.com/sitkoru/Sitko.Blockly/commit/88282c6af18111d34db9edd42047ed0a3a4048c8))
+* **demo:** upd demo to use correct layout and components ([18a02a0](https://github.com/sitkoru/Sitko.Blockly/commit/18a02a004dd69cf473e6acb874a1f0f4275a6c47))
+* fix blocks visibility ([e864a11](https://github.com/sitkoru/Sitko.Blockly/commit/e864a115ff1da4232d2fd62e79d4608b15919d5c))
+* fixed brands icons ([b066788](https://github.com/sitkoru/Sitko.Blockly/commit/b066788547395d3f1658e391bfa8e0ac5525e5fe))
+* fixed disabled visibility ticket ([2fa6195](https://github.com/sitkoru/Sitko.Blockly/commit/2fa6195a123e9d606231d2ccc56476551376a161))
+* fixed displaying delete popup msg ([6b90733](https://github.com/sitkoru/Sitko.Blockly/commit/6b907332a2088d09509ae9a487c3c1ed3d0a4ae1))
+* fixed some icons ([f6b5a41](https://github.com/sitkoru/Sitko.Blockly/commit/f6b5a4152045491773657e67ae3a3bd12d80057e))
+* **mudblazor:** fix add icon display ([98371fb](https://github.com/sitkoru/Sitko.Blockly/commit/98371fb47f5848229727a977c6c5ca79d5912939))
+* **mudblazor:** fix carousel parameters ([cf81259](https://github.com/sitkoru/Sitko.Blockly/commit/cf8125945d57eac74ea7e0bcedd2363cdcb7796b))
+* **mudblazor:** fix paths to resources ([6b06bb1](https://github.com/sitkoru/Sitko.Blockly/commit/6b06bb188c9c267b5e412b4afd1a13c823619bff))
+* **mudblazor:** fix tag case ([a798084](https://github.com/sitkoru/Sitko.Blockly/commit/a798084912b7183165ec9d6265cfc4efd8105b7b))
+* **mudblazor:** rename extensions methods ([313d445](https://github.com/sitkoru/Sitko.Blockly/commit/313d445a17bcfac21a1251628a99b34837bcf818))
+* **mudblazor:** rework enabled-disabled blocks ([2e3452a](https://github.com/sitkoru/Sitko.Blockly/commit/2e3452ac501f009d9a4e617645eb0a01a531c3a2))
+* **mudblazor:** set correct mode for quote picture input ([857c85d](https://github.com/sitkoru/Sitko.Blockly/commit/857c85d1d6f1ca3ecd4709d0cfd7a5d1e86d7f18))
+* **mudblazor:** set For and HelperText on form fields ([b9017fe](https://github.com/sitkoru/Sitko.Blockly/commit/b9017fe770d03620a87b640c2364a35d57df1873))
+* **mudblazor:** update file inputs ([a96f00a](https://github.com/sitkoru/Sitko.Blockly/commit/a96f00a1418f7b728a96a4727d267bd20dbb6c60))
+* **mudblazor:** use HelperText instead of Tooltip, add For in MudYoutubeBlockForm.razor ([7ffff16](https://github.com/sitkoru/Sitko.Blockly/commit/7ffff16bf37ac7c726c0ae6507b0eeee40811149))
+* rename resources Ant to Mud ([d164e4a](https://github.com/sitkoru/Sitko.Blockly/commit/d164e4a31bd70f199f72829427f24e7bf0ee746f))
+
+
+### Features
+
+* add MudBlazor to demo project ([786907a](https://github.com/sitkoru/Sitko.Blockly/commit/786907a2632ccaad40be97fe7304bfa9d01b4017))
+* add Sitko.Blockly.MudBlazor project ([0f3e8e1](https://github.com/sitkoru/Sitko.Blockly/commit/0f3e8e1a844493dc5928b61bec49f08eb01eddba))
+* **antdesign:** use new string icons ([0092c2d](https://github.com/sitkoru/Sitko.Blockly/commit/0092c2d7ea30b77db2a968471d3c45e8d419fbfc))
+* **blazor:** move Icon to core descriptor, make it string ([9b16f52](https://github.com/sitkoru/Sitko.Blockly/commit/9b16f52c575dd3c4fd8b258fa7a58b113c360bdb))
+* **core:** Sitko.Core 9.0.0-beta.5 ([d220b92](https://github.com/sitkoru/Sitko.Blockly/commit/d220b9298d5551d86af514e72a6c1aa8b4978ef4))
+* **demo:** add launchSettings.json to git ([fd964f9](https://github.com/sitkoru/Sitko.Blockly/commit/fd964f96f6c836c04739d482d9157ad2f8fb3d85))
+* **demo:** add version to resources urls ([71b4f28](https://github.com/sitkoru/Sitko.Blockly/commit/71b4f28ca6a69f38b18c8cfc07f6b5be64f9b915))
+* make demo use mud ([ad86258](https://github.com/sitkoru/Sitko.Blockly/commit/ad86258760e94da5798325c031e46997f8f25f5e))
+* **mudblazor:** rename root namespace MudBlazorComponents to prevent collision with MudBlazor package namespace ([d6a05f6](https://github.com/sitkoru/Sitko.Blockly/commit/d6a05f69ba3ea6a6baac5938362c3385db044dc8))
+* **mudblazor:** use new Label and HelperText in MudFileUpload ([caf7522](https://github.com/sitkoru/Sitko.Blockly/commit/caf7522d2468608bf1b6c2101bf5b3c9748942bc))
+* **mudblazor:** use new MudValidationMessage ([4952893](https://github.com/sitkoru/Sitko.Blockly/commit/4952893d677db452fd8b0843b4c91885895b3a6f))
+* **mudblazor:** use new string icons ([4738a8f](https://github.com/sitkoru/Sitko.Blockly/commit/4738a8fd5197db12941b05b049a265764acfac25))
+* project files added ([50aa944](https://github.com/sitkoru/Sitko.Blockly/commit/50aa94434537427e631203776f79d3cfb2c2ddba))
+* update blocks for mud blazor ([3456112](https://github.com/sitkoru/Sitko.Blockly/commit/3456112a0669da1e1d572b88335670417ab766fd))
+* update forms to mudblazor ([023a11e](https://github.com/sitkoru/Sitko.Blockly/commit/023a11e1f05cf7520caa0bd8d66c8f823103e52e))
+
 # [1.0.0-beta.4](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.3...1.0.0-beta.4) (2022-01-17)
 
 
