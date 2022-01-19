@@ -18,6 +18,8 @@
     {
         <MudItem xs="12">
             <MudFileUpload
+                Label="@LocalizationProvider["Source picture"]"
+                HelperText="@LocalizationProvider["Author photo, site logo, etc..."]"
                 Storage="FormOptions.Storage"
                 DisplayMode="FileUploadDisplayMode.Image"
                 ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
@@ -29,9 +31,6 @@
                 GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
                 @bind-Value="Block.Picture"
                 For="() => Block.Picture"/>
-            <MudTooltip Text="@LocalizationProvider["Author photo, site logo, etc..."]">
-                <MudIconButton Class="mx-2" Icon="@Icons.Material.Outlined.Info"/>
-            </MudTooltip>
         </MudItem>
     }
 
