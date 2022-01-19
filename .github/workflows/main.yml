@@ -14,6 +14,7 @@ jobs:
       PROJECT: Sitko.Blockly
       BLAZOR_PROJECT: Sitko.Blockly.Blazor
       ANTDESIGN_PROJECT: Sitko.Blockly.AntDesign
+      MUDBLAZOR_PROJECT: Sitko.Blockly.AntDesign
       EF_PROJECT: Sitko.Blockly.EntityFrameworkCore
       TESTS_PROJECT_MAIN: Sitko.Blockly.Tests
       TESTS_PROJECT_PARSER: Sitko.Blockly.HtmlParser.Tests
@@ -39,6 +40,8 @@ jobs:
         run: dotnet pack -c Release src/${{ env.BLAZOR_PROJECT }}
       - name: Create antdesign package
         run: dotnet pack -c Release src/${{ env.ANTDESIGN_PROJECT }}
+      - name: Create mudblazor package
+        run: dotnet pack -c Release src/${{ env.MUDBLAZOR_PROJECT }}
       - name: Create ef package
         run: dotnet pack -c Release src/${{ env.EF_PROJECT }}
       - name: Add Github Actions logger
