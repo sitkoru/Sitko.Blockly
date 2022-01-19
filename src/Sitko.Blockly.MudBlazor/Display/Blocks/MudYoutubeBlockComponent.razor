@@ -1,0 +1,12 @@
+﻿@inherits YoutubeBlockComponent<MudBlazorBlocklyListOptions>
+<!--suppress HtmlDeprecatedAttribute -->
+<div class="block-content">
+    <div class="youtube-container-wrapper">
+        <div class="youtube-container">
+            @* ReSharper disable once Html.Obsolete *@
+            <iframe src="@Block.Url"
+                    frameborder="0" allowfullscreen class="youtube-video">
+            </iframe>
+        </div>
+    </div>
+</div>

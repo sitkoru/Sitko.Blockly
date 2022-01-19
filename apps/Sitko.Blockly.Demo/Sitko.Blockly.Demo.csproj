@@ -7,21 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Blockly.AntDesign\Sitko.Blockly.AntDesign.csproj" />
+    <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj" />
     <ProjectReference Include="..\..\src\Sitko.Blockly.EntityFrameworkCore\Sitko.Blockly.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AntDesign.ProLayout" Version="0.1.10" />
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.0.0-beta.2" />
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor.Server" Version="9.0.0-beta.5" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.0.0-beta.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="9.0.0-beta.2" />
-    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="9.0.0-beta.2" />
-    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="9.0.0-beta.2" />
-    <PackageReference Include="Sitko.Core.Blazor.AntDesign.Server" Version="9.0.0-beta.2" />
+    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="9.0.0-beta.5" />
+    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="9.0.0-beta.5" />
+    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="9.0.0-beta.5" />
   </ItemGroup>
 
 </Project>

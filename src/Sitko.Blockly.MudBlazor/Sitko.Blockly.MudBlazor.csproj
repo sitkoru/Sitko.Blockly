@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <RootNamespace>Sitko.Blockly.MudBlazorComponents</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sitko.Blockly.Blazor\Sitko.Blockly.Blazor.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="3.0.3" />
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="9.0.0-beta.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\*.json" />
+  </ItemGroup>
+</Project>

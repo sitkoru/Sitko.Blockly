@@ -22,6 +22,7 @@ public class ContentBlockMetadata : IContentBlockMetadata
     public Type BlockType { get; }
 }
 
+[AttributeUsage(AttributeTargets.Class)]
 public class ContentBlockMetadataAttribute : Attribute
 {
     public ContentBlockMetadataAttribute(int priority = int.MaxValue, int maxCount = 0)

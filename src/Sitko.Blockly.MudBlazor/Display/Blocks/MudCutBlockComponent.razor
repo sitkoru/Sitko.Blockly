@@ -1,0 +1,26 @@
+﻿@inherits CutBlockComponent<MudBlazorBlocklyListOptions>
+@if (Options.EntityUrl is not null)
+{
+    <a href="@Options.EntityUrl">
+        <MudButton>
+            @{
+                if (string.IsNullOrEmpty(Block.ButtonText))
+                {
+                    <span>
+                        @LocalizationProvider["Read more..."]
+                    </span>
+                }
+                else
+                {
+                    <span>
+                        @Block.ButtonText
+                    </span>
+                }
+            }
+        </MudButton>
+    </a>
+}
+else
+{
+    <MudBlockErrorComponent Error="@LocalizationProvider["Not Entity url provided"]"></MudBlockErrorComponent>
+}

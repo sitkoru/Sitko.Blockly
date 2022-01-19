@@ -14,5 +14,5 @@ public record AntQuoteBlockDescriptor : BlazorBlockDescriptor<QuoteBlock, AntQuo
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("quote");
+    public override string Icon => "quote";
 }

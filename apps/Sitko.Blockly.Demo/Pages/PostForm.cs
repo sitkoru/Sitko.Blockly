@@ -4,16 +4,16 @@ using FluentValidation;
 using Sitko.Blockly.Demo.Data.Entities;
 using Sitko.Blockly.Validation;
 using Sitko.Core.Blazor.Forms;
+using Sitko.Core.Blazor.MudBlazorComponents;
 
 namespace Sitko.Blockly.Demo.Pages;
 
 using Blazor.Extensions;
-using Core.Blazor.AntDesignComponents.Components;
 using Data.Repositories;
 using KellermanSoftware.CompareNetObjects;
 using Microsoft.AspNetCore.Components;
 
-public class PostForm : BaseAntRepositoryForm<Post, Guid, PostsRepository>
+public class PostForm : BaseMudRepositoryForm<Post, Guid, PostsRepository>
 {
     [Parameter] public RenderFragment<PostForm> ChildContent { get; set; } = null!;
 

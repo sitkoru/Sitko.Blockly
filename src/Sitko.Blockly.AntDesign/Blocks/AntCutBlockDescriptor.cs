@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Sitko.Blockly.AntDesignComponents.Display.Blocks;
+﻿using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
@@ -13,5 +12,5 @@ public record AntCutBlockDescriptor : BlazorBlockDescriptor<CutBlock, AntCutBloc
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("cut");
+    public override string Icon => "cut";
 }

@@ -15,5 +15,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("twitch");
+    public override string Icon => "twitch";
 }

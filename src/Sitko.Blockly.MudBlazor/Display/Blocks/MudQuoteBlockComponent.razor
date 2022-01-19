@@ -1,0 +1,37 @@
+﻿@inherits QuoteBlockComponent<MudBlazorBlocklyListOptions>
+<blockquote class="blockquote">
+    <div>
+        @((MarkupString)Block.Text)
+    </div>
+    <footer class="author">
+        @if (Options.Storage is not null && Block.Picture != null)
+        {
+            <div class="picture" style="background-image: url(@Options.Storage.PublicUri(Block.Picture))">
+            </div>
+        }
+        <cite>
+            @{
+                var authorText = Block.Author;
+                @if (Options.Storage is null || Block.Picture is null)
+                {
+                    authorText = $"— {authorText}";
+                }
+            }
+            @if (!string.IsNullOrEmpty(Block.Link))
+            {
+                if (!string.IsNullOrEmpty(Block.Author))
+                {
+                    <a href="@Block.Link">@authorText</a>
+                }
+                else
+                {
+                    <a href="@Block.Link">Source</a>
+                }
+            }
+            else if (!string.IsNullOrEmpty(Block.Author))
+            {
+                @authorText
+            }
+        </cite>
+    </footer>
+</blockquote>

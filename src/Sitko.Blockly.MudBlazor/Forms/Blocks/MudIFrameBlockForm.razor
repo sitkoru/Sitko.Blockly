@@ -1,0 +1,16 @@
+﻿@inherits IFrameBlockForm<MudBlazorBlocklyFormOptions>
+<!--suppress HtmlDeprecatedAttribute -->
+<MudItem>
+    <MudTextField @bind-Value="@Block.Src" Placeholder="@LocalizationProvider["Source"]" Label="@LocalizationProvider["Url"]" For="() => Block.Src" HelperText="@LocalizationProvider["Page url to embed"]"/>
+</MudItem>
+@if (!string.IsNullOrEmpty(Block.Src))
+{
+    <div class="iframe-container-wrapper">
+        <div class="iframe-container">
+            @* ReSharper disable once Html.Obsolete *@
+            <iframe src="@Block.Src"
+                    frameborder="0" allowfullscreen class="iframe-content">
+            </iframe>
+        </div>
+    </div>
+}

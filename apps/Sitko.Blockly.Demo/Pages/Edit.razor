@@ -1,26 +1,11 @@
 ﻿@page "/Posts/{PostId:guid}/Edit"
+@inherits BaseComponent
 @{
     var title = $"Edit post {PostId}";
 }
-<PageContainer Title="@title">
-    <Breadcrumb>
-        <Breadcrumb>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Posts</BreadcrumbItem>
-            <BreadcrumbItem>Edit</BreadcrumbItem>
-        </Breadcrumb>
-    </Breadcrumb>
-    <Content>
-    </Content>
-    <ExtraContent>
-        <Button>
-            <a href="/Posts/@PostId">View</a>
-        </Button>
-    </ExtraContent>
-    <ChildContent>
-        <PostFormComponent PostId="PostId"></PostFormComponent>
-    </ChildContent>
-</PageContainer>
+<MudPageLayout Title="@title">
+    <PostFormComponent PostId="PostId"></PostFormComponent>
+</MudPageLayout>
 
 @code {
 

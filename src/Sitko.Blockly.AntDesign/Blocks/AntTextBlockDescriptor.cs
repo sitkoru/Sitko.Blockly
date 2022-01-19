@@ -14,5 +14,5 @@ public record AntTextBlockDescriptor : BlazorBlockDescriptor<TextBlock, AntTextB
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("text");
+    public override string Icon => "text";
 }

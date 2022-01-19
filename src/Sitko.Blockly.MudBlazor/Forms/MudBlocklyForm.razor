@@ -1,0 +1,100 @@
+﻿@inherits BlocklyForm<MudBlazorBlocklyFormOptions>
+<div class="blockly-form blockly-form-@ModuleOptions.Value.Theme.ToString().ToLowerInvariant()">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label class="blockly-form-label">@Label</label>
+    }
+    @if (Blocks.Any())
+    {
+        foreach (var block in Blocks)
+        {
+            var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
+            var className = $"block-form block-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.FormComponentCssClass} {(block.Enabled ? "block-enabled" : "block-disabled")}";
+            <div class="@className" style="order: @block.Position" @ref="@BlockElements[block.Id]" id="@block.Id">
+                <div class="block-row" @key="@block.Id">
+                    <div @key="@block.Id" class="block-content">
+                        <MudCard @key="@block.Id" Class="@className">
+                            <MudCardContent Style="position: relative">
+                                @(RenderBlockForm(blockDescriptor, block))
+                                @if (!block.Enabled)
+                                {
+                                    <MudOverlay Visible="true" LightBackground="true" Absolute="true" Style="backdrop-filter: blur(1px);">
+                                        <MudIcon Color="Color.Primary" Icon="@Icons.Material.Filled.VisibilityOff" Style="font-size: 4rem;"/>
+                                    </MudOverlay>
+                                }
+                            </MudCardContent>
+                        </MudCard>
+                    </div>
+                    <div class="block-controls block-controls-default">
+                        <div class="block-mainicon" title="@blockDescriptor.Title">
+                            <MudIcon Icon="@blockDescriptor.Icon"></MudIcon>
+                        </div>
+                        <span title="@(block.Enabled ? LocalizationProvider["Disable block"] : LocalizationProvider["Enable block"])">
+                            <MudButton Size="Size.Medium" OnClick="@(() => block.Enabled = !block.Enabled)" Class="block-disable-button">
+                                <MudIcon Icon="@(block.Enabled ? Icons.Filled.VisibilityOff : Icons.Filled.Visibility)"></MudIcon>
+                            </MudButton>
+                        </span>
+                        <span title="@LocalizationProvider["Delete block"]">
+                            <MudPopover Open="@(_openBlockId == block.Id)" Fixed="true" Class="px-4 pt-4" Tag="block.Id">
+                                <div class="d-flex flex-column">
+                                    <MudText>@LocalizationProvider["Delete block?"]</MudText>
+                                    <MudButton OnClick="@(async () => await DeleteBlockAsync(block))" Class="ml-auto mr-n3 mb-1" Color="Color.Error">@LocalizationProvider["Delete block"]</MudButton>
+                                    <MudButton OnClick="@(() => ToggleOpen(block.Id))" Class="ml-auto mr-n3 mb-1" Color="Color.Error">@LocalizationProvider["Cancel"]</MudButton>
+                                </div>
+                            </MudPopover>
+                            <MudButton Disabled="!CanDeleteBlock(block)" Size="Size.Medium" OnClick="@(() => ToggleOpen(block.Id))">
+                                <MudIcon Icon="@Icons.Filled.Delete"></MudIcon>
+                            </MudButton>
+                        </span>
+                        <span title="@LocalizationProvider["Move up"]">
+                            <MudButton Size="Size.Medium" Disabled="!CanMoveBlockUp(block)" OnClick="@(() => MoveBlockUpAsync(block))">
+                                <MudIcon Icon="@Icons.Filled.ArrowUpward"></MudIcon>
+                            </MudButton>
+                        </span>
+                        <span title="@LocalizationProvider["Move down"]">
+                            <MudButton Size="Size.Medium" Disabled="!CanMoveBlockDown(block)" OnClick="@(() => MoveBlockDownAsync(block))">
+                                <MudIcon Icon="@Icons.Filled.ArrowDownward"></MudIcon>
+                            </MudButton>
+                        </span>
+                    </div>
+                </div>
+                @AddPanelTemplate(block)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="blocks-add-first">@LocalizationProvider["Wow! Such empty! Add first block!"]</div>
+        @AddPanelTemplate()
+    }
+</div>
+
+@code{
+
+    private RenderFragment disabledBlockIndicator = @<span class="block-disabled-icon">
+                                                        <MudIcon Icon="@Icons.Filled.DisabledVisible"></MudIcon>
+                                                    </span>;
+
+    private RenderFragment AddPanelTemplate(ContentBlock? afterBlock = null)
+    {
+        return @<div class="add-block-panel add-block-panel-default @(CanAdd() ? "" : "add-block-panel-disabled")">
+                   <div class="add-block-items_wrapper">
+                       <MudIcon Icon="@Icons.Filled.Add" Class="plus-icon plus-icon_default"></MudIcon>
+                       @if (CanAdd())
+                       {
+                           foreach (var descriptor in BlockDescriptors)
+                           {
+                               <span class="add-block-button" title="@descriptor.Title">
+                                   <MudButton Disabled="!CanAdd(descriptor)" Size="@Size.Medium" OnClick="() => AddBlock(descriptor, afterBlock)" StartIcon="@descriptor.Icon"></MudButton>
+                               </span>
+                           }
+                       }
+                       else
+                       {
+                           <span class="max-blocks-error">@LocalizationProvider["Maximum blocks already added to form"]</span>
+                       }
+                   </div>
+               </div>;
+    }
+
+}

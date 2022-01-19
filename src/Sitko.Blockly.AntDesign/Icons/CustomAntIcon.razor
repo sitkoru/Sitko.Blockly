@@ -1,0 +1,15 @@
+﻿@if (!string.IsNullOrEmpty(Icon))
+{
+    <Icon>
+        <Component>
+            @CustomIconsProvider.GetIcon(Icon)
+        </Component>
+    </Icon>
+}
+
+@code {
+
+    [Parameter]
+    public string Icon { get; set; } = "";
+
+}

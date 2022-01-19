@@ -1,15 +1,5 @@
 ﻿@page "/Posts/Add"
-<PageContainer Title="Add post">
-    <Breadcrumb>
-        <Breadcrumb>
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Posts</BreadcrumbItem>
-            <BreadcrumbItem>Add</BreadcrumbItem>
-        </Breadcrumb>
-    </Breadcrumb>
-    <Content>
-    </Content>
-    <ChildContent>
-        <PostFormComponent></PostFormComponent>
-    </ChildContent>
-</PageContainer>
+@inherits BaseComponent
+<MudPageLayout Title="@LocalizationProvider["Add Post"]">
+    <PostFormComponent></PostFormComponent>
+</MudPageLayout>

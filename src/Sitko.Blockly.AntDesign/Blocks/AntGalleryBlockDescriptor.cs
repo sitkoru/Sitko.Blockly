@@ -15,5 +15,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon("gallery");
+    public override string Icon => "gallery";
 }
