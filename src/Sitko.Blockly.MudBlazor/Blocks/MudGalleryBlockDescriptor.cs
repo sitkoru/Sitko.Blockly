@@ -16,5 +16,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.Photo);
+    public override string Icon => Icons.Filled.Photo;
 }

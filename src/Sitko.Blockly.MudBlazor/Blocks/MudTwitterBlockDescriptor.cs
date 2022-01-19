@@ -16,5 +16,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Custom.Brands.Twitter);
+    public override string Icon => Icons.Custom.Brands.Twitter;
 }

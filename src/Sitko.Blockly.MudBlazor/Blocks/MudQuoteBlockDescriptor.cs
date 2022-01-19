@@ -15,5 +15,5 @@ public record MudQuoteBlockDescriptor : BlazorBlockDescriptor<QuoteBlock, MudQuo
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.FormatQuote);
+    public override string Icon => Icons.Filled.FormatQuote;
 }

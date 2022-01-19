@@ -16,5 +16,5 @@ public record
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.Stream);
+    public override string Icon => Icons.Filled.Stream; // TODO: Get twitch icon
 }

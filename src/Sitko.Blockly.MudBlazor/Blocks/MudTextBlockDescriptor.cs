@@ -15,5 +15,5 @@ public record MudTextBlockDescriptor : BlazorBlockDescriptor<TextBlock, MudTextB
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.TextFields);
+    public override string Icon => Icons.Filled.TextFields;
 }

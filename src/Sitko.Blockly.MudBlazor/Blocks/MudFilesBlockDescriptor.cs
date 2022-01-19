@@ -15,5 +15,5 @@ public record MudFilesBlockDescriptor : BlazorBlockDescriptor<FilesBlock, MudFil
     {
     }
 
-    public override RenderFragment Icon => builder => builder.AddIcon(Icons.Filled.Attachment);
+    public override string Icon => Icons.Filled.Attachment;
 }
