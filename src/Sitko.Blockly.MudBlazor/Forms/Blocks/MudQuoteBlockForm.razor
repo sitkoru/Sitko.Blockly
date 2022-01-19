@@ -19,6 +19,7 @@
         <MudItem xs="12">
             <MudFileUpload
                 Storage="FormOptions.Storage"
+                DisplayMode="FileUploadDisplayMode.Image"
                 ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
                 UploadPath="@FormOptions.ImagesOptions.UploadPath"
                 MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
