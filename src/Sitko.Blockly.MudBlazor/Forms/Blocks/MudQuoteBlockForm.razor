@@ -2,7 +2,7 @@
 <MudGrid>
     <MudItem xs="12">
         <CKEditor Config="FormOptions.CKEditorConfig" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
-        <MudBlockValidationMessage BlockForm="this"></MudBlockValidationMessage>
+        <MudValidationMessage FieldIdentifier="FieldIdentifier"></MudValidationMessage>
     </MudItem>
 
     <MudItem md="4" xs="12">
