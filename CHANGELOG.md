@@ -1,3 +1,11 @@
+# [1.0.0-beta.7](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.6...1.0.0-beta.7) (2022-01-20)
+
+
+### Bug Fixes
+
+* add custom twitch icon ([7d9252b](https://github.com/sitkoru/Sitko.Blockly/commit/7d9252bc441fe97ea622e595be4ef871ae2991d3))
+* add custom twitch icon ([819da36](https://github.com/sitkoru/Sitko.Blockly/commit/819da3678e9e841b9885801e0e4191a13ee98f98))
+
 # [1.0.0-beta.6](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.5...1.0.0-beta.6) (2022-01-19)
 
 
