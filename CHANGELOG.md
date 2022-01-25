@@ -1,3 +1,16 @@
+# [1.0.0-beta.8](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.7...1.0.0-beta.8) (2022-01-25)
+
+
+### Bug Fixes
+
+* **blazor:** remove default file types from file options, extend default image types ([1a3bbea](https://github.com/sitkoru/Sitko.Blockly/commit/1a3bbea5a3eb710ffcd7d07f0006053e626c7173))
+* **mudblazor:** remove duplicate validation messages ([24144e3](https://github.com/sitkoru/Sitko.Blockly/commit/24144e35e3b4fc8cf305082b13bb96addfcf54b1))
+
+
+### Features
+
+* **core:** Sitko.Core 9.0.0-beta.9 ([9313d5a](https://github.com/sitkoru/Sitko.Blockly/commit/9313d5a1ea40cceffc0c0165c60330ce2b96f9da))
+
 # [1.0.0-beta.7](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.6...1.0.0-beta.7) (2022-01-20)
 
 
