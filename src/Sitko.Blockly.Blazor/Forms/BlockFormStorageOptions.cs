@@ -5,7 +5,7 @@ namespace Sitko.Blockly.Blazor.Forms;
 public class BlockFormStorageOptions : BlocklyFormBlockOptions
 {
     public string UploadPath { get; set; } = "";
-    public string AllowedTypes { get; set; } = "image/jpeg,image/png,image/svg+xml";
+    public string AllowedTypes { get; set; } = "";
     public long MaxFileSize { get; set; }
     public int? MaxAllowedFiles { get; set; }
 

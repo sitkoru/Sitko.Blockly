@@ -5,5 +5,8 @@ public class BlazorBlocklyFormOptions : BlocklyFormOptions
     public BlockFormStorageOptions FilesOptions { get; set; } = new();
 
     public BlockFormStorageOptions ImagesOptions { get; set; } =
-        new() { AllowedTypes = "image/jpeg,image/png,image/svg+xml" };
+        new()
+        {
+            AllowedTypes = "image/jpeg,image/png,image/svg+xml,image/gif,image/ico,image/bmp,image/webm,image/webp"
+        };
 }
