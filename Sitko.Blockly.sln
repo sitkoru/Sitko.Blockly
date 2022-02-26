@@ -25,6 +25,9 @@ ProjectSection(SolutionItems) = preProject
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BE2C5E4A-BFBD-4645-AE0A-8B57A9EC1CB2}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly.Tests", "tests\Sitko.Blockly.Tests\Sitko.Blockly.Tests.csproj", "{6E318256-F811-46B9-9EED-EDB1D1CEACDC}"
 EndProject

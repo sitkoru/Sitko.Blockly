@@ -44,8 +44,6 @@ jobs:
         run: dotnet pack -c Release src/${{ env.MUDBLAZOR_PROJECT }}
       - name: Create ef package
         run: dotnet pack -c Release src/${{ env.EF_PROJECT }}
-      - name: Add Github Actions logger
-        run: dotnet add tests/${{ env.TESTS_PROJECT_MAIN }}/${{ env.TESTS_PROJECT_MAIN }}.csproj package GitHubActionsTestLogger
       - name: Run main tests
         run: dotnet test --logger GitHubActions tests/${{ env.TESTS_PROJECT_MAIN }}/${{ env.TESTS_PROJECT_MAIN }}.csproj
       - name: Run html parser tests
