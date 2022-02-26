@@ -1,3 +1,16 @@
+# [1.0.0-beta.9](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.8...1.0.0-beta.9) (2022-02-26)
+
+
+### Bug Fixes
+
+* **tests:** preinstall GitHubActionsTestLogger ([9e78480](https://github.com/sitkoru/Sitko.Blockly/commit/9e784808daa2602d0242b590c55ded123c1a77b0))
+
+
+### Features
+
+* **ci:** update actions/setup-node to v3 ([15bd511](https://github.com/sitkoru/Sitko.Blockly/commit/15bd511a379c4aab37744bce7fe1f397521d9d7e))
+* **core:** Sitko.Core 9.0.0-beta.19 ([924eb3b](https://github.com/sitkoru/Sitko.Blockly/commit/924eb3bd3da5cc9a74da969349e5a2d7c5deb6f7))
+
 # [1.0.0-beta.8](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.7...1.0.0-beta.8) (2022-01-25)
 
 
