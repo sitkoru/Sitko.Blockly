@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <ItemGroup>
-    <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Blazor" Version="9.0.0-beta.9" />
-    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="9.0.0-beta.9" />
+    <PackageReference Include="Sitko.Core.Blazor" Version="9.0.0-beta.19"/>
+    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="9.0.0-beta.19"/>
   </ItemGroup>
 
 </Project>
