@@ -19,7 +19,7 @@ jobs:
       TESTS_PROJECT_PARSER: Sitko.Blockly.HtmlParser.Tests
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
       - name: Install node.js
         uses: actions/setup-node@v2.4.1
         with:
