@@ -74,7 +74,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Build and push demo image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           file: ./apps/${{ env.DEMO_PROJECT }}/Dockerfile
           context: /app
