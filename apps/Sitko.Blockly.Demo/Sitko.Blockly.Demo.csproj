@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="AntDesign.ProLayout" Version="0.1.8" />
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.16.0" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
