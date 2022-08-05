@@ -1,3 +1,10 @@
+# [1.0.0-beta.11](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.10...1.0.0-beta.11) (2022-08-05)
+
+
+### Features
+
+* **antdesign:** support external custom icons ([624cc0c](https://github.com/sitkoru/Sitko.Blockly/commit/624cc0ce0129a73e3716872ee481d07f71a57891))
+
 # [1.0.0-beta.10](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.9...1.0.0-beta.10) (2022-08-05)
 
 
