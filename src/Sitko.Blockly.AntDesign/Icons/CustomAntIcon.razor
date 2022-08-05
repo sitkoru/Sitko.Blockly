@@ -1,10 +1,17 @@
 ﻿@if (!string.IsNullOrEmpty(Icon))
 {
-    <Icon>
-        <Component>
-            @CustomIconsProvider.GetIcon(Icon)
-        </Component>
-    </Icon>
+    if (CustomIconsProvider.HasIcon(Icon))
+    {
+        <Icon>
+            <Component>
+                @CustomIconsProvider.GetIcon(Icon)
+            </Component>
+        </Icon>
+    }
+    else
+    {
+        <Icon Type="@Icon"></Icon>
+    }
 }
 
 @code {

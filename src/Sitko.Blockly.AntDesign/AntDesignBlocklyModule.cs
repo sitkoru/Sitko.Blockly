@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Sitko.Blazor.CKEditor.Bundle;
 using Sitko.Blazor.ScriptInjector;
@@ -30,39 +29,9 @@ public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor
     public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider)
     {
         await base.InitAsync(context, serviceProvider);
-        await CustomIconsProvider.InitAsync();
+        var options = GetOptions(serviceProvider);
+        options.IconSources.Add(typeof(CustomIconsProvider).GetTypeInfo().Assembly,
+            "Sitko.Blockly.AntDesignComponents.Icons.");
+        await CustomIconsProvider.InitAsync(options.IconSources);
     }
-}
-
-public static class CustomIconsProvider
-{
-    private static readonly Dictionary<string, string> Icons = new();
-
-    public static async Task InitAsync()
-    {
-        var assembly = typeof(CustomIconsProvider).GetTypeInfo().Assembly;
-        foreach (var resourceName in assembly.GetManifestResourceNames())
-        {
-            if (resourceName.EndsWith(".svg", StringComparison.InvariantCulture))
-            {
-                var resource = assembly.GetManifestResourceStream(resourceName);
-                if (resource is not null)
-                {
-                    StreamReader reader = new(resource);
-                    var text = await reader.ReadToEndAsync(); //hello world!
-                    var name = resourceName.Replace("Sitko.Blockly.AntDesignComponents.Icons.", "")
-                        .Replace(".svg", "");
-                    Icons.Add(name, text);
-                }
-            }
-        }
-    }
-
-    public static RenderFragment GetIcon(string iconName) => builder =>
-    {
-        if (Icons.ContainsKey(iconName))
-        {
-            builder.AddMarkupContent(1, Icons[iconName]);
-        }
-    };
 }
