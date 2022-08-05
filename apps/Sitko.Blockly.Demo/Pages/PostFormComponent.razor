@@ -4,14 +4,15 @@
 @using Sitko.Blockly.Blazor.Forms
 @using Sitko.Core.Storage
 @using Sitko.Blazor.CKEditor.Bundle
+
 @inherits BaseComponent
-<PostForm Layout="@FormLayout.Vertical" EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
-    <FormItem Label="Title">
-        <Input @bind-Value="context.Entity.Title"/>
-    </FormItem>
-    <AntBlocklyForm Label="Blocks" @bind-Value="context.Entity.Blocks" Options="blocksOptions"></AntBlocklyForm>
-    <AntBlocklyForm Label="Secondary blocks" @bind-Value="context.Entity.SecondaryBlocks" Options="secondaryBlocksOptions"></AntBlocklyForm>
-    <Button Disabled="@(!context.CanSave())" OnClick="context.Save">Save</Button>
+<PostForm EntityId="PostId" OnAfterCreate="post => GoToPost(post)">
+    <MudItem>
+        <MudTextField Label="Title" @bind-Value="context.Entity.Title" For="() => context.Entity.Title"/>
+    </MudItem>
+    <MudBlocklyForm Label="Blocks" @bind-Value="context.Entity.Blocks" Options="blocksOptions"></MudBlocklyForm>
+    <MudBlocklyForm Label="Secondary blocks" @bind-Value="context.Entity.SecondaryBlocks" Options="secondaryBlocksOptions"></MudBlocklyForm>
+    <MudButton Disabled="@(!context.CanSave())" >Save</MudButton>
 </PostForm>
 
 @code {
@@ -25,8 +26,8 @@
         return Task.CompletedTask;
     }
 
-    private AntDesignBlocklyFormOptions? blocksOptions;
-    private AntDesignBlocklyFormOptions? secondaryBlocksOptions;
+    private MudBlazorBlocklyFormOptions? blocksOptions;
+    private MudBlazorBlocklyFormOptions? secondaryBlocksOptions;
 
     protected override void Initialize()
     {
@@ -55,7 +56,7 @@
         };
         var ckEditorConfig = CKEditorBundleOptions.DefaultConfig.WithHtmlEditing();
         ckEditorConfig.Language = "ru";
-        blocksOptions = new AntDesignBlocklyFormOptions
+        blocksOptions = new MudBlazorBlocklyFormOptions
         {
             Storage = GetService<IStorage<BlocklyStorageOptions>>(),
             ImagesOptions = imagesStorageOptions,
@@ -64,7 +65,7 @@
         blocksOptions.DisableBlocksDelete(new[] { typeof(TextBlock), typeof(CutBlock), typeof(GalleryBlock), typeof(YoutubeBlock) });
         blocksOptions.DisableBlocksMove(new[] { typeof(CutBlock), typeof(GalleryBlock) });
 
-        secondaryBlocksOptions = new AntDesignBlocklyFormOptions
+        secondaryBlocksOptions = new MudBlazorBlocklyFormOptions
         {
             MaxBlocks = 5, Storage = GetService<IStorage<BlocklyStorageOptions>>(),
             ImagesOptions = imagesStorageOptions,

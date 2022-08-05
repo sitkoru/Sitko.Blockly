@@ -1,0 +1,11 @@
+﻿<div class="blockly-form-error">
+    <MudAlert Severity="@Severity.Error">@Error</MudAlert>
+</div>
+
+@code {
+
+    [EditorRequired]
+    [Parameter]
+    public string Error { get; set; } = null!;
+
+}

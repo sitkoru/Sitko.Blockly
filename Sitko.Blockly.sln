@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DA312F56-FDB4-4853-A7A1-A8B2527399FC}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly", "src\Sitko.Blockly\Sitko.Blockly.csproj", "{0367FAD9-C3FD-4E07-9CBE-103A17666A1D}"
 EndProject
@@ -18,9 +21,13 @@ ProjectSection(SolutionItems) = preProject
 	LICENSE.md = LICENSE.md
 	README.md = README.md
 	docker-compose.yml = docker-compose.yml
+	release.config.js = release.config.js
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BE2C5E4A-BFBD-4645-AE0A-8B57A9EC1CB2}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly.Tests", "tests\Sitko.Blockly.Tests\Sitko.Blockly.Tests.csproj", "{6E318256-F811-46B9-9EED-EDB1D1CEACDC}"
 EndProject
@@ -33,7 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 ProjectSection(SolutionItems) = preProject
 	.github\workflows\main.yml = .github\workflows\main.yml
 	.github\workflows\release.yml = .github\workflows\release.yml
-	.github\workflows\demo.yml = .github\workflows\demo.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{32D6C989-DF2C-4C06-BD48-C322E72888B9}"
@@ -45,6 +51,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly.HtmlParser", "src\Sitko.Blockly.HtmlParser\Sitko.Blockly.HtmlParser.csproj", "{33DD2E49-9A55-4648-8D97-81FB4FDFB4CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly.HtmlParser.Tests", "tests\Sitko.Blockly.HtmlParser.Tests\Sitko.Blockly.HtmlParser.Tests.csproj", "{C46F1161-7FFC-47DC-9140-463A02FD6DEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitko.Blockly.MudBlazor", "src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj", "{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +163,18 @@ Global
 		{C46F1161-7FFC-47DC-9140-463A02FD6DEC}.Release|x64.Build.0 = Release|Any CPU
 		{C46F1161-7FFC-47DC-9140-463A02FD6DEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{C46F1161-7FFC-47DC-9140-463A02FD6DEC}.Release|x86.Build.0 = Release|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Debug|x64.Build.0 = Debug|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Debug|x86.Build.0 = Debug|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Release|x64.ActiveCfg = Release|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Release|x64.Build.0 = Release|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0367FAD9-C3FD-4E07-9CBE-103A17666A1D} = {DA312F56-FDB4-4853-A7A1-A8B2527399FC}
@@ -166,5 +186,6 @@ Global
 		{B2976032-A11A-4107-9503-63357D828CCC} = {DA312F56-FDB4-4853-A7A1-A8B2527399FC}
 		{33DD2E49-9A55-4648-8D97-81FB4FDFB4CC} = {DA312F56-FDB4-4853-A7A1-A8B2527399FC}
 		{C46F1161-7FFC-47DC-9140-463A02FD6DEC} = {BE2C5E4A-BFBD-4645-AE0A-8B57A9EC1CB2}
+		{4B682521-01D4-4A3E-9F15-16DBA1FB91C9} = {DA312F56-FDB4-4853-A7A1-A8B2527399FC}
 	EndGlobalSection
 EndGlobal

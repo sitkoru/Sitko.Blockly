@@ -1,11 +1,9 @@
-﻿using Sitko.Blockly.Blazor.Forms;
+﻿using Sitko.Blazor.CKEditor;
+using Sitko.Blockly.Blazor.Forms;
 
-namespace Sitko.Blockly.AntDesignComponents.Forms
+namespace Sitko.Blockly.AntDesignComponents.Forms;
+
+public class AntDesignBlocklyFormOptions : BlazorBlocklyFormOptions
 {
-    using Sitko.Blazor.CKEditor;
-
-    public class AntDesignBlocklyFormOptions : BlazorBlocklyFormOptions
-    {
-        public CKEditorConfig? CKEditorConfig { get; set; }
-    }
+    public CKEditorConfig? CKEditorConfig { get; set; }
 }

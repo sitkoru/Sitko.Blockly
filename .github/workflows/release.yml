@@ -1,9 +1,9 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - '*.*.*'
+  release:
+    types:
+      - published
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       BLAZOR_PROJECT: Sitko.Blockly.Blazor
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2
       - name: Prepare
         id: prep
         shell: bash
@@ -22,33 +22,58 @@ jobs:
           VERSION=${GITHUB_REF#refs/tags/}
           echo ::set-output name=version::${VERSION}
       - name: Install node.js
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v3
         with:
-          node-version: '15'
+          node-version: 'lts/*'
           cache: 'npm'
           cache-dependency-path: |
             src/Sitko.Blockly.Blazor/Web/package.json
-      - name: Install .NET Core 3.1
-        uses: actions/setup-dotnet@v1.8.2
-        with:
-          dotnet-version: '3.1.x'
-      - name: Install .NET 5.0.x
-        uses: actions/setup-dotnet@v1.8.2
-        with:
-          dotnet-version: '5.0.x'
-      - name: Install .NET 6.0.x
-        uses: actions/setup-dotnet@v1.8.2
-        with:
-          dotnet-version: '6.0.x'
-          include-prerelease: true
       - name: Build blazor js
         working-directory: src/${{ env.BLAZOR_PROJECT }}/Web
         shell: bash
         run: |
           npm ci
           npm run prod
-      - name: Create packages
-        run: dotnet pack -c Release /p:Version=${{ steps.prep.outputs.version }} -o $(pwd)/packages
-      - name: Push to Nuget
-        run: find packages -name *.nupkg -exec dotnet nuget push {} -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} \;
+      - name: Publish main library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly/Sitko.Blockly.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish Blazor library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly.Blazor/Sitko.Blockly.Blazor.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish AntDesign library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish MudBlazor library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly.MudBlazor/Sitko.Blockly.MudBlazor.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish EF library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly.EntityFrameworkCore/Sitko.Blockly.EntityFrameworkCore.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish HtmlParser library
+        uses: sitkoru/nuget-release-action@v1
+        with:
+          version: ${{ steps.prep.outputs.version }}
+          project_path: src/Sitko.Blockly.HtmlParser/Sitko.Blockly.HtmlParser.csproj
+          nuget_host: https://api.nuget.org/v3/index.json
+          nuget_token: ${{ secrets.NUGET_API_KEY }}
 

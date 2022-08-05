@@ -1,7 +1,6 @@
-namespace Sitko.Blockly.Blazor
+namespace Sitko.Blockly.Blazor;
+
+public class BlazorBlocklyModuleOptions<TDescriptor> : BlocklyModuleOptions<TDescriptor>
+    where TDescriptor : IBlazorBlockDescriptor
 {
-    public class BlazorBlocklyModuleOptions<TDescriptor> : BlocklyModuleOptions<TDescriptor>
-        where TDescriptor : IBlazorBlockDescriptor
-    {
-    }
 }

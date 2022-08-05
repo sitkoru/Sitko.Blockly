@@ -1,0 +1,29 @@
+﻿@using Sitko.Core.Storage
+@using Sitko.Core.App.Collections
+@inherits FilesBlockForm<MudBlazorBlocklyFormOptions>
+@if (FormOptions.Storage is not null)
+{
+    <MudItem>
+        <MudFilesUpload
+            Storage="FormOptions.Storage"
+            TCollection="ValueCollection<StorageItem>"
+            DisplayMode="FileUploadDisplayMode.File"
+            @bind-Value="Block.Files"
+            For="() => Block.Files"
+            ContentTypes="@FormOptions.FilesOptions.AllowedTypes"
+            UploadPath="@FormOptions.FilesOptions.UploadPath"
+            MaxFileSize="@FormOptions.FilesOptions.MaxFileSize"
+            MaxAllowedFiles="@(FormOptions.FilesOptions.MaxAllowedFiles ?? 0)"
+            GenerateMetadata="FormOptions.FilesOptions.GenerateMetadata"
+            UploadText="@LocalizationProvider["Upload"]"
+            RemoveText="@LocalizationProvider["Remove"]"
+            PreviewText="@LocalizationProvider["Preview"]"
+            LeftText="@LocalizationProvider["Move left"]"
+            RightText="@LocalizationProvider["Move right"]">
+        </MudFilesUpload>
+    </MudItem>
+}
+else
+{
+    <MudBlockFormErrorComponent Error="@LocalizationProvider["Storage is not configured in form options"]"></MudBlockFormErrorComponent>
+}

@@ -1,8 +1,9 @@
-﻿namespace Sitko.Blockly.Blazor.Display.Blocks
+﻿using Sitko.Blockly.Blocks;
+
+namespace Sitko.Blockly.Blazor.Display.Blocks;
+
+public abstract class
+    YoutubeBlockComponent<TListOptions> : BlockComponent<YoutubeBlock,
+        TListOptions> where TListOptions : BlazorBlocklyListOptions
 {
-    public abstract class
-        YoutubeBlockComponent<TListOptions> : BlockComponent<Sitko.Blockly.Blocks.YoutubeBlock,
-            TListOptions> where TListOptions : BlazorBlocklyListOptions
-    {
-    }
 }

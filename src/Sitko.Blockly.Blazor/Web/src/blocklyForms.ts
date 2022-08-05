@@ -8,18 +8,18 @@ class BlocklyForms extends BlocklyBase {
     super('BlocklyForms');
   }
 
+  private static inOutQuad(n: number) {
+    n *= 2;
+    if (n < 1) return 0.5 * n * n;
+    return -0.5 * (--n * (n - 2) - 1);
+  }
+
   public savePosition() {
     document.querySelectorAll('.block-form').forEach(b => {
       this._oldBlockPositions[b.id] = b.getBoundingClientRect().top;
     });
     ``
     this.debug("Save block positions: ", this._oldBlockPositions);
-  }
-
-  private static inOutQuad(n: number) {
-    n *= 2;
-    if (n < 1) return 0.5 * n * n;
-    return -0.5 * (--n * (n - 2) - 1);
   }
 
   public scroll(element: HTMLElement, duration?: number) {

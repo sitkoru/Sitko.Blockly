@@ -5,16 +5,15 @@ using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.AntDesignComponents.Blocks
-{
-    public record
-        AntTwitterBlockDescriptor : BlazorBlockDescriptor<TwitterBlock, AntTwitterBlockComponent, AntTwitterBlockForm>
-    {
-        public AntTwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
-            localizationProvider)
-        {
-        }
+namespace Sitko.Blockly.AntDesignComponents.Blocks;
 
-        public override RenderFragment Icon => builder => builder.AddIcon("twitter");
+public record
+    AntTwitterBlockDescriptor : BlazorBlockDescriptor<TwitterBlock, AntTwitterBlockComponent, AntTwitterBlockForm>
+{
+    public AntTwitterBlockDescriptor(ILocalizationProvider<TwitterBlock> localizationProvider) : base(
+        localizationProvider)
+    {
     }
+
+    public override string Icon => "twitter";
 }

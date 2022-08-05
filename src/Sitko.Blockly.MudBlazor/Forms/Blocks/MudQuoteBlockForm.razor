@@ -1,0 +1,37 @@
+﻿@inherits QuoteBlockForm<MudBlazorBlocklyFormOptions>
+<MudGrid>
+    <MudItem xs="12">
+        <CKEditor Config="FormOptions.CKEditorConfig" Placeholder="@LocalizationProvider["Quote text"]" @bind-Value="Block.Text"></CKEditor>
+        <MudValidationMessage FieldIdentifier="FieldIdentifier"></MudValidationMessage>
+    </MudItem>
+
+    <MudItem md="4" xs="12">
+        <MudTextField Placeholder="@LocalizationProvider["Author name, site title, etc..."]" @bind-Value="@Block.Author" Label="@LocalizationProvider["Source"]" For="() => Block.Author" HelperText="@LocalizationProvider["Author name, site title, etc..."]"/>
+    </MudItem>
+
+    <MudItem md="4" xs="12">
+        <MudTextField Placeholder="@LocalizationProvider["Link"]" @bind-Value="@Block.Link" Label="@LocalizationProvider["Url"]" For="() => Block.Link" HelperText="@LocalizationProvider["Link to page where this quote comes from"]"/>
+    </MudItem>
+
+
+    @if (FormOptions.Storage is not null)
+    {
+        <MudItem xs="12">
+            <MudFileUpload
+                Label="@LocalizationProvider["Source picture"]"
+                HelperText="@LocalizationProvider["Author photo, site logo, etc..."]"
+                Storage="FormOptions.Storage"
+                DisplayMode="FileUploadDisplayMode.Image"
+                ContentTypes="@FormOptions.ImagesOptions.AllowedTypes"
+                UploadPath="@FormOptions.ImagesOptions.UploadPath"
+                MaxFileSize="@FormOptions.ImagesOptions.MaxFileSize"
+                UploadText="@LocalizationProvider["Upload"]"
+                RemoveText="@LocalizationProvider["Remove"]"
+                PreviewText="@LocalizationProvider["Preview"]"
+                GenerateMetadata="FormOptions.ImagesOptions.GenerateMetadata"
+                @bind-Value="Block.Picture"
+                For="() => Block.Picture"/>
+        </MudItem>
+    }
+
+</MudGrid>

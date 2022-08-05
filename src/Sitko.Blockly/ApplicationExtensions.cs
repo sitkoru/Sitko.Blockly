@@ -1,21 +1,16 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+﻿using JetBrains.Annotations;
 using Sitko.Core.App;
 
-namespace Sitko.Blockly
+namespace Sitko.Blockly;
+
+[PublicAPI]
+public static class ApplicationExtensions
 {
-    using JetBrains.Annotations;
+    public static Application AddBlockly(this Application application,
+        Action<IApplicationContext, BlocklyModuleOptions> configure, string? configKey = null) =>
+        application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
 
-    [PublicAPI]
-    public static class ApplicationExtensions
-    {
-        public static Application AddBlockly(this Application application,
-            Action<IConfiguration, IHostEnvironment, BlocklyModuleOptions> configure, string? configKey = null) =>
-            application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
-
-        public static Application AddBlockly(this Application application,
-            Action<BlocklyModuleOptions>? configure = null, string? configKey = null) =>
-            application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
-    }
+    public static Application AddBlockly(this Application application,
+        Action<BlocklyModuleOptions>? configure = null, string? configKey = null) =>
+        application.AddModule<BlocklyModule, BlocklyModuleOptions>(configure, configKey);
 }

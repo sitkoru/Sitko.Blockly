@@ -1,6 +1,5 @@
-﻿namespace Sitko.Blockly.AntDesignComponents.Display.Blocks
+﻿namespace Sitko.Blockly.AntDesignComponents.Display.Blocks;
+
+public partial class AntCutBlockComponent
 {
-    public partial class AntCutBlockComponent
-    {
-    }
 }

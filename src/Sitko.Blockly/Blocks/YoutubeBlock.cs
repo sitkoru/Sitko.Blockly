@@ -1,41 +1,39 @@
-using System;
-using System.Linq;
+using System.Web;
 using Sitko.Core.App.Localization;
 
-namespace Sitko.Blockly.Blocks
+namespace Sitko.Blockly.Blocks;
+
+[ContentBlockMetadata(6)]
+public record YoutubeBlock : UrlContentBlock
 {
-    [ContentBlockMetadata(6)]
-    public record YoutubeBlock : UrlContentBlock
+    protected override bool IsEmpty => string.IsNullOrEmpty(YoutubeId);
+    protected override string FinalUrl => $"https://www.youtube.com/embed/{YoutubeId}";
+
+    public string YoutubeId { get; set; } = "";
+
+    protected override void ParseUrl(string? url)
     {
-        protected override bool IsEmpty => string.IsNullOrEmpty(YoutubeId);
-        protected override string FinalUrl => $"https://www.youtube.com/embed/{YoutubeId}";
-
-        protected override void ParseUrl(string? url)
+        if (!string.IsNullOrEmpty(url) && (url.Contains("http://") || url.Contains("https://")))
         {
-            if (!string.IsNullOrEmpty(url) && (url.Contains("http://") || url.Contains("https://")))
-            {
-                var uri = new Uri(url);
+            var uri = new Uri(url);
 
-                var queryParams = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-                YoutubeId = queryParams.ContainsKey("v") ? queryParams["v"][0] : uri.Segments.Last();
-            }
-            else
-            {
-                YoutubeId = string.Empty;
-            }
+            YoutubeId = queryParams["v"] ?? uri.Segments.Last();
         }
-
-        public override string ToString() => $"Youtube: {YoutubeId}";
-
-        public string YoutubeId { get; set; } = "";
+        else
+        {
+            YoutubeId = string.Empty;
+        }
     }
 
-    public record YoutubeBlockDescriptor : BlockDescriptor<YoutubeBlock>
+    public override string ToString() => $"Youtube: {YoutubeId}";
+}
+
+public record YoutubeBlockDescriptor : BlockDescriptor<YoutubeBlock>
+{
+    public YoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
+        localizationProvider)
     {
-        public YoutubeBlockDescriptor(ILocalizationProvider<YoutubeBlock> localizationProvider) : base(
-            localizationProvider)
-        {
-        }
     }
 }

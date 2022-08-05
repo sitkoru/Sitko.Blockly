@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-    <UserSecretsId>test</UserSecretsId>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.16.0" />
-    <PackageReference Include="Sitko.Core.Xunit" Version="8.16.0" />
-    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="8.16.0" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.7.1" />
+    <PackageReference Include="Sitko.Core.Xunit" Version="9.7.1" />
+    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="9.7.1" />
   </ItemGroup>
 
   <ItemGroup>

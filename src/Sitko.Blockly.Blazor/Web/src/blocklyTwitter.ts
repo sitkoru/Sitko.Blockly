@@ -6,25 +6,6 @@ class BlocklyTwitter extends BlocklyBase {
     super('BlocklyTwitter');
   }
 
-  private load(): TwitterLike {
-    let d = document;
-    let id = "twitter-wjs";
-    let js, fjs = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) return window.twttr;
-    js = d.createElement('script');
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-
-    const t: { _e: Function[]; ready: (f: Function) => void } = {
-      _e: [],
-      ready: function (f: Function) {
-        t._e.push(f);
-      }
-    };
-    return t;
-  }
-
   public render(tweetId: string, container: HTMLElement) {
     this.debug('render tweet', tweetId, container);
     window.twttr = this.load();
@@ -42,6 +23,25 @@ class BlocklyTwitter extends BlocklyBase {
 
   public clear(container: HTMLElement) {
     container.innerHTML = '';
+  }
+
+  private load(): TwitterLike {
+    let d = document;
+    let id = "twitter-wjs";
+    let js, fjs = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) return window.twttr;
+    js = d.createElement('script');
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    const t: { _e: Function[]; ready: (f: Function) => void } = {
+      _e: [],
+      ready: function (f: Function) {
+        t._e.push(f);
+      }
+    };
+    return t;
   }
 }
 

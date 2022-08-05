@@ -1,8 +1,7 @@
-﻿namespace Sitko.Blockly.Display
+﻿namespace Sitko.Blockly.Display;
+
+public enum BlocksListMode
 {
-    public enum BlocksListMode
-    {
-        Preview,
-        Full
-    }
+    Preview,
+    Full
 }
