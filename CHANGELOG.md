@@ -1,3 +1,10 @@
+# [1.0.0-beta.10](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.9...1.0.0-beta.10) (2022-08-05)
+
+
+### Features
+
+* Sitko.Core 9.7.1 ([022943d](https://github.com/sitkoru/Sitko.Blockly/commit/022943d145380cda29a7cc8f084c9e9d3e2f0529))
+
 # [1.0.0-beta.9](https://github.com/sitkoru/Sitko.Blockly/compare/1.0.0-beta.8...1.0.0-beta.9) (2022-02-26)
 
 
