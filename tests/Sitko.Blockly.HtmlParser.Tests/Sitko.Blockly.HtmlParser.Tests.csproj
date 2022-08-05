@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="8.16.0" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.7.1" />
     <PackageReference Include="Sitko.Core.Xunit" Version="8.16.0" />
     <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="8.16.0" />
   </ItemGroup>
