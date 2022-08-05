@@ -9,14 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Blockly.HtmlParser\Sitko.Blockly.HtmlParser.csproj"/>
-    <ProjectReference Include="..\Sitko.Blockly.Tests\Sitko.Blockly.Tests.csproj"/>
+    <ProjectReference Include="..\..\src\Sitko.Blockly.HtmlParser\Sitko.Blockly.HtmlParser.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly.Tests\Sitko.Blockly.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.0.0-beta.19"/>
-    <PackageReference Include="Sitko.Core.Xunit" Version="9.0.0-beta.19"/>
-    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="9.0.0-beta.19"/>
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="9.7.1" />
+    <PackageReference Include="Sitko.Core.Xunit" Version="9.7.1" />
+    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="9.7.1" />
   </ItemGroup>
 
   <ItemGroup>
