@@ -1,0 +1,42 @@
+﻿@page "/"
+@using Sitko.Blockly.Display
+@using Sitko.Core.Storage
+@using Sitko.Blockly.Data.Entities
+@using Sitko.Core.Repository
+@inherits BaseComponent
+<PageLayout Title="@LocalizationProvider["Posts"]">
+    <Extra>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" Link="/Posts/Add">Add</MudButton>
+    </Extra>
+    <ChildContent>
+        @foreach (var post in Posts)
+        {
+            <MudCard>
+                <MudCardHeader>
+                    <MudText Typo="Typo.h6">@post.Title</MudText>
+                </MudCardHeader>
+                <MudCardActions>
+                    <MudButton Link="@($"/Posts/{post.Id}/Edit")" Variant="Variant.Text" Color="Color.Primary">Edit</MudButton>
+                </MudCardActions>
+                <MudCardContent>
+                    <MudBlocksList
+                        EntityBlocks="post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage>(), $"Posts/{post.Id}"))">
+                    </MudBlocksList>
+                </MudCardContent>
+            </MudCard>
+        }
+    </ChildContent>
+</PageLayout>
+
+@code{
+
+    protected override async Task InitializeAsync()
+    {
+        await base.InitializeAsync();
+        var posts = await GetRequiredService<IRepository<Post, Guid>>().GetAllAsync();
+        Posts = posts.items;
+    }
+
+    private Post[] Posts { get; set; } = Array.Empty<Post>();
+
+}

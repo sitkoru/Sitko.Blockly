@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using Sitko.Blockly.Demo.Data.Entities;
-using Sitko.Blockly.Demo.Data.Repositories;
+﻿using Microsoft.AspNetCore.Components;
+using Sitko.Blockly.Data.Entities;
+using Sitko.Core.Repository;
 
-namespace Sitko.Blockly.Demo.Pages;
+namespace Sitko.Blockly.Demo.Client.Pages;
 
 public partial class Show
 {
@@ -13,7 +11,7 @@ public partial class Show
     protected override async Task InitializeAsync()
     {
         await base.InitializeAsync();
-        var post = await GetRequiredService<PostsRepository>().GetByIdAsync(PostId);
+        var post = await GetRequiredService<IRepository<Post, Guid>>().GetByIdAsync(PostId);
         if (post is null)
         {
             NavigationManager.NavigateTo("/404");

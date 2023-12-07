@@ -5,8 +5,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Blazor" Version="9.7.1" />
-    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="9.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+    <PackageReference Include="Sitko.Core.Blazor" Version="11.0.0-beta.4" />
+    <PackageReference Include="Sitko.Core.Blazor.FileUpload" Version="11.0.0-beta.4" />
   </ItemGroup>
 
 </Project>

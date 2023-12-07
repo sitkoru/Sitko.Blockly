@@ -1,11 +1,12 @@
 ﻿@page "/Posts/{PostId:guid}/Edit"
+@rendermode InteractiveAuto
 @inherits BaseComponent
 @{
     var title = $"Edit post {PostId}";
 }
-<MudPageLayout Title="@title">
+<PageLayout Title="@title">
     <PostFormComponent PostId="PostId"></PostFormComponent>
-</MudPageLayout>
+</PageLayout>
 
 @code {
 

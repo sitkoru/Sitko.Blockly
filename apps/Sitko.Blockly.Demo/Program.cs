@@ -1,14 +1,47 @@
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
+using Sitko.Blockly.Demo;
+using Sitko.Blockly.Demo.Components;
+using Sitko.Blockly.Demo.Data;
+using Sitko.Blockly.MudBlazorComponents;
+using Sitko.Core.App.Localization;
+using Sitko.Core.App.Web;
+using Sitko.Core.Blazor.MudBlazor.Server;
+using Sitko.Core.Blazor.Server;
+using Sitko.Core.Db.Postgres;
+using Sitko.Core.Repository.EntityFrameworkCore;
+using Sitko.Core.Storage.FileSystem;
+using Sitko.Core.Storage.Metadata.Postgres;
+using Index = Sitko.Blockly.Demo.Client.Pages.Index;
 
-namespace Sitko.Blockly.Demo;
+var builder = WebApplication.CreateBuilder(args);
+builder
+    .AddSitkoCoreBlazorServer()
+    .AddMudBlazorServer()
+    .AddMudBlazorBlockly(options =>
+    {
+        options.AddBlocks<MudBlazorBlocklyModule>();
+    })
+    .AddInteractiveWebAssembly()
+    .AddJsonLocalization()
+    .AddPostgresDatabase<BlocklyContext>()
+    .AddEFRepositories<BlocklyContext>();
 
-public class Program
+builder
+    .AddSitkoCoreBlazorServer()
+    .AddFileSystemStorage<BlocklyStorageOptions>()
+    .AddPostgresStorageMetadata<BlocklyStorageOptions>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.ConfigureLocalization("ru-RU");
+
+if (app.Environment.IsDevelopment())
 {
-    public static async Task Main(string[] args) => await CreateApplication(args).RunAsync().ConfigureAwait(false);
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        CreateApplication(args).GetHostBuilder();
-
-    private static BlocklyApplication CreateApplication(string[] args) => new(args);
+    app.UseWebAssemblyDebugging();
 }
+
+app.MapSitkoCoreBlazor<App>()
+    .AddInteractiveWebAssemblyRenderMode()
+    .AddAdditionalAssemblies(typeof(Index).Assembly);
+
+app.Run();

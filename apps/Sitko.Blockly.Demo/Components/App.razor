@@ -1,0 +1,26 @@
+﻿@using Sitko.Core.App
+@inject IApplicationContext applicationContext
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link href="_content/MudBlazor/MudBlazor.min.css?v=@applicationContext.Version" rel="stylesheet"/>
+        <link href="_content/Sitko.Blazor.CKEditor.Bundle/ckeditor.dark.css?v=@applicationContext.Version" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js?v=@applicationContext.Version"></script>
+    <script src="_content/Sitko.Blazor.CKEditor.Bundle/ckeditor.dark.js?v=@applicationContext.Version"></script>
+    <script src="_content/Sitko.Blazor.CKEditor.Bundle/translations/ru.js?v=@applicationContext.Version"></script>
+    <script src="_content/Sitko.Blazor.CKEditor/ckeditor.js?v=@applicationContext.Version"></script>
+    <script src="_content/MudBlazor/MudBlazor.min.js?v=@applicationContext.Version"></script>
+</body>
+
+</html>

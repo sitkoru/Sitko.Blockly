@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.EntityFrameworkCore;
+using Sitko.Core.App;
 using Sitko.Core.App.Collections;
 using Sitko.Core.Repository;
 using Sitko.Core.Repository.EntityFrameworkCore;
@@ -66,7 +68,7 @@ public class ChangesTest : BaseTest<BlocklyTestScope>
     }
 }
 
-public class BlocklyTestScope : DbBaseTestScope<TestApplication, TestBlocklyDbContext, BlocklyTestScopeConfig>
+public class BlocklyTestScope : DbBaseTestScope<HostApplicationBuilder, TestBlocklyDbContext, BlocklyTestScopeConfig>
 {
     protected override async Task InitDbContextAsync(TestBlocklyDbContext dbContext)
     {
@@ -76,20 +78,30 @@ public class BlocklyTestScope : DbBaseTestScope<TestApplication, TestBlocklyDbCo
         model.Blocks.Add(new CutBlock { ButtonText = "Cut", Position = 1 });
         model.Blocks.Add(new TextBlock { Text = "Bar", Position = 2 });
         await dbContext.AddAsync(model);
-        await dbContext.SaveChangesAsync();
+        var res = await dbContext.SaveChangesAsync();
+
     }
 
-    protected override TestApplication ConfigureApplication(TestApplication application, string name)
+    protected override IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder, string name)
     {
-        base.ConfigureApplication(application, name);
-        application.AddEFRepositories<ChangesTest>();
-        application.AddBlockly(moduleOptions =>
+        base.ConfigureServices(builder, name);
+        builder.AddEFRepositories<ChangesTest>();
+        builder.AddBlockly(moduleOptions =>
         {
             moduleOptions.AddBlock<TextBlockDescriptor, TextBlock>();
             moduleOptions.AddBlock<CutBlockDescriptor, CutBlock>();
         });
-        return application;
+        return builder;
     }
+
+    protected override HostApplicationBuilder CreateHostBuilder()
+    {
+        var builder = Host.CreateApplicationBuilder();
+        builder.AddSitkoCore();
+        return builder;
+    }
+
+    protected override IHost BuildApplication(HostApplicationBuilder builder) => builder.Build();
 }
 
 public class BlocklyTestScopeConfig : BaseDbTestConfig

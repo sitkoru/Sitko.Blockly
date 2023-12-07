@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sitko.Blockly.Demo.Data.Entities;
+using Sitko.Blockly.Data.Entities;
 using Sitko.Blockly.EntityFrameworkCore;
 
 namespace Sitko.Blockly.Demo.Data;

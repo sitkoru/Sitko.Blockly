@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="3.0.3" />
-    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="9.7.1" />
+    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="4.0.0" />
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="11.0.0-beta.4" />
   </ItemGroup>
 
   <ItemGroup>
