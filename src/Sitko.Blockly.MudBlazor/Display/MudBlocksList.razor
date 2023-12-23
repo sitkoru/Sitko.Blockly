@@ -1,4 +1,5 @@
 ﻿@inherits BlocksList<MudBlazorBlocklyListOptions>
+<link rel="stylesheet" href="@MudBlazorBlocklyModule.CssUrl">
 @foreach (var block in Blocks)
 {
     var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());

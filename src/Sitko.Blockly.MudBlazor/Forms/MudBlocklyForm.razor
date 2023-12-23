@@ -1,4 +1,5 @@
 ﻿@inherits BlocklyForm<MudBlazorBlocklyFormOptions>
+<link rel="stylesheet" href="@MudBlazorBlocklyModule.CssUrl">
 <div class="blockly-form blockly-form-@ModuleOptions.Value.Theme.ToString().ToLowerInvariant()">
     @if (!string.IsNullOrEmpty(Label))
     {
