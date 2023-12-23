@@ -4,7 +4,7 @@
 @using Sitko.Blockly.Data.Entities
 @using Sitko.Core.Repository
 @inherits BaseComponent
-<PageLayout Title="@LocalizationProvider["Posts"]">
+<AppPageLayout Title="@LocalizationProvider["Posts"]">
     <Extra>
         <MudButton Color="Color.Primary" Variant="Variant.Filled" Link="/Posts/Add">Add</MudButton>
     </Extra>
@@ -26,7 +26,7 @@
             </MudCard>
         }
     </ChildContent>
-</PageLayout>
+</AppPageLayout>
 
 @code{
 

@@ -1,4 +1,5 @@
 using Sitko.Blockly.Demo;
+using Sitko.Blockly.Demo.Client.Pages;
 using Sitko.Blockly.Demo.Components;
 using Sitko.Blockly.Demo.Data;
 using Sitko.Blockly.MudBlazorComponents;
@@ -10,7 +11,6 @@ using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Storage.Metadata.Postgres;
-using Index = Sitko.Blockly.Demo.Client.Pages.Index;
 
 var builder = WebApplication.CreateBuilder(args);
 builder
@@ -42,6 +42,6 @@ if (app.Environment.IsDevelopment())
 
 app.MapSitkoCoreBlazor<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(Index).Assembly);
+    .AddAdditionalAssemblies(typeof(Add).Assembly);
 
 app.Run();

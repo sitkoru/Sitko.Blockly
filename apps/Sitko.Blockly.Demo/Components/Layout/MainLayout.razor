@@ -1,8 +1,10 @@
 ﻿@inherits LayoutComponentBase
-<MudThemeProvider @rendermode="InteractiveAuto"/>
-<MudDialogProvider @rendermode="InteractiveAuto"/>
-<MudSnackbarProvider @rendermode="InteractiveAuto"/>
-<MudLayout>
-    <MainAppDrawerBar @rendermode="InteractiveAuto"/>
-    @Body
-</MudLayout>
+
+<BaseMudLayout>
+    <Menu>
+        <NavMenu/>
+    </Menu>
+    <ChildContent>
+        @Body
+    </ChildContent>
+</BaseMudLayout>

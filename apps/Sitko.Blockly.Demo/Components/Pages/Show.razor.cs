@@ -2,7 +2,7 @@
 using Sitko.Blockly.Data.Entities;
 using Sitko.Core.Repository;
 
-namespace Sitko.Blockly.Demo.Client.Pages;
+namespace Sitko.Blockly.Demo.Components.Pages;
 
 public partial class Show
 {
