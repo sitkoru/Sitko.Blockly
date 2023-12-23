@@ -13,20 +13,19 @@
   <ItemGroup>
 
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0"/>
-    <PackageReference Include="Sitko.Core.Blazor.MudBlazor.Server" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="11.0.0-beta.4"/>
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor.Server" Version="11.0.0-beta.5"/>
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="11.0.0-beta.5"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Storage.Remote.Server" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Repository.Remote.Server" Version="11.0.0-beta.4"/>
+    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="11.0.0-beta.5"/>
+    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="11.0.0-beta.5"/>
+    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="11.0.0-beta.5"/>
+    <PackageReference Include="Sitko.Core.Storage.Remote.Server" Version="11.0.0-beta.5"/>
+    <PackageReference Include="Sitko.Core.Repository.Remote.Server" Version="11.0.0-beta.5"/>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\Pages\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
