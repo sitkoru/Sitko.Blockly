@@ -7,23 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Blockly.EntityFrameworkCore\Sitko.Blockly.EntityFrameworkCore.csproj"/>
-    <ProjectReference Include="..\Sitko.Blockly.Demo.Client\Sitko.Blockly.Demo.Client.csproj"/>
+    <ProjectReference Include="..\..\src\Sitko.Blockly.EntityFrameworkCore\Sitko.Blockly.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly.Demo.Client\Sitko.Blockly.Demo.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
 
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0"/>
-    <PackageReference Include="Sitko.Core.Blazor.MudBlazor.Server" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor.Server" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Repository.EntityFrameworkCore" Version="11.6.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Storage.Remote.Server" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Repository.Remote.Server" Version="11.0.0-beta.4"/>
+    <PackageReference Include="Sitko.Core.Storage.Metadata.Postgres" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Configuration.Vault" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Storage.FileSystem" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Storage.Remote.Server" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Repository.Remote.Server" Version="11.6.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\Pages\" />

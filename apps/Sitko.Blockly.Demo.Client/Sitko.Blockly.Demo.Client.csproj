@@ -10,15 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj"/>
-    <ProjectReference Include="..\Sitko.Blockly.Data\Sitko.Blockly.Data.csproj"/>
+    <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly.Data\Sitko.Blockly.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
 
-    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Blazor.Wasm" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Storage.Remote" Version="11.0.0-beta.4"/>
-    <PackageReference Include="Sitko.Core.Repository.Remote.Wasm" Version="11.0.0-beta.4"/>
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Blazor.Wasm" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Storage.Remote" Version="11.6.1" />
+    <PackageReference Include="Sitko.Core.Repository.Remote.Wasm" Version="11.6.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\js\" />
