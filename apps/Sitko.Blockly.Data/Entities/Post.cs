@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Sitko.Core.Repository;
+﻿using Sitko.Core.Repository;
 
 namespace Sitko.Blockly.Data.Entities;
 

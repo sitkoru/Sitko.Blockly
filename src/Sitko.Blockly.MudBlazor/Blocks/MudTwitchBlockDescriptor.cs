@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using Sitko.Blockly.Blazor;
+﻿using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.MudBlazorComponents.Display.Blocks;
 using Sitko.Blockly.MudBlazorComponents.Forms.Blocks;

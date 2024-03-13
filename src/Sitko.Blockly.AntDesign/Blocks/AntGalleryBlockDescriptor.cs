@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Sitko.Blockly.AntDesignComponents.Display.Blocks;
+﻿using Sitko.Blockly.AntDesignComponents.Display.Blocks;
 using Sitko.Blockly.AntDesignComponents.Forms.Blocks;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
