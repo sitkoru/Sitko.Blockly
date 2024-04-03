@@ -8,6 +8,7 @@ using Sitko.Core.Blazor.Wasm;
 using Sitko.Core.Repository.Remote;
 using Sitko.Core.Repository.Remote.Wasm;
 using Sitko.Core.Storage.Remote;
+using Sitko.EditorJS;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -32,6 +33,9 @@ builder
         context.Configuration.Bind(context.IsDevelopment() ? "HttpRoutes:Development" : "HttpRoutes:Production");
     });
 
+builder.Services.AddEditorJS()
+    .AddBlock<ParagraphBlock, ParagraphBlockOptions>((configuration, options) => { })
+    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>((configuration, options) => { });
 
 builder.ConfigureLocalization("ru-RU");
 
