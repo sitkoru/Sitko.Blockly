@@ -9,6 +9,8 @@ using Sitko.Core.Repository.Remote;
 using Sitko.Core.Repository.Remote.Wasm;
 using Sitko.Core.Storage.Remote;
 using Sitko.EditorJS;
+using Sitko.EditorJS.Blocks.Paragraph;
+using Sitko.EditorJS.Blocks.SimpleImage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -34,8 +36,8 @@ builder
     });
 
 builder.Services.AddEditorJS()
-    .AddBlock<ParagraphBlock, ParagraphBlockOptions>((configuration, options) => { })
-    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>((configuration, options) => { });
+    .AddBlock<ParagraphBlock, ParagraphBlockOptions>()
+    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>();
 
 builder.ConfigureLocalization("ru-RU");
 

@@ -12,6 +12,8 @@ using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Storage.Metadata.Postgres;
 using Sitko.EditorJS;
+using Sitko.EditorJS.Blocks.Paragraph;
+using Sitko.EditorJS.Blocks.SimpleImage;
 
 var builder = WebApplication.CreateBuilder(args);
 builder
@@ -32,8 +34,8 @@ builder
     .AddPostgresStorageMetadata<BlocklyStorageOptions>();
 
 builder.Services.AddEditorJS()
-    .AddBlock<ParagraphBlock, ParagraphBlockOptions>((configuration, options) => { })
-    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>((configuration, options) => { });
+    .AddBlock<ParagraphBlock, ParagraphBlockOptions>()
+    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>();
 
 var app = builder.Build();
 
