@@ -1,8 +1,12 @@
-﻿<div style="margin-top: 10px; margin-bottom: 10px;" id="@Id"></div>
+﻿@using System.Text.Json
+<div style="margin-top: 10px; margin-bottom: 10px;" id="@Id"></div>
 
-<pre>
-@Data
+@if (Data is not null)
+{
+    <pre>
+@JsonSerializer.Serialize(Data, PrettyPrintJsonOptions)
 </pre>
+}
 
 @code {
 

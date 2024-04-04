@@ -2,12 +2,12 @@
   window.SitkoEditorJS = {
     editors: [],
     timeouts: [],
-    init: function (id, configJson, instance) {
-      const config = JSON.parse(configJson) ?? {};
+    init: function (id, config, instance, data) {
       const editorConfig = {
         holder: config.holder,
         tools: {},
         minHeight : 0,
+        data: data,
         onChange: (api, event) => {
           window.SitkoEditorJS.editors[id].save().then((outputData) => {
             if (window.SitkoEditorJS.timeouts[id]) {
@@ -15,7 +15,7 @@
             }
             window.SitkoEditorJS.timeouts[id] = setTimeout(function () {
               //console.debug(id, 'Update text');
-              instance.invokeMethodAsync('OnSave', JSON.stringify(outputData));
+              instance.invokeMethodAsync('OnSave', outputData);
               delete window.SitkoEditorJS.timeouts[id];
             }, 50)
           }).catch((error) => {
