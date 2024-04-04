@@ -18,7 +18,7 @@ internal class EditorJSBuilder : IEditorJSBuilder
         serviceCollection.AddSingleton<IBlocksAccessor, BlocksAccessor>();
     }
 
-    public IEditorJSBuilder AddBlock<TBlock, TBlockOptions>(Action<IConfiguration, TBlockOptions> configure)
+    public IEditorJSBuilder AddBlock<TBlock, TBlockOptions>(Action<IConfiguration, TBlockOptions>? configure = null)
         where TBlock : ContentBlock where TBlockOptions : class, IContentBlockOptions<TBlock>
     {
         serviceCollection.Scan(selector =>
@@ -26,7 +26,7 @@ internal class EditorJSBuilder : IEditorJSBuilder
         serviceCollection.AddOptions<TBlockOptions>().PostConfigure<IConfiguration>((options,
             configuration) =>
         {
-            configure(configuration, options);
+            configure?.Invoke(configuration, options);
         });
         serviceCollection.AddSingleton<IContentBlockAccessor, ContentBlockAccessor<TBlock, TBlockOptions>>();
         ContentBlocksRegistry.Register<TBlock, TBlockOptions>();
