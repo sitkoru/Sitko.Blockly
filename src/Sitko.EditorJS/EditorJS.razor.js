@@ -1,57 +1,37 @@
 ﻿if (!window.SitkoEditorJS) {
   window.SitkoEditorJS = {
     editors: [],
+    configs: {},
+    instances: {},
     timeouts: [],
-    init: function (id, config, instance, data) {
-      const editorConfig = {
-        holder: config.holder,
-        tools: {},
-        minHeight : 0,
-        data: data,
-        onChange: (api, event) => {
-          window.SitkoEditorJS.editors[id].save().then((outputData) => {
-            if (window.SitkoEditorJS.timeouts[id]) {
-              clearTimeout(window.SitkoEditorJS.timeouts[id]);
-            }
-            window.SitkoEditorJS.timeouts[id] = setTimeout(function () {
-              //console.debug(id, 'Update text');
-              instance.invokeMethodAsync('OnSave', outputData);
-              delete window.SitkoEditorJS.timeouts[id];
-            }, 50)
-          }).catch((error) => {
-            console.log('Saving failed: ', error)
-          });
-        }
+    init: function (id, instance, data) {
+      window.SitkoEditorJS.instances[id] = instance;
+      const editorConfig = window.SitkoEditorJS.configs[id];
+      editorConfig.minHeight = 0;
+      editorConfig.data = data;
+      editorConfig.onChange = (api, event) => {
+        window.SitkoEditorJS.editors[id].save().then((outputData) => {
+          if (window.SitkoEditorJS.timeouts[id]) {
+            clearTimeout(window.SitkoEditorJS.timeouts[id]);
+          }
+          window.SitkoEditorJS.timeouts[id] = setTimeout(function () {
+            console.debug(id, 'Update text', outputData);
+            window.SitkoEditorJS.instances[id].invokeMethodAsync('OnSave', outputData);
+            delete window.SitkoEditorJS.timeouts[id];
+          }, 50)
+        }).catch((error) => {
+          console.log('Saving failed: ', error)
+        });
       };
-      for (const [key, value] of Object.entries(config.tools)) {
-        editorConfig.tools[key] = {
-          class: window[value.className],
-          config: value.config
-        }
-      }
-      console.log(config);
+
+      // for (const [key, value] of Object.entries(config.tools)) {
+      //   editorConfig.tools[key] = {
+      //     class: window[value.className],
+      //     config: value.config
+      //   }
+      // }
       console.log(editorConfig);
       window.SitkoEditorJS.editors[id] = new EditorJS(editorConfig);
-      //console.debug('CKEditor config', id, config);
-      // window[editorClass]
-      //   .create(element, config)
-      //   .then(editor => {
-      //     window.SitkoEditorJS.editors[id] = editor;
-      //     editor.model.document.on('change:data', () => {
-      //       if (window.SitkoEditorJS.timeouts[id]) {
-      //         clearTimeout(window.SitkoEditorJS.timeouts[id]);
-      //       }
-      //       window.SitkoEditorJS.timeouts[id] = setTimeout(function () {
-      //         //console.debug(id, 'Update text');
-      //         instance.invokeMethodAsync('UpdateText', editor.getData());
-      //         delete window.SitkoEditorJS.timeouts[id];
-      //       }, 50)
-      //
-      //     });
-      //   })
-      //   .catch(error => {
-      //     //console.error('Error initializing CKEditor', error);
-      //   });
     },
     // update: function (id, content) {
     //   if (this.editors.hasOwnProperty(id)) {

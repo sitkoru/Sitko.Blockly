@@ -4,15 +4,15 @@ internal class BlocksAccessor(IEnumerable<IContentBlockAccessor> blockAccessors)
 {
     private readonly IContentBlockAccessor[] blockAccessors = blockAccessors.ToArray();
 
-    public EditorJSConfig GetConfig(string holder)
+    public string GetConfig(Guid id)
     {
-        var config = new EditorJSConfig { Holder = holder };
+        var configs = new List<string>();
         foreach (var blockOptionsAccessor in blockAccessors)
         {
-            config.Tools[blockOptionsAccessor.Key] = blockOptionsAccessor.Options.GetConfig();
+            configs.Add($"\"{blockOptionsAccessor.Key}\": {blockOptionsAccessor.Options.GetConfig(id)}");
         }
 
-        return config;
+        return string.Join(",", configs);
     }
 
     public IReadOnlyDictionary<string, string> GetScripts() =>

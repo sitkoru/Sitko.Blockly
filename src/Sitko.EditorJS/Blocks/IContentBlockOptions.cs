@@ -3,7 +3,7 @@ namespace Sitko.EditorJS.Blocks;
 public interface IContentBlockOptions
 {
     string ScriptUrl { get; }
-    EditorJSToolConfig GetConfig();
+    string GetConfig(Guid id);
 }
 
 public interface IContentBlockOptions<TBlock> : IContentBlockOptions where TBlock : ContentBlock;

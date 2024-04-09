@@ -22,7 +22,8 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
     [Inject] protected IBlocksAccessor BlocksAccessor { get; set; } = null!;
     [Inject] protected IOptions<EditorJSOptions> EditorJSOptions { get; set; } = null!;
     [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;
-    [Parameter] public EditorJSConfig? Config { get; set; }
+
+    [Parameter] public string? Config { get; set; }
 
     private EditorJSData? Data { get; set; } = new()
     {
@@ -68,15 +69,23 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
         }
     }
 
-    private async Task InitializeEditorAsync(CancellationToken cancellationToken)
-    {
-        await JsRuntime.InvokeVoidAsync("window.SitkoEditorJS.init", cancellationToken, Id.ToString(),
-            GetConfig(), instance, Data);
-        rendered = true;
-    }
+    private async Task InitializeEditorAsync(CancellationToken cancellationToken) =>
+        await ScriptInjector.InjectAsync(ScriptInjectRequest.Inline(Id.ToString(), $$"""
+              window.SitkoEditorJS.antiForgeryToken = '{{AntiForgery.GetAntiforgeryToken()?.Value}}';
+              window.SitkoEditorJS.configs['{{Id}}'] = {
+                    holder: '{{Id}}',
+                    tools: {
+                        {{GetConfig()}}
+                    }
+              };
+              """), async _ =>
+        {
+            await JsRuntime.InvokeVoidAsync("window.SitkoEditorJS.init", cancellationToken, Id.ToString(),
+                instance, Data);
+            rendered = true;
+        }, cancellationToken);
 
-    private EditorJSConfig GetConfig() => Config ?? BlocksAccessor.GetConfig(Id.ToString());
-
+    private string GetConfig() => Config ?? BlocksAccessor.GetConfig(Id);
 
     private ValueTask DestroyEditor()
     {
@@ -94,19 +103,4 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
 
     // private async ValueTask UpdateEditorAsync() =>
     //     await JsRuntime.InvokeVoidAsync("window.SitkoBlazorCKEditor.update", Id, EditorValue);
-}
-
-[PublicAPI]
-public record EditorJSConfig
-{
-    [JsonPropertyName("holder")] public required string Holder { get; init; }
-
-    [JsonPropertyName("tools")] public Dictionary<string, EditorJSToolConfig> Tools { get; } = new();
-}
-
-[PublicAPI]
-public record EditorJSToolConfig
-{
-    [JsonPropertyName("className")] public required string ClassName { get; init; }
-    [JsonPropertyName("config")] public required ContentBlockConfig Config { get; init; }
 }

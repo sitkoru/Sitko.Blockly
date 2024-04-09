@@ -6,7 +6,17 @@ public abstract record ContentBlockOptions<TBlock, TConfig> : IContentBlockOptio
 {
     public abstract string ScriptUrl { get; set; }
     public abstract string ClassName { get; set; }
-    public EditorJSToolConfig GetConfig() => new() { ClassName = ClassName, Config = Config };
+
+    public string GetConfig(Guid id) => $$"""
+                                                  {
+                                                    class: window['{{ClassName}}'],
+                                                    config: {
+                                                        {{GetToolConfig(id)}}
+                                                     }
+                                                  }
+                                                  """;
+
+    protected virtual string GetToolConfig(Guid id) => "";
 
     public TConfig Config { get; } = new();
 }

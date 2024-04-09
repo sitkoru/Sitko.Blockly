@@ -2,7 +2,7 @@ namespace Sitko.EditorJS.Blocks;
 
 public interface IBlocksAccessor
 {
-    EditorJSConfig GetConfig(string holder);
+    string GetConfig(Guid id);
     IReadOnlyDictionary<string, string> GetScripts();
     IReadOnlyDictionary<string, Type> GetBlockTypes();
 }
