@@ -12,9 +12,7 @@ using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Storage.Metadata.Postgres;
-using Sitko.EditorJS;
-using Sitko.EditorJS.Blocks.Paragraph;
-using Sitko.EditorJS.Blocks.SimpleImage;
+using Sitko.EditorJS.Image;
 
 var builder = WebApplication.CreateBuilder(args);
 builder
@@ -35,6 +33,7 @@ builder
     .AddPostgresStorageMetadata<BlocklyStorageOptions>();
 
 builder.Services.AddEditorJSBlocks();
+builder.AddEditorJSImage<BlocklyStorageOptions>();
 
 var app = builder.Build();
 

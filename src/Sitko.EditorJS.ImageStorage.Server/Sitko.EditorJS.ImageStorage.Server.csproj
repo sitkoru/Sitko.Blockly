@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Sitko.EditorJS.Image</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Sitko.EditorJS\Sitko.EditorJS.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Sitko.Core.Storage" Version="11.11.0" />
+      <PackageReference Include="Sitko.Core.App.Web" Version="11.11.0" />
+    </ItemGroup>
+
+</Project>
