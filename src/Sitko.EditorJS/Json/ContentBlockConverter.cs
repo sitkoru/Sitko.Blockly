@@ -66,7 +66,7 @@ public class ContentBlockConverter : JsonConverter<ContentBlock>
             if (!string.IsNullOrEmpty(key))
             {
                 var descriptor = ContentBlocksRegistry.GetBlockMetadata(key);
-                if (JsonSerializer.Deserialize(ref reader, descriptor.BlockType) is ContentBlock contentBlock)
+                if (JsonSerializer.Deserialize(ref reader, descriptor.BlockType, options) is ContentBlock contentBlock)
                 {
                     block = contentBlock;
                 }
