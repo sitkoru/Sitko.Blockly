@@ -1,4 +1,4 @@
 namespace Sitko.EditorJS.Blocks.SimpleImage;
 
-[ContentBlock("image")]
+[ContentBlock("simple-image")]
 public record SimpleImageBlock : ContentBlock<SimpleImageBlockData>;

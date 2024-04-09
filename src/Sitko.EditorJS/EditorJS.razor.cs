@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Sitko.Blazor.ScriptInjector;
@@ -18,6 +17,7 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
 
     private DotNetObjectReference<EditorJS>? instance;
     private bool rendered;
+    [Inject] protected AntiforgeryStateProvider AntiForgery { get; set; } = null!;
     [Inject] protected IScriptInjector ScriptInjector { get; set; } = null!;
     [Inject] protected IBlocksAccessor BlocksAccessor { get; set; } = null!;
     [Inject] protected IOptions<EditorJSOptions> EditorJSOptions { get; set; } = null!;

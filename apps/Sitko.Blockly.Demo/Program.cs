@@ -1,4 +1,5 @@
 using Sitko.Blockly.Demo;
+using Sitko.Blockly.Demo.Client;
 using Sitko.Blockly.Demo.Client.Pages;
 using Sitko.Blockly.Demo.Components;
 using Sitko.Blockly.Demo.Data;
@@ -33,9 +34,7 @@ builder
     .AddFileSystemStorage<BlocklyStorageOptions>()
     .AddPostgresStorageMetadata<BlocklyStorageOptions>();
 
-builder.Services.AddEditorJS()
-    .AddBlock<ParagraphBlock, ParagraphBlockOptions>()
-    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>();
+builder.Services.AddEditorJSBlocks();
 
 var app = builder.Build();
 

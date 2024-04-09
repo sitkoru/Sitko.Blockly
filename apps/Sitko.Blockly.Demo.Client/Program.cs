@@ -35,9 +35,7 @@ builder
         context.Configuration.Bind(context.IsDevelopment() ? "HttpRoutes:Development" : "HttpRoutes:Production");
     });
 
-builder.Services.AddEditorJS()
-    .AddBlock<ParagraphBlock, ParagraphBlockOptions>()
-    .AddBlock<SimpleImageBlock, SimpleImageBlockOptions>();
+builder.Services.AddEditorJSBlocks();
 
 builder.ConfigureLocalization("ru-RU");
 
