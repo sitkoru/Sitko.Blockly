@@ -9,7 +9,7 @@ using Sitko.EditorJS.Blocks.Paragraph;
 using Sitko.EditorJS.Configuration;
 using Sitko.EditorJS.Data;
 
-namespace Sitko.EditorJS;
+namespace Sitko.EditorJS.Blazor;
 
 public partial class EditorJS : ComponentBase, IAsyncDisposable
 {
@@ -56,7 +56,7 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
 
             var injectRequests = new List<InjectRequest>
             {
-                ScriptInjectRequest.FromUrl("SitkoEditorJS", "_content/Sitko.EditorJS/EditorJS.razor.js",
+                ScriptInjectRequest.FromUrl("SitkoEditorJS", "_content/Sitko.EditorJS.Blazor/EditorJS.razor.js",
                     InjectScope.Scoped),
                 ScriptInjectRequest.FromUrl("editorjs", EditorJSOptions.Value.EditorJSScriptUrl, InjectScope.Scoped)
             };
