@@ -9,7 +9,7 @@ public record HeaderBlockOptions : ContentBlockOptions<HeaderBlock, HeaderBlockC
 
     protected override string GetToolConfig(Guid id) => $$"""
                                                           placeholder: "{{Config.Placeholder}}",
-                                                          levels: {{Config.Levels}},
+                                                          levels: "{{Config.Levels}}",
                                                           defaultLevel: {{Config.DefaultLevel.ToString(CultureInfo.InvariantCulture)}}
                                                           """;
 }
