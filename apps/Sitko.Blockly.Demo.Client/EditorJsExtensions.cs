@@ -20,7 +20,7 @@ public static class EditorJsExtensions
         serviceCollection.AddEditorJS()
             .AddBlock<StrikethroughBlock, StrikethroughBlockOptions>()
             .AddBlock<MarkerBlock, MarkerBlockOptions>()
-            .AddBlock<UnderlineTool, UnderlineBlockOptions>()
+            .AddBlock<UnderlineBlock, UnderlineBlockOptions>()
             .AddBlock<QuoteBlock, QuoteBlockOptions>()
             .AddBlock<TableBlock, TableBlockOptions>()
             .AddBlock<ListBlock, ListBlockOptions>()
