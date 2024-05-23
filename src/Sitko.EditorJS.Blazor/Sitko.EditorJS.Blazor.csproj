@@ -13,14 +13,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.3"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Sitko.EditorJS\Sitko.EditorJS.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Include="wwwroot\gallery.js" />
+        <ProjectReference Include="..\Sitko.EditorJS\Sitko.EditorJS.csproj" />
     </ItemGroup>
 
 </Project>
