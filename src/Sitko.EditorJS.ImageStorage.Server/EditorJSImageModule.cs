@@ -5,6 +5,7 @@ using Sitko.Core.App;
 using Sitko.Core.App.Web;
 using Sitko.Core.Storage;
 using Sitko.EditorJS.Blocks.Image;
+using Sitko.EditorJS.Data;
 
 namespace Sitko.EditorJS.Image;
 

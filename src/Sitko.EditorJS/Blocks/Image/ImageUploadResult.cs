@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Sitko.EditorJS.Data;
 
 namespace Sitko.EditorJS.Blocks.Image;
 
