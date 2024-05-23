@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Sitko.Blockly\Sitko.Blockly.csproj" />
+    <ProjectReference Include="..\..\src\Sitko.EditorJS\Sitko.EditorJS.csproj" />
   </ItemGroup>
 </Project>

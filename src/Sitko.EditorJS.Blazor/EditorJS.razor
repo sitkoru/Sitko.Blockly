@@ -1,10 +1,11 @@
-﻿@using System.Text.Json
+﻿@inherits Microsoft.AspNetCore.Components.Forms.InputBase<Sitko.EditorJS.Data.EditorJSData>
+@using System.Text.Json
 <div style="margin-top: 10px; margin-bottom: 10px;" id="@Id"></div>
 
-@if (Data is not null)
+@if (CurrentValue is not null)
 {
     <pre>
-@JsonSerializer.Serialize(Data, PrettyPrintJsonOptions)
+@JsonSerializer.Serialize(CurrentValue, PrettyPrintJsonOptions)
 </pre>
 }
 

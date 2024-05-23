@@ -11,7 +11,7 @@ using Sitko.EditorJS.Data;
 
 namespace Sitko.EditorJS.Blazor;
 
-public partial class EditorJS : ComponentBase, IAsyncDisposable
+public partial class EditorJS : InputBase<EditorJSData>, IAsyncDisposable
 {
     private static readonly JsonSerializerOptions PrettyPrintJsonOptions = new() { WriteIndented = true };
 
@@ -24,19 +24,6 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
     [Inject] protected IJSRuntime JsRuntime { get; set; } = null!;
 
     [Parameter] public string? Config { get; set; }
-
-    private EditorJSData? Data { get; set; } = new()
-    {
-        Time = DateTime.UtcNow.Ticks,
-        Version = "somever",
-        Blocks =
-        [
-            new ParagraphBlock
-            {
-                Id = Guid.NewGuid().ToString(), Data = new ParagraphBlockData { Text = "Мой клёвый текст" }
-            }
-        ]
-    };
 
     public Guid Id { get; } = Guid.NewGuid();
 
@@ -81,7 +68,7 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
               """), async _ =>
         {
             await JsRuntime.InvokeVoidAsync("window.SitkoEditorJS.init", cancellationToken, Id.ToString(),
-                instance, Data);
+                instance, CurrentValue);
             rendered = true;
         }, cancellationToken);
 
@@ -96,9 +83,17 @@ public partial class EditorJS : ComponentBase, IAsyncDisposable
     [JSInvokable]
     public Task OnSave(EditorJSData data)
     {
-        Data = data;
+        CurrentValue = data;
         StateHasChanged();
         return Task.CompletedTask;
+    }
+
+    protected override bool TryParseValueFromString(string? value, out EditorJSData result,
+        out string validationErrorMessage)
+    {
+        result = default!;
+        validationErrorMessage = "";
+        return false;
     }
 
     // private async ValueTask UpdateEditorAsync() =>

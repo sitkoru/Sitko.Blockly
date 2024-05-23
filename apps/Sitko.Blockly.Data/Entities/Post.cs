@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Sitko.Core.Repository;
+﻿using Sitko.Core.Repository;
+using Sitko.EditorJS.Data;
 
 namespace Sitko.Blockly.Data.Entities;
 
@@ -16,4 +16,5 @@ public record Post : BaseEntityRecord
     public string Title { get; set; } = "";
     public List<ContentBlock> Blocks { get; set; } = new();
     public List<ContentBlock> SecondaryBlocks { get; set; } = new();
+    public EditorJSData EditorJSBlocks { get; set; } = new();
 }

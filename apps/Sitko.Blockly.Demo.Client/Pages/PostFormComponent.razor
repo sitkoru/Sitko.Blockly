@@ -7,7 +7,7 @@
     </MudItem>
     @* <MudBlocklyForm @bind-Value="context.Entity.Blocks" Options="blocksOptions"></MudBlocklyForm> *@
     @* <MudBlocklyForm Label="Secondary blocks" @bind-Value="context.Entity.SecondaryBlocks" Options="secondaryBlocksOptions"></MudBlocklyForm> *@
-    <EditorJS />
+    <EditorJS @bind-Value="context.Entity.EditorJSBlocks"/>
     <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!context.Form.CanSave())" OnClick="@context.Form.SaveEntityAsync">Save</MudButton>
     <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Disabled="@(!context.Form.HasChanges)" OnClick="@context.Form.ResetAsync">Reset</MudButton>
 </PostForm>
