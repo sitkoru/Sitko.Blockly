@@ -2,7 +2,7 @@ namespace Sitko.EditorJS.Blocks.Quote;
 
 public record QuoteBlockOptions : ContentBlockOptions<QuoteBlock, QuoteBlockConfig>
 {
-    public override string ScriptUrl { get; set; } = "https://cdn.jsdelivr.net/npm/@editorjs/quote@2.6.0/dist/quote.umd.min.js";
+    public override string ScriptUrl { get; set; } = "https://cdn.jsdelivr.net/npm/@editorjs/quote@latest";
     public override string ClassName { get; set; } = "Quote";
 
     protected override string GetToolConfig(Guid id) => $$"""
