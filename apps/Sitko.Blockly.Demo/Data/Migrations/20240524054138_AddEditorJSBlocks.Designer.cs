@@ -13,7 +13,7 @@ using Sitko.EditorJS.Data;
 namespace Sitko.Blockly.Demo.Migrations
 {
     [DbContext(typeof(BlocklyContext))]
-    [Migration("20240523063901_AddEditorJSBlocks")]
+    [Migration("20240524054138_AddEditorJSBlocks")]
     partial class AddEditorJSBlocks
     {
         /// <inheritdoc />
