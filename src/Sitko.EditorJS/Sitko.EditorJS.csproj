@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -18,5 +18,5 @@
     <PackageReference Include="Scrutor" Version="4.2.2" />
     <PackageReference Include="Sitko.Blazor.ScriptInjector" Version="3.1.0" />
   </ItemGroup>
-  
+
 </Project>
