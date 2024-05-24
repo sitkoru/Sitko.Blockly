@@ -1,6 +1,4 @@
 ﻿@page "/"
-@using Sitko.Blockly.Display
-@using Sitko.Core.Storage
 @using Sitko.Blockly.Data.Entities
 @using Sitko.Core.Repository
 @using BlocksListMode=Sitko.EditorJS.Blazor.Display.BlocksListMode
@@ -23,7 +21,7 @@
                     @* <MudBlocksList *@
                     @*     EntityBlocks="post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage>(), $"Posts/{post.Id}"))"> *@
                     @* </MudBlocksList> *@
-                    <MudBlocksList EntityBlocks="post.EditorJSBlocks.Blocks" Options="@(new MudBlazorEditorJSListOptions(BlocksListMode.Full, GetService<IStorage>(), $"Posts/{post.Id}"))">
+                    <MudBlocksList EntityBlocks="post.EditorJSBlocks.Blocks" Options="@(new MudBlazorEditorJSListOptions(BlocksListMode.Full, $"Posts/{post.Id}"))">
                     </MudBlocksList>
                 </MudCardContent>
             </MudCard>

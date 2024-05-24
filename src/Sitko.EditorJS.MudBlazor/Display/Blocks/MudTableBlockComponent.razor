@@ -1,5 +1,4 @@
-﻿@using global::MudBlazor
-@inherits TableBlockComponent
+﻿@inherits TableBlockComponent<BlazorEditorJSListOptions>
 
 @if (Block.Data.Content != null)
 {
@@ -38,43 +37,4 @@
 
         </RowTemplate>
     </MudTable>
-
-    @* <table> *@
-    @*     @if (Block.Data.WithHeadings) *@
-    @*     { *@
-    @*         <thead> *@
-    @*         @foreach (var items in Block.Data.Content) *@
-    @*         { *@
-    @*             foreach (var item in items) *@
-    @*             { *@
-    @*                 <MudTh>@item</MudTh> *@
-    @*             } *@
-    @*             break; *@
-    @*         } *@
-    @*         </thead> *@
-    @*         <tbody> *@
-    @*         @foreach (var items in Block.Data.Content.Skip(1)) *@
-    @*         { *@
-    @*             <tr> *@
-    @*                 @foreach (var item in items) *@
-    @*                 { *@
-    @*                     <MudTd>@item</MudTd> *@
-    @*                 } *@
-    @*             </tr> *@
-    @*         } *@
-    @*         </tbody> *@
-    @*     } *@
-    @*     else *@
-    @*     { *@
-    @*         foreach (var items in Block.Data.Content) *@
-    @*         { *@
-    @*             <tr> *@
-    @*                 @foreach (var item in items) *@
-    @*                 { *@
-    @*                     <MudTd>@item</MudTd> *@
-    @*                 } *@
-    @*             </tr> *@
-    @*         } *@
-    @*     } *@
-    @* </table> *@
 }

@@ -2,4 +2,5 @@
 
 namespace Sitko.EditorJS.Blazor.Display.Blocks;
 
-public abstract class ListBlockComponent : BlockComponent<ListBlock>;
+public abstract class ListBlockComponent<TListOptions> : BlockComponent<ListBlock, TListOptions>
+    where TListOptions : BlazorEditorJSListOptions;

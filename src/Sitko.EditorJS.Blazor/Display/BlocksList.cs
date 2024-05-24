@@ -40,7 +40,7 @@ public class BlocksList<TOptions> : BaseComponent where TOptions : BlazorEditorJ
             var component = blockDescriptor.DisplayComponent;
             builder.OpenComponent(0, component);
             builder.AddAttribute(1, "Block", block);
-            // builder.AddAttribute(2, "Options", Options);
+            builder.AddAttribute(2, "Options", Options);
             builder.CloseComponent();
         };
 }
