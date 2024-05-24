@@ -1,0 +1,12 @@
+﻿@inherits QuoteBlockComponent
+
+<blockquote class="blockquote">
+    <div>
+        @((MarkupString)Block.Data.Text)
+    </div>
+    <footer class="author">
+        <cite>
+           @((MarkupString)Block.Data.Caption)
+        </cite>
+    </footer>
+</blockquote>

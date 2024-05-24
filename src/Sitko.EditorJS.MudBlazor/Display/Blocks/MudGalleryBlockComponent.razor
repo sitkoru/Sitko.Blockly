@@ -1,0 +1,8 @@
+﻿@inherits GalleryBlockComponent<Sitko.Core.Storage.StorageItem>
+
+<MudCarousel AutoCycle="true" AutoCycleTime="TimeSpan.FromSeconds(2)" ItemsSource="@(Block.Data.Files.ToList())">
+    <ItemTemplate>
+        <img src="@context.Url" alt="Image: @context.Data.FileName"/>
+    </ItemTemplate>
+</MudCarousel>
+

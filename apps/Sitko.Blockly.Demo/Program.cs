@@ -13,6 +13,7 @@ using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Storage.Metadata.Postgres;
 using Sitko.EditorJS.Image;
+using Sitko.EditorJS.MudBlazor;
 
 var builder = WebApplication.CreateBuilder(args);
 builder
@@ -21,6 +22,10 @@ builder
     .AddMudBlazorBlockly(options =>
     {
         options.AddBlocks<MudBlazorBlocklyModule>();
+    })
+    .AddMudBlazorEditorJS(options =>
+    {
+        options.AddBlocks<MudBlazorEditorJSModule>();
     })
     .AddInteractiveWebAssembly()
     .AddJsonLocalization()

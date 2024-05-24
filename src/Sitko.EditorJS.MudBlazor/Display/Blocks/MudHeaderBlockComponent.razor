@@ -1,0 +1,11 @@
+﻿@using global::MudBlazor
+@inherits HeaderBlockComponent
+
+@switch (Block.Data.Level)
+{
+    case 2: <MudText Typo="Typo.h2">@Block.Data.Text</MudText>
+        break;
+    case 3: <MudText Typo="Typo.h3">@Block.Data.Text</MudText>
+        break;
+}
+

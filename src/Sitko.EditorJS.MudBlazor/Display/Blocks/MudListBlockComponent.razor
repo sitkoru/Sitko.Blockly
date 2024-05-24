@@ -1,0 +1,24 @@
+﻿@inherits ListBlockComponent
+
+<div style="margin-left: 20px">
+    @if (Block.Data.Style != "ordered")
+    {
+        <ul style = "list-style-type:disc">
+            @foreach (var item in Block.Data.Items)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <ol type="1">
+            @foreach (var item in Block.Data.Items)
+            {
+                <li>@item</li>
+            }
+        </ol>
+    }
+</div>
+
+

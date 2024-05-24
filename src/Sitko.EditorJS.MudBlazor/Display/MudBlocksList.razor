@@ -1,0 +1,9 @@
+﻿@inherits BlocksList<MudBlazorEditorJSListOptions>
+@foreach (var block in Blocks)
+{
+    var blockDescriptor = Blockly.GetBlockDescriptor(block.GetType());
+    var className = $"editorjs editorjs-{block.GetType().Name.ToLowerInvariant()} {blockDescriptor.DisplayComponentCssClass}";
+    <div class="@className" @key="block.Id">
+        @(RenderBlock(blockDescriptor, block))
+    </div>
+}

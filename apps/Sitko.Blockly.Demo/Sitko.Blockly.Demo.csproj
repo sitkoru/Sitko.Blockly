@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Sitko.Blockly.EntityFrameworkCore\Sitko.Blockly.EntityFrameworkCore.csproj"/>
     <ProjectReference Include="..\..\src\Sitko.EditorJS.ImageStorage.Server\Sitko.EditorJS.ImageStorage.Server.csproj" />
+    <ProjectReference Include="..\..\src\Sitko.EditorJS.MudBlazor\Sitko.EditorJS.MudBlazor.csproj" />
     <ProjectReference Include="..\Sitko.Blockly.Demo.Client\Sitko.Blockly.Demo.Client.csproj"/>
   </ItemGroup>
   <ItemGroup>
