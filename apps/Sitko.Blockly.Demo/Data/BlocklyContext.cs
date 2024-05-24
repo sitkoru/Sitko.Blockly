@@ -17,12 +17,5 @@ public class BlocklyContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.RegisterBlocklyConversion<Post>(post => post.Blocks, nameof(Post.Blocks));
         modelBuilder.RegisterBlocklyConversion<Post>(post => post.SecondaryBlocks, nameof(Post.SecondaryBlocks));
-        modelBuilder.Entity<Post>(post =>
-        {
-            post.Property(property => property.EditorJSBlocks)
-                .IsRequired()
-                .HasColumnType("jsonb")
-                .HasDefaultValueSql("'{}'");
-        });
     }
 }
