@@ -3,7 +3,7 @@ using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Data;
 
-public record BaseImageBlockData : ContentBlockData
+public abstract record BaseImageBlockData : ContentBlockData
 {
     [JsonPropertyName("caption")] public string Caption { get; set; } = "";
     [JsonPropertyName("stretched")] public bool Stretched { get; set; }
