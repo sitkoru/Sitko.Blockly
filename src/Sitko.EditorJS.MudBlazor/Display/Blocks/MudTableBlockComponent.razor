@@ -32,10 +32,12 @@
         {
             foreach (var items in Block.Data.Content)
             {
-                foreach (var item in items)
-                {
-                    <MudTd>@item</MudTd>
-                }
+                <tr>
+                    @foreach (var item in items)
+                    {
+                        <MudTd>@item</MudTd>
+                    }
+                </tr>
             }
         }
     </table>

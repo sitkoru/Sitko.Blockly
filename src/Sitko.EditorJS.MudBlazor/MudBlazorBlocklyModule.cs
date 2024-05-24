@@ -10,9 +10,9 @@ namespace Sitko.EditorJS.MudBlazor;
 
 public class MudBlazorEditorJSModule : BlazorEditorJSModule<IBlazorBlockDescriptor, MudBlazorEditorJSModuleOptions>
 {
-    public static readonly string CssUrl = "/_content/Sitko.Blockly.MudBlazor/Sitko.Blockly.MudBlazor.bundle.scp.css";
+    public static readonly string CssUrl = "/_content/Sitko.EditorJS.MudBlazor/Sitko.EditorJS.MudBlazor.bundle.scp.css";
 
-    public override string OptionsKey => "Blockly:MudBlazor";
+    public override string OptionsKey => "EditorJS:MudBlazor";
 
     public override void ConfigureServices(IApplicationContext context, IServiceCollection services,
         MudBlazorEditorJSModuleOptions startupOptions)

@@ -14,7 +14,7 @@ public class EditorJSModule
 public class EditorJSModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TConfig>
     where TBlockDescriptor : IBlockDescriptor where TConfig : EditorJSModuleOptions<TBlockDescriptor>, new()
 {
-    public override string OptionsKey => "Blockly";
+    public override string OptionsKey => "EditorJS";
 
     public override void ConfigureServices(IApplicationContext context, IServiceCollection services,
         TConfig startupOptions)
