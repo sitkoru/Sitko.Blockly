@@ -3,7 +3,7 @@
 public record GalleryBlockOptions<TData> : ContentBlockOptions<GalleryBlock<TData>, GalleryBlockConfig>
     where TData: class, new()
 {
-    public override string ScriptUrl { get; set; } = "/_content/Sitko.EditorJS.Blazor/gallery.js";
+    public override string ScriptUrl { get; set; } = "https://cdn.jsdelivr.net/npm/editorjs-gallery@latest";
     public override string ClassName { get; set; } = "ImageGallery";
 
     protected override string GetToolConfig(Guid id) => $$"""
