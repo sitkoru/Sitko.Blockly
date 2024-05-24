@@ -1,8 +1,25 @@
 ﻿@inherits GalleryBlockComponent<Sitko.Core.Storage.StorageItem>
 
-<MudCarousel AutoCycle="true" AutoCycleTime="TimeSpan.FromSeconds(2)" ItemsSource="@(Block.Data.Files.ToList())">
-    <ItemTemplate>
-        <img src="@context.Url" alt="Image: @context.Data.FileName"/>
-    </ItemTemplate>
-</MudCarousel>
+
+@if (Block.Data.Style == "slider")
+{
+    <MudCarousel AutoCycle="true" AutoCycleTime="TimeSpan.FromSeconds(2)" ItemsSource="@(Block.Data.Files.ToList())">
+        <ItemTemplate>
+            <img src="@context.Url" alt="Image: @context.Data.FileName"/>
+        </ItemTemplate>
+    </MudCarousel>
+}
+else
+{
+    foreach (var file in Block.Data.Files)
+    {
+        <div class="responsive">
+            <div class="gallery">
+                <img src="@file.Url" alt="Image: @file.Data.FileName">
+            </div>
+        </div>
+    }
+
+    <div class="clearfix"></div>
+}
 

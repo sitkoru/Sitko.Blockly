@@ -3,42 +3,78 @@
 
 @if (Block.Data.Content != null)
 {
-    <table>
-        @if (Block.Data.WithHeadings)
-        {
-            <thead>
-            @foreach (var items in Block.Data.Content)
+    <MudTable Items="Block.Data.Content">
+        <HeaderContent>
+            @if (Block.Data.WithHeadings)
             {
-                foreach (var item in items)
+                foreach (var items in Block.Data.Content)
                 {
-                    <MudTh>@item</MudTh>
+                    foreach (var item in items)
+                    {
+                        <MudTh>@item</MudTh>
+                    }
+                    break;
                 }
-                break;
             }
-            </thead>
-            <tbody>
-            @foreach (var items in Block.Data.Content.Skip(1))
+        </HeaderContent>
+        <RowTemplate>
+            @if (Block.Data.WithHeadings)
             {
-                <tr>
-                    @foreach (var item in items)
+                if (Block.Data.Content[0] != context)
+                {
+                    foreach (var item in context)
                     {
                         <MudTd>@item</MudTd>
                     }
-                </tr>
+                }
             }
-            </tbody>
-        }
-        else
-        {
-            foreach (var items in Block.Data.Content)
+            else
             {
-                <tr>
-                    @foreach (var item in items)
-                    {
-                        <MudTd>@item</MudTd>
-                    }
-                </tr>
+                foreach (var item in context)
+                {
+                    <MudTd>@item</MudTd>
+                }
             }
-        }
-    </table>
+
+        </RowTemplate>
+    </MudTable>
+
+    @* <table> *@
+    @*     @if (Block.Data.WithHeadings) *@
+    @*     { *@
+    @*         <thead> *@
+    @*         @foreach (var items in Block.Data.Content) *@
+    @*         { *@
+    @*             foreach (var item in items) *@
+    @*             { *@
+    @*                 <MudTh>@item</MudTh> *@
+    @*             } *@
+    @*             break; *@
+    @*         } *@
+    @*         </thead> *@
+    @*         <tbody> *@
+    @*         @foreach (var items in Block.Data.Content.Skip(1)) *@
+    @*         { *@
+    @*             <tr> *@
+    @*                 @foreach (var item in items) *@
+    @*                 { *@
+    @*                     <MudTd>@item</MudTd> *@
+    @*                 } *@
+    @*             </tr> *@
+    @*         } *@
+    @*         </tbody> *@
+    @*     } *@
+    @*     else *@
+    @*     { *@
+    @*         foreach (var items in Block.Data.Content) *@
+    @*         { *@
+    @*             <tr> *@
+    @*                 @foreach (var item in items) *@
+    @*                 { *@
+    @*                     <MudTd>@item</MudTd> *@
+    @*                 } *@
+    @*             </tr> *@
+    @*         } *@
+    @*     } *@
+    @* </table> *@
 }
