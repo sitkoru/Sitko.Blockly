@@ -2,6 +2,21 @@
   text-align: center;
 }
 
+.single-image-with-background {
+  text-align: center;
+  padding: 2em;
+  background: #cdd1e0;
+}
+
+img.stretched {
+  max-width: 100%;
+  height: auto;
+}
+
+img.with-border {
+  border: 1px #e8e8eb solid;
+}
+
 img {
   max-width: 100%;
   height: 50vh;

@@ -8,7 +8,6 @@ public interface IBlockDescriptor
     string Title { get; }
     Type Type { get; }
     string Key { get; }
-    string Icon { get; }
 }
 
 // ReSharper disable once UnusedTypeParameter
@@ -21,7 +20,6 @@ public abstract record BlockDescriptor : IBlockDescriptor
     public abstract string Title { get; }
     public abstract Type Type { get; }
     public abstract string Key { get; }
-    public abstract string Icon { get; }
 }
 
 public abstract record BlockDescriptor<TBlock> : BlockDescriptor, IBlockDescriptor<TBlock>
@@ -36,5 +34,4 @@ public abstract record BlockDescriptor<TBlock> : BlockDescriptor, IBlockDescript
 
     public override string Title => LocalizationProvider[typeof(TBlock).Name];
     public override string Key => typeof(TBlock).Name.Replace("Block", "").ToLowerInvariant();
-    public override string Icon => "";
 }

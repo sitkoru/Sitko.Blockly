@@ -60,10 +60,10 @@ public abstract class EditorJSModuleOptions<TBlockDescriptor> : BaseModuleOption
                     .AddClasses(c => c.AssignableTo<TDescriptor>().Where(d => !d.IsAbstract && d.IsClass))
                     .AsSelfWithInterfaces().WithSingletonLifetime());
         });
-        if (withValidators)
-        {
-            // AddValidators<TAssembly, IBlockValidator>();
-        }
+        // if (withValidators)
+        // {
+        //     AddValidators<TAssembly, IBlockValidator>();
+        // }
 
         return this;
     }
@@ -71,10 +71,10 @@ public abstract class EditorJSModuleOptions<TBlockDescriptor> : BaseModuleOption
     public EditorJSModuleOptions<TBlockDescriptor> AddBlocks<TAssembly>(bool withValidators = true)
     {
         AddBlocks<TAssembly, TBlockDescriptor>();
-        if (withValidators)
-        {
-            // AddValidators<TAssembly, IBlockValidator>();
-        }
+        // if (withValidators)
+        // {
+        //     AddValidators<TAssembly, IBlockValidator>();
+        // }
 
         return this;
     }
@@ -97,10 +97,10 @@ public abstract class EditorJSModuleOptions<TBlockDescriptor> : BaseModuleOption
         where TDescriptor : TBlockDescriptor, IBlockDescriptor<TBlock> where TBlock : ContentBlock
     {
         AddBlocks<TDescriptor, TDescriptor>();
-        if (withValidator)
-        {
-            // AddValidators<TDescriptor, IBlockValidator<TBlock>>();
-        }
+        // if (withValidator)
+        // {
+        //     AddValidators<TDescriptor, IBlockValidator<TBlock>>();
+        // }
 
         return this;
     }

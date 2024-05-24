@@ -5,7 +5,6 @@ namespace Sitko.EditorJS.Blazor.Display;
 public interface IBlazorBlockDescriptor : IBlockDescriptor
 {
     string DisplayComponentCssClass => "";
-    string FormComponentCssClass => "";
     Type DisplayComponent { get; }
 }
 
