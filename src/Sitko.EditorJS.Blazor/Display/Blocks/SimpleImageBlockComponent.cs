@@ -2,5 +2,4 @@
 
 namespace Sitko.EditorJS.Blazor.Display.Blocks;
 
-public abstract class SimpleImageBlockComponent<TListOptions> : BlockComponent<SimpleImageBlock, TListOptions>
-    where TListOptions : BlazorEditorJSListOptions;
+public abstract class SimpleImageBlockComponent : BlockComponent<SimpleImageBlock>;

@@ -2,5 +2,4 @@
 
 namespace Sitko.EditorJS.Blazor.Display.Blocks;
 
-public abstract class HeaderBlockComponent<TListOptions> : BlockComponent<HeaderBlock, TListOptions>
-    where TListOptions : BlazorEditorJSListOptions;
+public abstract class HeaderBlockComponent : BlockComponent<HeaderBlock>;

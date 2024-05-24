@@ -2,5 +2,4 @@
 
 namespace Sitko.EditorJS.Blazor.Display.Blocks;
 
-public abstract class QuoteBlockComponent<TListOptions> : BlockComponent<QuoteBlock, TListOptions>
-    where TListOptions : BlazorEditorJSListOptions;
+public abstract class QuoteBlockComponent: BlockComponent<QuoteBlock>;

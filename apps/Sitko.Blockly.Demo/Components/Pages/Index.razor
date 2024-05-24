@@ -1,7 +1,6 @@
 ﻿@page "/"
 @using Sitko.Blockly.Data.Entities
 @using Sitko.Core.Repository
-@using BlocksListMode=Sitko.EditorJS.Blazor.Display.BlocksListMode
 @inherits BaseComponent
 <AppPageLayout Title="@LocalizationProvider["Posts"]">
     <Extra>
@@ -21,8 +20,7 @@
                     @* <MudBlocksList *@
                     @*     EntityBlocks="post.Blocks" Options="@(new MudBlazorBlocklyListOptions(BlocksListMode.Preview, GetService<IStorage>(), $"Posts/{post.Id}"))"> *@
                     @* </MudBlocksList> *@
-                    <MudBlocksList EntityBlocks="post.EditorJSBlocks.Blocks" Options="@(new MudBlazorEditorJSListOptions(BlocksListMode.Full, $"Posts/{post.Id}"))">
-                    </MudBlocksList>
+                    <MudBlocksList EntityBlocks="post.EditorJSBlocks.Blocks"/>
                 </MudCardContent>
             </MudCard>
         }

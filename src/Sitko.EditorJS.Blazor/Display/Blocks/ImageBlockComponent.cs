@@ -2,6 +2,5 @@
 
 namespace Sitko.EditorJS.Blazor.Display.Blocks;
 
-public abstract class ImageBlockComponent<TData, TListOptions> : BlockComponent<ImageBlock<TData>, TListOptions>
-    where TData : class, new()
-    where TListOptions : BlazorEditorJSListOptions;
+public abstract class ImageBlockComponent<TData> : BlockComponent<ImageBlock<TData>>
+    where TData : class, new();

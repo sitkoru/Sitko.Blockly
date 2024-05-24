@@ -5,7 +5,7 @@ using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Blazor.Display;
 
-public class BlocksList<TOptions> : BaseComponent where TOptions : BlazorEditorJSListOptions
+public class BlocksList : BaseComponent
 {
     [EditorRequired]
     [Parameter]
@@ -19,28 +19,19 @@ public class BlocksList<TOptions> : BaseComponent where TOptions : BlazorEditorJ
 
     protected ContentBlock[] Blocks => EntityBlocks.ToArray();
 
-    [Parameter] public TOptions Options { get; set; } = null!;
-
     protected override void Initialize()
     {
         base.Initialize();
-
-        if (Options is null)
-        {
-            throw new InvalidOperationException("Provide options for BlocksList");
-        }
-
         BlockDescriptors = Blockly.Descriptors.ToArray();
     }
 
     [PublicAPI]
-    public RenderFragment RenderBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock block) =>
+    public static RenderFragment RenderBlock(IBlazorBlockDescriptor blockDescriptor, ContentBlock block) =>
         builder =>
         {
             var component = blockDescriptor.DisplayComponent;
             builder.OpenComponent(0, component);
             builder.AddAttribute(1, "Block", block);
-            builder.AddAttribute(2, "Options", Options);
             builder.CloseComponent();
         };
 }

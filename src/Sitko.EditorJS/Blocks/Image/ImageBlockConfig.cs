@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Sitko.EditorJS.Blocks.Image;
+﻿namespace Sitko.EditorJS.Blocks.Image;
 
 public record ImageBlockConfig : ContentBlockConfig
 {
