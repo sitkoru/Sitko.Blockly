@@ -6,12 +6,7 @@ using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Blazor;
 
-public class EditorJSModule
-{
-
-}
-
-public class EditorJSModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TConfig>
+public abstract class EditorJSModule<TBlockDescriptor, TConfig> : BaseApplicationModule<TConfig>
     where TBlockDescriptor : IBlockDescriptor where TConfig : EditorJSModuleOptions<TBlockDescriptor>, new()
 {
     public override string OptionsKey => "EditorJS";

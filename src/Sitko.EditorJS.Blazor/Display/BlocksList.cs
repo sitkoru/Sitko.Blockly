@@ -5,7 +5,7 @@ using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Blazor.Display;
 
-public class BlocksList : BaseComponent
+public abstract class BlocksList : BaseComponent
 {
     [EditorRequired]
     [Parameter]

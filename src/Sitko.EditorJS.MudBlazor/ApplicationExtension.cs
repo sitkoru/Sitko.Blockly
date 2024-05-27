@@ -7,7 +7,7 @@ namespace Sitko.EditorJS.MudBlazor;
 public static class ApplicationExtension
 {
 
-    public static IHostApplicationBuilder AddMudBlazorBlockly(this IHostApplicationBuilder hostApplicationBuilder,
+    public static IHostApplicationBuilder AddMudBlazorEditorJS(this IHostApplicationBuilder hostApplicationBuilder,
         Action<IApplicationContext, MudBlazorEditorJSModuleOptions> configure, string? optionsKey = null)
     {
         hostApplicationBuilder.GetSitkoCore<ISitkoCoreBlazorApplicationBuilder>()
@@ -15,7 +15,7 @@ public static class ApplicationExtension
         return hostApplicationBuilder;
     }
 
-    public static IHostApplicationBuilder AddMudBlazorBlockly(this IHostApplicationBuilder hostApplicationBuilder,
+    public static IHostApplicationBuilder AddMudBlazorEditorJS(this IHostApplicationBuilder hostApplicationBuilder,
         Action<MudBlazorEditorJSModuleOptions>? configure = null, string? optionsKey = null)
     {
         hostApplicationBuilder.GetSitkoCore<ISitkoCoreBlazorApplicationBuilder>()
