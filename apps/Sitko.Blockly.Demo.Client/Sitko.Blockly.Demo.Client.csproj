@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj"/>
     <ProjectReference Include="..\..\src\Sitko.EditorJS.Blazor\Sitko.EditorJS.Blazor.csproj" />
+    <ProjectReference Include="..\..\src\Sitko.EditorJS.MudBlazor\Sitko.EditorJS.MudBlazor.csproj" />
     <ProjectReference Include="..\..\src\Sitko.EditorJS\Sitko.EditorJS.csproj" />
     <ProjectReference Include="..\Sitko.Blockly.Data\Sitko.Blockly.Data.csproj"/>
   </ItemGroup>

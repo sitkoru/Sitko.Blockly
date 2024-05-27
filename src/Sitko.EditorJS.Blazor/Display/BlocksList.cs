@@ -15,14 +15,14 @@ public abstract class BlocksList : BaseComponent
     protected IBlazorBlockDescriptor[] BlockDescriptors { get; private set; } =
         Array.Empty<IBlazorBlockDescriptor>();
 
-    [Inject] protected IEditorJS<IBlazorBlockDescriptor> Blockly { get; set; } = null!;
+    [Inject] protected IEditorJS<IBlazorBlockDescriptor> EditorJs { get; set; } = null!;
 
     protected ContentBlock[] Blocks => EntityBlocks.ToArray();
 
     protected override void Initialize()
     {
         base.Initialize();
-        BlockDescriptors = Blockly.Descriptors.ToArray();
+        BlockDescriptors = EditorJs.Descriptors.ToArray();
     }
 
     [PublicAPI]

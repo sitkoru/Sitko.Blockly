@@ -37,7 +37,7 @@ builder
     .AddFileSystemStorage<BlocklyStorageOptions>()
     .AddPostgresStorageMetadata<BlocklyStorageOptions>();
 
-builder.Services.AddEditorJSBlocks();
+// builder.Services.AddEditorJSBlocks();
 builder.AddEditorJSImage<BlocklyStorageOptions>();
 
 var app = builder.Build();
