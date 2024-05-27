@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Validators;
 using Sitko.EditorJS.Blazor.Display;
 using Sitko.EditorJS.Blocks;
@@ -46,29 +45,6 @@ public class BlockInheritanceValidator<TModel> : PolymorphicValidator<TModel, Co
             }
         }
 
-        return this;
-    }
-}
-
-public abstract class AbstractEditorJSFormValidator<TForm> : AbstractValidator<TForm>
-{
-    private readonly IEnumerable<IBlockDescriptor> blockDescriptors;
-    private readonly IEnumerable<IBlockValidator> validators;
-
-    public AbstractEditorJSFormValidator(IEnumerable<IBlockDescriptor> blockDescriptors,
-        IEnumerable<IBlockValidator> validators)
-    {
-        this.blockDescriptors = blockDescriptors;
-        this.validators = validators;
-    }
-
-    protected virtual IEnumerable<AbstractValidator<ContentBlock>>? AdditionalValidators => null;
-
-    protected AbstractEditorJSFormValidator<TForm> AddBlocksValidators(
-        Expression<Func<TForm, IEnumerable<ContentBlock>>> fieldSelector)
-    {
-        RuleForEach(fieldSelector)
-            .AddBlockValidators(blockDescriptors, validators, AdditionalValidators);
         return this;
     }
 }
