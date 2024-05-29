@@ -7,5 +7,5 @@ namespace Sitko.EditorJS.Blazor.Validation;
 public class ParagraphBlockValidator : BlockValidator<ParagraphBlock>
 {
     public ParagraphBlockValidator(ILocalizationProvider<ParagraphBlock> localizationProvider) : base(localizationProvider) =>
-        RuleFor(p => p.Data.Text).NotEmpty().WithMessage(LocalizationProvider["Text is required"]);
+        RuleFor(p => p.Data.Text).NotEmpty().WithMessage(LocalizationProvider[ValidatorConst.TextIsRequired]);
 }

@@ -8,5 +8,5 @@ public class GalleryBlockValidator<TImageData> : BlockValidator<GalleryBlock<TIm
     where TImageData: class, new()
 {
     public GalleryBlockValidator(ILocalizationProvider<GalleryBlock<TImageData>> localizationProvider) : base(localizationProvider) =>
-        RuleFor(b => b.Data.Files).NotEmpty().WithMessage(LocalizationProvider["Choose at least 1 picture"]);
+        RuleFor(b => b.Data.Files).NotEmpty().WithMessage(LocalizationProvider[ValidatorConst.ChooseMorePicture]);
 }

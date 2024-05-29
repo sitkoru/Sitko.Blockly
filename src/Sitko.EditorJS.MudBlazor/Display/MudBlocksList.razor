@@ -1,5 +1,5 @@
 ﻿@inherits BlocksList
-<link rel="stylesheet" href="/_content/Sitko.EditorJS.MudBlazor/Sitko.EditorJS.MudBlazor.bundle.scp.css">
+<link rel="stylesheet" href="@StyleConst.Css">
 @foreach (var block in Blocks)
 {
     var blockDescriptor = EditorJs.GetBlockDescriptor(block.GetType());

@@ -8,5 +8,5 @@ public class ImageBlockValidator<TImageData> : BlockValidator<ImageBlock<TImageD
     where TImageData: class, new()
 {
     public ImageBlockValidator(ILocalizationProvider<ImageBlock<TImageData>> localizationProvider) : base(localizationProvider) =>
-        RuleFor(b => b.Data.File).NotEmpty().WithMessage(LocalizationProvider["Choose a picture"]);
+        RuleFor(b => b.Data.File).NotEmpty().WithMessage(LocalizationProvider[ValidatorConst.ChoosePicture]);
 }
