@@ -1,4 +1,5 @@
-﻿@inherits ImageBlockComponent<Sitko.Core.Storage.StorageItem>
+﻿@inherits ImageBlockComponent<TImageData>
+@typeparam TImageData
 
 <div class="@(Block.Data.WithBackground ? "single-image-with-background" : "single-image")">
     <img class="@(Block.Data.Stretched ? "stretched " : "") @(Block.Data.WithBorder ? "with-border" : "")" src="@Block.Data.File.Url" alt="Image: @Block.Data.Caption"/>

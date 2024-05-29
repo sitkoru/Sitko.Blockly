@@ -10,6 +10,7 @@ using Sitko.Core.Blazor.MudBlazor.Server;
 using Sitko.Core.Blazor.Server;
 using Sitko.Core.Db.Postgres;
 using Sitko.Core.Repository.EntityFrameworkCore;
+using Sitko.Core.Storage;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Storage.Metadata.Postgres;
 using Sitko.EditorJS.Image;
@@ -23,10 +24,6 @@ builder
     {
         options.AddBlocks<MudBlazorBlocklyModule>();
     })
-    .AddMudBlazorEditorJS(options =>
-    {
-        options.AddBlocks<MudBlazorEditorJSModule>();
-    })
     .AddInteractiveWebAssembly()
     .AddJsonLocalization()
     .AddPostgresDatabase<BlocklyContext>()
@@ -37,6 +34,7 @@ builder
     .AddFileSystemStorage<BlocklyStorageOptions>()
     .AddPostgresStorageMetadata<BlocklyStorageOptions>();
 
+builder.Services.AddEditorJSMudBlazor<StorageItem>();
 // builder.Services.AddEditorJSBlocks();
 builder.AddEditorJSImage<BlocklyStorageOptions>();
 

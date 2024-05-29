@@ -7,6 +7,7 @@ using Sitko.Core.Blazor.MudBlazorComponents;
 using Sitko.Core.Blazor.Wasm;
 using Sitko.Core.Repository.Remote;
 using Sitko.Core.Repository.Remote.Wasm;
+using Sitko.Core.Storage;
 using Sitko.Core.Storage.Remote;
 using Sitko.EditorJS;
 using Sitko.EditorJS.Blocks.Paragraph;
@@ -22,10 +23,6 @@ builder
     {
         options.AddBlocks<MudBlazorBlocklyModule>();
     })
-    .AddMudBlazorEditorJS(options =>
-    {
-        options.AddBlocks<MudBlazorEditorJSModule>();
-    })
     .AddJsonLocalization(options => options.AddDefaultResource<Index>())
     .AddRemoteStorage<RemoteStorageOptions>((context, options) =>
     {
@@ -40,6 +37,7 @@ builder
         context.Configuration.Bind(context.IsDevelopment() ? "HttpRoutes:Development" : "HttpRoutes:Production");
     });
 
+builder.Services.AddEditorJSMudBlazor<StorageItem>();
 // builder.Services.AddEditorJSBlocks();
 
 builder.ConfigureLocalization("ru-RU");
