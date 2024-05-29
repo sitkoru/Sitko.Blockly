@@ -24,7 +24,7 @@ public class EditorJSImageModule<TStorageOptions> : BaseApplicationModule<Editor
             {
                 var item = await storage.SaveAsync(image.OpenReadStream(), image.FileName, "/");
                 return ImageUploadResult.Ok(
-                    new ImageBlockDataFile<StorageItem> { Url = storage.PublicUri(item).ToString(), Data = item });
+                    new ImageBlockDataFile<StorageItem> { Url = storage.PublicUri(item).ToString(), FileName = item.FileName, Data = item });
             }
             catch (Exception ex)
             {

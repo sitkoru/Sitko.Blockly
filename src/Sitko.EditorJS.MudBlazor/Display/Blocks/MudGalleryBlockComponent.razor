@@ -5,7 +5,7 @@
 {
     <MudCarousel AutoCycle="true" AutoCycleTime="TimeSpan.FromSeconds(2)" ItemsSource="@(Block.Data.Files.ToList())">
         <ItemTemplate>
-            <img src="@context.Url" alt="Image: "/>
+            <img src="@context.Url" alt="Image: @context.FileName"/>
         </ItemTemplate>
     </MudCarousel>
 }
@@ -15,7 +15,7 @@ else
     {
         <div class="responsive">
             <div class="gallery">
-                <img src="@file.Url" alt="Image: ">
+                <img src="@file.Url" alt="Image: @file.FileName">
             </div>
         </div>
     }
