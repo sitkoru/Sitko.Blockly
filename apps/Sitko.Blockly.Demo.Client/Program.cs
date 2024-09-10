@@ -23,7 +23,7 @@ builder
     // {
     //     options.AddBlocks<MudBlazorBlocklyModule>();
     // })
-    // .AddJsonLocalization(options => options.AddDefaultResource<Index>())
+    .AddJsonLocalization(options => options.AddDefaultResource<Index>())
     .AddRemoteStorage<RemoteStorageOptions>((context, options) =>
     {
         context.Configuration.Bind("Storage:Remote:DigitClubRemoteStorageOptions");
