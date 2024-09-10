@@ -12,7 +12,10 @@ public class EditorJSBlazor<TBlockDescriptor> where TBlockDescriptor : IBlockDes
     {
         this.serviceCollection = serviceCollection;
         this.serviceCollection.AddSingleton<IEditorJS<TBlockDescriptor>, EditorJS<TBlockDescriptor>>();
-        this.serviceCollection.AddLocalization();
+        this.serviceCollection.AddJsonLocalization(options =>
+        {
+            options.ResourcesPath = "Resources";
+        });
     }
 
     public EditorJSBlazor<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
