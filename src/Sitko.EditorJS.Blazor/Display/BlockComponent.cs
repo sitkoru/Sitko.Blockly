@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Sitko.Core.Blazor.Components;
 using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Blazor.Display;
 
-public abstract class BlockComponent<TBlock> : BaseComponent
+public abstract class BlockComponent<TBlock> : ComponentBase
     where TBlock : ContentBlock
 {
     [EditorRequired]

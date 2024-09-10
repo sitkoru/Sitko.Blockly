@@ -1,11 +1,10 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.AspNetCore.Components;
-using Sitko.Core.Blazor.Components;
 using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Blazor.Display;
 
-public abstract class BlocksList : BaseComponent
+public abstract class BlocksList : ComponentBase
 {
     [EditorRequired]
     [Parameter]
@@ -19,9 +18,9 @@ public abstract class BlocksList : BaseComponent
 
     protected ContentBlock[] Blocks => EntityBlocks.ToArray();
 
-    protected override void Initialize()
+    protected override void OnInitialized()
     {
-        base.Initialize();
+        base.OnInitialized();
         BlockDescriptors = EditorJs.Descriptors.ToArray();
     }
 
