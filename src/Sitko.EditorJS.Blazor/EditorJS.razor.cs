@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Sitko.Blazor.ScriptInjector;
 using Sitko.EditorJS.Blocks;
-using Sitko.EditorJS.Blocks.Paragraph;
 using Sitko.EditorJS.Configuration;
 using Sitko.EditorJS.Data;
 
@@ -16,7 +15,6 @@ public partial class EditorJS : InputBase<EditorJSData>, IAsyncDisposable
     private static readonly JsonSerializerOptions PrettyPrintJsonOptions = new() { WriteIndented = true };
 
     private DotNetObjectReference<EditorJS>? instance;
-    private bool rendered;
     [Inject] protected AntiforgeryStateProvider AntiForgery { get; set; } = null!;
     [Inject] protected IScriptInjector ScriptInjector { get; set; } = null!;
     [Inject] protected IBlocksAccessor BlocksAccessor { get; set; } = null!;
@@ -69,16 +67,11 @@ public partial class EditorJS : InputBase<EditorJSData>, IAsyncDisposable
         {
             await JsRuntime.InvokeVoidAsync("window.SitkoEditorJS.init", cancellationToken, Id.ToString(),
                 instance, CurrentValue);
-            rendered = true;
         }, cancellationToken);
 
     private string GetConfig() => Config ?? BlocksAccessor.GetConfig(Id);
 
-    private ValueTask DestroyEditor()
-    {
-        rendered = false;
-        return JsRuntime.InvokeVoidAsync("window.SitkoEditorJS.destroy", Id);
-    }
+    private ValueTask DestroyEditor() => JsRuntime.InvokeVoidAsync("window.SitkoEditorJS.destroy", Id);
 
     [JSInvokable]
     public Task OnSave(EditorJSData data)
