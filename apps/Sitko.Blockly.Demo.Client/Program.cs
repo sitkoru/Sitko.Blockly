@@ -19,11 +19,11 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder
     .AddSitkoCoreBlazorWasm()
     .AddMudBlazor()
-    .AddMudBlazorBlockly(options =>
-    {
-        options.AddBlocks<MudBlazorBlocklyModule>();
-    })
-    .AddJsonLocalization(options => options.AddDefaultResource<Index>())
+    // .AddMudBlazorBlockly(options =>
+    // {
+    //     options.AddBlocks<MudBlazorBlocklyModule>();
+    // })
+    // .AddJsonLocalization(options => options.AddDefaultResource<Index>())
     .AddRemoteStorage<RemoteStorageOptions>((context, options) =>
     {
         context.Configuration.Bind("Storage:Remote:DigitClubRemoteStorageOptions");
