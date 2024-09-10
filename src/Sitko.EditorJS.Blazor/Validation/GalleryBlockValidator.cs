@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Sitko.Core.App.Localization;
+using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks.Gallery;
 
 namespace Sitko.EditorJS.Blazor.Validation;
@@ -7,6 +7,6 @@ namespace Sitko.EditorJS.Blazor.Validation;
 public class GalleryBlockValidator<TImageData> : BlockValidator<GalleryBlock<TImageData>>
     where TImageData: class, new()
 {
-    public GalleryBlockValidator(ILocalizationProvider<GalleryBlock<TImageData>> localizationProvider) : base(localizationProvider) =>
-        RuleFor(b => b.Data.Files).NotEmpty().WithMessage(LocalizationProvider[ValidatorConst.ChooseMorePicture]);
+    public GalleryBlockValidator(IStringLocalizer<GalleryBlock<TImageData>> localizer) : base(localizer) =>
+        RuleFor(b => b.Data.Files).NotEmpty().WithMessage(Localizer[ValidatorConst.ChooseMorePicture]);
 }

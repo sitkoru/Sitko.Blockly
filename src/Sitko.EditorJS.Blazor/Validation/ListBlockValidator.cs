@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using Sitko.Core.App.Localization;
+using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks.List;
 
 namespace Sitko.EditorJS.Blazor.Validation;
 
 public class ListBlockValidator : BlockValidator<ListBlock>
 {
-    public ListBlockValidator(ILocalizationProvider<ListBlock> localizationProvider) : base(localizationProvider) =>
-        RuleFor(b => b.Data.Items).NotEmpty().WithMessage(LocalizationProvider[ValidatorConst.ContentIsRequired]);
+    public ListBlockValidator(IStringLocalizer<ListBlock> localizer) : base(localizer) =>
+        RuleFor(b => b.Data.Items).NotEmpty().WithMessage(Localizer[ValidatorConst.ContentIsRequired]);
 }

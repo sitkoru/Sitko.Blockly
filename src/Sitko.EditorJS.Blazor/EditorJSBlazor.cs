@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sitko.Core.App.Localization;
 using Sitko.EditorJS.Blazor.Display;
 using Sitko.EditorJS.Blazor.Validation;
 
@@ -13,10 +12,7 @@ public class EditorJSBlazor<TBlockDescriptor> where TBlockDescriptor : IBlockDes
     {
         this.serviceCollection = serviceCollection;
         this.serviceCollection.AddSingleton<IEditorJS<TBlockDescriptor>, EditorJS<TBlockDescriptor>>();
-        this.serviceCollection.Configure<JsonLocalizationModuleOptions>(options =>
-        {
-            options.AddDefaultResource<EditorJS>();
-        });
+        this.serviceCollection.AddLocalization();
     }
 
     public EditorJSBlazor<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)

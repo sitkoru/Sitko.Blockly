@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Sitko.Core.App.Localization;
+using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks;
 
 namespace Sitko.EditorJS.Blazor.Validation;
@@ -15,8 +15,8 @@ public interface IBlockValidator<in TBlock> : IBlockValidator, IValidator<TBlock
 public abstract class BlockValidator<TBlock> : AbstractValidator<TBlock>, IBlockValidator<TBlock>
     where TBlock : ContentBlock
 {
-    protected BlockValidator(ILocalizationProvider<TBlock> localizationProvider) =>
-        LocalizationProvider = localizationProvider;
+    protected BlockValidator(IStringLocalizer<TBlock> localizer) =>
+        Localizer = localizer;
 
-    protected ILocalizationProvider<TBlock> LocalizationProvider { get; }
+    protected IStringLocalizer<TBlock> Localizer { get; }
 }

@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using Sitko.Core.App.Localization;
+using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks.Paragraph;
 
 namespace Sitko.EditorJS.Blazor.Validation;
 
 public class ParagraphBlockValidator : BlockValidator<ParagraphBlock>
 {
-    public ParagraphBlockValidator(ILocalizationProvider<ParagraphBlock> localizationProvider) : base(localizationProvider) =>
-        RuleFor(p => p.Data.Text).NotEmpty().WithMessage(LocalizationProvider[ValidatorConst.TextIsRequired]);
+    public ParagraphBlockValidator(IStringLocalizer<ParagraphBlock> localizer) : base(localizer) =>
+        RuleFor(p => p.Data.Text).NotEmpty().WithMessage(Localizer[ValidatorConst.TextIsRequired]);
 }
