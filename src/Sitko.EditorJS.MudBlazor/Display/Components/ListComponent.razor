@@ -1,0 +1,51 @@
+﻿@using global::MudBlazor
+<div style="margin-left: 20px">
+    @{
+        var counterType = Items.FirstOrDefault()?.ItemMeta.CounterType ?? "numeric";
+        var start = Items.FirstOrDefault()?.ItemMeta.Start ?? 1;
+        var index = 0;
+    }
+    @switch (Style)
+    {
+        case "ordered":
+            <ol style="list-style-type:@counterType;" start="@start">
+                @foreach (var item in Items)
+                {
+                    var jIndex = index;
+                    <li>@item.Content</li>
+                    if (item.Items.Length > 0)
+                    {
+                        <ListComponent Items="item.Items" Style="@Style" Level="@jIndex"/>
+                    }
+                    index++;
+                }
+            </ol>
+            break;
+        case "checklist":
+            <ul style="list-style-type: none">
+                @foreach (var item in Items)
+                {
+                    <li>
+                        <MudCheckBox T="bool" Value="@item.ItemMeta.Checked" Label="@item.Content" LabelPlacement="Placement.Right"/>
+                    </li>
+                    if (item.Items.Length > 0)
+                    {
+                        <ListComponent Items="item.Items" Style="@Style" Level="@(Level + 1)"/>
+                    }
+                }
+            </ul>
+            break;
+        case "unordered":
+            <ul>
+                @foreach (var item in Items)
+                {
+                    <li>@item.Content</li>
+                    if (item.Items.Length > 0)
+                    {
+                        <ListComponent Items="item.Items" Style="@Style" Level="@(Level + 1)"/>
+                    }
+                }
+            </ul>
+            break;
+    }
+</div>
