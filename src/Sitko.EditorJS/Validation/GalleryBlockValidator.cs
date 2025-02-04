@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks.Gallery;
 
-namespace Sitko.EditorJS.Blazor.Validation;
+namespace Sitko.EditorJS.Validation;
 
 public class GalleryBlockValidator<TImageData> : BlockValidator<GalleryBlock<TImageData>>
     where TImageData: class, new()

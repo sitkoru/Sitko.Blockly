@@ -1,6 +1,4 @@
-﻿using Sitko.EditorJS.Blocks;
-
-namespace Sitko.EditorJS.Blazor.Display;
+﻿namespace Sitko.EditorJS.Blocks;
 
 public interface IBlockDescriptor
 {

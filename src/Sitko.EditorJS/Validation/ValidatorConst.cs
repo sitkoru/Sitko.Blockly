@@ -1,4 +1,4 @@
-﻿namespace Sitko.EditorJS.Blazor.Validation;
+﻿namespace Sitko.EditorJS.Validation;
 
 public static class ValidatorConst
 {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks;
 
-namespace Sitko.EditorJS.Blazor.Validation;
+namespace Sitko.EditorJS.Validation;
 
 public interface IBlockValidator : IValidator
 {

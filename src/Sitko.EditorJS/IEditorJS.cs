@@ -1,7 +1,6 @@
-﻿using Sitko.EditorJS.Blazor.Display;
-using Sitko.EditorJS.Blocks;
+﻿using Sitko.EditorJS.Blocks;
 
-namespace Sitko.EditorJS.Blazor;
+namespace Sitko.EditorJS;
 
 public interface IEditorJS<TBlockDescriptor> where TBlockDescriptor : IBlockDescriptor
 {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Localization;
 using Sitko.EditorJS.Blocks.Paragraph;
 
-namespace Sitko.EditorJS.Blazor.Validation;
+namespace Sitko.EditorJS.Validation;
 
 public class ParagraphBlockValidator : BlockValidator<ParagraphBlock>
 {
