@@ -13,6 +13,6 @@ public class EditorJSMudBlazor<TImageData> : EditorJSBlazor<IBlazorBlockDescript
         serviceCollection.AddEditorJS().AddDefaultBlocks<TImageData>();
         serviceCollection.AddSingleton<IBlazorBlockDescriptor, MudGalleryBlockDescriptor<TImageData>>();
         serviceCollection.AddSingleton<IBlazorBlockDescriptor, MudImageBlockDescriptor<TImageData>>();
-        AddBlocks<EditorJSMudBlazor<TImageData>>();
+        AddDescriptors<EditorJSMudBlazor<TImageData>>();
     }
 }

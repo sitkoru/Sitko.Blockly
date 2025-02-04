@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sitko.EditorJS.Blazor.Display;
-using Sitko.EditorJS.Blazor.Validation;
+using Sitko.EditorJS.Blocks;
+using Sitko.EditorJS.Validation;
 
 namespace Sitko.EditorJS.Blazor;
 
@@ -18,11 +18,12 @@ public class EditorJSBlazor<TBlockDescriptor> where TBlockDescriptor : IBlockDes
         });
     }
 
-    public EditorJSBlazor<TBlockDescriptor> AddBlocks<TAssembly, TDescriptor>(bool withValidators = true)
+    public EditorJSBlazor<TBlockDescriptor> AddDescriptors<TAssembly, TDescriptor>(bool withValidators = true)
         where TDescriptor : TBlockDescriptor
     {
         serviceCollection.Scan(s => s.FromAssemblyOf<TAssembly>()
-                .AddClasses(c => c.AssignableTo<TDescriptor>().Where(d => !d.IsAbstract && d.IsClass))
+                .AddClasses(c => c.AssignableTo<TDescriptor>()
+                    .Where(d => d is { IsAbstract: false, IsClass: true }))
                 .AsSelfWithInterfaces().WithSingletonLifetime());
 
         if (withValidators)
@@ -33,9 +34,9 @@ public class EditorJSBlazor<TBlockDescriptor> where TBlockDescriptor : IBlockDes
         return this;
     }
 
-    public EditorJSBlazor<TBlockDescriptor> AddBlocks<TAssembly>(bool withValidators = true)
+    public EditorJSBlazor<TBlockDescriptor> AddDescriptors<TAssembly>(bool withValidators = true)
     {
-        AddBlocks<TAssembly, TBlockDescriptor>();
+        AddDescriptors<TAssembly, TBlockDescriptor>();
         if (withValidators)
         {
             AddValidators<TAssembly, IBlockValidator>();
@@ -49,7 +50,6 @@ public class EditorJSBlazor<TBlockDescriptor> where TBlockDescriptor : IBlockDes
     {
         serviceCollection.Scan(s => s
                 .FromAssemblyOf<TAssembly>().AddClasses(c => c.AssignableTo<TValidator>())
-                .FromAssemblyOf<EditorJS>().AddClasses(c => c.AssignableTo<TValidator>())
                 .AsSelfWithInterfaces().WithScopedLifetime());
 
         return this;

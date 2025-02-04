@@ -1,10 +1,7 @@
 using Sitko.Blockly.Demo;
-using Sitko.Blockly.Demo.Client;
 using Sitko.Blockly.Demo.Client.Pages;
 using Sitko.Blockly.Demo.Components;
 using Sitko.Blockly.Demo.Data;
-using Sitko.Blockly.MudBlazorComponents;
-using Sitko.Core.App;
 using Sitko.Core.App.Localization;
 using Sitko.Core.App.Web;
 using Sitko.Core.Blazor.MudBlazor.Server;
@@ -26,7 +23,7 @@ builder
     //     options.AddBlocks<MudBlazorBlocklyModule>();
     // })
     .AddInteractiveWebAssembly()
-    // .AddJsonLocalization()
+    .AddJsonLocalization()
     .AddPostgresDatabase<BlocklyContext>()
     .AddEFRepositories<BlocklyContext>();
 
@@ -36,7 +33,6 @@ builder
     .AddPostgresStorageMetadata<BlocklyStorageOptions>();
 
 builder.Services.AddEditorJSMudBlazor<StorageItem>();
-// builder.Services.AddEditorJSBlocks();
 builder.AddEditorJSImage<BlocklyStorageOptions>();
 
 var app = builder.Build();

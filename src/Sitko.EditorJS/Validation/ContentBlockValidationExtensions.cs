@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
-using Sitko.EditorJS.Blazor.Display;
 using Sitko.EditorJS.Blocks;
 
-namespace Sitko.EditorJS.Blazor.Validation;
+namespace Sitko.EditorJS.Validation;
 
 public static class ContentBlockValidationExtensions
 {

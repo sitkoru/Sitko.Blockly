@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Sitko.Blockly.Demo.Client;
 using Sitko.Blockly.Demo.Client.Data.Repositories;
-using Sitko.Blockly.MudBlazorComponents;
 using Sitko.Core.App.Localization;
 using Sitko.Core.Blazor.MudBlazorComponents;
 using Sitko.Core.Blazor.Wasm;
@@ -9,9 +8,6 @@ using Sitko.Core.Repository.Remote;
 using Sitko.Core.Repository.Remote.Wasm;
 using Sitko.Core.Storage;
 using Sitko.Core.Storage.Remote;
-using Sitko.EditorJS;
-using Sitko.EditorJS.Blocks.Paragraph;
-using Sitko.EditorJS.Blocks.SimpleImage;
 using Sitko.EditorJS.MudBlazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
