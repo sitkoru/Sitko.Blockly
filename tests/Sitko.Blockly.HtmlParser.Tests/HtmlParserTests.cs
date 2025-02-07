@@ -4,7 +4,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.Tests;
-using Sitko.Core.App;
 using Sitko.Core.Storage;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Xunit;
