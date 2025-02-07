@@ -10,18 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj"/>
+    <ProjectReference Include="..\..\src\Sitko.Blockly.MudBlazor\Sitko.Blockly.MudBlazor.csproj" />
     <ProjectReference Include="..\..\src\Sitko.EditorJS.Blazor\Sitko.EditorJS.Blazor.csproj" />
     <ProjectReference Include="..\..\src\Sitko.EditorJS.MudBlazor\Sitko.EditorJS.MudBlazor.csproj" />
     <ProjectReference Include="..\..\src\Sitko.EditorJS\Sitko.EditorJS.csproj" />
-    <ProjectReference Include="..\Sitko.Blockly.Data\Sitko.Blockly.Data.csproj"/>
+    <ProjectReference Include="..\Sitko.Blockly.Data\Sitko.Blockly.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
 
-    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="11.48.0" />
-    <PackageReference Include="Sitko.Core.Blazor.Wasm" Version="11.48.0" />
-    <PackageReference Include="Sitko.Core.Storage.Remote" Version="11.48.0" />
-    <PackageReference Include="Sitko.Core.Repository.Remote.Wasm" Version="11.48.0" />
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="11.49.0" />
+    <PackageReference Include="Sitko.Core.Blazor.Wasm" Version="11.49.0" />
+    <PackageReference Include="Sitko.Core.Storage.Remote" Version="11.49.0" />
+    <PackageReference Include="Sitko.Core.Repository.Remote.Wasm" Version="11.49.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />

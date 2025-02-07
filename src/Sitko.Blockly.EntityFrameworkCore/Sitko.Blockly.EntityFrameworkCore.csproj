@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Db.Postgres" Version="11.48.0" />
+    <PackageReference Include="Sitko.Core.Db.Postgres" Version="11.49.0" />
   </ItemGroup>
 
 </Project>

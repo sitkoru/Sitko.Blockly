@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Sitko.Core.Storage" Version="11.48.0" />
-      <PackageReference Include="Sitko.Core.App.Web" Version="11.48.0" />
+      <PackageReference Include="Sitko.Core.Storage" Version="11.49.0" />
+      <PackageReference Include="Sitko.Core.App.Web" Version="11.49.0" />
     </ItemGroup>
 
 </Project>

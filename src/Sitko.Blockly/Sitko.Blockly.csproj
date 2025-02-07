@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.App" Version="11.48.0" />
-    <PackageReference Include="Sitko.Core.Storage" Version="11.48.0" />
+    <PackageReference Include="Sitko.Core.App" Version="11.49.0" />
+    <PackageReference Include="Sitko.Core.Storage" Version="11.49.0" />
   </ItemGroup>
 
   <ItemGroup>
