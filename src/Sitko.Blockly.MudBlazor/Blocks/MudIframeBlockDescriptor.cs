@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
+﻿using MudBlazor;
 using Sitko.Blockly.Blazor;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.MudBlazorComponents.Display.Blocks;
@@ -16,5 +15,5 @@ public record
     {
     }
 
-    public override string Icon => Icons.Filled.Code;
+    public override string Icon => Icons.Material.Filled.Code;
 }

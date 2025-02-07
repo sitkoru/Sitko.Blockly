@@ -1,11 +1,10 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider Theme="new MudTheme()"/>
-<MudLayout>
-    <MudDrawer>
+<BaseMudLayout>
+    <Menu>
         <NavMenu/>
-    </MudDrawer>
-    <MudMainContent>
+    </Menu>
+    <ChildContent>
         @Body
-    </MudMainContent>
-</MudLayout>
+    </ChildContent>
+</BaseMudLayout>

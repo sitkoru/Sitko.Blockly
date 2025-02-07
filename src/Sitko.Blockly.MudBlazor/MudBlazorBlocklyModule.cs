@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Sitko.Blazor.CKEditor.Bundle;
-using Sitko.Blazor.ScriptInjector;
 using Sitko.Blockly.Blazor;
 using Sitko.Core.App;
 using Sitko.Core.App.Localization;
