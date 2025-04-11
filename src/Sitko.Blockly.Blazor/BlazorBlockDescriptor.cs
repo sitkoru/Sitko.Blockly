@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Components;
 using Sitko.Blockly.Blazor.Display;
 using Sitko.Blockly.Blazor.Forms;
 using Sitko.Core.App.Localization;

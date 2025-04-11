@@ -11,8 +11,7 @@ namespace Sitko.Blockly.MudBlazorComponents;
 
 public class MudBlazorBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor, MudBlazorBlocklyModuleOptions>
 {
-     public static readonly CssInjectRequest MudBlazorBlocklyCssRequest = CssInjectRequest.FromUrl(
-         "blocklyMud", "/_content/Sitko.Blockly.MudBlazor/Sitko.Blockly.MudBlazor.bundle.scp.css");
+    public static readonly string CssUrl = "/_content/Sitko.Blockly.MudBlazor/Sitko.Blockly.MudBlazor.bundle.scp.css";
 
     public override string OptionsKey => "Blockly:MudBlazor";
 

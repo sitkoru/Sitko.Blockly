@@ -1,5 +1,4 @@
-﻿using System;
-using Sitko.Blockly.Demo.Data.Entities;
+﻿using Sitko.Blockly.Data.Entities;
 using Sitko.Core.Repository.EntityFrameworkCore;
 
 namespace Sitko.Blockly.Demo.Data.Repositories;

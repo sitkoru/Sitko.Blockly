@@ -20,9 +20,9 @@ jobs:
       TESTS_PROJECT_PARSER: Sitko.Blockly.HtmlParser.Tests
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           cache: 'npm'
@@ -56,12 +56,12 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Semantic Release
-        uses: sitkoru/semantic-release-action@v1
+        uses: sitkoru/semantic-release-action@v2
         env:
           GH_TOKEN: ${{ secrets.BOT_TOKEN }}
           GIT_AUTHOR_NAME: ${{ secrets.BOT_NAME }}

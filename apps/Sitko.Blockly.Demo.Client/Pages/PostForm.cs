@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentValidation;
-using Sitko.Blockly.Demo.Data.Entities;
-using Sitko.Blockly.Validation;
-using Sitko.Core.Blazor.Forms;
-using Sitko.Core.Blazor.MudBlazorComponents;
-
-namespace Sitko.Blockly.Demo.Pages;
-
-using Blazor.Extensions;
-using Data.Repositories;
+﻿using FluentValidation;
 using KellermanSoftware.CompareNetObjects;
-using Microsoft.AspNetCore.Components;
+using Sitko.Blockly.Blazor.Extensions;
+using Sitko.Blockly.Data.Entities;
+using Sitko.Blockly.Validation;
+using Sitko.Core.Blazor.MudBlazorComponents;
+using Sitko.Core.Repository;
 
-public class PostForm : BaseMudRepositoryForm<Post, Guid, PostsRepository>
+namespace Sitko.Blockly.Demo.Client.Pages;
+
+public class PostForm : BaseMudRepositoryForm<Post, Guid, IRepository<Post, Guid>>
 {
-    [Parameter] public RenderFragment<PostForm> ChildContent { get; set; } = null!;
-
-    protected override RenderFragment ChildContentFragment => ChildContent(this);
-
     protected override void ConfigureComparer(ComparisonConfig comparisonConfig)
     {
         base.ConfigureComparer(comparisonConfig);

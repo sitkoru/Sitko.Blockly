@@ -1,9 +1,9 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Sitko.Blockly.Blocks;
 using Sitko.Blockly.Tests;
-using Sitko.Core.App;
 using Sitko.Core.Storage;
 using Sitko.Core.Storage.FileSystem;
 using Sitko.Core.Xunit;
@@ -105,23 +105,17 @@ public class HtmlParserTests : BaseTest<BlocklyHtmlParserTestScope>
 
 public class BlocklyHtmlParserTestScope : BlocklyTestScope
 {
-    protected override TestApplication ConfigureApplication(TestApplication application, string name)
+    protected override IHostApplicationBuilder ConfigureServices(IHostApplicationBuilder builder, string name)
     {
-        base.ConfigureApplication(application, name);
-        application
+        base.ConfigureServices(builder, name);
+        builder
             .AddFileSystemStorage<TestBlocklyStorageOptions>(moduleOptions =>
             {
                 moduleOptions.StoragePath = Path.Combine(Path.GetTempPath(), nameof(BlocklyHtmlParserTestScope));
             })
             .AddFileSystemStorageMetadata<TestBlocklyStorageOptions>();
-        return application;
-    }
-
-    protected override IServiceCollection ConfigureServices(IApplicationContext applicationContext,
-        IServiceCollection services, string name)
-    {
-        services.AddHttpClient();
-        return base.ConfigureServices(applicationContext, services, name);
+        builder.Services.AddHttpClient();
+        return builder;
     }
 }
 
