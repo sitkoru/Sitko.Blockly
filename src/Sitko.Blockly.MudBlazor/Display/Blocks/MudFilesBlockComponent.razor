@@ -5,7 +5,7 @@
         @foreach (var file in Block.Files)
         {
             <li>
-                <MudIcon Icon="@Icons.Filled.AttachFile"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@Options.Storage.PublicUri(file)">@file.FileName</a><span class="filesize">&nbsp;(@file.HumanSize)</span>
+                <MudIcon Icon="@Icons.Material.Filled.AttachFile"/> <a target="_blank" rel="noopener noreferrer" title="@file.FileName" href="@Options.Storage.PublicUri(file)">@file.FileName</a><span class="filesize">&nbsp;(@file.HumanSize)</span>
             </li>
         }
     </ul>
