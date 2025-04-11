@@ -15,14 +15,14 @@
   </ItemGroup>
   <ItemGroup>
 
-    <PackageReference Include="Sitko.Core.Blazor.MudBlazor" Version="11.0.0-beta.7"/>
-    <PackageReference Include="Sitko.Core.Blazor.Wasm" Version="11.0.0-beta.7"/>
-    <PackageReference Include="Sitko.Core.Storage.Remote" Version="11.0.0-beta.7"/>
-    <PackageReference Include="Sitko.Core.Repository.Remote.Wasm" Version="11.0.0-beta.7"/>
+    <PackageReference Include="Sitko.Core.Blazor.MudBlazor"/>
+    <PackageReference Include="Sitko.Core.Blazor.Wasm"/>
+    <PackageReference Include="Sitko.Core.Storage.Remote"/>
+    <PackageReference Include="Sitko.Core.Repository.Remote.Wasm"/>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="wwwroot\js\" />
+    <Folder Include="Components\"/>
+    <Folder Include="wwwroot\js\"/>
   </ItemGroup>
 
 </Project>

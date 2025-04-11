@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Repository" Version="11.0.0-beta.7"/>
+    <PackageReference Include="Sitko.Core.Repository"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Blockly\Sitko.Blockly.csproj" />
+    <ProjectReference Include="..\..\src\Sitko.Blockly\Sitko.Blockly.csproj"/>
   </ItemGroup>
 </Project>
