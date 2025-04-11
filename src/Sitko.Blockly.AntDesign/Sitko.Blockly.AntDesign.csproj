@@ -6,18 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sitko.Blockly.Blazor\Sitko.Blockly.Blazor.csproj" />
-    <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj" />
+    <ProjectReference Include="..\Sitko.Blockly.Blazor\Sitko.Blockly.Blazor.csproj"/>
+    <ProjectReference Include="..\Sitko.Blockly\Sitko.Blockly.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="4.2.1" />
-    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="11.6.1" />
+    <PackageReference Include="Sitko.Blazor.CKEditor.Bundle"/>
+    <PackageReference Include="Sitko.Core.Blazor.AntDesign"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Icons\*.svg" />
-    <EmbeddedResource Include="Icons\*.svg" />
-    <EmbeddedResource Include="Resources\*.json" />
+    <Content Remove="Icons\*.svg"/>
+    <EmbeddedResource Include="Icons\*.svg"/>
+    <EmbeddedResource Include="Resources\*.json"/>
   </ItemGroup>
 </Project>

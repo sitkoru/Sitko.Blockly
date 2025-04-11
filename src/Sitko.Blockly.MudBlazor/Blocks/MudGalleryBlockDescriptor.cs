@@ -15,5 +15,5 @@ public record
     {
     }
 
-    public override string Icon => Icons.Filled.Photo;
+    public override string Icon => Icons.Material.Filled.Photo;
 }

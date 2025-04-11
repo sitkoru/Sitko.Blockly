@@ -13,5 +13,5 @@ public record MudCutBlockDescriptor : BlazorBlockDescriptor<CutBlock, MudCutBloc
     {
     }
 
-    public override string Icon => Icons.Filled.ContentCut;
+    public override string Icon => Icons.Material.Filled.ContentCut;
 }

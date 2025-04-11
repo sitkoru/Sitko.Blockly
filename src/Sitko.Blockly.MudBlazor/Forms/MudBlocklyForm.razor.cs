@@ -13,14 +13,7 @@ public partial class MudBlocklyForm
     [Parameter] public string? Label { get; set; }
 
     private Guid? _openBlockId;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            await ScriptInjector.InjectAsync(MudBlazorBlocklyModule.MudBlazorBlocklyCssRequest);
-        }
-    }
+
     private void ToggleOpen(Guid blockId)
     {
         if (_openBlockId == blockId)

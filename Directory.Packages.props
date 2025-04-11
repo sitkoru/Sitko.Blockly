@@ -1,0 +1,34 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
+    <PackageVersion Include="HtmlAgilityPack" Version="1.12.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.15" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.15" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+    <PackageVersion Include="Sitko.Blazor.CKEditor.Bundle" Version="4.2.1" />
+    <PackageVersion Include="Sitko.Core.App" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Blazor" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Blazor.AntDesign" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Blazor.FileUpload" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Blazor.MudBlazor" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Blazor.MudBlazor.Server" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Blazor.Wasm" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Configuration.Vault" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Db.Postgres" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Repository" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Repository.EntityFrameworkCore" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Repository.Remote.Server" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Repository.Remote.Wasm" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Storage" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Storage.FileSystem" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Storage.Metadata.Postgres" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Storage.Remote" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Storage.Remote.Server" Version="11.49.0" />
+    <PackageVersion Include="Sitko.Core.Xunit" Version="11.49.0" />
+  </ItemGroup>
+</Project>
