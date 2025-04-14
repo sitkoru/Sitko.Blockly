@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Sitko.Blazor.CKEditor.Bundle" Version="3.0.3" />
-    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="9.7.1" />
+    <PackageReference Include="Sitko.Core.Blazor.AntDesign" Version="10.36.0" />
   </ItemGroup>
 
   <ItemGroup>
