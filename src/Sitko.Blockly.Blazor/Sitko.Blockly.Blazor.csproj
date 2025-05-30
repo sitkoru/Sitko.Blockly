@@ -8,6 +8,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
     <PackageReference Include="Sitko.Core.Blazor"/>
     <PackageReference Include="Sitko.Core.Blazor.FileUpload"/>
+    <PackageReference Include="Sitko.Blazor.ScriptInjector"/>
   </ItemGroup>
 
 </Project>
