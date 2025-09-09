@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Sitko.Blazor.CKEditor.Bundle;
-using Sitko.Blazor.ScriptInjector;
 using Sitko.Blockly.Blazor;
 using Sitko.Core.App;
 using Sitko.Core.App.Localization;
@@ -26,7 +25,8 @@ public class MudBlazorBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor
         });
     }
 
-    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider)
+    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider,
+        CancellationToken cancellationToken = default)
     {
         await base.InitAsync(context, serviceProvider);
         await CustomIconsProvider.InitAsync();
