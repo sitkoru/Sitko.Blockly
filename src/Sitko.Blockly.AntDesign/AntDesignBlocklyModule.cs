@@ -11,7 +11,7 @@ namespace Sitko.Blockly.AntDesignComponents;
 public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor, AntDesignBlocklyModuleOptions>
 {
     public static readonly CssInjectRequest AntDesignBlocklyCssRequest = CssInjectRequest.FromUrl(
-        "blocklyAnt", "/_content/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.bundle.scp.css", InjectScope.Scoped );
+        "blocklyAnt", "/_content/Sitko.Blockly.AntDesign/Sitko.Blockly.AntDesign.bundle.scp.css", InjectScope.Scoped);
 
     public override string OptionsKey => "Blockly:AntDesign";
 
@@ -26,7 +26,8 @@ public class AntDesignBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor
         });
     }
 
-    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider)
+    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider,
+        CancellationToken cancellationToken = default)
     {
         await base.InitAsync(context, serviceProvider);
         var options = GetOptions(serviceProvider);

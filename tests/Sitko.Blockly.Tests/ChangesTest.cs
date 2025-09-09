@@ -8,7 +8,6 @@ using Sitko.Core.Repository;
 using Sitko.Core.Repository.EntityFrameworkCore;
 using Sitko.Core.Xunit;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Sitko.Blockly.Tests;
 

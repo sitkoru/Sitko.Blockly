@@ -25,7 +25,8 @@ public class MudBlazorBlocklyModule : BlazorBlocklyModule<IBlazorBlockDescriptor
         });
     }
 
-    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider)
+    public override async Task InitAsync(IApplicationContext context, IServiceProvider serviceProvider,
+        CancellationToken cancellationToken = default)
     {
         await base.InitAsync(context, serviceProvider);
         await CustomIconsProvider.InitAsync();
